@@ -1,15 +1,14 @@
 // EXEC: %compiler %enableEH %cmp_opt %f -o %output
 // EXEC: %run %set_stdx_path %run_opt %output
-import stdx.effect.Command
-
+import stdx.effect.{Command, Resumption}
 
 class Eff <: Command<Int64> {}
 
 public func assertPerformed<T>(fn: ()->Int64, msg!: String = ""): Int64 where T <: Command<Int64> {
     try{
         fn()
-    } handle (e: T){
-        resume with 11
+    } handle (e: T, r: Resumption<Int64, Int64>){
+        resume r with 11
     }
 }
 
