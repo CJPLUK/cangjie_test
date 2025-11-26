@@ -19,18 +19,18 @@ main() {
 /* SCAN
 error: The type of this catch block is 'Struct-String', which mismatches the smallest common supertype 'Int64' of previous branches.
   ==> mistypedTryCatchHandle_deferred.cj:13:32:
-   |
+   | 
 13 |         } catch (_: Exception) {
-   |                                ^
-   |
+   |                                ^ 
+   | 
 note: Traces:
 The types 'Int64' and 'Struct-String' do not have the smallest common supertype
 
   ==> mistypedTryCatchHandle_deferred.cj:11:9:
-   |
+   | 
 11 |         try {
-   |         ^
-   |
+   |         ^ 
+   | 
 
 1 error generated, 1 error printed.
 */

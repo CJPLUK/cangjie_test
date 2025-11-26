@@ -43,7 +43,7 @@ class Scheduler {
     private func scheduleNextTask() {
         let t = tasks.firstNode
         if (let Some(node) <- t) {
-            resume(tasks.remove(node))
+            resume tasks.remove(node)
         }
     }
 
