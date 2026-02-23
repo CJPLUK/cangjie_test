@@ -10,7 +10,7 @@
 import stdx.effect.{Command, Resumption}
 
 class CmdA <: Command<Int64> {}
-class CmdB <: Command<Bool> {}
+class CmdB <: Command<Int64> {}
 
 main() {
     let saved : Box<Option<Resumption<Int64, Int64>>> = Box(None)
@@ -32,14 +32,16 @@ main() {
         perform CmdB()
         println("got here 4")
         0
-    } handle (_: CmdB, r_: Resumption<Bool, Int64>) {
+    } handle (_: CmdB, r_: Resumption<Int64, Int64>) {
         // Resume stored resumption from Frame A
         // This triggers CJ_MRT_ThreadReady(handleeA) inside
         println("got here 1")
-        let v = resume saved.value.getOrThrow() with 42
+        var resVar = saved.value.getOrThrow()
+        let v = resume resVar with 42
         println("got here 3")
         // Then resume Frame B's own resumption
-        resume r_ with true
+        resVar = r_
+        resume resVar with 69 
         println("got here 5")
         0
     }
