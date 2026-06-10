@@ -2,19 +2,7 @@
 // After forced-cast implementation: should still compile and stay on the
 // original fallback path, even though the argument is Extern.
 
-interface Runtime<T> where T <: Runtime<T> {
-    static func memberAccess(e: Extern<T>, field: String): Extern<T>
-    static func indexAccess(e: Extern<T>, arg: Any): Extern<T>
-    static func memberUpdate(e: Extern<T>, field: String, value: Any): Unit
-    static func indexUpdate(e: Extern<T>, field: Any, value: Any): Unit
-    static func functionCall(e: Extern<T>, args: Array<Any>): Extern<T>
-    static func fromExtern<R>(h: Extern<T>): R
-    static func toExtern<R>(v: R): Extern<T>
-}
-
-struct Extern<T> where T <: Runtime<T> {
-    Extern(public let content: Any) {}
-}
+import std.interop.*
 
 class DummyRuntime <: Runtime<DummyRuntime> {
     public static func memberAccess(e: Extern<DummyRuntime>, field: String): Extern<DummyRuntime> {
