@@ -1,3 +1,6 @@
+// EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>&1 | compare %f
+// ASSERT: scan 'name' is not a member of struct 'Extern<Class-DummyRuntime>'
+
 // Negative shape case: this looks like a forced-cast operand using extern
 // member access, but the current local runtime stub does not enable e.f
 // interop sugar. It should fail as an ordinary member lookup on Extern.

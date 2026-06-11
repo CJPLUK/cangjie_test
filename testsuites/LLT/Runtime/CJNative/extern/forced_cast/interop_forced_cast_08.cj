@@ -1,3 +1,5 @@
+// EXEC-0: %compiler %cmp_opt %f -o %output
+
 // Fallback case with an extended binary expression. This keeps the old
 // expression path and verifies that operators after the ambiguous prefix are
 // preserved inside the fallback branch.

@@ -1,3 +1,5 @@
+// EXEC-0: %compiler %cmp_opt %f -o %output
+
 // Current compiler: should compile.
 // After forced-cast implementation: should still compile and stay on the
 // original parenthesized-call path instead of becoming a forced cast.

@@ -1,3 +1,6 @@
+// EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>&1 | compare %f
+// ASSERT: scan invalid subscript operator [] on type 'Struct-Extern<Class-DummyRuntime>' with index type 'Int64'
+
 // Negative shape case: this looks like a forced-cast operand using extern
 // index access, but the current local runtime stub does not enable e[i]
 // interop sugar. It should fail as an ordinary subscript on Extern.
