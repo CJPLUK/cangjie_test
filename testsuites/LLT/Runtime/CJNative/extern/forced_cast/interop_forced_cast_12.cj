@@ -1,3 +1,5 @@
+// EXEC-0: %compiler %cmp_opt %f -o %output
+
 // Similar surface shape, but not a forced-cast candidate: the text inside
 // parentheses is an expression, not a syntactic type. This must keep the old
 // parenthesized-expression path.

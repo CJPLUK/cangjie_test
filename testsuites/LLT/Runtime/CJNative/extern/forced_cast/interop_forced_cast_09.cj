@@ -1,3 +1,5 @@
+// EXEC-0: %compiler %cmp_opt %f -o %output
+
 // Direct forced-cast case whose operand is a call expression. The old parser has
 // no valid fallback for `(foo)makeExtern()`, while the new parser should produce
 // a ForcedCastExpr and desugar it through Runtime.fromExtern.

@@ -1,3 +1,5 @@
+// EXEC-0: %compiler %cmp_opt %f -o %output
+
 // Current compiler: should fail, because `(foo)e` is the new forced-cast form.
 // After forced-cast implementation: should compile and be resolved as
 // `ForcedCastExpr(targetType = foo, operand = externValue)`.

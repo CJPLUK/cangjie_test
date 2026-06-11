@@ -1,3 +1,5 @@
+// EXEC-0: %compiler %cmp_opt %f -o %output
+
 // Forced-cast operand is a normal class member whose declared type is
 // Extern<DummyRuntime>. This verifies that ordinary class member access remains
 // usable as the operand expression and is not confused with extern e.f sugar.
