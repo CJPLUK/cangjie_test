@@ -7,37 +7,87 @@
 // EXEC-0: %compiler %cmp_opt %f -o %output
 // RUN-EXEC: %run %run_opt %output %run_args
 
-
 public class DummyRT <: Runtime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
-        Extern<DummyRT>(0)
+        match (field) {
+            case "id" => e
+            case "pi" => Extern<DummyRT>(3.14)
+            case "add"=> Extern<DummyRT>((getPayload(e) as Int64).getOrThrow() + 1)
+            case "sub"=> Extern<DummyRT>((getPayload(e) as Int64).getOrThrow() - 1)
+            case _ => throw MemberAccessException("memberAccess not implemented")
+        }
     }
-    public static func indexAccess(e: Extern<DummyRT>, arg: Any): Extern<DummyRT> {
+    public static func indexAccess(_: Extern<DummyRT>, _: Any): Extern<DummyRT> {
         throw Exception("indexAccess not implemented")
     }
-    public static func memberUpdate(e: Extern<DummyRT>, field: String, value: Any) : Unit  {
+    public static func memberUpdate(_: Extern<DummyRT>, _: String, _: Any) : Unit  {
         throw Exception("memberUpdate not implemented")
     }
-    public static func indexUpdate(e: Extern<DummyRT>, field: Any, value: Any): Unit {
+    public static func indexUpdate(_: Extern<DummyRT>, _: Any, _: Any): Unit {
         throw Exception("indexUpdate not implemented")
     }
-    public static func functionCall(e: Extern<DummyRT>, args: Array<Any>): Extern<DummyRT> {
+    public static func functionCall(_: Extern<DummyRT>, _: Array<Any>): Extern<DummyRT> {
         throw Exception("functionCall not implemented")
     }
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
-        match (getPayload(h)) {
-            case v: Int64 => (v as R).getOrThrow()
-            case _ => throw Exception("fromExtern: invalid Extern value")
+        match (None<R>) {
+            case _: Option<Int64>  => (getPayload(h) as R).getOrThrow()
+            case _: Option<Float64> => (getPayload(h) as R).getOrThrow()
+            case _ => throw Exception("fromExtern not implemented")
         }
     }
-    public static func toExtern<R>(v: R): Extern<DummyRT> {
-        Extern<DummyRT>(v)
+    public static func toExtern<R>(_: R): Extern<DummyRT> {
+        throw Exception("toExtern not implemented")
     }
 }
 
 main () {
-    let e1: Extern<DummyRT> = 0
-    let e2: Extern<DummyRT> = e1.bar
-    let f = foo<DummyRT>(Extern<DummyRT>(0))
-    DummyRT.fromExtern<Int64>(f)
+    let e = Extern<DummyRT>(0)
+
+    if (DummyRT.fromExtern<Int64>(e.id) != 0) {
+        throw Exception("Unexpected!")
+    }
+
+    if (DummyRT.fromExtern<Float64>(e.pi) != 3.14) {
+        throw Exception("Unexpected!")
+    }
+
+    if (DummyRT.fromExtern<Int64>(e.add) != 1) {
+        throw Exception("Unexpected!")
+    }
+
+    if (DummyRT.fromExtern<Int64>(e.sub) != -1) {
+        throw Exception("Unexpected!")
+    }
+
+    if (DummyRT.fromExtern<Int64>(e.add.add.add.sub.sub.sub) != 0) {
+        throw Exception("Unexpected!")
+    }
+
+    if (DummyRT.fromExtern<Float64>(e.add.add.add.sub.sub.sub.add.add.add.sub.sub.sub.pi) != 3.14) {
+        throw Exception("Unexpected!")
+    }
+
+    try {
+        DummyRT.fromExtern<Int64>(e.foo)
+        throw Exception("Unexpected!")
+    } catch (e: MemberAccessException) {
+        // Expected
+    }
+
+    try {
+        DummyRT.fromExtern<Int64>(e.add.add.add.sub.sub.foo)
+        throw Exception("Unexpected!")
+    } catch (e: MemberAccessException) {
+        // Expected
+    }
+
+    try {
+        DummyRT.fromExtern<Int64>(e.add.add.foo.add.sub.sub)
+        throw Exception("Unexpected!")
+    } catch (e: MemberAccessException) {
+        // Expected
+    }
+
+    0
 }
