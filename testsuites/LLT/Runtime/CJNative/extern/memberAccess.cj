@@ -89,5 +89,17 @@ main () {
         // Expected
     }
 
+    func id(e: Extern<DummyRT>) {
+        e
+    }
+
+    if (DummyRT.fromExtern<Float64>(id(e.add.add.add.sub.sub).sub.add.add.add.sub.sub.sub.pi) != 3.14) {
+        throw Exception("Unexpected!")
+    }
+
+    if (DummyRT.fromExtern<Float64>(id(Extern<DummyRT>(DummyRT.fromExtern<Int64>(e.add.add.add.sub.sub))).sub.add.add.add.sub.sub.sub.pi) != 3.14) {
+        throw Exception("Unexpected!")
+    }
+
     0
 }
