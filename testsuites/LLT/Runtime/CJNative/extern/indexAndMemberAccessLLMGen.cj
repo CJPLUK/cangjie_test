@@ -135,28 +135,24 @@ func expectMissingIndex(e: Extern<DummyRT>, key: String) {
 
 
 func mixedPairSum(e: Extern<DummyRT>, key: String): Int64 {
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for parameterized extern subscript chains.
-    // DummyRT.fromExtern<Int64>(e[key].sum)
+    DummyRT.fromExtern<Int64>(e[key].sum)
     let pair = (getPayload(e) as HashMap<String, Pair>).getOrThrow()[key]
     pair.left + pair.right
 }
 
 func mixedRowPairSum(e: Extern<DummyRT>, key: String): Int64 {
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for parameterized extern subscript chains.
-    // DummyRT.fromExtern<Int64>(e[key].pair.sum)
+    DummyRT.fromExtern<Int64>(e[key].pair.sum)
     let row = (getPayload(e) as HashMap<String, Array<Int64>>).getOrThrow()[key]
     row[0] + row[1]
 }
 
 func mixedRowIndexTwice(e: Extern<DummyRT>, key: String, index: Int64): Int64 {
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for parameterized extern subscript chains.
-    // DummyRT.fromExtern<Int64>(e[key][index].twice)
+    DummyRT.fromExtern<Int64>(e[key][index].twice)
     (getPayload(e) as HashMap<String, Array<Int64>>).getOrThrow()[key][index] * 2
 }
 
 func mixedExternKeyRight(e: Extern<DummyRT>, key: String): Int64 {
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for parameterized extern subscript chains.
-    // DummyRT.fromExtern<Int64>(e[key].right)
+    DummyRT.fromExtern<Int64>(e[key].right)
     (getPayload(e) as HashMap<String, Pair>).getOrThrow()[key].right
 }
 
@@ -180,8 +176,7 @@ main () {
     let pairExtern = Extern<DummyRT>(pairMap)
 
     assertInt("pair map direct sum", DummyRT.fromExtern<Int64>(pairExtern["low"].sum), 7)
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for extern-valued subscript argument.
-    // assertInt("pair map extern key", DummyRT.fromExtern<Int64>(pairExtern[makeKey("mid")].sum), 24)
+    assertInt("pair map extern key", DummyRT.fromExtern<Int64>(pairExtern[makeKey("mid")].sum), 24)
     assertInt("pair map direct key mid", DummyRT.fromExtern<Int64>(pairExtern["mid"].sum), 24)
     assertInt("pair map chained member", DummyRT.fromExtern<Int64>(pairExtern["high"].sum.twice.neg), -72)
 
@@ -196,8 +191,7 @@ main () {
         throw Exception("extern-valued passthrough index")
     }
 
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for extern-valued subscript argument.
-    // assertInt("held map extern key", DummyRT.fromExtern<Int64>(hold(pairExtern.id)[makeKey("low")].right.twice), 10)
+    assertInt("held map extern key", DummyRT.fromExtern<Int64>(hold(pairExtern.id)[makeKey("low")].right.twice), 10)
     assertInt("held map direct key low", DummyRT.fromExtern<Int64>(hold(pairExtern.id)["low"].right.twice), 10)
     assertInt("held row pair", DummyRT.fromExtern<Int64>(hold(rowExtern)["third"].pair.sum.twice), 30)
 
@@ -225,10 +219,9 @@ main () {
 
 
     let pairSelector = pairExtern["mid"]
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for string selector subscript on Extern<Pair>.
-    // assertInt("mixed pair string left", DummyRT.fromExtern<Int64>(pairSelector["left"]), 11)
-    // assertInt("mixed pair string right", DummyRT.fromExtern<Int64>(pairSelector["right"]), 13)
-    // assertInt("mixed pair string sum", DummyRT.fromExtern<Int64>(pairSelector["sum"].twice), 48)
+    assertInt("mixed pair string left", DummyRT.fromExtern<Int64>(pairSelector["left"]), 11)
+    assertInt("mixed pair string right", DummyRT.fromExtern<Int64>(pairSelector["right"]), 13)
+    assertInt("mixed pair string sum", DummyRT.fromExtern<Int64>(pairSelector["sum"].twice), 48)
     assertInt("mixed pair member left", DummyRT.fromExtern<Int64>(pairSelector.left), 11)
     assertInt("mixed pair member right", DummyRT.fromExtern<Int64>(pairSelector.right), 13)
     assertInt("mixed pair member sum", DummyRT.fromExtern<Int64>(pairSelector.sum.twice), 48)
@@ -249,8 +242,7 @@ main () {
     let mapFromRows = HashMap<String, Pair>()
     mapFromRows["derived"] = Pair(DummyRT.fromExtern<Int64>(localRowsExtern["fib"][2]), DummyRT.fromExtern<Int64>(localRowsExtern["triple"][1]))
     let mapFromRowsExtern = Extern<DummyRT>(mapFromRows)
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for extern-valued subscript argument.
-    // assertInt("derived mixed pair sum", DummyRT.fromExtern<Int64>(mapFromRowsExtern[makeKey("derived")].sum), 8)
+    assertInt("derived mixed pair sum", DummyRT.fromExtern<Int64>(mapFromRowsExtern[makeKey("derived")].sum), 8)
     assertInt("derived mixed pair direct sum", DummyRT.fromExtern<Int64>(mapFromRowsExtern["derived"].sum), 8)
     assertInt("derived mixed as row index", DummyRT.fromExtern<Int64>(mapFromRowsExtern["derived"].asRow[2]), 8)
 
@@ -314,8 +306,7 @@ main () {
     assertInt("composed pair from member", mixedExternKeyRight(composedPairsExtern, "fromMember"), 5)
 
     let selector = if (mixedPairSum(composedPairsExtern, "fromRows") == 12) { "fromMember" } else { "fromRows" }
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for extern-valued subscript argument built from a variable.
-    // assertInt("selector mixed extern key", DummyRT.fromExtern<Int64>(composedPairsExtern[makeKey(selector)].sum.twice), 14)
+    assertInt("selector mixed extern key", DummyRT.fromExtern<Int64>(composedPairsExtern[makeKey(selector)].sum.twice), 14)
     assertInt("selector mixed direct key", DummyRT.fromExtern<Int64>(composedPairsExtern[selector].sum.twice), 14)
 
     try {

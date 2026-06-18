@@ -145,14 +145,12 @@ func expectBadIndex(e: Extern<DummyRT>, i: Int64) {
 
 
 func nestedLookup(e: Extern<DummyRT>, row: String, col: Int64): Int64 {
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for parameterized extern subscript chains.
-    // DummyRT.fromExtern<Int64>(e[row][col])
+    DummyRT.fromExtern<Int64>(e[row][col])
     (getPayload(e) as HashMap<String, Array<Int64>>).getOrThrow()[row][col]
 }
 
 func pairLookup(e: Extern<DummyRT>, field: String): Int64 {
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for parameterized subscript on Extern<Pair>.
-    // DummyRT.fromExtern<Int64>(e[field])
+    DummyRT.fromExtern<Int64>(e[field])
     let pair = (getPayload(e) as Pair).getOrThrow()
     if (field == "right") {
         pair.right
@@ -166,8 +164,7 @@ func pairLookup(e: Extern<DummyRT>, field: String): Int64 {
 }
 
 func externKeyLookup(e: Extern<DummyRT>, name: String): Int64 {
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for parameterized extern subscript keys.
-    // DummyRT.fromExtern<Int64>(e[name])
+    DummyRT.fromExtern<Int64>(e[name])
     (getPayload(e) as HashMap<String, Int64>).getOrThrow()[name]
 }
 
@@ -198,8 +195,7 @@ main () {
     byName["gamma"] = 19
     let mapExtern = Extern<DummyRT>(byName)
     assertInt("map alpha", DummyRT.fromExtern<Int64>(mapExtern["alpha"]), 7)
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for extern-valued subscript argument.
-    // assertInt("map beta extern key", DummyRT.fromExtern<Int64>(mapExtern[key("beta")]), 11)
+    assertInt("map beta extern key", DummyRT.fromExtern<Int64>(mapExtern[key("beta")]), 11)
     assertInt("map beta direct key", DummyRT.fromExtern<Int64>(mapExtern["beta"]), 11)
     assertInt("map gamma direct", DummyRT.fromExtern<Int64>(mapExtern["gamma"]), 19)
 
@@ -300,8 +296,7 @@ main () {
     extraMap0["other"] = 1
     let extraMapExtern0 = Extern<DummyRT>(extraMap0)
     assertInt("extra direct key 0", DummyRT.fromExtern<Int64>(extraMapExtern0["k0"]), 0)
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for extern-valued subscript argument.
-    // assertInt("extra extern key 0", DummyRT.fromExtern<Int64>(extraMapExtern0[key("other")]), 1)
+    assertInt("extra extern key 0", DummyRT.fromExtern<Int64>(extraMapExtern0[key("other")]), 1)
     assertInt("extra direct other key 0", DummyRT.fromExtern<Int64>(extraMapExtern0["other"]), 1)
 
     let extraMap1 = HashMap<String, Int64>()
@@ -309,8 +304,7 @@ main () {
     extraMap1["other"] = 11
     let extraMapExtern1 = Extern<DummyRT>(extraMap1)
     assertInt("extra direct key 1", DummyRT.fromExtern<Int64>(extraMapExtern1["k1"]), 10)
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for extern-valued subscript argument.
-    // assertInt("extra extern key 1", DummyRT.fromExtern<Int64>(extraMapExtern1[key("other")]), 11)
+    assertInt("extra extern key 1", DummyRT.fromExtern<Int64>(extraMapExtern1[key("other")]), 11)
     assertInt("extra direct other key 1", DummyRT.fromExtern<Int64>(extraMapExtern1["other"]), 11)
 
     let extraMap2 = HashMap<String, Int64>()
@@ -318,8 +312,7 @@ main () {
     extraMap2["other"] = 21
     let extraMapExtern2 = Extern<DummyRT>(extraMap2)
     assertInt("extra direct key 2", DummyRT.fromExtern<Int64>(extraMapExtern2["k2"]), 20)
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for extern-valued subscript argument.
-    // assertInt("extra extern key 2", DummyRT.fromExtern<Int64>(extraMapExtern2[key("other")]), 21)
+    assertInt("extra extern key 2", DummyRT.fromExtern<Int64>(extraMapExtern2[key("other")]), 21)
     assertInt("extra direct other key 2", DummyRT.fromExtern<Int64>(extraMapExtern2["other"]), 21)
 
     let extraMap3 = HashMap<String, Int64>()
@@ -327,8 +320,7 @@ main () {
     extraMap3["other"] = 31
     let extraMapExtern3 = Extern<DummyRT>(extraMap3)
     assertInt("extra direct key 3", DummyRT.fromExtern<Int64>(extraMapExtern3["k3"]), 30)
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for extern-valued subscript argument.
-    // assertInt("extra extern key 3", DummyRT.fromExtern<Int64>(extraMapExtern3[key("other")]), 31)
+    assertInt("extra extern key 3", DummyRT.fromExtern<Int64>(extraMapExtern3[key("other")]), 31)
     assertInt("extra direct other key 3", DummyRT.fromExtern<Int64>(extraMapExtern3["other"]), 31)
 
     let extraMap4 = HashMap<String, Int64>()
@@ -336,8 +328,7 @@ main () {
     extraMap4["other"] = 41
     let extraMapExtern4 = Extern<DummyRT>(extraMap4)
     assertInt("extra direct key 4", DummyRT.fromExtern<Int64>(extraMapExtern4["k4"]), 40)
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for extern-valued subscript argument.
-    // assertInt("extra extern key 4", DummyRT.fromExtern<Int64>(extraMapExtern4[key("other")]), 41)
+    assertInt("extra extern key 4", DummyRT.fromExtern<Int64>(extraMapExtern4[key("other")]), 41)
     assertInt("extra direct other key 4", DummyRT.fromExtern<Int64>(extraMapExtern4["other"]), 41)
 
     let extraBoolPair0 = Extern<DummyRT>(Pair(1, 2))
@@ -379,17 +370,15 @@ main () {
 
 
     let pairByString = Extern<DummyRT>(Pair(30, 12))
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for string selector subscript on Extern<Pair>.
-    // assertInt("pair string left", DummyRT.fromExtern<Int64>(pairByString["left"]), 30)
-    // assertInt("pair string right", DummyRT.fromExtern<Int64>(pairByString["right"]), 12)
-    // assertInt("pair string sum", DummyRT.fromExtern<Int64>(pairByString["sum"]), 42)
+    assertInt("pair string left", DummyRT.fromExtern<Int64>(pairByString["left"]), 30)
+    assertInt("pair string right", DummyRT.fromExtern<Int64>(pairByString["right"]), 12)
+    assertInt("pair string sum", DummyRT.fromExtern<Int64>(pairByString["sum"]), 42)
     assertInt("pair bool left fallback", DummyRT.fromExtern<Int64>(pairByString[true]), 30)
     assertInt("pair bool right fallback", DummyRT.fromExtern<Int64>(pairByString[false]), 12)
 
     let externIndexArray = Extern<DummyRT>([100, 200, 300, 400])
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for extern-valued numeric subscript arguments.
-    // assertInt("extern numeric key", DummyRT.fromExtern<Int64>(externIndexArray[Extern<DummyRT>(2)]), 300)
-    // assertInt("extern numeric key expression", DummyRT.fromExtern<Int64>(externIndexArray[genericIndex()]), 400)
+    assertInt("extern numeric key", DummyRT.fromExtern<Int64>(externIndexArray[Extern<DummyRT>(2)]), 300)
+    assertInt("extern numeric key expression", DummyRT.fromExtern<Int64>(externIndexArray[genericIndex()]), 400)
 
     let jagged = HashMap<String, Array<Int64>>()
     jagged["small"] = [1, 1, 2]
@@ -402,8 +391,7 @@ main () {
     keyedValues["left"] = DummyRT.fromExtern<Int64>(pairByString["left"])
     keyedValues["right"] = DummyRT.fromExtern<Int64>(pairByString["right"])
     let keyedExtern = Extern<DummyRT>(keyedValues)
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for extern-valued subscript argument.
-    // assertInt("extern key after pair selector", DummyRT.fromExtern<Int64>(keyedExtern[key("left")]), 30)
+    assertInt("extern key after pair selector", DummyRT.fromExtern<Int64>(keyedExtern[key("left")]), 30)
     assertInt("direct key after pair selector", DummyRT.fromExtern<Int64>(keyedExtern["left"]), 30)
     assertInt("extern key direct after pair selector", DummyRT.fromExtern<Int64>(keyedExtern["right"]), 12)
 
@@ -414,13 +402,12 @@ main () {
         // Expected
     }
 
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for extern-valued numeric subscript arguments.
-    // try {
-    //     DummyRT.fromExtern<Int64>(externIndexArray[Extern<DummyRT>(9)])
-    //     throw Exception("extern numeric key out of bounds")
-    // } catch (e: IndexOutOfBoundsException) {
-    //     // Expected
-    // }
+    try {
+        DummyRT.fromExtern<Int64>(externIndexArray[Extern<DummyRT>(9)])
+        throw Exception("extern numeric key out of bounds")
+    } catch (e: IndexOutOfBoundsException) {
+        // Expected
+    }
 
 
     let helperTable = HashMap<String, Array<Int64>>()
@@ -465,14 +452,13 @@ main () {
     nestedKeyTable["left"] = [1, 3, 5]
     nestedKeyTable["right"] = [2, 4, 6]
     let nestedKeyTableExtern = Extern<DummyRT>(nestedKeyTable)
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for string selector subscript on Extern<Pair>.
-    // let selectedNestedKey = if (DummyRT.fromExtern<Int64>(helperPair["sum"]) == 42) { "right" } else { "left" }
-    let selectedNestedKey = if (DummyRT.fromExtern<Int64>(helperPair[true]) == 14) { "right" } else { "left" }
+    let selectedNestedKey = if (DummyRT.fromExtern<Int64>(helperPair["sum"]) == 42) { "right" } else { "left" }
     assertInt("selected nested key", nestedLookup(nestedKeyTableExtern, selectedNestedKey, 2), 6)
+    let selectedNestedKey2 = if (DummyRT.fromExtern<Int64>(helperPair[true]) == 14) { "right" } else { "left" }
+    assertInt("selected nested key", nestedLookup(nestedKeyTableExtern, selectedNestedKey2, 2), 6)
 
     let externIndexMap = HashMap<String, Int64>()
-    // TODO: Compiler assertion in RecoverToSubscriptExpr for extern-valued numeric subscript arguments.
-    // externIndexMap["computed"] = DummyRT.fromExtern<Int64>(conditionalIndexArray[Extern<DummyRT>(1)]) + pairLookup(helperPair, "left")
+    externIndexMap["computed"] = DummyRT.fromExtern<Int64>(conditionalIndexArray[Extern<DummyRT>(1)]) + pairLookup(helperPair, "left")
     externIndexMap["computed"] = DummyRT.fromExtern<Int64>(conditionalIndexArray[1]) + pairLookup(helperPair, "left")
     let externIndexMapExtern = Extern<DummyRT>(externIndexMap)
     assertInt("extern index map computed", externKeyLookup(externIndexMapExtern, "computed"), 24)

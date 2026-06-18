@@ -259,11 +259,10 @@ main () {
     rolling = genericWrap<Int64>(unwrapInt(rolling) * mapValue(mapExtern, "mid"))
     assertInt("rolling multiplied", unwrapInt(rolling), 20)
 
-    // TODO: Compiler assertion with nested toExtern coercions inside Pair constructor arguments.
-    // let computedPair: Extern<DummyRT> = Pair(unwrapInt(select(true, 4, 5)), sumArray(genericWrap<Array<Int64>>([3, 3, 3, 3])))
-    // let computedPayload = DummyRT.fromExtern<Pair>(computedPair)
-    // assertInt("computed pair left", computedPayload.left, 4)
-    // assertInt("computed pair right", computedPayload.right, 12)
+    let computedPair: Extern<DummyRT> = Pair(unwrapInt(select(true, 4, 5)), sumArray(genericWrap<Array<Int64>>([3, 3, 3, 3])))
+    let computedPayload = DummyRT.fromExtern<Pair>(computedPair)
+    assertInt("computed pair left", computedPayload.left, 4)
+    assertInt("computed pair right", computedPayload.right, 12)
 
     let nestedScores = HashMap<String, Int64>()
     nestedScores["fromEnvelope"] = env0.score
@@ -272,16 +271,14 @@ main () {
     assertInt("nested scores pair", mapValue(nestedScoresExtern, "fromPair"), 30)
     assertInt("nested scores envelope", mapValue(nestedScoresExtern, "fromEnvelope"), 42)
 
-    // TODO: Compiler assertion when selecting between an implicit toExtern array conversion and an existing Extern value.
-    // let selectedArray = select(false, genericWrap<Array<Int64>>([0, 0, 0, 0]), matrixLike0)
-    // assertInt("selected array sum", sumArray(selectedArray), 60)
+    let selectedArray = select(false, genericWrap<Array<Int64>>([0, 0, 0, 0]), matrixLike0)
+    assertInt("selected array sum", sumArray(selectedArray), 60)
 
-    // TODO: Compiler assertion with nested toExtern coercions in genericWrap<Envelope> constructor argument.
-    // let genericEnvelope = genericWrap<Envelope>(Envelope(unwrapString("secondary"), unwrapInt(8), false))
-    // let genericEnvPayload = DummyRT.fromExtern<Envelope>(genericEnvelope)
-    // assertString("generic envelope name", genericEnvPayload.name, "secondary")
-    // assertInt("generic envelope score", genericEnvPayload.score, 8)
-    // assertBool("generic envelope enabled", genericEnvPayload.enabled, false)
+    let genericEnvelope = genericWrap<Envelope>(Envelope(unwrapString("secondary"), unwrapInt(8), false))
+    let genericEnvPayload = DummyRT.fromExtern<Envelope>(genericEnvelope)
+    assertString("generic envelope name", genericEnvPayload.name, "secondary")
+    assertInt("generic envelope score", genericEnvPayload.score, 8)
+    assertBool("generic envelope enabled", genericEnvPayload.enabled, false)
 
     try {
         DummyRT.fromExtern<Envelope>(arrayExtern)
