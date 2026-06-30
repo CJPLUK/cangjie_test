@@ -25,7 +25,7 @@ public class DummyRT <: Runtime<DummyRT> {
         throw Exception("functionCall not implemented")
     }
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
-        match (getPayload(h)) {
+        match (Extern<DummyRT>.getPayload(h)) {
             case v: Int64 => (v as R).getOrThrow()
             case _ => throw Exception("fromExtern: invalid Extern value")
         }

@@ -22,7 +22,7 @@ struct Pair {
 
 public class DummyRT <: Runtime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
-        let payload = getPayload(e)
+        let payload = Extern<DummyRT>.getPayload(e)
         match (field) {
             case "id" => e
             case "sum" =>
@@ -43,7 +43,7 @@ public class DummyRT <: Runtime<DummyRT> {
         }
     }
     public static func indexAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
-        let payload = getPayload(e)
+        let payload = Extern<DummyRT>.getPayload(e)
         if (index is String) {
             if (payload is Pair) {
                 let pair = (payload as Pair).getOrThrow()
@@ -68,7 +68,7 @@ public class DummyRT <: Runtime<DummyRT> {
             Extern<DummyRT>((payload as Array<Int64>).getOrThrow()[Int64((index as IntNative).getOrThrow())])
         } else if (index is Extern<DummyRT>) {
             if (payload is HashMap<String, Pair>) {
-                let key = getPayload((index as Extern<DummyRT>).getOrThrow())
+                let key = Extern<DummyRT>.getPayload((index as Extern<DummyRT>).getOrThrow())
                 Extern<DummyRT>((payload as HashMap<String, Pair>).getOrThrow()[(key as String).getOrThrow()])
             } else {
                 (index as Extern<DummyRT>).getOrThrow()
@@ -88,11 +88,11 @@ public class DummyRT <: Runtime<DummyRT> {
     }
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Float64> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Pair> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Array<Int64>> => (getPayload(h) as R).getOrThrow()
-            case _: Option<HashMap<String, Pair>> => (getPayload(h) as R).getOrThrow()
+            case _: Option<Int64> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Float64> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Pair> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Array<Int64>> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<HashMap<String, Pair>> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
             case _ => throw ExternConversionException("fromExtern not implemented")
         }
     }
@@ -136,24 +136,24 @@ func expectMissingIndex(e: Extern<DummyRT>, key: String) {
 
 func mixedPairSum(e: Extern<DummyRT>, key: String): Int64 {
     DummyRT.fromExtern<Int64>(e[key].sum)
-    let pair = (getPayload(e) as HashMap<String, Pair>).getOrThrow()[key]
+    let pair = (Extern<DummyRT>.getPayload(e) as HashMap<String, Pair>).getOrThrow()[key]
     pair.left + pair.right
 }
 
 func mixedRowPairSum(e: Extern<DummyRT>, key: String): Int64 {
     DummyRT.fromExtern<Int64>(e[key].pair.sum)
-    let row = (getPayload(e) as HashMap<String, Array<Int64>>).getOrThrow()[key]
+    let row = (Extern<DummyRT>.getPayload(e) as HashMap<String, Array<Int64>>).getOrThrow()[key]
     row[0] + row[1]
 }
 
 func mixedRowIndexTwice(e: Extern<DummyRT>, key: String, index: Int64): Int64 {
     DummyRT.fromExtern<Int64>(e[key][index].twice)
-    (getPayload(e) as HashMap<String, Array<Int64>>).getOrThrow()[key][index] * 2
+    (Extern<DummyRT>.getPayload(e) as HashMap<String, Array<Int64>>).getOrThrow()[key][index] * 2
 }
 
 func mixedExternKeyRight(e: Extern<DummyRT>, key: String): Int64 {
     DummyRT.fromExtern<Int64>(e[key].right)
-    (getPayload(e) as HashMap<String, Pair>).getOrThrow()[key].right
+    (Extern<DummyRT>.getPayload(e) as HashMap<String, Pair>).getOrThrow()[key].right
 }
 
 main () {

@@ -14,7 +14,7 @@ class DummyRT <: Runtime<DummyRT> {
 
     public static func indexAccess(e: Extern<DummyRT>, arg: Any): Extern<DummyRT> {
         let idx = (arg as Int64).getOrThrow()
-        match (getPayload(e)) {
+        match (Extern<DummyRT>.getPayload(e)) {
             case a: Array<Array<Array<String>>> => a[idx]
             case a: Array<Array<String>> => a[idx]
             case a: Array<String> => a[idx]
@@ -27,7 +27,7 @@ class DummyRT <: Runtime<DummyRT> {
 
     public static func indexUpdate(e: Extern<DummyRT>, index: Any, value: Any): Unit {
         let idx = (index as Int64).getOrThrow()
-        match (getPayload(e)) {
+        match (Extern<DummyRT>.getPayload(e)) {
             case a: Array<Array<Array<String>>> => a[idx] = (value as Array<Array<String>>).getOrThrow()
             case a: Array<Array<String>> => a[idx] = (value as Array<String>).getOrThrow()
             case a: Array<String> => a[idx] = (value as String).getOrThrow()
@@ -40,7 +40,7 @@ class DummyRT <: Runtime<DummyRT> {
     }
 
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
-        return (getPayload(h) as R).getOrThrow()
+        return (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
     }
 
     public static func toExtern<R>(v: R): Extern<DummyRT> {

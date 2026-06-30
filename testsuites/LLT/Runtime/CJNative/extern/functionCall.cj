@@ -14,16 +14,16 @@ public class DummyRT <: Runtime<DummyRT> {
         match (field) {
             case "id" => e
             case "pi" => Extern<DummyRT>(3.14)
-            case "add"=> Extern<DummyRT>((getPayload(e) as Int64).getOrThrow() + 1)
-            case "sub"=> Extern<DummyRT>((getPayload(e) as Int64).getOrThrow() - 1)
+            case "add"=> Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as Int64).getOrThrow() + 1)
+            case "sub"=> Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as Int64).getOrThrow() - 1)
             case "foo" => Extern<DummyRT>({input: Array<Any> =>
                 Extern<DummyRT>("function call with input size ${input.size}")})
             case "bar" => Extern<DummyRT>({input: String => "function call with input ${input}"})
             case "baz" => 
                 let f : (Extern<DummyRT>, Extern<DummyRT>) -> Extern<DummyRT> =
                     {arg1: Extern<DummyRT>,  arg2: Extern<DummyRT> =>
-                        let s1 = (getPayload(arg1) as String).getOrThrow()
-                        let s2 = (getPayload(arg2) as String).getOrThrow()
+                        let s1 = (Extern<DummyRT>.getPayload(arg1) as String).getOrThrow()
+                        let s2 = (Extern<DummyRT>.getPayload(arg2) as String).getOrThrow()
                         return Extern<DummyRT>("function call with input ${s1} and ${s2}")}
                 Extern<DummyRT>(f)
             case _ => throw MemberAccessException("memberAccess not implemented")
@@ -31,9 +31,9 @@ public class DummyRT <: Runtime<DummyRT> {
     }
     public static func indexAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
         if (index is Int64) {
-            Extern<DummyRT>((getPayload(e) as Array<Int64>).getOrThrow()[(index as Int64).getOrThrow()])
+            Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as Array<Int64>).getOrThrow()[(index as Int64).getOrThrow()])
         } else if (index is String) {
-            Extern<DummyRT>((getPayload(e) as HashMap<String, Array<Int64>>).getOrThrow()[(index as String).getOrThrow()])
+            Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as HashMap<String, Array<Int64>>).getOrThrow()[(index as String).getOrThrow()])
         } else if (index is Extern<DummyRT>) {
             (index as Extern<DummyRT>).getOrThrow()
         } else {
@@ -47,7 +47,7 @@ public class DummyRT <: Runtime<DummyRT> {
         throw Exception("indexUpdate not implemented")
     }
     public static func functionCall(e: Extern<DummyRT>, args: Array<Any>): Extern<DummyRT> {
-        match (getPayload(e)) {
+        match (Extern<DummyRT>.getPayload(e)) {
             case i: Int64 => match (i) {
                 case 1 => Extern<DummyRT>(101)
                 case _ => throw Exception("functionCall not implemented")
@@ -60,13 +60,13 @@ public class DummyRT <: Runtime<DummyRT> {
     }
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64>  => (getPayload(h) as R).getOrThrow()
-            case _: Option<Float64> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Rune> => (getPayload(h) as R).getOrThrow()
-            case _: Option<UInt32> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Int32> => (getPayload(h) as R).getOrThrow()
-            case _: Option<HashMap<String, Array<Int64>>> => (getPayload(h) as R).getOrThrow()
-            case _: Option<String> => (getPayload(h) as R).getOrThrow()
+            case _: Option<Int64>  => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Float64> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Rune> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<UInt32> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Int32> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<HashMap<String, Array<Int64>>> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<String> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
             case _ => throw ExternConversionException("fromExtern not implemented")
         }
     }

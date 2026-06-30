@@ -32,7 +32,7 @@ var countMaps: Int64 = 0
 
 public class DummyRT <: Runtime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
-        let box = (getPayload(e) as Boxed).getOrThrow()
+        let box = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
         match (field) {
             case "id" => e
             case "inc" =>
@@ -57,7 +57,7 @@ public class DummyRT <: Runtime<DummyRT> {
         throw Exception("indexAccess not implemented")
     }
     public static func memberUpdate(e: Extern<DummyRT>, field: String, value: Any): Unit {
-        let box = (getPayload(e) as Boxed).getOrThrow()
+        let box = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
         match (field) {
             case "add" =>
                 countAdds = countAdds + 1
@@ -127,11 +127,11 @@ public class DummyRT <: Runtime<DummyRT> {
     }
     public static func fromExtern<R>(e: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64> => ((getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
-            case _: Option<String> => ((getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
-            case _: Option<Bool> => ((getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
-            case _: Option<Pair> => ((getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
-            case _: Option<HashMap<String, Int64>> => ((getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<Int64> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<String> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<Bool> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<Pair> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<HashMap<String, Int64>> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
             case _ => throw ExternConversionException("fromExtern not implemented")
         }
     }

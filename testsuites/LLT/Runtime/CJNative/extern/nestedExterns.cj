@@ -28,7 +28,7 @@ public class DummyRT <: Runtime<DummyRT> {
     public static func memberUpdate(e: Extern<DummyRT>, field: String, value: Any) : Unit  {
         match (field) {
             case "something" =>
-                let v = (getPayload(e) as Boxed).getOrThrow()
+                let v = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
                 v.value = value
             case _ => throw MemberAccessException("memberAccess not implemented")
         }
@@ -36,13 +36,13 @@ public class DummyRT <: Runtime<DummyRT> {
     public static func indexUpdate(e: Extern<DummyRT>, index: Any, value: Any): Unit {
         match (index) {
             case i: Int64 =>
-                let v = (getPayload(e) as Boxed).getOrThrow()
+                let v = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
                 v.value = value
             case _ => throw MemberAccessException("indexUpdate not implemented")
         }
     }
     public static func functionCall(e: Extern<DummyRT>, args: Array<Any>): Extern<DummyRT> {
-        match (getPayload(e)) {
+        match (Extern<DummyRT>.getPayload(e)) {
             case i: Int64 => match (i) {
                 case 1 => Extern<DummyRT>(101)
                 case 42 => Extern<DummyRT>(1042)
@@ -54,7 +54,7 @@ public class DummyRT <: Runtime<DummyRT> {
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
         match (None<R>) {
             case _: Option<Int64>  =>
-                match (getPayload(h)) {
+                match (Extern<DummyRT>.getPayload(h)) {
                     case b: Boxed => (b.value as R).getOrThrow()
                     case i: Int64 => (i as R).getOrThrow()
                     case _ => throw ExternConversionException("fromExtern not implemented")

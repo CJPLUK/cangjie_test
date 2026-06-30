@@ -13,14 +13,14 @@ public class DummyRT <: Runtime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
         match (field) {
             case "length" =>
-                let a = (getPayload(e) as Array<Int64>).getOrThrow()
+                let a = (Extern<DummyRT>.getPayload(e) as Array<Int64>).getOrThrow()
                 Extern<DummyRT>(a.size)
             case _ => throw Exception("memberAccess not implemented")
         }
     }
     public static func indexAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
         if (index is Int64) {
-            Extern<DummyRT>((getPayload(e) as Array<Int64>).getOrThrow()[(index as Int64).getOrThrow()])
+            Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as Array<Int64>).getOrThrow()[(index as Int64).getOrThrow()])
         } else {
             throw Exception("indexAccess not implemented")
         }
@@ -36,7 +36,7 @@ public class DummyRT <: Runtime<DummyRT> {
     }
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64>  => (getPayload(h) as R).getOrThrow()
+            case _: Option<Int64>  => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
             case _ => throw Exception("fromExtern not implemented")
         }
     }

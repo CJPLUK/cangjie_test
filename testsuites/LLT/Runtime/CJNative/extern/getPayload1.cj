@@ -8,7 +8,7 @@
 // RUN-EXEC: %run %run_opt %output %run_args
 
 func foo<T>(e: Extern<T>) where T <: Runtime<T> {
-    getPayload(e)
+    Extern<T>.getPayload(e)
 }
 
 main () {

@@ -22,7 +22,7 @@ struct Pair {
 
 public class DummyRT <: Runtime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
-        let payload = getPayload(e)
+        let payload = Extern<DummyRT>.getPayload(e)
         match (field) {
             case "id" => e
             case "left" => Extern<DummyRT>((payload as Pair).getOrThrow().left)
@@ -76,12 +76,12 @@ public class DummyRT <: Runtime<DummyRT> {
     }
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Float64> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Bool> => (getPayload(h) as R).getOrThrow()
-            case _: Option<String> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Pair> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Array<Int64>> => (getPayload(h) as R).getOrThrow()
+            case _: Option<Int64> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Float64> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Bool> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<String> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Pair> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Array<Int64>> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
             case _ => throw ExternConversionException("fromExtern not implemented")
         }
     }

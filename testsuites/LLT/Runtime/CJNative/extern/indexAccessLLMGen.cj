@@ -25,7 +25,7 @@ public class DummyRT <: Runtime<DummyRT> {
         throw Exception("memberAccess not implemented")
     }
     public static func indexAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
-        let payload = getPayload(e)
+        let payload = Extern<DummyRT>.getPayload(e)
         if (index is Int64) {
             if (payload is Array<Int64>) {
                 Extern<DummyRT>((payload as Array<Int64>).getOrThrow()[(index as Int64).getOrThrow()])
@@ -68,7 +68,7 @@ public class DummyRT <: Runtime<DummyRT> {
                 Extern<DummyRT>(pair.right)
             }
         } else if (index is Extern<DummyRT>) {
-            let key = getPayload((index as Extern<DummyRT>).getOrThrow())
+            let key = Extern<DummyRT>.getPayload((index as Extern<DummyRT>).getOrThrow())
             if (key is String) {
                 Extern<DummyRT>((payload as HashMap<String, Int64>).getOrThrow()[(key as String).getOrThrow()])
             } else {
@@ -89,10 +89,10 @@ public class DummyRT <: Runtime<DummyRT> {
     }
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64> => (getPayload(h) as R).getOrThrow()
-            case _: Option<String> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Pair> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Array<Int64>> => (getPayload(h) as R).getOrThrow()
+            case _: Option<Int64> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<String> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Pair> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Array<Int64>> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
             case _ => throw ExternConversionException("fromExtern not implemented")
         }
     }
@@ -146,12 +146,12 @@ func expectBadIndex(e: Extern<DummyRT>, i: Int64) {
 
 func nestedLookup(e: Extern<DummyRT>, row: String, col: Int64): Int64 {
     DummyRT.fromExtern<Int64>(e[row][col])
-    (getPayload(e) as HashMap<String, Array<Int64>>).getOrThrow()[row][col]
+    (Extern<DummyRT>.getPayload(e) as HashMap<String, Array<Int64>>).getOrThrow()[row][col]
 }
 
 func pairLookup(e: Extern<DummyRT>, field: String): Int64 {
     DummyRT.fromExtern<Int64>(e[field])
-    let pair = (getPayload(e) as Pair).getOrThrow()
+    let pair = (Extern<DummyRT>.getPayload(e) as Pair).getOrThrow()
     if (field == "right") {
         pair.right
     } else if (field == "sum") {
@@ -165,7 +165,7 @@ func pairLookup(e: Extern<DummyRT>, field: String): Int64 {
 
 func externKeyLookup(e: Extern<DummyRT>, name: String): Int64 {
     DummyRT.fromExtern<Int64>(e[name])
-    (getPayload(e) as HashMap<String, Int64>).getOrThrow()[name]
+    (Extern<DummyRT>.getPayload(e) as HashMap<String, Int64>).getOrThrow()[name]
 }
 
 func chooseIndex(flag: Bool): Int64 {
