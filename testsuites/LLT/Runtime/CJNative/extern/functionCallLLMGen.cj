@@ -33,7 +33,7 @@ func anyToInt(v: Any): Int64 {
     if (v is Int64) {
         (v as Int64).getOrThrow()
     } else {
-        let payload = getPayload((v as Extern<DummyRT>).getOrThrow())
+        let payload = Extern<DummyRT>.getPayload((v as Extern<DummyRT>).getOrThrow())
         (payload as Int64).getOrThrow()
     }
 }
@@ -42,14 +42,14 @@ func anyToString(v: Any): String {
     if (v is String) {
         (v as String).getOrThrow()
     } else {
-        let payload = getPayload((v as Extern<DummyRT>).getOrThrow())
+        let payload = Extern<DummyRT>.getPayload((v as Extern<DummyRT>).getOrThrow())
         (payload as String).getOrThrow()
     }
 }
 
 public class DummyRT <: Runtime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
-        let payload = getPayload(e)
+        let payload = Extern<DummyRT>.getPayload(e)
         match (field) {
             case "id" => e
             case "left" => Extern<DummyRT>((payload as Pair).getOrThrow().left)
@@ -129,7 +129,7 @@ public class DummyRT <: Runtime<DummyRT> {
     }
 
     public static func indexAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
-        let payload = getPayload(e)
+        let payload = Extern<DummyRT>.getPayload(e)
         if (index is String) {
             let key = (index as String).getOrThrow()
             if (payload is HashMap<String, Extern<DummyRT>>) {
@@ -183,7 +183,7 @@ public class DummyRT <: Runtime<DummyRT> {
                 Extern<DummyRT>(pair.right)
             }
         } else if (index is Extern<DummyRT>) {
-            let keyPayload = getPayload((index as Extern<DummyRT>).getOrThrow())
+            let keyPayload = Extern<DummyRT>.getPayload((index as Extern<DummyRT>).getOrThrow())
             if (keyPayload is String) {
                 if (payload is HashMap<String, Extern<DummyRT>>) {
                     (payload as HashMap<String, Extern<DummyRT>>).getOrThrow()[(keyPayload as String).getOrThrow()]
@@ -209,7 +209,7 @@ public class DummyRT <: Runtime<DummyRT> {
     }
 
     public static func functionCall(e: Extern<DummyRT>, args: Array<Any>): Extern<DummyRT> {
-        match (getPayload(e)) {
+        match (Extern<DummyRT>.getPayload(e)) {
             case i: Int64 => Extern<DummyRT>(i + 100)
             case s: String => Extern<DummyRT>("${s}:${args.size}")
             case f: (Array<Any>) -> Extern<DummyRT> => f(args)
@@ -224,13 +224,13 @@ public class DummyRT <: Runtime<DummyRT> {
 
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64> => (getPayload(h) as R).getOrThrow()
-            case _: Option<String> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Bool> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Pair> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Box> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Array<Extern<DummyRT>>> => (getPayload(h) as R).getOrThrow()
-            case _: Option<HashMap<String, Extern<DummyRT>>> => (getPayload(h) as R).getOrThrow()
+            case _: Option<Int64> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<String> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Bool> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Pair> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Box> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Array<Extern<DummyRT>>> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<HashMap<String, Extern<DummyRT>>> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
             case _ => throw ExternConversionException("fromExtern not implemented")
         }
     }
@@ -716,20 +716,20 @@ func conversionAndContextCases() {
 
 func genericHelperCall<T>(e: Extern<T>): Int64 where T <: Runtime<T> {
     DummyRT.fromExtern<Int64>((e as Extern<DummyRT>).getOrThrow()())
-    let payload = getPayload((e as Extern<DummyRT>).getOrThrow())
+    let payload = Extern<DummyRT>.getPayload((e as Extern<DummyRT>).getOrThrow())
     (payload as Int64).getOrThrow() + 100
 }
 
 func genericHelperMemberCall<T>(e: Extern<T>): Int64 where T <: Runtime<T> {
     DummyRT.fromExtern<Int64>((e as Extern<DummyRT>).getOrThrow().id.twice())
-    let payload = getPayload((e as Extern<DummyRT>).getOrThrow())
+    let payload = Extern<DummyRT>.getPayload((e as Extern<DummyRT>).getOrThrow())
     ((payload as Int64).getOrThrow() * 2) + 100
 }
 
 func genericHelperIndexCall<T>(e: Extern<T>, index: Int64): Int64 where T <: Runtime<T> {
     DummyRT.fromExtern<Int64>((e as Extern<DummyRT>).getOrThrow()[index]())
     let concrete = (e as Extern<DummyRT>).getOrThrow()
-    let selectedValues = getPayload(concrete) as Array<Extern<DummyRT>>
+    let selectedValues = Extern<DummyRT>.getPayload(concrete) as Array<Extern<DummyRT>>
     let selected = selectedValues.getOrThrow()[index]
     DummyRT.fromExtern<Int64>(selected())
 }
@@ -832,7 +832,7 @@ func additionalPassingCalleeCases() {
 }
 
 func genericAndExceptionCases<T>(e: Extern<T>) where T <: Runtime<T> {
-    let payload = getPayload(e)
+    let payload = Extern<DummyRT>.getPayload(e)
     if (payload is Int64) {
         assertInt("generic root call payload", DummyRT.fromExtern<Int64>((e as Extern<DummyRT>).getOrThrow()()), 105)
     }

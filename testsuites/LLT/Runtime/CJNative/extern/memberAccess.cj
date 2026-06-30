@@ -12,8 +12,8 @@ public class DummyRT <: Runtime<DummyRT> {
         match (field) {
             case "id" => e
             case "pi" => Extern<DummyRT>(3.14)
-            case "add"=> Extern<DummyRT>((getPayload(e) as Int64).getOrThrow() + 1)
-            case "sub"=> Extern<DummyRT>((getPayload(e) as Int64).getOrThrow() - 1)
+            case "add"=> Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as Int64).getOrThrow() + 1)
+            case "sub"=> Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as Int64).getOrThrow() - 1)
             case _ => throw MemberAccessException("memberAccess not implemented")
         }
     }
@@ -31,8 +31,8 @@ public class DummyRT <: Runtime<DummyRT> {
     }
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64>  => (getPayload(h) as R).getOrThrow()
-            case _: Option<Float64> => (getPayload(h) as R).getOrThrow()
+            case _: Option<Int64>  => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Float64> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
             case _ => throw Exception("fromExtern not implemented")
         }
     }

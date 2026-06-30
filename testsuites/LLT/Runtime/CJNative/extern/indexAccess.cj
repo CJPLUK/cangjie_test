@@ -15,14 +15,14 @@ public class DummyRT <: Runtime<DummyRT> {
     }
     public static func indexAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
         if (index is Int64) {
-            Extern<DummyRT>((getPayload(e) as Array<Rune>).getOrThrow()[(index as Int64).getOrThrow()])
+            Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as Array<Rune>).getOrThrow()[(index as Int64).getOrThrow()])
         } else if (index is UInt32) {
-            let payload = (getPayload(e) as Array<Int32>).getOrThrow()
+            let payload = (Extern<DummyRT>.getPayload(e) as Array<Int32>).getOrThrow()
             Extern<DummyRT>(payload[Int64((index as UInt32).getOrThrow())])
         } else if (index is String) {
-            Extern<DummyRT>((getPayload(e) as HashMap<String, UInt32>).getOrThrow()[(index as String).getOrThrow()])
+            Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as HashMap<String, UInt32>).getOrThrow()[(index as String).getOrThrow()])
         } else if (index is Int32) {
-            Extern<DummyRT>((getPayload(e) as HashMap<Int32, Array<Int32>>).getOrThrow()[(index as Int32).getOrThrow()])
+            Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as HashMap<Int32, Array<Int32>>).getOrThrow()[(index as Int32).getOrThrow()])
         } else {
             throw Exception("indexAccess not implemented")
         }
@@ -38,11 +38,11 @@ public class DummyRT <: Runtime<DummyRT> {
     }
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64>  => (getPayload(h) as R).getOrThrow()
-            case _: Option<Float64> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Rune> => (getPayload(h) as R).getOrThrow()
-            case _: Option<UInt32> => (getPayload(h) as R).getOrThrow()
-            case _: Option<Int32> => (getPayload(h) as R).getOrThrow()
+            case _: Option<Int64>  => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Float64> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Rune> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<UInt32> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Int32> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
             case _ => throw Exception("fromExtern not implemented")
         }
     }
@@ -96,10 +96,10 @@ main () {
     let g = Extern<DummyRT>(m)
 
     let tmp = g[Int32(1)]
-    if (!(getPayload(tmp) is Array<Int32>)) {
+    if (!(Extern<DummyRT>.getPayload(tmp) is Array<Int32>)) {
         throw Exception("Unexpected!")
     }
-    let payload = (getPayload(tmp) as Array<Int32>).getOrThrow()
+    let payload = (Extern<DummyRT>.getPayload(tmp) as Array<Int32>).getOrThrow()
     if (payload[0] != 1 || payload[1] != 2 || payload[2] != 3) {
         throw Exception("Unexpected!")
     }

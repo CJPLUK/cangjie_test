@@ -32,7 +32,7 @@ var countMapUpdates: Int64 = 0
 
 public class DummyRT <: Runtime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
-        let box = (getPayload(e) as Boxed).getOrThrow()
+        let box = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
         match (field) {
             case "id" => e
             case "inc" =>
@@ -49,7 +49,7 @@ public class DummyRT <: Runtime<DummyRT> {
         }
     }
     public static func indexAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
-        let box = (getPayload(e) as Boxed).getOrThrow()
+        let box = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
         match (index) {
             case i: Int64 => Extern<DummyRT>(Boxed((box.value as Array<Int64>).getOrThrow()[i]))
             case field: String =>
@@ -76,7 +76,7 @@ public class DummyRT <: Runtime<DummyRT> {
         throw Exception("memberUpdate not implemented")
     }
     public static func indexUpdate(e: Extern<DummyRT>, index: Any, value: Any): Unit {
-        let box = (getPayload(e) as Boxed).getOrThrow()
+        let box = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
         match (index) {
             case field: String => match (field) {
                 case "add" =>
@@ -136,12 +136,12 @@ public class DummyRT <: Runtime<DummyRT> {
     }
     public static func fromExtern<R>(e: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64> => ((getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
-            case _: Option<String> => ((getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
-            case _: Option<Pair> => ((getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
-            case _: Option<Array<Int64>> => ((getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
-            case _: Option<HashMap<String, Int64>> => ((getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
-            case _: Option<HashMap<String, Array<Int64>>> => ((getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<Int64> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<String> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<Pair> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<Array<Int64>> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<HashMap<String, Int64>> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<HashMap<String, Array<Int64>>> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
             case _ => throw ExternConversionException("fromExtern not implemented")
         }
     }

@@ -25,8 +25,8 @@ public class DummyRT <: Runtime<DummyRT> {
     }
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64>  => (getPayload(h) as R).getOrThrow()
-            case _: Option<Float64> => (getPayload(h) as R).getOrThrow()
+            case _: Option<Int64>  => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Float64> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
             case _ => throw Exception("fromExtern not implemented")
 
         }

@@ -19,7 +19,7 @@ public class DummyRT <: Runtime<DummyRT> {
         match (field) {
             case "inc" => 
                 countIncs = countIncs + 1
-                let e = (getPayload(e) as Boxed).getOrThrow()
+                let e = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
                 Extern<DummyRT>(Boxed((e.value as Int64).getOrThrow() + 1))
             case _ => throw MemberAccessException("memberAccess not implemented")
         }
@@ -35,20 +35,20 @@ public class DummyRT <: Runtime<DummyRT> {
             case field: String => match (field) {
                 case "add" => 
                     countAdds = countAdds + 1
-                    let v = (getPayload(e) as Boxed).getOrThrow()
+                    let v = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
                     v.value =  (v.value as Int64).getOrThrow() + (value as Int64).getOrThrow()
                 case "set" => 
-                    let v = (getPayload(e) as Boxed).getOrThrow()
+                    let v = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
                     v.value = value
                 case "mutate" => 
-                    let v = (getPayload(e) as Boxed).getOrThrow()
+                    let v = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
                     let s = (v.value as String).getOrThrow()
                     let c = (value as Rune).getOrThrow()
                     v.value = String([c]) + s[1..]
                 case _ => throw MemberAccessException("not implemented")
             }
             case i: Int64 =>
-                let array: Array<Int64> = (getPayload(e) as Array<Int64>).getOrThrow()
+                let array: Array<Int64> = (Extern<DummyRT>.getPayload(e) as Array<Int64>).getOrThrow()
                 array[i] = (value as Int64).getOrThrow()
             case _ => throw IndexAccessException("indexAccess not implemented")
         }
@@ -58,8 +58,8 @@ public class DummyRT <: Runtime<DummyRT> {
     }
     public static func fromExtern<R>(e: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64>  => ((getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
-            case _: Option<String>  => ((getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<Int64>  => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<String>  => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
             case _ => throw Exception("fromExtern not implemented")
         }
     }
