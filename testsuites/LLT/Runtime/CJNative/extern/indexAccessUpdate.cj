@@ -14,7 +14,7 @@ class Boxed {
 var countIncs: Int64 = 0
 var countAdds: Int64 = 0
 
-public class DummyRT <: Runtime<DummyRT> {
+public class DummyRT <: ForeignRuntime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
         match (field) {
             case "inc" => 
@@ -24,13 +24,13 @@ public class DummyRT <: Runtime<DummyRT> {
             case _ => throw MemberAccessException("memberAccess not implemented")
         }
     }
-    public static func indexAccess(_: Extern<DummyRT>, _: Any): Extern<DummyRT> {
-        throw Exception("indexAccess not implemented")
+    public static func indexedAccess(_: Extern<DummyRT>, _: Any): Extern<DummyRT> {
+        throw Exception("indexedAccess not implemented")
     }
     public static func memberUpdate(_: Extern<DummyRT>, _: String, _: Any) : Unit  {
         throw Exception("memberUpdate not implemented")
     }
-    public static func indexUpdate(e: Extern<DummyRT>, index: Any, value: Any): Unit {
+    public static func indexedUpdate(e: Extern<DummyRT>, index: Any, value: Any): Unit {
         match (index) {
             case field: String => match (field) {
                 case "add" => 
@@ -50,7 +50,7 @@ public class DummyRT <: Runtime<DummyRT> {
             case i: Int64 =>
                 let array: Array<Int64> = (Extern<DummyRT>.getPayload(e) as Array<Int64>).getOrThrow()
                 array[i] = (value as Int64).getOrThrow()
-            case _ => throw IndexAccessException("indexAccess not implemented")
+            case _ => throw IndexAccessException("indexedAccess not implemented")
         }
     }
     public static func functionCall(_: Extern<DummyRT>, _: Array<Any>): Extern<DummyRT> {

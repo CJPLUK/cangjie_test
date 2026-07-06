@@ -8,17 +8,17 @@
 // RUN-EXEC: %run %run_opt %output %run_args
 
 
-public class DummyRT <: Runtime<DummyRT> {
+public class DummyRT <: ForeignRuntime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
         throw Exception("memberAccess not implemented") 
     }
-    public static func indexAccess(e: Extern<DummyRT>, arg: Any): Extern<DummyRT> {
-        throw Exception("indexAccess not implemented")
+    public static func indexedAccess(e: Extern<DummyRT>, arg: Any): Extern<DummyRT> {
+        throw Exception("indexedAccess not implemented")
     }
     public static func memberUpdate(e: Extern<DummyRT>, field: String, value: Any) : Unit  {
         throw Exception("memberUpdate not implemented")
     }
-    public static func indexUpdate(e: Extern<DummyRT>, field: Any, value: Any): Unit {
+    public static func indexedUpdate(e: Extern<DummyRT>, field: Any, value: Any): Unit {
         ()
     }
     public static func functionCall(e: Extern<DummyRT>, args: Array<Any>): Extern<DummyRT> {
@@ -32,7 +32,7 @@ public class DummyRT <: Runtime<DummyRT> {
     }
 }
 
-func foo<T>(e: Extern<T>) where T <: Runtime<T> {
+func foo<T>(e: Extern<T>) where T <: ForeignRuntime<T> {
     e[0] = 42
 }
 

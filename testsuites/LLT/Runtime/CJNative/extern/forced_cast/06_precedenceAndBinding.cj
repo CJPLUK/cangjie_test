@@ -13,11 +13,11 @@
 //   * Tighter than binary operators: `(U)e + 1` is `((U)e) + 1`.
 // Also pins how postfix binds for the ordinary-call branch.
 
-class DummyRuntime <: Runtime<DummyRuntime> {
+class DummyRuntime <: ForeignRuntime<DummyRuntime> {
     public static func memberAccess(e: Extern<DummyRuntime>, field: String): Extern<DummyRuntime> { return e }
-    public static func indexAccess(e: Extern<DummyRuntime>, arg: Any): Extern<DummyRuntime> { return e }
+    public static func indexedAccess(e: Extern<DummyRuntime>, arg: Any): Extern<DummyRuntime> { return e }
     public static func memberUpdate(e: Extern<DummyRuntime>, field: String, value: Any): Unit {}
-    public static func indexUpdate(e: Extern<DummyRuntime>, field: Any, value: Any): Unit {}
+    public static func indexedUpdate(e: Extern<DummyRuntime>, field: Any, value: Any): Unit {}
     public static func functionCall(e: Extern<DummyRuntime>, args: Array<Any>): Extern<DummyRuntime> { return e }
     public static func fromExtern<R>(h: Extern<DummyRuntime>): R { return (Extern<DummyRuntime>.getPayload(h) as R).getOrThrow() }
     public static func toExtern<R>(v: R): Extern<DummyRuntime> { return Extern<DummyRuntime>(v) }

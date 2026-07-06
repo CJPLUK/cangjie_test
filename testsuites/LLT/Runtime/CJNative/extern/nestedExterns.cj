@@ -11,18 +11,18 @@ class Boxed {
     Boxed(public var value: Any) {}
 }
 
-public class DummyRT <: Runtime<DummyRT> {
+public class DummyRT <: ForeignRuntime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
         match (field) {
             case "id" => e
             case _ => throw MemberAccessException("memberAccess not implemented")
         }
     }
-    public static func indexAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
+    public static func indexedAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
         if (index is Int64) {
             Extern<DummyRT>(1)
         } else {
-            throw Exception("indexAccess not implemented")
+            throw Exception("indexedAccess not implemented")
         }
     }
     public static func memberUpdate(e: Extern<DummyRT>, field: String, value: Any) : Unit  {
@@ -33,12 +33,12 @@ public class DummyRT <: Runtime<DummyRT> {
             case _ => throw MemberAccessException("memberAccess not implemented")
         }
     }
-    public static func indexUpdate(e: Extern<DummyRT>, index: Any, value: Any): Unit {
+    public static func indexedUpdate(e: Extern<DummyRT>, index: Any, value: Any): Unit {
         match (index) {
             case i: Int64 =>
                 let v = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
                 v.value = value
-            case _ => throw MemberAccessException("indexUpdate not implemented")
+            case _ => throw MemberAccessException("indexedUpdate not implemented")
         }
     }
     public static func functionCall(e: Extern<DummyRT>, args: Array<Any>): Extern<DummyRT> {

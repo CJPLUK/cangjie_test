@@ -47,7 +47,7 @@ func anyToString(v: Any): String {
     }
 }
 
-public class DummyRT <: Runtime<DummyRT> {
+public class DummyRT <: ForeignRuntime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
         let payload = Extern<DummyRT>.getPayload(e)
         match (field) {
@@ -128,7 +128,7 @@ public class DummyRT <: Runtime<DummyRT> {
         }
     }
 
-    public static func indexAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
+    public static func indexedAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
         let payload = Extern<DummyRT>.getPayload(e)
         if (index is String) {
             let key = (index as String).getOrThrow()
@@ -196,7 +196,7 @@ public class DummyRT <: Runtime<DummyRT> {
                 (payload as Array<Extern<DummyRT>>).getOrThrow()[(keyPayload as Int64).getOrThrow()]
             }
         } else {
-            throw Exception("indexAccess not implemented")
+            throw Exception("indexedAccess not implemented")
         }
     }
 
@@ -204,8 +204,8 @@ public class DummyRT <: Runtime<DummyRT> {
         throw Exception("memberUpdate not implemented")
     }
 
-    public static func indexUpdate(_: Extern<DummyRT>, _: Any, _: Any): Unit {
-        throw Exception("indexUpdate not implemented")
+    public static func indexedUpdate(_: Extern<DummyRT>, _: Any, _: Any): Unit {
+        throw Exception("indexedUpdate not implemented")
     }
 
     public static func functionCall(e: Extern<DummyRT>, args: Array<Any>): Extern<DummyRT> {
@@ -714,19 +714,19 @@ func conversionAndContextCases() {
     assertInt("extern call selected as arg by match", DummyRT.fromExtern<Int64>(one.varargs(matchArg, 22)), 42)
 }
 
-func genericHelperCall<T>(e: Extern<T>): Int64 where T <: Runtime<T> {
+func genericHelperCall<T>(e: Extern<T>): Int64 where T <: ForeignRuntime<T> {
     DummyRT.fromExtern<Int64>((e as Extern<DummyRT>).getOrThrow()())
     let payload = Extern<DummyRT>.getPayload((e as Extern<DummyRT>).getOrThrow())
     (payload as Int64).getOrThrow() + 100
 }
 
-func genericHelperMemberCall<T>(e: Extern<T>): Int64 where T <: Runtime<T> {
+func genericHelperMemberCall<T>(e: Extern<T>): Int64 where T <: ForeignRuntime<T> {
     DummyRT.fromExtern<Int64>((e as Extern<DummyRT>).getOrThrow().id.twice())
     let payload = Extern<DummyRT>.getPayload((e as Extern<DummyRT>).getOrThrow())
     ((payload as Int64).getOrThrow() * 2) + 100
 }
 
-func genericHelperIndexCall<T>(e: Extern<T>, index: Int64): Int64 where T <: Runtime<T> {
+func genericHelperIndexCall<T>(e: Extern<T>, index: Int64): Int64 where T <: ForeignRuntime<T> {
     DummyRT.fromExtern<Int64>((e as Extern<DummyRT>).getOrThrow()[index]())
     let concrete = (e as Extern<DummyRT>).getOrThrow()
     let selectedValues = Extern<DummyRT>.getPayload(concrete) as Array<Extern<DummyRT>>
@@ -831,7 +831,7 @@ func additionalPassingCalleeCases() {
     assertInt("additional saved map binary callee", DummyRT.fromExtern<Int64>(selectedBinary(8, 5)), 40)
 }
 
-func genericAndExceptionCases<T>(e: Extern<T>) where T <: Runtime<T> {
+func genericAndExceptionCases<T>(e: Extern<T>) where T <: ForeignRuntime<T> {
     let payload = Extern<DummyRT>.getPayload(e)
     if (payload is Int64) {
         assertInt("generic root call payload", DummyRT.fromExtern<Int64>((e as Extern<DummyRT>).getOrThrow()()), 105)

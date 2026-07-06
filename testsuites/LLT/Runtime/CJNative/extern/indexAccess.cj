@@ -9,11 +9,11 @@
 
 import std.collection.HashMap
 
-public class DummyRT <: Runtime<DummyRT> {
+public class DummyRT <: ForeignRuntime<DummyRT> {
     public static func memberAccess(_: Extern<DummyRT>, _: String): Extern<DummyRT> {
         throw Exception("memberAccess not implemented")
     }
-    public static func indexAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
+    public static func indexedAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
         if (index is Int64) {
             Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as Array<Rune>).getOrThrow()[(index as Int64).getOrThrow()])
         } else if (index is UInt32) {
@@ -24,14 +24,14 @@ public class DummyRT <: Runtime<DummyRT> {
         } else if (index is Int32) {
             Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as HashMap<Int32, Array<Int32>>).getOrThrow()[(index as Int32).getOrThrow()])
         } else {
-            throw Exception("indexAccess not implemented")
+            throw Exception("indexedAccess not implemented")
         }
     }
     public static func memberUpdate(_: Extern<DummyRT>, _: String, _: Any) : Unit  {
         throw Exception("memberUpdate not implemented")
     }
-    public static func indexUpdate(_: Extern<DummyRT>, _: Any, _: Any): Unit {
-        throw Exception("indexUpdate not implemented")
+    public static func indexedUpdate(_: Extern<DummyRT>, _: Any, _: Any): Unit {
+        throw Exception("indexedUpdate not implemented")
     }
     public static func functionCall(_: Extern<DummyRT>, _: Array<Any>): Extern<DummyRT> {
         throw Exception("functionCall not implemented")

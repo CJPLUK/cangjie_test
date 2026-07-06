@@ -30,7 +30,7 @@ var countStringUpdates: Int64 = 0
 var countArrayUpdates: Int64 = 0
 var countMapUpdates: Int64 = 0
 
-public class DummyRT <: Runtime<DummyRT> {
+public class DummyRT <: ForeignRuntime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
         let box = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
         match (field) {
@@ -48,7 +48,7 @@ public class DummyRT <: Runtime<DummyRT> {
             case _ => throw MemberAccessException("memberAccess not implemented")
         }
     }
-    public static func indexAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
+    public static func indexedAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
         let box = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
         match (index) {
             case i: Int64 => Extern<DummyRT>(Boxed((box.value as Array<Int64>).getOrThrow()[i]))
@@ -69,13 +69,13 @@ public class DummyRT <: Runtime<DummyRT> {
             case flag: Bool =>
                 let pair = (box.value as Pair).getOrThrow()
                 if (flag) { Extern<DummyRT>(Boxed(pair.left)) } else { Extern<DummyRT>(Boxed(pair.right)) }
-            case _ => throw IndexAccessException("indexAccess not implemented")
+            case _ => throw IndexAccessException("indexedAccess not implemented")
         }
     }
     public static func memberUpdate(_: Extern<DummyRT>, _: String, _: Any): Unit {
         throw Exception("memberUpdate not implemented")
     }
-    public static func indexUpdate(e: Extern<DummyRT>, index: Any, value: Any): Unit {
+    public static func indexedUpdate(e: Extern<DummyRT>, index: Any, value: Any): Unit {
         let box = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
         match (index) {
             case field: String => match (field) {
@@ -128,7 +128,7 @@ public class DummyRT <: Runtime<DummyRT> {
                 } else {
                     box.value = Pair(pair.left, (value as Int64).getOrThrow())
                 }
-            case _ => throw IndexAccessException("indexUpdate not implemented")
+            case _ => throw IndexAccessException("indexedUpdate not implemented")
         }
     }
     public static func functionCall(_: Extern<DummyRT>, _: Array<Any>): Extern<DummyRT> {

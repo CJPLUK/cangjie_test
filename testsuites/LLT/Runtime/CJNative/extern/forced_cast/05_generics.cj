@@ -11,11 +11,11 @@
 // cast whose Extern runtime argument is itself a generic type parameter (the cast
 // must still desugar through Runtime.fromExtern instantiated with that parameter).
 
-class DummyRuntime <: Runtime<DummyRuntime> {
+class DummyRuntime <: ForeignRuntime<DummyRuntime> {
     public static func memberAccess(e: Extern<DummyRuntime>, field: String): Extern<DummyRuntime> { return e }
-    public static func indexAccess(e: Extern<DummyRuntime>, arg: Any): Extern<DummyRuntime> { return e }
+    public static func indexedAccess(e: Extern<DummyRuntime>, arg: Any): Extern<DummyRuntime> { return e }
     public static func memberUpdate(e: Extern<DummyRuntime>, field: String, value: Any): Unit {}
-    public static func indexUpdate(e: Extern<DummyRuntime>, field: Any, value: Any): Unit {}
+    public static func indexedUpdate(e: Extern<DummyRuntime>, field: Any, value: Any): Unit {}
     public static func functionCall(e: Extern<DummyRuntime>, args: Array<Any>): Extern<DummyRuntime> { return e }
     public static func fromExtern<R>(h: Extern<DummyRuntime>): R { return (Extern<DummyRuntime>.getPayload(h) as R).getOrThrow() }
     public static func toExtern<R>(v: R): Extern<DummyRuntime> { return Extern<DummyRuntime>(v) }
@@ -36,28 +36,28 @@ func makeBoxExtern(v: Int64): Extern<DummyRuntime> {
 }
 
 // Generic Extern runtime parameter: forced cast inside a function generic over T.
-func genericBare<T>(): Int64 where T <: Runtime<T> {
+func genericBare<T>(): Int64 where T <: ForeignRuntime<T> {
     let e = Extern<T>(42)
     (Int64)e
 }
 
-func genericReturn<T>(): Int64 where T <: Runtime<T> {
+func genericReturn<T>(): Int64 where T <: ForeignRuntime<T> {
     let e = Extern<T>(43)
     return (Int64)e
 }
 
-func genericLocal<T>(): Int64 where T <: Runtime<T> {
+func genericLocal<T>(): Int64 where T <: ForeignRuntime<T> {
     let e = Extern<T>(44)
     let value: Int64 = (Int64)e
     value
 }
 
-func genericClass<T>(): Foo where T <: Runtime<T> {
+func genericClass<T>(): Foo where T <: ForeignRuntime<T> {
     let e = Extern<T>(Foo(45))
     (Foo)e
 }
 
-func genericNested<T>(): Array<Int64> where T <: Runtime<T> {
+func genericNested<T>(): Array<Int64> where T <: ForeignRuntime<T> {
     let e = Extern<T>([46, 47])
     (Array<Int64>)e
 }

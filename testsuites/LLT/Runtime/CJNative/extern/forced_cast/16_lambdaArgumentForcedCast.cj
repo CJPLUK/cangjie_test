@@ -17,11 +17,11 @@
 
 import std.collection.ArrayList
 
-class DummyRT <: Runtime<DummyRT> {
+class DummyRT <: ForeignRuntime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> { return e }
-    public static func indexAccess(e: Extern<DummyRT>, arg: Any): Extern<DummyRT> { return e }
+    public static func indexedAccess(e: Extern<DummyRT>, arg: Any): Extern<DummyRT> { return e }
     public static func memberUpdate(e: Extern<DummyRT>, field: String, value: Any): Unit {}
-    public static func indexUpdate(e: Extern<DummyRT>, field: Any, value: Any): Unit {}
+    public static func indexedUpdate(e: Extern<DummyRT>, field: Any, value: Any): Unit {}
     public static func functionCall(e: Extern<DummyRT>, args: Array<Any>): Extern<DummyRT> { return e }
     public static func fromExtern<R>(h: Extern<DummyRT>): R { return (Extern<DummyRT>.getPayload(h) as R).getOrThrow() }
     public static func toExtern<R>(v: R): Extern<DummyRT> { return Extern<DummyRT>(v) }
