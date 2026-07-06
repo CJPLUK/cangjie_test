@@ -20,7 +20,7 @@ struct Pair {
     }
 }
 
-public class DummyRT <: Runtime<DummyRT> {
+public class DummyRT <: ForeignRuntime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
         let payload = Extern<DummyRT>.getPayload(e)
         match (field) {
@@ -62,14 +62,14 @@ public class DummyRT <: Runtime<DummyRT> {
             case _ => throw MemberAccessException("memberAccess not implemented")
         }
     }
-    public static func indexAccess(_: Extern<DummyRT>, _: Any): Extern<DummyRT> {
-        throw Exception("indexAccess not implemented")
+    public static func indexedAccess(_: Extern<DummyRT>, _: Any): Extern<DummyRT> {
+        throw Exception("indexedAccess not implemented")
     }
     public static func memberUpdate(_: Extern<DummyRT>, _: String, _: Any): Unit {
         throw Exception("memberUpdate not implemented")
     }
-    public static func indexUpdate(_: Extern<DummyRT>, _: Any, _: Any): Unit {
-        throw Exception("indexUpdate not implemented")
+    public static func indexedUpdate(_: Extern<DummyRT>, _: Any, _: Any): Unit {
+        throw Exception("indexedUpdate not implemented")
     }
     public static func functionCall(_: Extern<DummyRT>, _: Array<Any>): Extern<DummyRT> {
         throw Exception("functionCall not implemented")

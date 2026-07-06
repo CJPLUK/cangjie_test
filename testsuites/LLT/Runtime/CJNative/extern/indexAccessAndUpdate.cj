@@ -7,12 +7,12 @@
 // EXEC-0: %compiler %cmp_opt %f -o %output
 // RUN-EXEC: %run %run_opt %output %run_args
 
-class DummyRT <: Runtime<DummyRT> {
+class DummyRT <: ForeignRuntime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, _: String): Extern<DummyRT> {
         return e
     }
 
-    public static func indexAccess(e: Extern<DummyRT>, arg: Any): Extern<DummyRT> {
+    public static func indexedAccess(e: Extern<DummyRT>, arg: Any): Extern<DummyRT> {
         let idx = (arg as Int64).getOrThrow()
         match (Extern<DummyRT>.getPayload(e)) {
             case a: Array<Array<Array<String>>> => a[idx]
@@ -25,7 +25,7 @@ class DummyRT <: Runtime<DummyRT> {
     public static func memberUpdate(_: Extern<DummyRT>, _: String, _: Any): Unit {
     }
 
-    public static func indexUpdate(e: Extern<DummyRT>, index: Any, value: Any): Unit {
+    public static func indexedUpdate(e: Extern<DummyRT>, index: Any, value: Any): Unit {
         let idx = (index as Int64).getOrThrow()
         match (Extern<DummyRT>.getPayload(e)) {
             case a: Array<Array<Array<String>>> => a[idx] = (value as Array<Array<String>>).getOrThrow()

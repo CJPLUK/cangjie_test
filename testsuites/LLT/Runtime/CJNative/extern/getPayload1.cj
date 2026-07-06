@@ -7,7 +7,7 @@
 // EXEC-0: %compiler %cmp_opt %f -o %output
 // RUN-EXEC: %run %run_opt %output %run_args
 
-func foo<T>(e: Extern<T>) where T <: Runtime<T> {
+func foo<T>(e: Extern<T>) where T <: ForeignRuntime<T> {
     Extern<T>.getPayload(e)
 }
 

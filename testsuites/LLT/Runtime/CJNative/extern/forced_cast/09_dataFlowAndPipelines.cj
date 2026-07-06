@@ -11,11 +11,11 @@
 // boundaries, ordinary class members/methods/arrays/helpers carrying Extern
 // values, nested Extern handles, and generic forwarding / callbacks / pipelines.
 
-class DummyRuntime <: Runtime<DummyRuntime> {
+class DummyRuntime <: ForeignRuntime<DummyRuntime> {
     public static func memberAccess(e: Extern<DummyRuntime>, field: String): Extern<DummyRuntime> { return e }
-    public static func indexAccess(e: Extern<DummyRuntime>, arg: Any): Extern<DummyRuntime> { return e }
+    public static func indexedAccess(e: Extern<DummyRuntime>, arg: Any): Extern<DummyRuntime> { return e }
     public static func memberUpdate(e: Extern<DummyRuntime>, field: String, value: Any): Unit {}
-    public static func indexUpdate(e: Extern<DummyRuntime>, field: Any, value: Any): Unit {}
+    public static func indexedUpdate(e: Extern<DummyRuntime>, field: Any, value: Any): Unit {}
     public static func functionCall(e: Extern<DummyRuntime>, args: Array<Any>): Extern<DummyRuntime> { return e }
     public static func fromExtern<R>(h: Extern<DummyRuntime>): R { return (Extern<DummyRuntime>.getPayload(h) as R).getOrThrow() }
     public static func toExtern<R>(v: R): Extern<DummyRuntime> { return Extern<DummyRuntime>(v) }
@@ -159,22 +159,22 @@ class Slot<T> {
 
 func identity<T>(value: T): T { value }
 
-func mapExtern<T, R>(value: Extern<T>, transform: (Extern<T>) -> R): R where T <: Runtime<T> {
+func mapExtern<T, R>(value: Extern<T>, transform: (Extern<T>) -> R): R where T <: ForeignRuntime<T> {
     transform(value)
 }
 
 func flatMapExtern<T>(
     value: Extern<T>,
     transform: (Extern<T>) -> Extern<T>
-): Extern<T> where T <: Runtime<T> {
+): Extern<T> where T <: ForeignRuntime<T> {
     transform(value)
 }
 
-func makeReader<T>(): (Extern<T>) -> Item where T <: Runtime<T> {
+func makeReader<T>(): (Extern<T>) -> Item where T <: ForeignRuntime<T> {
     {value: Extern<T> => (Item)value}
 }
 
-func castThroughGeneric<T>(value: Extern<T>): Item where T <: Runtime<T> {
+func castThroughGeneric<T>(value: Extern<T>): Item where T <: ForeignRuntime<T> {
     (Item)identity(value)
 }
 
