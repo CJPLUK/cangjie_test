@@ -15,11 +15,11 @@
 // multi-argument). The positive forced-cast counterpart of this fallback is the
 // rejected case in 11_negativeFallbackCallRejected, where no constructor matches.
 
-class DummyRuntime <: Runtime<DummyRuntime> {
+class DummyRuntime <: ForeignRuntime<DummyRuntime> {
     public static func memberAccess(e: Extern<DummyRuntime>, field: String): Extern<DummyRuntime> { return e }
-    public static func indexAccess(e: Extern<DummyRuntime>, arg: Any): Extern<DummyRuntime> { return e }
+    public static func indexedAccess(e: Extern<DummyRuntime>, arg: Any): Extern<DummyRuntime> { return e }
     public static func memberUpdate(e: Extern<DummyRuntime>, field: String, value: Any): Unit {}
-    public static func indexUpdate(e: Extern<DummyRuntime>, field: Any, value: Any): Unit {}
+    public static func indexedUpdate(e: Extern<DummyRuntime>, field: Any, value: Any): Unit {}
     public static func functionCall(e: Extern<DummyRuntime>, args: Array<Any>): Extern<DummyRuntime> { return e }
     public static func fromExtern<R>(h: Extern<DummyRuntime>): R { return (Extern<DummyRuntime>.getPayload(h) as R).getOrThrow() }
     public static func toExtern<R>(v: R): Extern<DummyRuntime> { return Extern<DummyRuntime>(v) }

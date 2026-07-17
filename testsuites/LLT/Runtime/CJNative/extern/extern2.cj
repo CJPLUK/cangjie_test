@@ -6,7 +6,7 @@
 
 // EXEC-0: %compiler %cmp_opt %f -o %output
 
-func foo<T>(e: Extern<T>) where T <: Runtime<T> {
+func foo<T>(e: Extern<T>) where T <: ForeignRuntime<T> {
     T.fromExtern<Int64>(e)
 }
 

@@ -8,18 +8,18 @@
 // ASSERT: scan-8 expected 'Bool', found 'Struct-Extern<Class-DummyRT>'
 // ASSERT: scan-8 error: mismatched types
 
-public class DummyRT <: Runtime<DummyRT> {
+public class DummyRT <: ForeignRuntime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
         throw Exception("memberAccess not implemented") 
     }
-    public static func indexAccess(e: Extern<DummyRT>, arg: Any): Extern<DummyRT> {
-        throw Exception("indexAccess not implemented")
+    public static func indexedAccess(e: Extern<DummyRT>, arg: Any): Extern<DummyRT> {
+        throw Exception("indexedAccess not implemented")
     }
     public static func memberUpdate(e: Extern<DummyRT>, field: String, value: Any) : Unit  {
         throw Exception("memberUpdate not implemented")
     }
-    public static func indexUpdate(e: Extern<DummyRT>, field: Any, value: Any): Unit {
-        throw Exception("indexUpdate not implemented")
+    public static func indexedUpdate(e: Extern<DummyRT>, field: Any, value: Any): Unit {
+        throw Exception("indexedUpdate not implemented")
     }
     public static func functionCall(e: Extern<DummyRT>, args: Array<Any>): Extern<DummyRT> {
         throw Exception("functionCall not implemented")

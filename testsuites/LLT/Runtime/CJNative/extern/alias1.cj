@@ -9,20 +9,20 @@
 
 import std.collection.ArrayList
 
-public class DummyRT <: Runtime<DummyRT> {
+public class DummyRT <: ForeignRuntime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
         match (field) {
             case "id" => Extern<DummyRT>(42)
             case _ => throw Exception("not implemented")
         }
     }
-    public static func indexAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
+    public static func indexedAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
         throw Exception("not implemented")
     }
     public static func memberUpdate(_: Extern<DummyRT>, _: String, _: Any) : Unit  {
         throw Exception("not implemented")
     }
-    public static func indexUpdate(_: Extern<DummyRT>, _: Any, _: Any): Unit {
+    public static func indexedUpdate(_: Extern<DummyRT>, _: Any, _: Any): Unit {
         throw Exception("not implemented")
     }
     public static func functionCall(e: Extern<DummyRT>, args: Array<Any>): Extern<DummyRT> {
