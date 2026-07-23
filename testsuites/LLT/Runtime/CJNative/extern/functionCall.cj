@@ -26,7 +26,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
                         let s2 = (Extern<DummyRT>.getPayload(arg2) as String).getOrThrow()
                         return Extern<DummyRT>("function call with input ${s1} and ${s2}")}
                 Extern<DummyRT>(f)
-            case _ => throw MemberAccessException("memberAccess not implemented")
+            case _ => throw ExternMemberAccessException("memberAccess not implemented")
         }
     }
     public static func indexedAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {

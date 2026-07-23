@@ -21,7 +21,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
                 countIncs = countIncs + 1
                 let e = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
                 Extern<DummyRT>(Boxed((e.value as Int64).getOrThrow() + 1))
-            case _ => throw MemberAccessException("memberAccess not implemented")
+            case _ => throw ExternMemberAccessException("memberAccess not implemented")
         }
     }
     public static func indexedAccess(_: Extern<DummyRT>, _: Any): Extern<DummyRT> {
@@ -45,12 +45,12 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
                     let s = (v.value as String).getOrThrow()
                     let c = (value as Rune).getOrThrow()
                     v.value = String([c]) + s[1..]
-                case _ => throw MemberAccessException("not implemented")
+                case _ => throw ExternMemberAccessException("not implemented")
             }
             case i: Int64 =>
                 let array: Array<Int64> = (Extern<DummyRT>.getPayload(e) as Array<Int64>).getOrThrow()
                 array[i] = (value as Int64).getOrThrow()
-            case _ => throw IndexAccessException("indexedAccess not implemented")
+            case _ => throw ExternIndexedAccessException("indexedAccess not implemented")
         }
     }
     public static func functionCall(_: Extern<DummyRT>, _: Array<Any>): Extern<DummyRT> {

@@ -50,7 +50,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
                 let pair = (box.value as Pair).getOrThrow()
                 Extern<DummyRT>(Boxed(pair.left + pair.right))
             case "textLen" => Extern<DummyRT>(Boxed((box.value as String).getOrThrow().size))
-            case _ => throw MemberAccessException("memberAccess not implemented")
+            case _ => throw ExternMemberAccessException("memberAccess not implemented")
         }
     }
     public static func indexedAccess(_: Extern<DummyRT>, _: Any): Extern<DummyRT> {
@@ -116,7 +116,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
                 m["left"] = m["left"] + other["left"]
                 m["right"] = m["right"] + other["right"]
                 m["sum"] = m["left"] + m["right"]
-            case _ => throw MemberAccessException("memberUpdate not implemented")
+            case _ => throw ExternMemberAccessException("memberUpdate not implemented")
         }
     }
     public static func indexedUpdate(_: Extern<DummyRT>, _: Any, _: Any): Unit {
@@ -184,7 +184,7 @@ func expectMissingMember(e: Extern<DummyRT>) {
     try {
         e.unknown = 1
         throw Exception("missing member update did not throw")
-    } catch (e: MemberAccessException) {
+    } catch (e: ExternMemberAccessException) {
         // Expected
     }
 }

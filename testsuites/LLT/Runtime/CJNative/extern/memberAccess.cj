@@ -14,7 +14,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
             case "pi" => Extern<DummyRT>(3.14)
             case "add"=> Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as Int64).getOrThrow() + 1)
             case "sub"=> Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as Int64).getOrThrow() - 1)
-            case _ => throw MemberAccessException("memberAccess not implemented")
+            case _ => throw ExternMemberAccessException("memberAccess not implemented")
         }
     }
     public static func indexedAccess(_: Extern<DummyRT>, _: Any): Extern<DummyRT> {
@@ -71,21 +71,21 @@ main () {
     try {
         DummyRT.fromExtern<Int64>(e.foo)
         throw Exception("Unexpected!")
-    } catch (e: MemberAccessException) {
+    } catch (e: ExternMemberAccessException) {
         // Expected
     }
 
     try {
         DummyRT.fromExtern<Int64>(e.add.add.add.sub.sub.foo)
         throw Exception("Unexpected!")
-    } catch (e: MemberAccessException) {
+    } catch (e: ExternMemberAccessException) {
         // Expected
     }
 
     try {
         DummyRT.fromExtern<Int64>(e.add.add.foo.add.sub.sub)
         throw Exception("Unexpected!")
-    } catch (e: MemberAccessException) {
+    } catch (e: ExternMemberAccessException) {
         // Expected
     }
 

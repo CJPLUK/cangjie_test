@@ -124,7 +124,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
                         }
                     Extern<DummyRT>(f)
                 })
-            case _ => throw MemberAccessException("memberAccess not implemented")
+            case _ => throw ExternMemberAccessException("memberAccess not implemented")
         }
     }
 
@@ -330,7 +330,7 @@ func expectMissingMember(e: Extern<DummyRT>) {
     try {
         DummyRT.fromExtern<Int64>(e.missing())
         throw Exception("missing member call did not throw")
-    } catch (e: MemberAccessException) {
+    } catch (e: ExternMemberAccessException) {
         // Expected
     }
 }

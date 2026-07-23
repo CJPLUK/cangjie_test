@@ -45,7 +45,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
             case "row" =>
                 let m = (box.value as HashMap<String, Array<Int64>>).getOrThrow()
                 Extern<DummyRT>(Boxed(m["row"]))
-            case _ => throw MemberAccessException("memberAccess not implemented")
+            case _ => throw ExternMemberAccessException("memberAccess not implemented")
         }
     }
     public static func indexedAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
@@ -63,13 +63,13 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
                         case "left" => Extern<DummyRT>(Boxed(pair.left))
                         case "right" => Extern<DummyRT>(Boxed(pair.right))
                         case "sum" => Extern<DummyRT>(Boxed(pair.left + pair.right))
-                        case _ => throw IndexAccessException("unknown pair field")
+                        case _ => throw ExternIndexedAccessException("unknown pair field")
                     }
                 }
             case flag: Bool =>
                 let pair = (box.value as Pair).getOrThrow()
                 if (flag) { Extern<DummyRT>(Boxed(pair.left)) } else { Extern<DummyRT>(Boxed(pair.right)) }
-            case _ => throw IndexAccessException("indexedAccess not implemented")
+            case _ => throw ExternIndexedAccessException("indexedAccess not implemented")
         }
     }
     public static func memberUpdate(_: Extern<DummyRT>, _: String, _: Any): Unit {
@@ -111,7 +111,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
                     m["left"] = m["left"] + other["left"]
                     m["right"] = m["right"] + other["right"]
                     m["sum"] = m["left"] + m["right"]
-                case _ => throw IndexAccessException("string index update not implemented")
+                case _ => throw ExternIndexedAccessException("string index update not implemented")
             }
             case i: Int64 =>
                 countArrayUpdates = countArrayUpdates + 1
@@ -128,7 +128,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
                 } else {
                     box.value = Pair(pair.left, (value as Int64).getOrThrow())
                 }
-            case _ => throw IndexAccessException("indexedUpdate not implemented")
+            case _ => throw ExternIndexedAccessException("indexedUpdate not implemented")
         }
     }
     public static func functionCall(_: Extern<DummyRT>, _: Array<Any>): Extern<DummyRT> {
@@ -203,7 +203,7 @@ func expectMissingStringIndex(e: Extern<DummyRT>) {
     try {
         e["missing"] = 1
         throw Exception("missing index update did not throw")
-    } catch (e: IndexAccessException) {
+    } catch (e: ExternIndexedAccessException) {
         // Expected
     }
 }
