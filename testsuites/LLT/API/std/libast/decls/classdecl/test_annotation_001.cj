@@ -96,9 +96,9 @@ ClassDecl {
 class A < T > where T <: Hashable {
 }
 
-description: identifier, token_id: 137, token_literal_value: a0, fileID: 16, line: 177, column: 22
-description: identifier, token_id: 137, token_literal_value: a1, fileID: 16, line: 177, column: 22
-description: identifier, token_id: 137, token_literal_value: a2, fileID: 16, line: 177, column: 22
+description: identifier, token_id: 137, token_literal_value: a0, fileID: 16, line: 178, column: 22
+description: identifier, token_id: 137, token_literal_value: a1, fileID: 16, line: 178, column: 22
+description: identifier, token_id: 137, token_literal_value: a2, fileID: 16, line: 178, column: 22
 true
 true
 true

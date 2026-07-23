@@ -12,9 +12,9 @@
 // operand is never Extern); they round out the matrix so every viable callee shape /
 // operand form is guarded, not only the ones that once misbehaved:
 //   * generic function call   `(genId<Int64>)(x)`
-//   * generic constructor     `(Box<Int64>)(x)`   (operand not Extern -> construct)
+//   * generic constructor     `Box<Int64>(x)`
 //   * unit operand, function  `(zero)()`
-//   * unit operand, constructor `(NoArg)()`
+//   * no-argument constructor `NoArg()`
 // (Simple names live in 02/04, qualified/dotted in 14, generic FC targets in 05.)
 
 class Box<T> {
@@ -33,9 +33,9 @@ func zero(): Int64 { 42 }
 
 main() {
     let genericCall = (genId<Int64>)(5)
-    let genericCtor = (Box<Int64>)(9)
+    let genericCtor = Box<Int64>(9)
     let unitCall = (zero)()
-    let unitCtor = (NoArg)()
+    let unitCtor = NoArg()
 
     if (genericCall != 5 || genericCtor.value != 9 || unitCall != 42 || unitCtor.tag != 7) {
         throw Exception("fallback shape matrix failed")

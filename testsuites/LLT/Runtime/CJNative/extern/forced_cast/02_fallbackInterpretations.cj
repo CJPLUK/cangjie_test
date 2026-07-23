@@ -7,13 +7,11 @@
 // EXEC-0: %compiler %cmp_opt %f -o %output
 // RUN-EXEC: %run %run_opt %output %run_args
 
-// Shapes that look like a forced cast but must stay on the ordinary
-// (non-forced-cast) path: a parenthesized function call `(foo)(x)` (including
-// when the argument is Extern), a parenthesized expression `(a + b)`, and a
-// `(Type)(args)` whose operand is not Extern -- the forced-cast candidate is
-// rejected and it falls back to an ordinary constructor call (single- and
-// multi-argument). The positive forced-cast counterpart of this fallback is the
-// rejected case in 11_negativeFallbackCallRejected, where no constructor matches.
+// Shapes that stay on the ordinary (non-forced-cast) path: a parenthesized
+// function call `(foo)(x)` (including when the argument is Extern), a
+// parenthesized expression `(a + b)`, and canonical constructor calls `Type(args)`.
+// A parenthesized type `(Type)(args)` always selects forced-cast semantics and is
+// rejected when its operand is not Extern; 11_negativeFallbackCallRejected pins it.
 
 class DummyRuntime <: ForeignRuntime<DummyRuntime> {
     public static func memberAccess(e: Extern<DummyRuntime>, field: String): Extern<DummyRuntime> { return e }
@@ -46,11 +44,9 @@ main() {
     let a: Int64 = 10
     let b: Int64 = 20
     let parenExpr = (a + b)
-    // (Type)(args): Bar is a type, so this is a forced-cast candidate, but the
-    // operand is not Extern, so the candidate is rejected and it falls back to an
-    // ordinary constructor call -- both single- and multi-argument.
-    let ctorSingle: Bar = (Bar)(1)
-    let ctorMulti: Bar = (Bar)(2, 3)
+    // Constructors use the unambiguous `Type(args)` spelling.
+    let ctorSingle: Bar = Bar(1)
+    let ctorMulti: Bar = Bar(2, 3)
 
     if (call != 2 || callExtern != 42 || parenExpr != 30 ||
         ctorSingle.v != 1 || ctorMulti.v != 5) {
