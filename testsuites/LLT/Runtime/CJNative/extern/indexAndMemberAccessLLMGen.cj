@@ -39,7 +39,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
             case "twice" => Extern<DummyRT>((payload as Int64).getOrThrow() * 2)
             case "neg" => Extern<DummyRT>(0 - (payload as Int64).getOrThrow())
             case "pi" => Extern<DummyRT>(3.14)
-            case _ => throw MemberAccessException("memberAccess not implemented")
+            case _ => throw ExternMemberAccessException("memberAccess not implemented")
         }
     }
     public static func indexedAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
@@ -119,7 +119,7 @@ func expectMissingMember(e: Extern<DummyRT>) {
     try {
         DummyRT.fromExtern<Int64>(e.unknown)
         throw Exception("missing member did not throw")
-    } catch (e: MemberAccessException) {
+    } catch (e: ExternMemberAccessException) {
         // Expected
     }
 }
@@ -249,7 +249,7 @@ main () {
     try {
         DummyRT.fromExtern<Int64>(pairSelector.missing)
         throw Exception("missing pair selector in mixed")
-    } catch (e: MemberAccessException) {
+    } catch (e: ExternMemberAccessException) {
         // Expected
     }
 
@@ -336,7 +336,7 @@ main () {
     try {
         DummyRT.fromExtern<Int64>(finalMixedRowsExtern["a"].pair.missing)
         throw Exception("final mixed missing member did not throw")
-    } catch (e: MemberAccessException) {
+    } catch (e: ExternMemberAccessException) {
         // Expected
     }
 

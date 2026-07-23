@@ -16,7 +16,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
             case "pi" => Extern<DummyRT>(3.14)
             case "add"=> Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as Int64).getOrThrow() + 1)
             case "sub"=> Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as Int64).getOrThrow() - 1)
-            case _ => throw MemberAccessException("memberAccess not implemented")
+            case _ => throw ExternMemberAccessException("memberAccess not implemented")
         }
     }
     public static func indexedAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {

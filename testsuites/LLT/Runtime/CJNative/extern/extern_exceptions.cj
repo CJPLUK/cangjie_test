@@ -9,23 +9,23 @@
 
 
 func throwMemberAccessException() {
-    throw MemberAccessException("Test 1")
+    throw ExternMemberAccessException("Test 1")
 }
 
 func throwFunctionAccessException() {
-    throw FunctionAccessException("Test 2")
+    throw ExternFunctionAccessException("Test 2")
 }
 
 func throwFunctionCallException() {
-    throw FunctionCallException("Test 3")
+    throw ExternFunctionCallException("Test 3")
 }
 
 func throwIndexAccessException() {
-    throw IndexAccessException("Test 4")
+    throw ExternIndexedAccessException("Test 4")
 }
 
 func throwExternDynamicException() {
-    throw ExternDynamicException("Test 5")
+    throw ForeignRuntimeException("Test 5")
 }
 
 func throwExternConversionException() {
@@ -35,9 +35,9 @@ func throwExternConversionException() {
 main () {
     try {
         throwMemberAccessException()
-        throw Exception("MemberAccessException not thrown")
-    } catch (e: MemberAccessException) {
-        println("Caught MemberAccessException: " + e.message)
+        throw Exception("ExternMemberAccessException not thrown")
+    } catch (e: ExternMemberAccessException) {
+        println("Caught ExternMemberAccessException: " + e.message)
         if (e.message != "Test 1") {
             throw Exception("Unexpected message: " + e.message)
         }
@@ -45,9 +45,9 @@ main () {
 
     try {
         throwFunctionAccessException()
-        throw Exception("FunctionAccessException not thrown")
-    } catch (e: FunctionAccessException) {
-        println("Caught FunctionAccessException: " + e.message)
+        throw Exception("ExternFunctionAccessException not thrown")
+    } catch (e: ExternFunctionAccessException) {
+        println("Caught ExternFunctionAccessException: " + e.message)
         if (e.message != "Test 2") {
             throw Exception("Unexpected message: " + e.message)
         }
@@ -55,9 +55,9 @@ main () {
 
     try {
         throwFunctionCallException()
-        throw Exception("FunctionCallException not thrown")
-    } catch (e: FunctionCallException) {
-        println("Caught FunctionCallException: " + e.message)
+        throw Exception("ExternFunctionCallException not thrown")
+    } catch (e: ExternFunctionCallException) {
+        println("Caught ExternFunctionCallException: " + e.message)
         if (e.message != "Test 3") {
             throw Exception("Unexpected message: " + e.message)
         }
@@ -65,9 +65,9 @@ main () {
 
     try {
         throwIndexAccessException()
-        throw Exception("IndexAccessException not thrown")
-    } catch (e: IndexAccessException) {
-        println("Caught IndexAccessException: " + e.message)
+        throw Exception("ExternIndexedAccessException not thrown")
+    } catch (e: ExternIndexedAccessException) {
+        println("Caught ExternIndexedAccessException: " + e.message)
         if (e.message != "Test 4") {
             throw Exception("Unexpected message: " + e.message)
         }
@@ -75,9 +75,9 @@ main () {
 
     try {
         throwExternDynamicException()
-        throw Exception("ExternDynamicException not thrown")
-    } catch (e: ExternDynamicException) {
-        println("Caught ExternDynamicException: " + e.message)
+        throw Exception("ForeignRuntimeException not thrown")
+    } catch (e: ForeignRuntimeException) {
+        println("Caught ForeignRuntimeException: " + e.message)
         if (e.message != "Test 5") {
             throw Exception("Unexpected message: " + e.message)
         }

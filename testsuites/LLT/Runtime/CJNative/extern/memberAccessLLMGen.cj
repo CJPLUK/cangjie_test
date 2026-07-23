@@ -59,7 +59,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
             case "positive" => Extern<DummyRT>((payload as Bool).getOrThrow())
             case "name" => Extern<DummyRT>((payload as String).getOrThrow())
             case "pi" => Extern<DummyRT>(3.14)
-            case _ => throw MemberAccessException("memberAccess not implemented")
+            case _ => throw ExternMemberAccessException("memberAccess not implemented")
         }
     }
     public static func indexedAccess(_: Extern<DummyRT>, _: Any): Extern<DummyRT> {
@@ -116,7 +116,7 @@ func expectMissing(e: Extern<DummyRT>) {
     try {
         DummyRT.fromExtern<Int64>(e.missing)
         throw Exception("missing member did not throw")
-    } catch (e: MemberAccessException) {
+    } catch (e: ExternMemberAccessException) {
         // Expected
     }
 }

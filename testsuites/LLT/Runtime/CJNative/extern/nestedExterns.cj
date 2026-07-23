@@ -15,7 +15,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
         match (field) {
             case "id" => e
-            case _ => throw MemberAccessException("memberAccess not implemented")
+            case _ => throw ExternMemberAccessException("memberAccess not implemented")
         }
     }
     public static func indexedAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
@@ -30,7 +30,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
             case "something" =>
                 let v = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
                 v.value = value
-            case _ => throw MemberAccessException("memberAccess not implemented")
+            case _ => throw ExternMemberAccessException("memberAccess not implemented")
         }
     }
     public static func indexedUpdate(e: Extern<DummyRT>, index: Any, value: Any): Unit {
@@ -38,7 +38,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
             case i: Int64 =>
                 let v = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
                 v.value = value
-            case _ => throw MemberAccessException("indexedUpdate not implemented")
+            case _ => throw ExternMemberAccessException("indexedUpdate not implemented")
         }
     }
     public static func functionCall(e: Extern<DummyRT>, args: Array<Any>): Extern<DummyRT> {
@@ -46,9 +46,9 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
             case i: Int64 => match (i) {
                 case 1 => Extern<DummyRT>(101)
                 case 42 => Extern<DummyRT>(1042)
-                case _ => throw FunctionCallException("functionCall not implemented")
+                case _ => throw ExternFunctionCallException("functionCall not implemented")
             }
-            case _ => throw FunctionCallException("functionCall not implemented")
+            case _ => throw ExternFunctionCallException("functionCall not implemented")
         }
     }
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
@@ -220,7 +220,7 @@ main () {
         // function call nested extern
         Extern<DummyRT>("foooooo")()
         throw Exception("test failed")
-    } catch (e: FunctionCallException) {
+    } catch (e: ExternFunctionCallException) {
         // expected
     }
 
@@ -228,7 +228,7 @@ main () {
         // function call nested extern
         Extern<DummyRT>(2)()
         throw Exception("test failed")
-    } catch (e: FunctionCallException) {
+    } catch (e: ExternFunctionCallException) {
         // expected
     }
 
