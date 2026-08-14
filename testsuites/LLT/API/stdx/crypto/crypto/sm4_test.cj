@@ -251,4 +251,87 @@ class Test_sm4 {
         test_func_sm4_07(SM4(OperationMode.CFB, key.toArray(), iv: iv.toArray()), "./file/cfbTest.txt")
         test_func_sm4_07(SM4(OperationMode.CTR, key.toArray(), iv: iv.toArray()), "./file/ctrTest.txt")
     }
+
+    @TestCase
+    func test_sm4_gcm_roundtrip(): Unit {
+        var key = "1234567890123456"
+        var iv = "1234567890123456"
+        var aad = "Additional authenticated data."
+        var plain = "hello cangjie! SM4-GCM roundtrip"
+        // GCM output layout: ciphertext || tag
+        var sm4 = SM4(OperationMode.GCM, key.toArray(), iv: iv.toArray(), aad: aad.toArray())
+        var enR = sm4.encrypt(plain.toArray())
+        @Expect(enR.size, plain.size + sm4.tagSize)
+        var re = sm4.decrypt(enR)
+        @Expect(String.fromUtf8(re), plain)
+
+        // Tamper with the last tag byte: decryption must fail.
+        var tampered = enR.clone()
+        if (tampered[tampered.size - 1] == 0) {
+            tampered[tampered.size - 1] = 1
+        } else {
+            tampered[tampered.size - 1] = 0
+        }
+        var num = 0
+        try {
+            sm4.decrypt(tampered)
+        } catch (e: CryptoException) {
+            num++
+        }
+        @Expect(num, 1)
+
+        // Wrong AAD must fail tag verification.
+        var numAad = 0
+        var sm4WrongAad = SM4(OperationMode.GCM, key.toArray(), iv: iv.toArray(),
+            aad: "wrong aad data".toArray())
+        try {
+            sm4WrongAad.decrypt(enR)
+        } catch (e: CryptoException) {
+            numAad++
+        }
+        @Expect(numAad, 1)
+    }
+
+    @TestCase
+    func test_sm4_gcm_tag_sizes(): Unit {
+        var key = "1234567890123456"
+        var iv = "1234567890123456"
+        var aad = "Additional authenticated data."
+
+        // non-default tag size (12 bytes)
+        var plain12 = "hello cangjie!"
+        var sm4_12 = SM4(OperationMode.GCM, key.toArray(), iv: iv.toArray(), aad: aad.toArray(), tagSize: 12)
+        var enR12 = sm4_12.encrypt(plain12.toArray())
+        @Expect(enR12.size, plain12.size + 12)
+        @Expect(String.fromUtf8(sm4_12.decrypt(enR12)), plain12)
+
+        // empty payload with AAD
+        var sm4Empty = SM4(OperationMode.GCM, key.toArray(), iv: iv.toArray(), aad: aad.toArray())
+        var enREmpty = sm4Empty.encrypt(Array<Byte>())
+        @Expect(enREmpty.size, sm4Empty.tagSize)
+        @Expect(sm4Empty.decrypt(enREmpty).size, 0)
+
+        // payload without AAD
+        var plainNoAad = "payload without aad"
+        var sm4NoAad = SM4(OperationMode.GCM, key.toArray(), iv: iv.toArray())
+        var enRNoAad = sm4NoAad.encrypt(plainNoAad.toArray())
+        @Expect(String.fromUtf8(sm4NoAad.decrypt(enRNoAad)), plainNoAad)
+    }
+
+    @TestCase
+    func test_sm4_gcm_large_payload(): Unit {
+        var key = "1234567890123456"
+        var iv = "1234567890123456"
+        var aad = "Additional authenticated data."
+        // payload larger than the internal 1024-byte buffer
+        var large = Array<Byte>(3000, {i => UInt8(i % 256)})
+        var sm4 = SM4(OperationMode.GCM, key.toArray(), iv: iv.toArray(), aad: aad.toArray())
+        var enR = sm4.encrypt(large)
+        @Expect(enR.size, large.size + sm4.tagSize)
+        var re = sm4.decrypt(enR)
+        @Expect(re.size, large.size)
+        for (i in 0..large.size) {
+            @Expect(re[i], large[i])
+        }
+    }
 }
