@@ -508,8 +508,28 @@ class HNode<K, V> where K <: Hashable & Equatable<K> {
         }
     }
 
+    func tryGetBucket(index: Int64): Bool {
+        lockG.lock(index)
+        if (freezeFlags[index]) {
+            lockG.unlock(index)
+            return false
+        }
+
+        if (buckets[index].refList().isSome()) {
+            return true
+        }
+
+        if (let Some(preHT) <- pre.load()) {
+            let preIndex = index & (preHT.buckets.size - 1) // Index of bucket remains to be migrated
+            preHT.freeze(preIndex)
+            buckets[index].migrate(preHT.buckets[preIndex].refList(), buckets.size - 1, index)
+        }
+
+        return true
+    }
+
     /**
-     * Prepares the bucket for updating.
+     * Prepares the bucket for updating and returns the loaded bucket list.
      * Returns (entries, ready):
      * - ready == false: the bucket is frozen, caller should reload head and retry;
      * - ready == true: the bucket is ready; entries are the bucket list
@@ -517,7 +537,7 @@ class HNode<K, V> where K <: Hashable & Equatable<K> {
      *   until the caller calls unlock.
      */
     @OverflowWrapping
-    func tryGetBucket(index: Int64): (?KVList<K, V>, Bool) {
+    func tryGetBucketWithEntries(index: Int64): (?KVList<K, V>, Bool) {
         lockG.lock(index)
         if (freezeFlags[index]) {
             lockG.unlock(index)
@@ -765,7 +785,7 @@ public class ConcurrentHashMap<K, V> <: ConcurrentMap<K, V> & Collection<(K, V)>
         }
 
         while (true) {
-            let (_, ready) = curHT.tryGetBucket(index)
+            let ready = curHT.tryGetBucket(index)
             if (ready) {
                 ret = curHT.buckets[index].copyAddIfAbsent(hash, key, value)
                 curHT.lockG.unlock(index)
@@ -937,7 +957,7 @@ public class ConcurrentHashMap<K, V> <: ConcurrentMap<K, V> & Collection<(K, V)>
         var ret = None<V>
         var index = hash & (curHT.buckets.size - 1)
         while (true) {
-            let (entries, ready) = curHT.tryGetBucket(index)
+            let (entries, ready) = curHT.tryGetBucketWithEntries(index)
             if (ready) {
                 ret = curHT.buckets[index].copyPutWith(hash, key, value, entries)
                 curHT.lockG.unlock(index)
@@ -957,7 +977,7 @@ public class ConcurrentHashMap<K, V> <: ConcurrentMap<K, V> & Collection<(K, V)>
         var curHT = head.load()
         var index = hash & (curHT.buckets.size - 1)
         while (true) {
-            let (_, ready) = curHT.tryGetBucket(index)
+            let ready = curHT.tryGetBucket(index)
             if (ready) {
                 ret = curHT.buckets[index].copyReplace(hash, key, predicate, eval)
                 curHT.lockG.unlock(index)
@@ -976,7 +996,7 @@ public class ConcurrentHashMap<K, V> <: ConcurrentMap<K, V> & Collection<(K, V)>
         var curHT = head.load()
         var index = hash & (curHT.buckets.size - 1)
         while (true) {
-            let (entries, ready) = curHT.tryGetBucket(index)
+            let (entries, ready) = curHT.tryGetBucketWithEntries(index)
             if (ready) {
                 // dropping an emptied bucket to None is only safe when the table has
                 // no previous table to fall back to (see copyRemoveWith)
@@ -1003,7 +1023,7 @@ public class ConcurrentHashMap<K, V> <: ConcurrentMap<K, V> & Collection<(K, V)>
         var index = hash & (curHT.buckets.size - 1)
 
         while (true) {
-            let (_, ready) = curHT.tryGetBucket(index)
+            let ready = curHT.tryGetBucket(index)
             if (ready) {
                 (ret, resize) = curHT.buckets[index].copyEntryView(hash, key, fn)
                 curHT.lockG.unlock(index)
