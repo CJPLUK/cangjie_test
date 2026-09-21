@@ -48,6 +48,21 @@ let PROBE_WAIT: Duration = Duration.second * 5
 const LEAKED_STRIPE_KEY: Int64 = 1     // 1 & 15 == 1
 const WRITER_KEY_SAME_STRIPE: Int64 = 17 // 17 & 15 == 1
 
+class CountingKey <: Hashable & Equatable<CountingKey> {
+    var calls: Int64 = 0
+    init() { }
+    init(seed: Int64) { calls = seed }
+    public func hashCode(): Int64 { return 9 } // stripe 9
+
+    public operator func == (other: CountingKey): Bool {
+        calls = calls + 1
+        if (calls >= 2) {
+            throw IllegalArgumentException("== threw under the stripe lock")
+        }
+        return false
+    }
+}
+
 @Test
 class ConcurrentHashMapLockExceptionSafetyTest {
     @TestCase
@@ -160,5 +175,57 @@ class ConcurrentHashMapLockExceptionSafetyTest {
             @Expect(map.get(k), Some(k * 10))
         }
         @Expect(map.size, 16)
+    }
+
+    @TestCase
+    func testAddIfAbsentThrowingEqualsReleasesLock(): Unit {
+        // addIfAbsent/putIfAbsent invoke the user-overridden == twice: once on
+        // the unlocked fast path (getValue) and again under the stripe mutex
+        // (copyAddIfAbsent -> entries.find). A counting == that returns false
+        // first and throws on the second (locked) call leaks the stripe mutex
+        // if unlock is skipped; single-threaded and deterministic.
+        let mapD = ConcurrentHashMap<CountingKey, Int64>()
+
+        // Step 1: on an EMPTY bucket the first addIfAbsent inserts without
+        // ever calling == (nothing to compare against), so it succeeds.
+        mapD.addIfAbsent(CountingKey(), 1)
+        @Expect(mapD.size, 1)
+
+        // Step 2: a second addIfAbsent with a FRESH key hits the locked
+        // entries.find against the stored entry: that == is its call 2 and
+        // throws UNDER the stripe mutex. The exception must unwind (finally
+        // releases the lock) and the map must stay unchanged.
+        var escaped = false
+        try {
+            mapD.addIfAbsent(CountingKey(), 1)
+        } catch (e: IllegalArgumentException) {
+            escaped = true // == threw under the lock; that is the trigger
+        }
+        @Expect(escaped, true)
+        @Expect(mapD.size, 1) // aborted insert left the map untouched
+
+        // Step 3: the stripe mutex must NOT be leaked. A writer to the same
+        // stripe (hashCode 9 & 15 == 9) runs its own == against the stored
+        // entry (call 2) and throws again by design; the essential assertion
+        // is that writer.get RETURNS (no TimeoutException) -- a leaked lock
+        // would park the writer forever in MutexLockGroup.lock.
+        let writer = spawn {
+            var marked = false
+            try {
+                mapD.putIfAbsent(CountingKey(), 2)
+            } catch (e: IllegalArgumentException) {
+                marked = true // == rethrew as designed, not a lock-related failure
+            }
+            marked
+        }
+        var parked = false
+        var markedRethrow = false
+        try {
+            if (writer.get(PROBE_WAIT)) { markedRethrow = true }
+        } catch (e: Exception) {
+            parked = true // TimeoutException here would mean the lock leaked
+        }
+        @Expect(parked, false)
+        @Expect(markedRethrow, true)
     }
 }
