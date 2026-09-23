@@ -5,10 +5,44 @@
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
 // RUN-EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>&1 | compare %f
-// ASSERT: scan-8 expected 'Bool', found 'Struct-Extern<Class-DummyRT>'
+// ASSERT: scan-8 expected 'Bool', found 'Enum-Extern<Class-DummyRT>'
 // ASSERT: scan-8 error: mismatched types
 
 public class DummyRT <: ForeignRuntime<DummyRT> {
+    public static func eval(t: Extern<DummyRT>): Extern<DummyRT> {
+        match (t) {
+            case ExternPayload(_) => t
+            case ExternMemberAccess(receiver, field) => memberAccess(eval(receiver), field)
+            case ExternIndexedAccess(receiver, index) => indexedAccess(eval(receiver), evalOperand(index))
+            case ExternMemberUpdate(receiver, field, value) => applyMemberUpdate(eval(receiver), field, evalOperand(value))
+            case ExternIndexedUpdate(receiver, index, value) => applyIndexedUpdate(eval(receiver), evalOperand(index), evalOperand(value))
+            case ExternFunctionCall(receiver, args) => functionCall(eval(receiver), evalArgs(args))
+            case ExternCompoundAssignment(_, _, _) => throw ExternCompoundAssignmentException()
+            case _ => Extern<DummyRT>.evalDerived(t)
+        }
+    }
+
+    static func evalOperand(value: Any): Any {
+        match (value) {
+            case e: Extern<DummyRT> => eval(e)
+            case _ => value
+        }
+    }
+
+    static func evalArgs(args: Array<Any>): Array<Any> {
+        Array<Any>(args.size, {i => evalOperand(args[i])})
+    }
+
+    static func applyMemberUpdate(receiver: Extern<DummyRT>, field: String, value: Any): Extern<DummyRT> {
+        memberUpdate(receiver, field, value)
+        receiver
+    }
+
+    static func applyIndexedUpdate(receiver: Extern<DummyRT>, index: Any, value: Any): Extern<DummyRT> {
+        indexedUpdate(receiver, index, value)
+        receiver
+    }
+
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
         throw Exception("memberAccess not implemented") 
     }
@@ -33,8 +67,8 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
 }
 
 main (){
-    let e1 = Extern<DummyRT>(1)
-    let e2 = Extern<DummyRT>(2)
+    let e1 = Extern<DummyRT>.ExternPayload(1)
+    let e2 = Extern<DummyRT>.ExternPayload(2)
     if (e1 < e2) {
         throw Exception("Extern comparison should not be allowed")
     }

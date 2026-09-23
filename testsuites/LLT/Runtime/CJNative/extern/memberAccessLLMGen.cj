@@ -10,6 +10,13 @@
 
 import std.collection.HashMap
 
+func externPayload<T>(e: Extern<T>): Any where T <: ForeignRuntime<T> {
+    match (e) {
+        case ExternPayload(value) => value
+        case _ => throw Exception("expected ExternPayload")
+    }
+}
+
 struct Pair {
     let left: Int64
     let right: Int64
@@ -21,44 +28,78 @@ struct Pair {
 }
 
 public class DummyRT <: ForeignRuntime<DummyRT> {
+    public static func eval(t: Extern<DummyRT>): Extern<DummyRT> {
+        match (t) {
+            case ExternPayload(_) => t
+            case ExternMemberAccess(receiver, field) => memberAccess(eval(receiver), field)
+            case ExternIndexedAccess(receiver, index) => indexedAccess(eval(receiver), evalOperand(index))
+            case ExternMemberUpdate(receiver, field, value) => applyMemberUpdate(eval(receiver), field, evalOperand(value))
+            case ExternIndexedUpdate(receiver, index, value) => applyIndexedUpdate(eval(receiver), evalOperand(index), evalOperand(value))
+            case ExternFunctionCall(receiver, args) => functionCall(eval(receiver), evalArgs(args))
+            case ExternCompoundAssignment(_, _, _) => throw ExternCompoundAssignmentException()
+            case _ => Extern<DummyRT>.evalDerived(t)
+        }
+    }
+
+    static func evalOperand(value: Any): Any {
+        match (value) {
+            case e: Extern<DummyRT> => eval(e)
+            case _ => value
+        }
+    }
+
+    static func evalArgs(args: Array<Any>): Array<Any> {
+        Array<Any>(args.size, {i => evalOperand(args[i])})
+    }
+
+    static func applyMemberUpdate(receiver: Extern<DummyRT>, field: String, value: Any): Extern<DummyRT> {
+        memberUpdate(receiver, field, value)
+        receiver
+    }
+
+    static func applyIndexedUpdate(receiver: Extern<DummyRT>, index: Any, value: Any): Extern<DummyRT> {
+        indexedUpdate(receiver, index, value)
+        receiver
+    }
+
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
-        let payload = Extern<DummyRT>.getPayload(e)
+        let payload = externPayload(e)
         match (field) {
             case "id" => e
-            case "left" => Extern<DummyRT>((payload as Pair).getOrThrow().left)
-            case "right" => Extern<DummyRT>((payload as Pair).getOrThrow().right)
+            case "left" => Extern<DummyRT>.ExternPayload((payload as Pair).getOrThrow().left)
+            case "right" => Extern<DummyRT>.ExternPayload((payload as Pair).getOrThrow().right)
             case "sum" =>
                 let pair = (payload as Pair).getOrThrow()
-                Extern<DummyRT>(pair.left + pair.right)
+                Extern<DummyRT>.ExternPayload(pair.left + pair.right)
             case "swap" =>
                 let pair = (payload as Pair).getOrThrow()
-                Extern<DummyRT>(Pair(pair.right, pair.left))
+                Extern<DummyRT>.ExternPayload(Pair(pair.right, pair.left))
             case "delta" =>
                 let pair = (payload as Pair).getOrThrow()
-                Extern<DummyRT>(pair.right - pair.left)
-            case "first" => Extern<DummyRT>((payload as Array<Int64>).getOrThrow()[0])
-            case "second" => Extern<DummyRT>((payload as Array<Int64>).getOrThrow()[1])
-            case "third" => Extern<DummyRT>((payload as Array<Int64>).getOrThrow()[2])
+                Extern<DummyRT>.ExternPayload(pair.right - pair.left)
+            case "first" => Extern<DummyRT>.ExternPayload((payload as Array<Int64>).getOrThrow()[0])
+            case "second" => Extern<DummyRT>.ExternPayload((payload as Array<Int64>).getOrThrow()[1])
+            case "third" => Extern<DummyRT>.ExternPayload((payload as Array<Int64>).getOrThrow()[2])
             case "asPair" =>
                 let values = (payload as Array<Int64>).getOrThrow()
-                Extern<DummyRT>(Pair(values[0], values[1]))
-            case "answer" => Extern<DummyRT>((payload as HashMap<String, Int64>).getOrThrow()["answer"])
+                Extern<DummyRT>.ExternPayload(Pair(values[0], values[1]))
+            case "answer" => Extern<DummyRT>.ExternPayload((payload as HashMap<String, Int64>).getOrThrow()["answer"])
             case "asAnswerPair" =>
                 let values = (payload as HashMap<String, Int64>).getOrThrow()
-                Extern<DummyRT>(Pair(values["answer"], values["bonus"]))
+                Extern<DummyRT>.ExternPayload(Pair(values["answer"], values["bonus"]))
             case "vector" =>
                 let pair = (payload as Pair).getOrThrow()
-                Extern<DummyRT>([pair.left, pair.right, pair.left + pair.right])
+                Extern<DummyRT>.ExternPayload([pair.left, pair.right, pair.left + pair.right])
             case "isBalanced" =>
                 let pair = (payload as Pair).getOrThrow()
-                Extern<DummyRT>(pair.left == pair.right)
-            case "not" => Extern<DummyRT>(!(payload as Bool).getOrThrow())
-            case "suffix" => Extern<DummyRT>((payload as String).getOrThrow() + "-suffix")
-            case "negative" => Extern<DummyRT>(0 - (payload as Int64).getOrThrow())
-            case "twice" => Extern<DummyRT>((payload as Int64).getOrThrow() * 2)
-            case "positive" => Extern<DummyRT>((payload as Bool).getOrThrow())
-            case "name" => Extern<DummyRT>((payload as String).getOrThrow())
-            case "pi" => Extern<DummyRT>(3.14)
+                Extern<DummyRT>.ExternPayload(pair.left == pair.right)
+            case "not" => Extern<DummyRT>.ExternPayload(!(payload as Bool).getOrThrow())
+            case "suffix" => Extern<DummyRT>.ExternPayload((payload as String).getOrThrow() + "-suffix")
+            case "negative" => Extern<DummyRT>.ExternPayload(0 - (payload as Int64).getOrThrow())
+            case "twice" => Extern<DummyRT>.ExternPayload((payload as Int64).getOrThrow() * 2)
+            case "positive" => Extern<DummyRT>.ExternPayload((payload as Bool).getOrThrow())
+            case "name" => Extern<DummyRT>.ExternPayload((payload as String).getOrThrow())
+            case "pi" => Extern<DummyRT>.ExternPayload(3.14)
             case _ => throw ExternMemberAccessException("memberAccess not implemented")
         }
     }
@@ -76,17 +117,17 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
     }
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<Float64> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<Bool> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<String> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<Pair> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<Array<Int64>> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Int64> => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<Float64> => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<Bool> => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<String> => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<Pair> => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<Array<Int64>> => (externPayload(eval(h)) as R).getOrThrow()
             case _ => throw ExternConversionException("fromExtern not implemented")
         }
     }
     public static func toExtern<R>(v: R): Extern<DummyRT> {
-        Extern<DummyRT>(v)
+        Extern<DummyRT>.ExternPayload(v)
     }
 }
 
@@ -144,7 +185,7 @@ func pairFromAnswer(answer: Int64, bonus: Int64): Extern<DummyRT> {
     let values = HashMap<String, Int64>()
     values["answer"] = answer
     values["bonus"] = bonus
-    Extern<DummyRT>(values).asAnswerPair
+    Extern<DummyRT>.ExternPayload(values).asAnswerPair
 }
 
 func suffixTwice(e: Extern<DummyRT>): String {
@@ -156,7 +197,7 @@ func isSymmetricAfterSwap(e: Extern<DummyRT>): Bool {
 }
 
 main () {
-    let pair = Extern<DummyRT>(Pair(5, 12))
+    let pair = Extern<DummyRT>.ExternPayload(Pair(5, 12))
     assertInt("pair left", DummyRT.fromExtern<Int64>(pair.left), 5)
     assertInt("pair right", DummyRT.fromExtern<Int64>(pair.right), 12)
     assertInt("pair sum", DummyRT.fromExtern<Int64>(pair.sum), 17)
@@ -165,7 +206,7 @@ main () {
     assertInt("swapped right", DummyRT.fromExtern<Int64>(pair.swap.right), 5)
     assertInt("double swap sum", DummyRT.fromExtern<Int64>(pair.swap.swap.sum), 17)
 
-    let fromArray = Extern<DummyRT>([4, 8, 15])
+    let fromArray = Extern<DummyRT>.ExternPayload([4, 8, 15])
     assertInt("array first", DummyRT.fromExtern<Int64>(fromArray.first), 4)
     assertInt("array second", DummyRT.fromExtern<Int64>(fromArray.second), 8)
     assertInt("array third", DummyRT.fromExtern<Int64>(fromArray.third), 15)
@@ -174,16 +215,16 @@ main () {
 
     let numbers = HashMap<String, Int64>()
     numbers["answer"] = 42
-    let fromMap = Extern<DummyRT>(numbers)
+    let fromMap = Extern<DummyRT>.ExternPayload(numbers)
     assertInt("map member", DummyRT.fromExtern<Int64>(fromMap.answer), 42)
     assertInt("map member through pass", DummyRT.fromExtern<Int64>(pass(fromMap).answer), 42)
 
-    assertInt("numeric negative", DummyRT.fromExtern<Int64>(Extern<DummyRT>(9).negative), -9)
-    assertInt("numeric twice", DummyRT.fromExtern<Int64>(Extern<DummyRT>(9).twice), 18)
-    assertInt("numeric chained", DummyRT.fromExtern<Int64>(Extern<DummyRT>(9).twice.negative.twice), -36)
+    assertInt("numeric negative", DummyRT.fromExtern<Int64>(Extern<DummyRT>.ExternPayload(9).negative), -9)
+    assertInt("numeric twice", DummyRT.fromExtern<Int64>(Extern<DummyRT>.ExternPayload(9).twice), 18)
+    assertInt("numeric chained", DummyRT.fromExtern<Int64>(Extern<DummyRT>.ExternPayload(9).twice.negative.twice), -36)
 
-    assertBool("bool member", DummyRT.fromExtern<Bool>(Extern<DummyRT>(true).positive), true)
-    assertString("string member", DummyRT.fromExtern<String>(Extern<DummyRT>("runtime").name), "runtime")
+    assertBool("bool member", DummyRT.fromExtern<Bool>(Extern<DummyRT>.ExternPayload(true).positive), true)
+    assertString("string member", DummyRT.fromExtern<String>(Extern<DummyRT>.ExternPayload("runtime").name), "runtime")
 
     if (DummyRT.fromExtern<Float64>(pair.left.pi) != 3.14) {
         throw Exception("pi after Int64 member")
@@ -191,7 +232,7 @@ main () {
 
     expectMissing(pair)
     expectMissing(fromArray.asPair)
-    expectWrongPayload(Extern<DummyRT>(99))
+    expectWrongPayload(Extern<DummyRT>.ExternPayload(99))
 
     try {
         DummyRT.fromExtern<Pair>(fromMap.answer)
@@ -201,8 +242,8 @@ main () {
     }
 
 
-    let balanced = Extern<DummyRT>(Pair(6, 6))
-    let unbalanced = Extern<DummyRT>(Pair(4, 9))
+    let balanced = Extern<DummyRT>.ExternPayload(Pair(6, 6))
+    let unbalanced = Extern<DummyRT>.ExternPayload(Pair(4, 9))
     assertBool("balanced pair", DummyRT.fromExtern<Bool>(balanced.isBalanced), true)
     assertBool("unbalanced pair", DummyRT.fromExtern<Bool>(unbalanced.isBalanced), false)
     assertBool("negated balance", DummyRT.fromExtern<Bool>(unbalanced.isBalanced.not), true)
@@ -216,74 +257,74 @@ main () {
     let derivedMap = HashMap<String, Int64>()
     derivedMap["answer"] = 20
     derivedMap["bonus"] = 22
-    let derivedMapExtern = Extern<DummyRT>(derivedMap)
+    let derivedMapExtern = Extern<DummyRT>.ExternPayload(derivedMap)
     assertInt("map answer pair left", DummyRT.fromExtern<Int64>(derivedMapExtern.asAnswerPair.left), 20)
     assertInt("map answer pair right", DummyRT.fromExtern<Int64>(derivedMapExtern.asAnswerPair.right), 22)
     assertInt("map answer pair sum", DummyRT.fromExtern<Int64>(derivedMapExtern.asAnswerPair.sum), 42)
 
-    assertString("string suffix", DummyRT.fromExtern<String>(Extern<DummyRT>("base").suffix), "base-suffix")
-    assertString("string double suffix", DummyRT.fromExtern<String>(Extern<DummyRT>("base").suffix.suffix), "base-suffix-suffix")
+    assertString("string suffix", DummyRT.fromExtern<String>(Extern<DummyRT>.ExternPayload("base").suffix), "base-suffix")
+    assertString("string double suffix", DummyRT.fromExtern<String>(Extern<DummyRT>.ExternPayload("base").suffix.suffix), "base-suffix-suffix")
 
-    let pairThroughPass = pass(Extern<DummyRT>(Pair(10, -3))).swap.vector.asPair
+    let pairThroughPass = pass(Extern<DummyRT>.ExternPayload(Pair(10, -3))).swap.vector.asPair
     assertInt("pass swap vector pair sum", DummyRT.fromExtern<Int64>(pairThroughPass.sum), 7)
     assertInt("pass swap vector delta", DummyRT.fromExtern<Int64>(pairThroughPass.delta), 13)
 
     try {
-        DummyRT.fromExtern<Array<Int64>>(Extern<DummyRT>(true).vector)
+        DummyRT.fromExtern<Array<Int64>>(Extern<DummyRT>.ExternPayload(true).vector)
         throw Exception("bool vector did not throw")
     } catch (e: NoneValueException) {
         // Expected
     }
 
     try {
-        DummyRT.fromExtern<Pair>(Extern<DummyRT>("x").asAnswerPair)
+        DummyRT.fromExtern<Pair>(Extern<DummyRT>.ExternPayload("x").asAnswerPair)
         throw Exception("string as answer pair did not throw")
     } catch (e: NoneValueException) {
         // Expected
     }
 
 
-    assertInt("helper member score", memberScore(Extern<DummyRT>(Pair(10, 11))), 42)
-    assertInt("helper vector tail", vectorTail(Extern<DummyRT>(Pair(4, 6))), 10)
+    assertInt("helper member score", memberScore(Extern<DummyRT>.ExternPayload(Pair(10, 11))), 42)
+    assertInt("helper vector tail", vectorTail(Extern<DummyRT>.ExternPayload(Pair(4, 6))), 10)
     assertInt("helper pair from answer left", DummyRT.fromExtern<Int64>(pairFromAnswer(12, 30).left), 12)
     assertInt("helper pair from answer sum", DummyRT.fromExtern<Int64>(pairFromAnswer(12, 30).sum), 42)
-    assertString("helper suffix twice", suffixTwice(Extern<DummyRT>("root")), "root-suffix-suffix")
-    assertBool("helper symmetric true", isSymmetricAfterSwap(Extern<DummyRT>(Pair(5, 5))), true)
-    assertBool("helper symmetric false", isSymmetricAfterSwap(Extern<DummyRT>(Pair(5, 6))), false)
+    assertString("helper suffix twice", suffixTwice(Extern<DummyRT>.ExternPayload("root")), "root-suffix-suffix")
+    assertBool("helper symmetric true", isSymmetricAfterSwap(Extern<DummyRT>.ExternPayload(Pair(5, 5))), true)
+    assertBool("helper symmetric false", isSymmetricAfterSwap(Extern<DummyRT>.ExternPayload(Pair(5, 6))), false)
 
-    let memberDerived = pairFromAnswer(DummyRT.fromExtern<Int64>(Extern<DummyRT>(5).twice), DummyRT.fromExtern<Int64>(Extern<DummyRT>(16).twice))
+    let memberDerived = pairFromAnswer(DummyRT.fromExtern<Int64>(Extern<DummyRT>.ExternPayload(5).twice), DummyRT.fromExtern<Int64>(Extern<DummyRT>.ExternPayload(16).twice))
     assertInt("member derived left", DummyRT.fromExtern<Int64>(memberDerived.left), 10)
     assertInt("member derived right", DummyRT.fromExtern<Int64>(memberDerived.right), 32)
     assertInt("member derived sum", DummyRT.fromExtern<Int64>(memberDerived.sum), 42)
 
     try {
-        vectorTail(Extern<DummyRT>(true))
+        vectorTail(Extern<DummyRT>.ExternPayload(true))
         throw Exception("bool vectorTail did not throw")
     } catch (e: NoneValueException) {
         // Expected
     }
 
     try {
-        suffixTwice(Extern<DummyRT>(Pair(1, 2)))
+        suffixTwice(Extern<DummyRT>.ExternPayload(Pair(1, 2)))
         throw Exception("pair suffix did not throw")
     } catch (e: NoneValueException) {
         // Expected
     }
 
 
-    var memberStage = Extern<DummyRT>(Pair(1, 2))
+    var memberStage = Extern<DummyRT>.ExternPayload(Pair(1, 2))
     assertInt("member stage pair", memberScore(memberStage), 6)
     memberStage = pairFromAnswer(10, 11)
     assertInt("member stage map pair", memberScore(memberStage), 42)
     memberStage = memberStage.swap
     assertInt("member stage swapped", DummyRT.fromExtern<Int64>(memberStage.delta), -1)
 
-    let suffixSource = Extern<DummyRT>("seed")
+    let suffixSource = Extern<DummyRT>.ExternPayload("seed")
     let suffixed = DummyRT.fromExtern<String>(suffixSource.suffix)
     assertString("suffixed intermediate", suffixed, "seed-suffix")
-    assertString("suffixed rewrapped", suffixTwice(Extern<DummyRT>(suffixed)), "seed-suffix-suffix-suffix")
+    assertString("suffixed rewrapped", suffixTwice(Extern<DummyRT>.ExternPayload(suffixed)), "seed-suffix-suffix-suffix")
 
-    let boolFromPair = Extern<DummyRT>(Pair(memberScore(Extern<DummyRT>(Pair(1, 2))), 6)).isBalanced
+    let boolFromPair = Extern<DummyRT>.ExternPayload(Pair(memberScore(Extern<DummyRT>.ExternPayload(Pair(1, 2))), 6)).isBalanced
     assertBool("bool from pair expression", DummyRT.fromExtern<Bool>(boolFromPair), true)
     assertBool("bool from pair expression not", DummyRT.fromExtern<Bool>(boolFromPair.not), false)
 
@@ -294,22 +335,22 @@ main () {
     assertInt("chained vector total", chainedVectorPayload[2], 7)
 
     try {
-        DummyRT.fromExtern<Bool>(Extern<DummyRT>("not-bool").not)
+        DummyRT.fromExtern<Bool>(Extern<DummyRT>.ExternPayload("not-bool").not)
         throw Exception("string not did not throw")
     } catch (e: NoneValueException) {
         // Expected
     }
 
     try {
-        DummyRT.fromExtern<String>(Extern<DummyRT>(false).suffix)
+        DummyRT.fromExtern<String>(Extern<DummyRT>.ExternPayload(false).suffix)
         throw Exception("bool suffix did not throw")
     } catch (e: NoneValueException) {
         // Expected
     }
 
 
-    let finalBalanced = Extern<DummyRT>(Pair(12, 12))
-    let finalUnbalanced = Extern<DummyRT>(Pair(3, 30))
+    let finalBalanced = Extern<DummyRT>.ExternPayload(Pair(12, 12))
+    let finalUnbalanced = Extern<DummyRT>.ExternPayload(Pair(3, 30))
     assertBool("final balanced member", DummyRT.fromExtern<Bool>(finalBalanced.isBalanced), true)
     assertBool("final balanced not member", DummyRT.fromExtern<Bool>(finalBalanced.isBalanced.not), false)
     assertBool("final unbalanced member", DummyRT.fromExtern<Bool>(finalUnbalanced.isBalanced), false)
@@ -327,13 +368,13 @@ main () {
     let finalAnswerMap = HashMap<String, Int64>()
     finalAnswerMap["answer"] = DummyRT.fromExtern<Int64>(finalBalanced.sum)
     finalAnswerMap["bonus"] = DummyRT.fromExtern<Int64>(finalUnbalanced.delta)
-    let finalAnswerExtern = Extern<DummyRT>(finalAnswerMap)
+    let finalAnswerExtern = Extern<DummyRT>.ExternPayload(finalAnswerMap)
     assertInt("final answer pair left", DummyRT.fromExtern<Int64>(finalAnswerExtern.asAnswerPair.left), 24)
     assertInt("final answer pair right", DummyRT.fromExtern<Int64>(finalAnswerExtern.asAnswerPair.right), 27)
     assertInt("final answer pair sum", DummyRT.fromExtern<Int64>(finalAnswerExtern.asAnswerPair.sum), 51)
 
-    let finalSuffixA = Extern<DummyRT>("a")
-    let finalSuffixB = Extern<DummyRT>(DummyRT.fromExtern<String>(finalSuffixA.suffix))
+    let finalSuffixA = Extern<DummyRT>.ExternPayload("a")
+    let finalSuffixB = Extern<DummyRT>.ExternPayload(DummyRT.fromExtern<String>(finalSuffixA.suffix))
     assertString("final suffix a", DummyRT.fromExtern<String>(finalSuffixA.suffix), "a-suffix")
     assertString("final suffix b", DummyRT.fromExtern<String>(finalSuffixB.suffix), "a-suffix-suffix")
 

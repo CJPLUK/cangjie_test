@@ -9,20 +9,61 @@
 
 import std.collection.HashMap
 
+func externPayload<T>(e: Extern<T>): Any where T <: ForeignRuntime<T> {
+    match (e) {
+        case ExternPayload(value) => value
+        case _ => throw Exception("expected ExternPayload")
+    }
+}
+
 public class DummyRT <: ForeignRuntime<DummyRT> {
+    public static func eval(t: Extern<DummyRT>): Extern<DummyRT> {
+        match (t) {
+            case ExternPayload(_) => t
+            case ExternMemberAccess(receiver, field) => memberAccess(eval(receiver), field)
+            case ExternIndexedAccess(receiver, index) => indexedAccess(eval(receiver), evalOperand(index))
+            case ExternMemberUpdate(receiver, field, value) => applyMemberUpdate(eval(receiver), field, evalOperand(value))
+            case ExternIndexedUpdate(receiver, index, value) => applyIndexedUpdate(eval(receiver), evalOperand(index), evalOperand(value))
+            case ExternFunctionCall(receiver, args) => functionCall(eval(receiver), evalArgs(args))
+            case ExternCompoundAssignment(_, _, _) => throw ExternCompoundAssignmentException()
+            case _ => Extern<DummyRT>.evalDerived(t)
+        }
+    }
+
+    static func evalOperand(value: Any): Any {
+        match (value) {
+            case e: Extern<DummyRT> => eval(e)
+            case _ => value
+        }
+    }
+
+    static func evalArgs(args: Array<Any>): Array<Any> {
+        Array<Any>(args.size, {i => evalOperand(args[i])})
+    }
+
+    static func applyMemberUpdate(receiver: Extern<DummyRT>, field: String, value: Any): Extern<DummyRT> {
+        memberUpdate(receiver, field, value)
+        receiver
+    }
+
+    static func applyIndexedUpdate(receiver: Extern<DummyRT>, index: Any, value: Any): Extern<DummyRT> {
+        indexedUpdate(receiver, index, value)
+        receiver
+    }
+
     public static func memberAccess(_: Extern<DummyRT>, _: String): Extern<DummyRT> {
         throw Exception("memberAccess not implemented")
     }
     public static func indexedAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
         if (index is Int64) {
-            Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as Array<Rune>).getOrThrow()[(index as Int64).getOrThrow()])
+            Extern<DummyRT>.ExternPayload((externPayload(e) as Array<Rune>).getOrThrow()[(index as Int64).getOrThrow()])
         } else if (index is UInt32) {
-            let payload = (Extern<DummyRT>.getPayload(e) as Array<Int32>).getOrThrow()
-            Extern<DummyRT>(payload[Int64((index as UInt32).getOrThrow())])
+            let payload = (externPayload(e) as Array<Int32>).getOrThrow()
+            Extern<DummyRT>.ExternPayload(payload[Int64((index as UInt32).getOrThrow())])
         } else if (index is String) {
-            Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as HashMap<String, UInt32>).getOrThrow()[(index as String).getOrThrow()])
+            Extern<DummyRT>.ExternPayload((externPayload(e) as HashMap<String, UInt32>).getOrThrow()[(index as String).getOrThrow()])
         } else if (index is Int32) {
-            Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as HashMap<Int32, Array<Int32>>).getOrThrow()[(index as Int32).getOrThrow()])
+            Extern<DummyRT>.ExternPayload((externPayload(e) as HashMap<Int32, Array<Int32>>).getOrThrow()[(index as Int32).getOrThrow()])
         } else {
             throw Exception("indexedAccess not implemented")
         }
@@ -38,11 +79,11 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
     }
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64>  => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<Float64> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<Rune> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<UInt32> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<Int32> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Int64>  => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<Float64> => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<Rune> => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<UInt32> => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<Int32> => (externPayload(eval(h)) as R).getOrThrow()
             case _ => throw Exception("fromExtern not implemented")
         }
     }
@@ -53,7 +94,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
 
 main () {
     let a : Array<Rune> = [r'a', r'b', r'c']
-    let e = Extern<DummyRT>(a)
+    let e = Extern<DummyRT>.ExternPayload(a)
 
     if (DummyRT.fromExtern<Rune>(e[0]) != r'a') {
         throw Exception("Unexpected!")
@@ -71,7 +112,7 @@ main () {
     h["one"] = 1
     h["two"] = 2
     h["three"] = 3
-    let f = Extern<DummyRT>(h)
+    let f = Extern<DummyRT>.ExternPayload(h)
 
     if (DummyRT.fromExtern<UInt32>(f["one"]) != 1) {
         throw Exception("Unexpected!")
@@ -93,13 +134,13 @@ main () {
     m[1] = [1, 2, 3]
     m[2] = [4, 5, 6]
     m[3] = [7, 8, 9]
-    let g = Extern<DummyRT>(m)
+    let g = Extern<DummyRT>.ExternPayload(m)
 
     let tmp = g[Int32(1)]
-    if (!(Extern<DummyRT>.getPayload(tmp) is Array<Int32>)) {
+    if (!(externPayload(tmp) is Array<Int32>)) {
         throw Exception("Unexpected!")
     }
-    let payload = (Extern<DummyRT>.getPayload(tmp) as Array<Int32>).getOrThrow()
+    let payload = (externPayload(tmp) as Array<Int32>).getOrThrow()
     if (payload[0] != 1 || payload[1] != 2 || payload[2] != 3) {
         throw Exception("Unexpected!")
     }

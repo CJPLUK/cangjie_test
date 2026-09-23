@@ -7,8 +7,15 @@
 // EXEC-0: %compiler %cmp_opt %f -o %output
 // RUN-EXEC: %run %run_opt %output %run_args
 
+func externPayload<T>(e: Extern<T>): Any where T <: ForeignRuntime<T> {
+    match (e) {
+        case ExternPayload(value) => value
+        case _ => throw Exception("expected ExternPayload")
+    }
+}
+
 func foo<T>(e: Extern<T>) where T <: ForeignRuntime<T> {
-    Extern<T>.getPayload(e)
+    externPayload(e)
 }
 
 main () {

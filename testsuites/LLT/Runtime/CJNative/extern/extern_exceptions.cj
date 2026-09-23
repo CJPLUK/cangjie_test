@@ -32,6 +32,14 @@ func throwExternConversionException() {
     throw ExternConversionException("Test 6")
 }
 
+func throwCompoundAssignmentException() {
+    throw ExternCompoundAssignmentException("Test 7")
+}
+
+func throwUnsupportedOperation() {
+    throw ExternUnsupportedOperation("Test 8")
+}
+
 main () {
     try {
         throwMemberAccessException()
@@ -89,6 +97,26 @@ main () {
     } catch (e: ExternConversionException) {
         println("Caught ExternConversionException: " + e.message)
         if (e.message != "Test 6") {
+            throw Exception("Unexpected message: " + e.message)
+        }
+    }
+
+    try {
+        throwCompoundAssignmentException()
+        throw Exception("ExternCompoundAssignmentException not thrown")
+    } catch (e: ExternCompoundAssignmentException) {
+        println("Caught ExternCompoundAssignmentException: " + e.message)
+        if (e.message != "Test 7") {
+            throw Exception("Unexpected message: " + e.message)
+        }
+    }
+
+    try {
+        throwUnsupportedOperation()
+        throw Exception("ExternUnsupportedOperation not thrown")
+    } catch (e: ExternUnsupportedOperation) {
+        println("Caught ExternUnsupportedOperation: " + e.message)
+        if (e.message != "Test 8") {
             throw Exception("Unexpected message: " + e.message)
         }
     }

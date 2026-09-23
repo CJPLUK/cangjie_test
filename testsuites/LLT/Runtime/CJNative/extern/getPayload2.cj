@@ -8,7 +8,48 @@
 // RUN-EXEC: %run %output
 
 
+func externPayload<T>(e: Extern<T>): Any where T <: ForeignRuntime<T> {
+    match (e) {
+        case ExternPayload(value) => value
+        case _ => throw Exception("expected ExternPayload")
+    }
+}
+
 public class DummyRT <: ForeignRuntime<DummyRT> {
+    public static func eval(t: Extern<DummyRT>): Extern<DummyRT> {
+        match (t) {
+            case ExternPayload(_) => t
+            case ExternMemberAccess(receiver, field) => memberAccess(eval(receiver), field)
+            case ExternIndexedAccess(receiver, index) => indexedAccess(eval(receiver), evalOperand(index))
+            case ExternMemberUpdate(receiver, field, value) => applyMemberUpdate(eval(receiver), field, evalOperand(value))
+            case ExternIndexedUpdate(receiver, index, value) => applyIndexedUpdate(eval(receiver), evalOperand(index), evalOperand(value))
+            case ExternFunctionCall(receiver, args) => functionCall(eval(receiver), evalArgs(args))
+            case ExternCompoundAssignment(_, _, _) => throw ExternCompoundAssignmentException()
+            case _ => Extern<DummyRT>.evalDerived(t)
+        }
+    }
+
+    static func evalOperand(value: Any): Any {
+        match (value) {
+            case e: Extern<DummyRT> => eval(e)
+            case _ => value
+        }
+    }
+
+    static func evalArgs(args: Array<Any>): Array<Any> {
+        Array<Any>(args.size, {i => evalOperand(args[i])})
+    }
+
+    static func applyMemberUpdate(receiver: Extern<DummyRT>, field: String, value: Any): Extern<DummyRT> {
+        memberUpdate(receiver, field, value)
+        receiver
+    }
+
+    static func applyIndexedUpdate(receiver: Extern<DummyRT>, index: Any, value: Any): Extern<DummyRT> {
+        indexedUpdate(receiver, index, value)
+        receiver
+    }
+
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
         throw Exception("memberAccess not implemented") 
     }
@@ -33,37 +74,37 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
 }
 
 main () {
-    var e = Extern<DummyRT>(1)
-    var payload = Extern<DummyRT>.getPayload(e)
+    var e = Extern<DummyRT>.ExternPayload(1)
+    var payload = externPayload(e)
     println((payload as Int64).getOrThrow())
     if ((payload as Int64).getOrThrow() != 1) {
         throw Exception("payload is not 1")
     }
 
-    e = Extern<DummyRT>("hello world")
-    payload = Extern<DummyRT>.getPayload(e)
+    e = Extern<DummyRT>.ExternPayload("hello world")
+    payload = externPayload(e)
     println((payload as String).getOrThrow())
     if ((payload as String).getOrThrow() != "hello world") {
         throw Exception("payload is not hello world")
     }
 
-    e = Extern<DummyRT>(true)
-    payload = Extern<DummyRT>.getPayload(e)
+    e = Extern<DummyRT>.ExternPayload(true)
+    payload = externPayload(e)
     println((payload as Bool).getOrThrow())
     if ((payload as Bool).getOrThrow() != true) {
         throw Exception("payload is not true")
     }
 
-    e = Extern<DummyRT>(42.0)
-    payload = Extern<DummyRT>.getPayload(e)
+    e = Extern<DummyRT>.ExternPayload(42.0)
+    payload = externPayload(e)
     println((payload as Float64).getOrThrow())
     if ((payload as Float64).getOrThrow() != 42.0) {
         throw Exception("payload is not 42.0")
     }
 
     let a: Array<Int64> = [1, 2, 3]
-    e = Extern<DummyRT>(a)
-    payload = Extern<DummyRT>.getPayload(e)
+    e = Extern<DummyRT>.ExternPayload(a)
+    payload = externPayload(e)
     println((payload as Array<Int64>).getOrThrow())
     if ((payload as Array<Int64>).getOrThrow() != a) {
         throw Exception("payload is not a")

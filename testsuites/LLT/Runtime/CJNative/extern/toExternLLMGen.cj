@@ -10,6 +10,13 @@
 
 import std.collection.HashMap
 
+func externPayload<T>(e: Extern<T>): Any where T <: ForeignRuntime<T> {
+    match (e) {
+        case ExternPayload(value) => value
+        case _ => throw Exception("expected ExternPayload")
+    }
+}
+
 struct Pair {
     let left: Int64
     let right: Int64
@@ -33,6 +40,40 @@ struct Envelope {
 }
 
 public class DummyRT <: ForeignRuntime<DummyRT> {
+    public static func eval(t: Extern<DummyRT>): Extern<DummyRT> {
+        match (t) {
+            case ExternPayload(_) => t
+            case ExternMemberAccess(receiver, field) => memberAccess(eval(receiver), field)
+            case ExternIndexedAccess(receiver, index) => indexedAccess(eval(receiver), evalOperand(index))
+            case ExternMemberUpdate(receiver, field, value) => applyMemberUpdate(eval(receiver), field, evalOperand(value))
+            case ExternIndexedUpdate(receiver, index, value) => applyIndexedUpdate(eval(receiver), evalOperand(index), evalOperand(value))
+            case ExternFunctionCall(receiver, args) => functionCall(eval(receiver), evalArgs(args))
+            case ExternCompoundAssignment(_, _, _) => throw ExternCompoundAssignmentException()
+            case _ => Extern<DummyRT>.evalDerived(t)
+        }
+    }
+
+    static func evalOperand(value: Any): Any {
+        match (value) {
+            case e: Extern<DummyRT> => eval(e)
+            case _ => value
+        }
+    }
+
+    static func evalArgs(args: Array<Any>): Array<Any> {
+        Array<Any>(args.size, {i => evalOperand(args[i])})
+    }
+
+    static func applyMemberUpdate(receiver: Extern<DummyRT>, field: String, value: Any): Extern<DummyRT> {
+        memberUpdate(receiver, field, value)
+        receiver
+    }
+
+    static func applyIndexedUpdate(receiver: Extern<DummyRT>, index: Any, value: Any): Extern<DummyRT> {
+        indexedUpdate(receiver, index, value)
+        receiver
+    }
+
     public static func memberAccess(_: Extern<DummyRT>, _: String): Extern<DummyRT> {
         throw Exception("memberAccess not implemented")
     }
@@ -50,19 +91,19 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
     }
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<Float64> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<Bool> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<String> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<Pair> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<Envelope> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<Array<Int64>> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<HashMap<String, Int64>> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Int64> => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<Float64> => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<Bool> => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<String> => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<Pair> => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<Envelope> => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<Array<Int64>> => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<HashMap<String, Int64>> => (externPayload(eval(h)) as R).getOrThrow()
             case _ => throw ExternConversionException("fromExtern not implemented")
         }
     }
     public static func toExtern<R>(v: R): Extern<DummyRT> {
-        Extern<DummyRT>(v)
+        Extern<DummyRT>.ExternPayload(v)
     }
 }
 
@@ -236,7 +277,7 @@ main () {
     expectBadStringConversion(arrayExtern)
 
     try {
-        DummyRT.fromExtern<HashMap<String, Int64>>(Extern<DummyRT>(Pair(0, 1)))
+        DummyRT.fromExtern<HashMap<String, Int64>>(Extern<DummyRT>.ExternPayload(Pair(0, 1)))
         throw Exception("bad map conversion did not throw")
     } catch (e: NoneValueException) {
         // Expected

@@ -10,11 +10,19 @@
 // A runtime type need not declare the `ForeignRuntime` operations itself: it may inherit
 // them, here from the default implementations of an interface that extends
 // `ForeignRuntime<T>`, either directly (`IfaceRT`) or through a superclass (`SuperRT`).
-// Every `Extern<T>` operation must desugar to the inherited implementation and dispatch to
-// it, matching what a hand-written `T.memberAccess(e, "f")` does. This is the regression
-// guard for the desugaring resolving the runtime function against only the members `T`
-// declares itself, which used to abort the compiler and later rejected these programs as
-// having an unimplemented static function.
+// Dynamic `Extern<T>` operations desugar to the inherited `eval`, and implicit conversions
+// desugar to the inherited `toExtern` and `fromExtern`. `eval` forwards each primitive
+// constructor to the helper that records it. This is the regression guard for desugaring
+// resolving the runtime function against only the members `T` declares itself, which used
+// to abort the compiler and later rejected these programs as having an unimplemented
+// static function.
+
+func externPayload<T>(e: Extern<T>): Any where T <: ForeignRuntime<T> {
+    match (e) {
+        case ExternPayload(value) => value
+        case _ => throw Exception("expected ExternPayload")
+    }
+}
 
 var trace: String = ""
 
@@ -27,6 +35,40 @@ func anyToString(v: Any): String {
 }
 
 interface DefaultOps<T> <: ForeignRuntime<T> where T <: ForeignRuntime<T> {
+    public static func eval(t: Extern<T>): Extern<T> {
+        match (t) {
+            case ExternPayload(_) => t
+            case ExternMemberAccess(receiver, field) => memberAccess(eval(receiver), field)
+            case ExternIndexedAccess(receiver, index) => indexedAccess(eval(receiver), evalOperand(index))
+            case ExternMemberUpdate(receiver, field, value) => applyMemberUpdate(eval(receiver), field, evalOperand(value))
+            case ExternIndexedUpdate(receiver, index, value) => applyIndexedUpdate(eval(receiver), evalOperand(index), evalOperand(value))
+            case ExternFunctionCall(receiver, args) => functionCall(eval(receiver), evalArgs(args))
+            case ExternCompoundAssignment(_, _, _) => throw ExternCompoundAssignmentException()
+            case _ => Extern<T>.evalDerived(t)
+        }
+    }
+
+    static func evalOperand(value: Any): Any {
+        match (value) {
+            case e: Extern<T> => eval(e)
+            case _ => value
+        }
+    }
+
+    static func evalArgs(args: Array<Any>): Array<Any> {
+        Array<Any>(args.size, {i => evalOperand(args[i])})
+    }
+
+    static func applyMemberUpdate(receiver: Extern<T>, field: String, value: Any): Extern<T> {
+        memberUpdate(receiver, field, value)
+        receiver
+    }
+
+    static func applyIndexedUpdate(receiver: Extern<T>, index: Any, value: Any): Extern<T> {
+        indexedUpdate(receiver, index, value)
+        receiver
+    }
+
     static func memberAccess(e: Extern<T>, field: String): Extern<T> {
         trace += "memberAccess:" + field + ";"
         return e
@@ -46,12 +88,13 @@ interface DefaultOps<T> <: ForeignRuntime<T> where T <: ForeignRuntime<T> {
         return e
     }
     static func fromExtern<R>(h: Extern<T>): R {
+        let evaluated = eval(h)
         trace += "fromExtern;"
-        return (Extern<T>.getPayload(h) as R).getOrThrow()
+        return (externPayload(evaluated) as R).getOrThrow()
     }
     static func toExtern<R>(v: R): Extern<T> {
         trace += "toExtern;"
-        return Extern<T>(v)
+        return Extern<T>.ExternPayload(v)
     }
 }
 
@@ -78,7 +121,7 @@ main() {
     let _ = e1[3]
     e1[4] = 5
     let _ = e1(1, 2)
-    let back1 = (Int64)e1
+    let back1 = IfaceRT.fromExtern<Int64>(e1)
     check(trace, EXPECTED, "interface default implementations")
     if (back1 != 42) {
         throw Exception("fromExtern via interface default returned " + back1.toString())
@@ -91,7 +134,7 @@ main() {
     let _ = e2[3]
     e2[4] = 5
     let _ = e2(1, 2)
-    let back2 = (Int64)e2
+    let back2 = SuperRT.fromExtern<Int64>(e2)
     check(trace, EXPECTED, "implementations inherited through a superclass")
     if (back2 != 42) {
         throw Exception("fromExtern via superclass returned " + back2.toString())

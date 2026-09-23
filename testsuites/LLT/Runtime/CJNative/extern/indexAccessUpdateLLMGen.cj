@@ -10,6 +10,13 @@
 
 import std.collection.HashMap
 
+func externPayload<T>(e: Extern<T>): Any where T <: ForeignRuntime<T> {
+    match (e) {
+        case ExternPayload(value) => value
+        case _ => throw Exception("expected ExternPayload")
+    }
+}
+
 class Boxed {
     Boxed(public var value: Any) {}
 }
@@ -31,44 +38,78 @@ var countArrayUpdates: Int64 = 0
 var countMapUpdates: Int64 = 0
 
 public class DummyRT <: ForeignRuntime<DummyRT> {
+    public static func eval(t: Extern<DummyRT>): Extern<DummyRT> {
+        match (t) {
+            case ExternPayload(_) => t
+            case ExternMemberAccess(receiver, field) => memberAccess(eval(receiver), field)
+            case ExternIndexedAccess(receiver, index) => indexedAccess(eval(receiver), evalOperand(index))
+            case ExternMemberUpdate(receiver, field, value) => applyMemberUpdate(eval(receiver), field, evalOperand(value))
+            case ExternIndexedUpdate(receiver, index, value) => applyIndexedUpdate(eval(receiver), evalOperand(index), evalOperand(value))
+            case ExternFunctionCall(receiver, args) => functionCall(eval(receiver), evalArgs(args))
+            case ExternCompoundAssignment(_, _, _) => throw ExternCompoundAssignmentException()
+            case _ => Extern<DummyRT>.evalDerived(t)
+        }
+    }
+
+    static func evalOperand(value: Any): Any {
+        match (value) {
+            case e: Extern<DummyRT> => eval(e)
+            case _ => value
+        }
+    }
+
+    static func evalArgs(args: Array<Any>): Array<Any> {
+        Array<Any>(args.size, {i => evalOperand(args[i])})
+    }
+
+    static func applyMemberUpdate(receiver: Extern<DummyRT>, field: String, value: Any): Extern<DummyRT> {
+        memberUpdate(receiver, field, value)
+        receiver
+    }
+
+    static func applyIndexedUpdate(receiver: Extern<DummyRT>, index: Any, value: Any): Extern<DummyRT> {
+        indexedUpdate(receiver, index, value)
+        receiver
+    }
+
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
-        let box = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
+        let box = (externPayload(e) as Boxed).getOrThrow()
         match (field) {
             case "id" => e
             case "inc" =>
                 countIncs = countIncs + 1
-                Extern<DummyRT>(Boxed((box.value as Int64).getOrThrow() + 1))
-            case "clone" => Extern<DummyRT>(Boxed(box.value))
+                Extern<DummyRT>.ExternPayload(Boxed((box.value as Int64).getOrThrow() + 1))
+            case "clone" => Extern<DummyRT>.ExternPayload(Boxed(box.value))
             case "leftBox" =>
                 let pair = (box.value as Pair).getOrThrow()
-                Extern<DummyRT>(Boxed(pair.left))
+                Extern<DummyRT>.ExternPayload(Boxed(pair.left))
             case "row" =>
                 let m = (box.value as HashMap<String, Array<Int64>>).getOrThrow()
-                Extern<DummyRT>(Boxed(m["row"]))
+                Extern<DummyRT>.ExternPayload(Boxed(m["row"]))
             case _ => throw ExternMemberAccessException("memberAccess not implemented")
         }
     }
     public static func indexedAccess(e: Extern<DummyRT>, index: Any): Extern<DummyRT> {
-        let box = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
+        let box = (externPayload(e) as Boxed).getOrThrow()
         match (index) {
-            case i: Int64 => Extern<DummyRT>(Boxed((box.value as Array<Int64>).getOrThrow()[i]))
+            case i: Int64 => Extern<DummyRT>.ExternPayload(Boxed((box.value as Array<Int64>).getOrThrow()[i]))
             case field: String =>
                 if (box.value is HashMap<String, Array<Int64>>) {
-                    Extern<DummyRT>(Boxed((box.value as HashMap<String, Array<Int64>>).getOrThrow()[field]))
+                    Extern<DummyRT>.ExternPayload(Boxed((box.value as HashMap<String, Array<Int64>>).getOrThrow()[field]))
                 } else if (box.value is HashMap<String, Int64>) {
-                    Extern<DummyRT>(Boxed((box.value as HashMap<String, Int64>).getOrThrow()[field]))
+                    Extern<DummyRT>.ExternPayload(Boxed((box.value as HashMap<String, Int64>).getOrThrow()[field]))
                 } else {
                     let pair = (box.value as Pair).getOrThrow()
                     match (field) {
-                        case "left" => Extern<DummyRT>(Boxed(pair.left))
-                        case "right" => Extern<DummyRT>(Boxed(pair.right))
-                        case "sum" => Extern<DummyRT>(Boxed(pair.left + pair.right))
+                        case "left" => Extern<DummyRT>.ExternPayload(Boxed(pair.left))
+                        case "right" => Extern<DummyRT>.ExternPayload(Boxed(pair.right))
+                        case "sum" => Extern<DummyRT>.ExternPayload(Boxed(pair.left + pair.right))
                         case _ => throw ExternIndexedAccessException("unknown pair field")
                     }
                 }
             case flag: Bool =>
                 let pair = (box.value as Pair).getOrThrow()
-                if (flag) { Extern<DummyRT>(Boxed(pair.left)) } else { Extern<DummyRT>(Boxed(pair.right)) }
+                if (flag) { Extern<DummyRT>.ExternPayload(Boxed(pair.left)) } else { Extern<DummyRT>.ExternPayload(Boxed(pair.right)) }
             case _ => throw ExternIndexedAccessException("indexedAccess not implemented")
         }
     }
@@ -76,7 +117,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
         throw Exception("memberUpdate not implemented")
     }
     public static func indexedUpdate(e: Extern<DummyRT>, index: Any, value: Any): Unit {
-        let box = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
+        let box = (externPayload(e) as Boxed).getOrThrow()
         match (index) {
             case field: String => match (field) {
                 case "add" =>
@@ -136,12 +177,12 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
     }
     public static func fromExtern<R>(e: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
-            case _: Option<String> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
-            case _: Option<Pair> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
-            case _: Option<Array<Int64>> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
-            case _: Option<HashMap<String, Int64>> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
-            case _: Option<HashMap<String, Array<Int64>>> => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<Int64> => ((externPayload(eval(e)) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<String> => ((externPayload(eval(e)) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<Pair> => ((externPayload(eval(e)) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<Array<Int64>> => ((externPayload(eval(e)) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<HashMap<String, Int64>> => ((externPayload(eval(e)) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<HashMap<String, Array<Int64>>> => ((externPayload(eval(e)) as Boxed).getOrThrow().value as R).getOrThrow()
             case _ => throw ExternConversionException("fromExtern not implemented")
         }
     }
@@ -151,7 +192,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
 }
 
 func boxed(v: Any): Extern<DummyRT> {
-    Extern<DummyRT>(Boxed(v))
+    Extern<DummyRT>.ExternPayload(Boxed(v))
 }
 
 func pass(e: Extern<DummyRT>): Extern<DummyRT> {

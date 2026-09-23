@@ -7,6 +7,13 @@
 // EXEC-0: %compiler %cmp_opt %f -o %output
 // RUN-EXEC: %run %run_opt %output %run_args
 
+func externPayload<T>(e: Extern<T>): Any where T <: ForeignRuntime<T> {
+    match (e) {
+        case ExternPayload(value) => value
+        case _ => throw Exception("expected ExternPayload")
+    }
+}
+
 class Boxed {
     Boxed(public var value: Any) {}
 }
@@ -15,12 +22,46 @@ var countIncs: Int64 = 0
 var countAdds: Int64 = 0
 
 public class DummyRT <: ForeignRuntime<DummyRT> {
+    public static func eval(t: Extern<DummyRT>): Extern<DummyRT> {
+        match (t) {
+            case ExternPayload(_) => t
+            case ExternMemberAccess(receiver, field) => memberAccess(eval(receiver), field)
+            case ExternIndexedAccess(receiver, index) => indexedAccess(eval(receiver), evalOperand(index))
+            case ExternMemberUpdate(receiver, field, value) => applyMemberUpdate(eval(receiver), field, evalOperand(value))
+            case ExternIndexedUpdate(receiver, index, value) => applyIndexedUpdate(eval(receiver), evalOperand(index), evalOperand(value))
+            case ExternFunctionCall(receiver, args) => functionCall(eval(receiver), evalArgs(args))
+            case ExternCompoundAssignment(_, _, _) => throw ExternCompoundAssignmentException()
+            case _ => Extern<DummyRT>.evalDerived(t)
+        }
+    }
+
+    static func evalOperand(value: Any): Any {
+        match (value) {
+            case e: Extern<DummyRT> => eval(e)
+            case _ => value
+        }
+    }
+
+    static func evalArgs(args: Array<Any>): Array<Any> {
+        Array<Any>(args.size, {i => evalOperand(args[i])})
+    }
+
+    static func applyMemberUpdate(receiver: Extern<DummyRT>, field: String, value: Any): Extern<DummyRT> {
+        memberUpdate(receiver, field, value)
+        receiver
+    }
+
+    static func applyIndexedUpdate(receiver: Extern<DummyRT>, index: Any, value: Any): Extern<DummyRT> {
+        indexedUpdate(receiver, index, value)
+        receiver
+    }
+
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
         match (field) {
             case "inc" => 
                 countIncs = countIncs + 1
-                let e = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
-                Extern<DummyRT>(Boxed((e.value as Int64).getOrThrow() + 1))
+                let e = (externPayload(e) as Boxed).getOrThrow()
+                Extern<DummyRT>.ExternPayload(Boxed((e.value as Int64).getOrThrow() + 1))
             case _ => throw ExternMemberAccessException("memberAccess not implemented")
         }
     }
@@ -35,20 +76,20 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
             case field: String => match (field) {
                 case "add" => 
                     countAdds = countAdds + 1
-                    let v = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
+                    let v = (externPayload(e) as Boxed).getOrThrow()
                     v.value =  (v.value as Int64).getOrThrow() + (value as Int64).getOrThrow()
                 case "set" => 
-                    let v = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
+                    let v = (externPayload(e) as Boxed).getOrThrow()
                     v.value = value
                 case "mutate" => 
-                    let v = (Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow()
+                    let v = (externPayload(e) as Boxed).getOrThrow()
                     let s = (v.value as String).getOrThrow()
                     let c = (value as Rune).getOrThrow()
                     v.value = String([c]) + s[1..]
                 case _ => throw ExternMemberAccessException("not implemented")
             }
             case i: Int64 =>
-                let array: Array<Int64> = (Extern<DummyRT>.getPayload(e) as Array<Int64>).getOrThrow()
+                let array: Array<Int64> = (externPayload(e) as Array<Int64>).getOrThrow()
                 array[i] = (value as Int64).getOrThrow()
             case _ => throw ExternIndexedAccessException("indexedAccess not implemented")
         }
@@ -58,8 +99,8 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
     }
     public static func fromExtern<R>(e: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64>  => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
-            case _: Option<String>  => ((Extern<DummyRT>.getPayload(e) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<Int64>  => ((externPayload(eval(e)) as Boxed).getOrThrow().value as R).getOrThrow()
+            case _: Option<String>  => ((externPayload(eval(e)) as Boxed).getOrThrow().value as R).getOrThrow()
             case _ => throw Exception("fromExtern not implemented")
         }
     }
@@ -69,7 +110,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
 }
 
 main () {
-    let e1 = Extern<DummyRT>(Boxed(0))
+    let e1 = Extern<DummyRT>.ExternPayload(Boxed(0))
     e1["add"] = 10
 
     if (DummyRT.fromExtern<Int64>(e1) != 10) {
@@ -96,7 +137,7 @@ main () {
         throw Exception("test failed")
     }
 
-    let e2 = Extern<DummyRT>(Boxed(0))
+    let e2 = Extern<DummyRT>.ExternPayload(Boxed(0))
 
     let currentCountIncs = countIncs
     let currentCountAdds = countAdds
@@ -117,7 +158,7 @@ main () {
 
     let array: Array<Int64> = [1, 2, 3, 4, 5]
 
-    let e3 = Extern<DummyRT>(array)
+    let e3 = Extern<DummyRT>.ExternPayload(array)
 
     e3[0] = 10
     if (array[0] != 10 || array[1] != 2 || array[2] != 3 || array[3] != 4 || array[4] != 5) {

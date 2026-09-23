@@ -7,13 +7,54 @@
 // EXEC-0: %compiler %cmp_opt %f -o %output
 // RUN-EXEC: %run %run_opt %output %run_args
 
+func externPayload<T>(e: Extern<T>): Any where T <: ForeignRuntime<T> {
+    match (e) {
+        case ExternPayload(value) => value
+        case _ => throw Exception("expected ExternPayload")
+    }
+}
+
 public class DummyRT <: ForeignRuntime<DummyRT> {
+    public static func eval(t: Extern<DummyRT>): Extern<DummyRT> {
+        match (t) {
+            case ExternPayload(_) => t
+            case ExternMemberAccess(receiver, field) => memberAccess(eval(receiver), field)
+            case ExternIndexedAccess(receiver, index) => indexedAccess(eval(receiver), evalOperand(index))
+            case ExternMemberUpdate(receiver, field, value) => applyMemberUpdate(eval(receiver), field, evalOperand(value))
+            case ExternIndexedUpdate(receiver, index, value) => applyIndexedUpdate(eval(receiver), evalOperand(index), evalOperand(value))
+            case ExternFunctionCall(receiver, args) => functionCall(eval(receiver), evalArgs(args))
+            case ExternCompoundAssignment(_, _, _) => throw ExternCompoundAssignmentException()
+            case _ => Extern<DummyRT>.evalDerived(t)
+        }
+    }
+
+    static func evalOperand(value: Any): Any {
+        match (value) {
+            case e: Extern<DummyRT> => eval(e)
+            case _ => value
+        }
+    }
+
+    static func evalArgs(args: Array<Any>): Array<Any> {
+        Array<Any>(args.size, {i => evalOperand(args[i])})
+    }
+
+    static func applyMemberUpdate(receiver: Extern<DummyRT>, field: String, value: Any): Extern<DummyRT> {
+        memberUpdate(receiver, field, value)
+        receiver
+    }
+
+    static func applyIndexedUpdate(receiver: Extern<DummyRT>, index: Any, value: Any): Extern<DummyRT> {
+        indexedUpdate(receiver, index, value)
+        receiver
+    }
+
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
         match (field) {
             case "id" => e
-            case "pi" => Extern<DummyRT>(3.14)
-            case "add"=> Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as Int64).getOrThrow() + 1)
-            case "sub"=> Extern<DummyRT>((Extern<DummyRT>.getPayload(e) as Int64).getOrThrow() - 1)
+            case "pi" => Extern<DummyRT>.ExternPayload(3.14)
+            case "add"=> Extern<DummyRT>.ExternPayload((externPayload(e) as Int64).getOrThrow() + 1)
+            case "sub"=> Extern<DummyRT>.ExternPayload((externPayload(e) as Int64).getOrThrow() - 1)
             case _ => throw ExternMemberAccessException("memberAccess not implemented")
         }
     }
@@ -31,8 +72,8 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
     }
     public static func fromExtern<R>(h: Extern<DummyRT>): R {
         match (None<R>) {
-            case _: Option<Int64>  => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
-            case _: Option<Float64> => (Extern<DummyRT>.getPayload(h) as R).getOrThrow()
+            case _: Option<Int64>  => (externPayload(eval(h)) as R).getOrThrow()
+            case _: Option<Float64> => (externPayload(eval(h)) as R).getOrThrow()
             case _ => throw Exception("fromExtern not implemented")
         }
     }
@@ -42,7 +83,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
 }
 
 main () {
-    let e = Extern<DummyRT>(0)
+    let e = Extern<DummyRT>.ExternPayload(0)
 
     if (DummyRT.fromExtern<Int64>(e.id) != 0) {
         throw Exception("Unexpected!")
@@ -97,7 +138,7 @@ main () {
         throw Exception("Unexpected!")
     }
 
-    if (DummyRT.fromExtern<Float64>(id(Extern<DummyRT>(DummyRT.fromExtern<Int64>(e.add.add.add.sub.sub))).sub.add.add.add.sub.sub.sub.pi) != 3.14) {
+    if (DummyRT.fromExtern<Float64>(id(Extern<DummyRT>.ExternPayload(DummyRT.fromExtern<Int64>(e.add.add.add.sub.sub))).sub.add.add.add.sub.sub.sub.pi) != 3.14) {
         throw Exception("Unexpected!")
     }
 
