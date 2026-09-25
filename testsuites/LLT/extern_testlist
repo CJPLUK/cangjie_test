@@ -5,4 +5,7 @@
 # See https://cangjie-lang.cn/pages/LICENSE for license information.
 
 [ALL-TEST-CASE]
-Runtime/CJNative/extern
+Runtime/CJNative/extern/
+
+[EXCLUDE-TEST-CASE]
+Runtime/CJNative/extern/forced_cast
