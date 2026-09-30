@@ -21,7 +21,10 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
     }
 }
 
+func withDefault(x!: (Extern<DummyRT>, Int64) = (1, 2)): Int64 {
+    x[1]
+}
+
 main() {
-    let _: Array<Extern<DummyRT>> = [42]
-    0
+    withDefault()
 }

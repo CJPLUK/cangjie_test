@@ -5,7 +5,7 @@
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
 // RUN-EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>&1 | compare %f
-// ASSERT: scan cannot convert an integer literal to type 'Enum-Extern<Class-DummyRT>'
+// ASSERT: scan ambiguous match for function call 'amb'
 
 public class DummyRT <: ForeignRuntime<DummyRT> {
     public static func eval(t: Extern<DummyRT>): Extern<DummyRT> {
@@ -21,7 +21,16 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
     }
 }
 
+// A conversion of an array element does not count in overload ranking, and neither candidate is more specific.
+func amb(_: Array<Extern<DummyRT>>): Int64 {
+    1
+}
+
+func amb(_: Array<Int64>): Int64 {
+    2
+}
+
 main() {
-    let _: (Extern<DummyRT>, Int64) = (1, 2)
+    amb([1])
     0
 }
