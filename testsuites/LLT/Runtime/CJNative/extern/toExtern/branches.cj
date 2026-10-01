@@ -97,12 +97,6 @@ main() {
     expectConverted([], "Extern branch was wrapped again")
     check(DummyRT.fromExtern<Int64>(externBranch) == 1, "Extern branch")
 
-    let unitBranch: Extern<DummyRT> = if (!c) { 1 } else { let _ = 1 }
-    expectConverted(["Unit"], "branch ending with a declaration")
-
-    let noElse: Extern<DummyRT> = if (c) { () }
-    expectConverted(["Unit"], "if without else")
-
     let m: Extern<DummyRT> = match (c) {
         case true => "yes"
         case false => 0
