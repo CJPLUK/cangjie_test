@@ -99,13 +99,13 @@ main() {
     expectConverted(["String"], "string interpolation")
     check(DummyRT.fromExtern<String>(interp) == "1", "string interpolation")
 
-    // synchronized, unsafe blocks and if-let are made of blocks of code: their values are converted, not the whole
-    // expression.
+    // synchronized is converted as a whole, after the lock is released.
     let m = Mutex()
-    let sync: Extern<DummyRT> = synchronized (m) { if (!c) { 5 } else { "five" } }
+    let sync: Extern<DummyRT> = synchronized (m) { 5 }
     expectConverted(["Int64"], "synchronized")
     check(DummyRT.fromExtern<Int64>(sync) == 5, "synchronized")
 
+    // unsafe blocks and if-let are a block and an if: their values are converted, not the whole expression.
     let u: Extern<DummyRT> = unsafe { 6 }
     expectConverted(["Int64"], "unsafe block")
     check(DummyRT.fromExtern<Int64>(u) == 6, "unsafe block")
