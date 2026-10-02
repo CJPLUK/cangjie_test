@@ -8,7 +8,8 @@
 // ASSERT: scan definitions and declarations are always of type 'Unit'
 // ASSERT: scan the type of an 'if' expression without an 'else' branch is always 'Unit'
 // ASSERT: scan try-with-resources expressions are of type 'Unit'
-// ASSERT: scan 4 errors generated
+// ASSERT: scan expected 'Enum-Extern<Class-DummyRT>', found 'Unit'
+// ASSERT: scan 8 errors generated
 
 public class DummyRT <: ForeignRuntime<DummyRT> {
     public static func eval(t: Extern<DummyRT>): Extern<DummyRT> {
@@ -36,9 +37,17 @@ func declLast(): Extern<DummyRT> {
     let z = 1
 }
 
+func loopBody(): Extern<DummyRT> {
+    while (false) {}
+}
+
 main() {
     let c = true
     let noElse: Extern<DummyRT> = if (c) { 1 }
     let declBranch: Extern<DummyRT> = if (c) { 1 } else { let _ = 1 }
     let withResources: Extern<DummyRT> = try (r = Res()) { 1 } catch (e: Exception) { 2 }
+    // Loops are never converted as a whole and are always of type Unit.
+    let w: Extern<DummyRT> = while (c) {}
+    let dw: Extern<DummyRT> = do {} while (c)
+    let f: Extern<DummyRT> = for (_ in 0..2) {}
 }
