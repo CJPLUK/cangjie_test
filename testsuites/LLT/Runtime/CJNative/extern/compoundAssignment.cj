@@ -88,6 +88,15 @@ struct Pair {
     var x: Extern<TraceRT> = Extern<TraceRT>.ExternPayload("px")
 }
 
+class Box {
+    var pair = Pair()
+}
+let box = Box()
+func getBox(): Box {
+    calls++
+    box
+}
+
 let holder = Holder()
 
 func getHolder(): Holder {
@@ -169,6 +178,17 @@ main() {
     pair.x %= 4
     check(trace, "px.%(4);", "pair.x %= 4")
     check(TraceRT.fromExtern<String>(pair.x), "px.%(4)", "value of pair.x after pair.x %= 4")
+
+    reset()
+    getBox().pair.x += 1
+    check(trace, "px.+(1);", "getBox().pair.x += 1")
+    checkCalls(1, "getBox().pair.x += 1")
+    check(TraceRT.fromExtern<String>(box.pair.x), "px.+(1)", "value of box.pair.x after getBox().pair.x += 1")
+
+    reset()
+    box.pair.x += 1
+    check(trace, "px.+(1).+(1);", "box.pair.x += 1")
+    check(TraceRT.fromExtern<String>(box.pair.x), "px.+(1).+(1)", "value of box.pair.x after box.pair.x += 1")
 
     let arr: Array<Extern<TraceRT>> = [Extern<TraceRT>.ExternPayload("a")]
     reset()
