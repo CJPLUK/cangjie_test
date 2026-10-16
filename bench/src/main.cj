@@ -8,6 +8,10 @@
 
 package bench
 
+import bench.chm.testDropLastBucket
+import bench.chm.testFrozenRetryContract
+import bench.chm.testPredicateInvokedOnce
+import bench.chm.testResizeRemoveInterleave
 import std.collection.concurrent.*
 import std.collection.HashMap
 import std.collection.MapEntryView
@@ -472,9 +476,17 @@ main() {
     // optimized implementation must pass the identical checks
     let stdOk = stdMapTests()
     let replOk = replMapTests()
+    let dropOk = testDropLastBucket()
+    let frozenOk = testFrozenRetryContract()
+    let rrOk = testResizeRemoveInterleave()
+    let predOk = testPredicateInvokedOnce()
     println("std map functional tests: ${stdOk}")
     println("repl map functional tests: ${replOk}")
-    if (!stdOk || !replOk) {
+    println("repl regression drop-last-bucket: ${dropOk}")
+    println("repl regression frozen-retry contract: ${frozenOk}")
+    println("repl regression resize/remove interleave: ${rrOk}")
+    println("repl regression predicate-once: ${predOk}")
+    if (!stdOk || !replOk || !dropOk || !frozenOk || !rrOk || !predOk) {
         println("FUNCTIONAL TESTS FAILED")
         return
     }
