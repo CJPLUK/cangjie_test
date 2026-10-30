@@ -24,15 +24,6 @@ error: expected '(' or '<', found keyword 'public'
   |     ^^^^^^ expected '(' or '<' here
   | 
 
-error: unclosed delimiter: '('
- ==> record1.cj:9:17:
-  | 
-9 |     public init(
-  |                ~^ expected ')' here
-  |                |
-  |                to match this opening '('
-  | 
-
 error: expected a argument name after '(' in parameter list, found '}'
   ==> record1.cj:10:1:
    | 
@@ -40,6 +31,15 @@ error: expected a argument name after '(' in parameter list, found '}'
    |                ~ after '(' in parameter list
 10 | }
    | ^ expected a argument name here
+   | 
+
+error: unclosed delimiter: '('
+  ==> record1.cj:10:2:
+   | 
+9  |     public init(
+   |                ~ to match this opening '('
+10 | }
+   |  ^ expected ')' here
    | 
 
 4 errors generated, 4 errors printed.

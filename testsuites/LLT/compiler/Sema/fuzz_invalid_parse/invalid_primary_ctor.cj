@@ -26,21 +26,7 @@ error: expected a argument name after ',' in parameter list, found ':'
   |                 after ',' in parameter list
   | 
 
-error: there should be no return type in a primary constructor
- ==> invalid_primary_ctor.cj:5:20:
-  | 
-5 |   public LA(var ,: Int32) {}
-  |                    ^^^^^ 
-  | 
-
-error: body of main constructor 'LA' is missing
- ==> invalid_primary_ctor.cj:5:25:
-  | 
-5 |   public LA(var ,: Int32) {}
-  |                         ^ missing main constructor body here
-  | 
-
-4 errors generated, 4 errors printed.
+2 errors generated, 2 errors printed.
 */
 
 
