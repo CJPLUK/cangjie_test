@@ -37,7 +37,8 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
     }
 }
 
-// A conversion of an array element does not count in overload ranking, and neither candidate is more specific.
+// Only the first candidate converts an array element, but conversions play no part in overload ranking and neither
+// candidate is more specific.
 func amb(_: Array<Extern<DummyRT>>): Int64 {
     1
 }

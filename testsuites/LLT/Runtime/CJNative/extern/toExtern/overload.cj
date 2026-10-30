@@ -53,17 +53,23 @@ func bothAny(e: Extern<DummyRT>): Int64 {
     100 + DummyRT.fromExtern<Int64>(e)
 }
 
+// Conversions play no part in overload ranking: Extern<DummyRT> is more specific than Any, so it is called even when
+// its argument needs a conversion, including a conversion of the branches of an if or a match.
 main() {
-    if (bothInt(42) != 42) {
-        throw Exception("Int64 overload lost to Extern")
+    if (bothAny(42) != 142) {
+        throw Exception("Any overload selected over the more specific Extern overload")
     }
-    if (bothAny(42) != 4) {
-        throw Exception("Any overload lost to Extern")
+    let flag = 42 > 0
+    if (bothAny(if (flag) { 42 } else { 43 }) != 142) {
+        throw Exception("Any overload selected for an if argument")
+    }
+    if (bothAny(match (flag) { case true => 42 case false => 43 }) != 142) {
+        throw Exception("Any overload selected for a match argument")
     }
 
     let existing: Extern<DummyRT> = DummyRT.toExtern<Int64>(7)
     if (bothInt(existing) != 107) {
-        throw Exception("Extern argument did not select the Extern overload")
+        throw Exception("Extern argument did not select the Extern overload over Int64")
     }
     if (bothAny(existing) != 107) {
         throw Exception("Extern argument did not select the Extern overload over Any")
