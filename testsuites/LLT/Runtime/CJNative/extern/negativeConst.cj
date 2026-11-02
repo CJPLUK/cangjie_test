@@ -6,7 +6,7 @@
 
 // RUN-EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>&1 | compare %f
 // ASSERT: scan-18 error: implicit conversion to 'Extern' is not allowed in 'const' code
-// ASSERT: scan-7 error: dynamic operation on 'Extern' is not allowed in 'const' code
+// ASSERT: scan-8 error: dynamic operation on 'Extern' is not allowed in 'const' code
 // ASSERT: scan-not expected 'const'
 
 // Implicit conversions to Extern<T> and dynamic operations on Extern<T> are desugared into calls to static functions
@@ -146,6 +146,10 @@ const func indexedUpdate(e: Extern<DummyRT>): Unit {
 
 const func compoundUpdate(e: Extern<DummyRT>): Unit {
     e.foo += e
+}
+
+const func pipeline(e: Extern<DummyRT>): Extern<DummyRT> {
+    1 |> e
 }
 
 main() {
