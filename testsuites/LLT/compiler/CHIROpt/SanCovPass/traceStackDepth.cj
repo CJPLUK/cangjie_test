@@ -4,13 +4,9 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// DEPENDENCE: sancov.h sancov.cpp
-// (CJNATIVE and DEBUG_OPTION) EXEC-PIPE: %clang++ -c -fPIC %stdc++_opt sancov.cpp -o sancov.o
-// (CJNATIVE and DEBUG_OPTION) EXEC-PIPE: %compiler %debugCHIROpt --sanitizer-coverage-stack-depth sancov.o %n.cj -o %output 2>&1 | compare %f
-// (not CJNATIVE and DEBUG_OPTION) EXEC: %clang++ -shared -fPIC %stdc++_opt sancov.cpp -o libsancov.so
-// (not CJNATIVE and DEBUG_OPTION) EXEC: %compiler %cmp_opt %debugCHIROpt --sanitizer-coverage-stack-depth -o %n.%suffix %n.cj -lsancov 2>&1 | compare %f
-
-// ASSERT: scan-2 [SanitizerCoverage] Add trace stage depth at [0,0].
+// DEPENDENCE: ../pick_defination.py
+// EXEC: %frontendCompiler %dumpCHIRDebug --sanitizer-coverage-stack-depth -Woff all %f -o sancov.out
+// EXEC: %python pick_defination.py sancov_CHIR/[0-9]*_Sanitizer_Coverage.chirtxt WHOLE | compare %f
 
 func f1(t1: Int8, t2: Int16, t4: Int32, t8: Int64): Int64 {
     if (t1 != 0) {
@@ -29,3 +25,11 @@ main() {
     f1(1, 1, 1, 1)
     0
 }
+
+// ASSERT: regex-2 = Apply\(@__cj_sancov_update_stack_depth[,)]
+// ASSERT: regex-begin Func @_CN7default2f1
+// ASSERT: regex-after ^Block #0:
+// ASSERT: regex-next ^\s*%\d+: Unit = Apply\(@__cj_sancov_update_stack_depth\)
+// ASSERT: regex-begin Func @_CN7default6<main>
+// ASSERT: regex-after ^Block #0:
+// ASSERT: regex-next ^\s*%\d+: Unit = Apply\(@__cj_sancov_update_stack_depth\)

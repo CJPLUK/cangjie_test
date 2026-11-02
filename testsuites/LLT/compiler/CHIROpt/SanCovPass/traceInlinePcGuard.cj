@@ -4,19 +4,11 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// DEPENDENCE: sancov.h sancov.cpp
-// (CJNATIVE and DEBUG_OPTION) EXEC: %clang++ -c -fPIC %stdc++_opt sancov.cpp -o sancov.o
-// (CJNATIVE and DEBUG_OPTION) EXEC: %compiler --sanitizer-coverage-level=1 --sanitizer-coverage-trace-pc-guard sancov.o %n.cj -o %output
-// (CJNATIVE and DEBUG_OPTION) EXEC: %run %run_opt %output %run_args
-// (CJNATIVE and DEBUG_OPTION) EXEC: %compiler %debugCHIROpt --sanitizer-coverage-level=2 --sanitizer-coverage-trace-pc-guard sancov.o %n.cj -o %output  2>&1 | compare %f
-// (CJNATIVE and DEBUG_OPTION) EXEC: %run %run_opt %output %run_args
-// (not CJNATIVE and DEBUG_OPTION) EXEC: %clang++ -shared -fPIC %stdc++_opt sancov.cpp -o libsancov.so
-// (not CJNATIVE and DEBUG_OPTION) EXEC: %compiler --sanitizer-coverage-level=1 --sanitizer-coverage-trace-pc-guard -o %n.%suffix %n.cj -lsancov
-// (not CJNATIVE and DEBUG_OPTION) RUN-EXEC: LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:. %run %n.%suffix %run_args
-// (not CJNATIVE and DEBUG_OPTION) EXEC: %compiler %debugCHIROpt --sanitizer-coverage-level=2 --sanitizer-coverage-trace-pc-guard -o %n.%suffix %n.cj -lsancov 2>&1 | compare %f
-// (not CJNATIVE and DEBUG_OPTION) RUN-EXEC: LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:. %run %n.%suffix %run_args
-
-// ASSERT: scan-16 [SanitizerCoverage] Add trace pc guard at [0,0].
+// DEPENDENCE: ../pick_defination.py
+// EXEC: %frontendCompiler %dumpCHIRDebug --sanitizer-coverage-level=1 --sanitizer-coverage-trace-pc-guard -Woff all %f -o sancov-function.out
+// EXEC: %python pick_defination.py sancov-function_CHIR/[0-9]*_Sanitizer_Coverage.chirtxt WHOLE | compare %f --assert_flag=ASSERT_FUNCTION
+// EXEC: %frontendCompiler %dumpCHIRDebug --sanitizer-coverage-level=2 --sanitizer-coverage-trace-pc-guard -Woff all %f -o sancov-block.out
+// EXEC: %python pick_defination.py sancov-block_CHIR/[0-9]*_Sanitizer_Coverage.chirtxt WHOLE | compare %f
 
 foreign func ShowUInt32Array(): Unit
 
@@ -64,3 +56,29 @@ main() {
     unsafe { ShowUInt32Array() };
     0
 }
+
+// ASSERT_FUNCTION: regex-4 = Intrinsic\(addPointer<UInt32>
+// ASSERT_FUNCTION: regex-1 = Apply\(@__cj_sancov_pc_guard_ctor[,)]
+// ASSERT_FUNCTION: regex-4 = Apply\(@__sanitizer_cov_trace_pc_guard[,)]
+// ASSERT_FUNCTION: regex-begin Func @\S*0\.sancov\$_pc_guardHv
+// ASSERT_FUNCTION: regex-after %(?P<size>\d+): UInt64 = Constant\(4u\)
+// ASSERT_FUNCTION: regex-after %(?P<storage>\d+): CPointer<UInt32> = Apply\(@__cj_sancov_pc_guard_ctor, %(?P=size)\)
+// ASSERT_FUNCTION: regex-after Unit = Store\(%(?P=storage), @sancov\$_pc_guard\)
+// ASSERT_FUNCTION: regex-begin Func @_CN7default6<main>
+// ASSERT_FUNCTION: regex-after %(?P<counter>\d+): CPointer<UInt32> = Load\(@sancov\$_pc_guard\)
+// ASSERT_FUNCTION: regex-after %(?P<offset>\d+): Int64 = Constant\(\d+i\)
+// ASSERT_FUNCTION: regex-after %(?P<point>\d+): CPointer<UInt32> = Intrinsic\(addPointer<UInt32>, %(?P=counter), %(?P=offset)\)
+// ASSERT_FUNCTION: regex-after Unit = Apply\(@__sanitizer_cov_trace_pc_guard, %(?P=point)\)
+
+// ASSERT: regex-16 = Intrinsic\(addPointer<UInt32>
+// ASSERT: regex-1 = Apply\(@__cj_sancov_pc_guard_ctor[,)]
+// ASSERT: regex-16 = Apply\(@__sanitizer_cov_trace_pc_guard[,)]
+// ASSERT: regex-begin Func @\S*0\.sancov\$_pc_guardHv
+// ASSERT: regex-after %(?P<size>\d+): UInt64 = Constant\(16u\)
+// ASSERT: regex-after %(?P<storage>\d+): CPointer<UInt32> = Apply\(@__cj_sancov_pc_guard_ctor, %(?P=size)\)
+// ASSERT: regex-after Unit = Store\(%(?P=storage), @sancov\$_pc_guard\)
+// ASSERT: regex-begin Func @_CN7default6<main>
+// ASSERT: regex-after %(?P<counter>\d+): CPointer<UInt32> = Load\(@sancov\$_pc_guard\)
+// ASSERT: regex-after %(?P<offset>\d+): Int64 = Constant\(\d+i\)
+// ASSERT: regex-after %(?P<point>\d+): CPointer<UInt32> = Intrinsic\(addPointer<UInt32>, %(?P=counter), %(?P=offset)\)
+// ASSERT: regex-after Unit = Apply\(@__sanitizer_cov_trace_pc_guard, %(?P=point)\)

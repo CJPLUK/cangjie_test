@@ -4,11 +4,9 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (DEBUG_OPTION)EXEC-PIPE-0: %compiler %enableO2 %debugCHIROpt %cmp_opt %n.cj -o %output | compare %f
-// (DEBUG_OPTION)RUN-EXEC-PIPE-0: %run %output
-// ASSERT: scan [UnitUnify] unit unify at [23,13].
-// ASSERT: scan-not core dumped
-// ASSERT: scan-not stack trace
+// DEPENDENCE: ../pick_defination.py
+// EXEC: %frontendCompiler %enableO2 %dumpCHIRDebug -Woff all %f -o unit-unify.out
+// EXEC: %python pick_defination.py unit-unify_CHIR/[0-9]*_Unit_Unify.chirtxt "Func @_CN7default6<main>Hv" | compare %f
 
 func f(): Unit {
     0
@@ -24,3 +22,19 @@ main() {
     g(a)
     0
 }
+
+// ASSERT: scan-2 = Constant(unit)
+// ASSERT: regex-1 = Apply\(@_CN7default1fHv\)
+// ASSERT: regex-1 = Apply\(@_CN7default1gHu,
+// ASSERT: regex-begin ^Block #0:
+// ASSERT: regex-next ^\s*%(?P<outerUnit>\d+): Unit = Constant\(unit\)
+// ASSERT: regex-after %(?P<closure>\d+): \(\) -> Unit = Lambda\[
+// ASSERT: regex-after ^\s+Block #\d+:
+// ASSERT: regex-next ^\s*\[ret\] %(?P<lambdaRet>\d+): Unit& = Allocate\(Unit\)
+// ASSERT: regex-after %\d+: Unit = Apply\(@_CN7default1fHv\)
+// ASSERT: regex-after %(?P<innerUnit>\d+): Unit = Constant\(unit\)
+// ASSERT: regex-after Unit = Store\(%(?P=innerUnit), %(?P=lambdaRet)\)
+// ASSERT: regex-after Unit = Store\(%(?P=closure), %(?P<slot>\d+)\)
+// ASSERT: regex-after %(?P<callee>\d+): \(\) -> Unit = Load\(%(?P=slot)\)
+// ASSERT: regex-after %\d+: Unit = Apply\(%(?P=callee)\)
+// ASSERT: regex-after Int64 = Apply\(@_CN7default1gHu, %(?P=outerUnit)\)

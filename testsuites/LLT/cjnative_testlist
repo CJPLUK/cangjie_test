@@ -19,10 +19,6 @@ compiler/CHIR/InvokeNodetest
 compiler/CHIR/RemoveRedundantRet
 compiler/CHIR/ScalarReplacementOfArray
 compiler/CHIROpt/FunctionInline
-compiler/CHIROpt/RedundantGetOrThrowElimination
-compiler/CHIROpt/SanCovPass
-compiler/CHIROpt/UnitUnify
-compiler/CHIROpt/UselessAllocateElimination
 compiler/CHIROpt/ValueRangeAnalysis
 compiler/CHIROpt/VarInitCheck
 compiler/CHIROpt/lambda_reduce
