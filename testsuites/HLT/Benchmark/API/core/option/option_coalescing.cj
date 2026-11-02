@@ -6,6 +6,7 @@
  * See https://cangjie-lang.cn/pages/LICENSE for license information.
  */
 
+// LEVEL: 3
 // DEPENDENCE: ../../benchmark.cj
 // EXEC: %compiler %cmp_macro benchmark.cj
 // EXEC: %compiler %cmp_opt %f

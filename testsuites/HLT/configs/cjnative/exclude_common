@@ -14,8 +14,7 @@ API/net/TLS_new/KeylessTlsServerConfig/test_KeylessTlsServerConfig.cj
 # https://gitcode.com/Cangjie/cangjie_test/issues/515
 Runtime/cjnative/runtime/PointerAuth
 
-# https://gitcode.com/Cangjie/cangjie_test/issues/514
-Benchmark
+
 
 # https://gitcode.com/Cangjie/cangjie_test/issues/516
 Runtime/cjnative/runtime/Finalizer/complex_1.cj
@@ -68,3 +67,23 @@ compiler/cjnative/stable_abi/07_extend/02_modify/01_define_content/05_instance_f
 
 # https://gitcode.com/Cangjie/cangjie_test/issues/529
 API/std/os/file/test_lseek/test_lseek.cj
+
+# Benchmark cases with missing data/dependencies
+Benchmark/micro-benchmark/cj/http2/
+Benchmark/micro-benchmark/cj/https/
+Benchmark/CJ-Arkworkload/babylon/cj/main.cj
+Benchmark/Object-oriented/game_of_life/cj/gameoflife.cj
+Benchmark/CJ-Arkworkload/mix-case/cj/weekly/crypto-aes.cj
+Benchmark/CJ-Arkworkload/mix-case/cj/weekly/json-parse-inspector.cj
+Benchmark/CJ-Arkworkload/mix-case/cj/weekly/json-stringify-inspector.cj
+Benchmark/CJ-Arkworkload/mix-case/cj/weekly/stanford-crypto-pbkdf2.cj
+Benchmark/micro-benchmark/cj/json/BenchmarkStr2JsonValue.cj
+
+# BenchmarkVisitorTraverse mutates the shared AST each iteration and cannot finish
+Benchmark/micro-benchmark/cj/libast_api/BenchmarkVisitorTraverse.cj
+
+# Puzzle fails under -O2 due to a compiler bug, A ticket has been filed
+Benchmark/linaro-benchmark/benchmarks-cj/stanford/Puzzle/Puzzle.cj
+
+# case25 performance gate failed, A ticket has been filed
+Benchmark/requirements-benchmark/case25_http_complex_json_stream/case25_http_complex_json_stream.info

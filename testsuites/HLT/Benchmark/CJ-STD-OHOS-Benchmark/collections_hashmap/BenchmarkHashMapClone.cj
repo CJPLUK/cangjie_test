@@ -6,6 +6,7 @@
  * See https://cangjie-lang.cn/pages/LICENSE for license information.
  */
 
+// LEVEL: 3
 // EXEC: %compiler %cmp_opt %cmp_utest_opt %f -o %output
 // RUN-EXEC: %export cjHeapSize=16gb && %run %run_opt %output %run_utest_opt %run_args --bench
 
