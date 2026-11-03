@@ -4,7 +4,7 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// LEVEL: 1
+// LEVEL: 0
 // DEPENDENCE: ../%n
 // EXEC: cd %n && %cjpm bundle --skip-test 2>&1 | compare %f
 // (not MAC)ASSERT: scan G.NAM.04: Function name 'test_lint' recommend to use lower camel case

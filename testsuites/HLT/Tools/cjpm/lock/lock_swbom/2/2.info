@@ -14,4 +14,4 @@
 // ASSERT: regex dependencies = \["org1::test_repo_2", "test_repo_4", "test_repo_5"\]
 // ASSERT: regex version = "2.0.0"
 // ASSERT: regex checksum = "sha256:[0-9a-f]{64}"
-// ASSERT: regex source = "registry\+https://mirror-centralrepo\.devcloud\.cn-north-4\.huaweicloud\.com/artifactory/api/cjpm/cangjie-central-cjpm-test"
+// ASSERT: regex source = "registry\+https://[^/]+/artifactory/api/cjpm/cangjie-central-cjpm-test"

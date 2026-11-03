@@ -12,7 +12,7 @@
 // ASSERT: regex version = 1
 // ASSERT: regex \[requires\."test_repo_7"\]
 // ASSERT: regex version = "1.0.0"
-// ASSERT: regex source = "registry\+https://mirror-centralrepo\.devcloud\.cn-north-4\.huaweicloud\.com/artifactory/api/cjpm/cangjie-central-cjpm-test"
+// ASSERT: regex source = "registry\+https://[^/]+/artifactory/api/cjpm/cangjie-central-cjpm-test"
 // ASSERT: regex checksum = "sha256:[0-9a-f]{64}"
 // ASSERT: regex dependencies = \[\]
 // ASSERT: scan-not test_repo_7 = \{

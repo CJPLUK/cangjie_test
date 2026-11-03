@@ -6,6 +6,7 @@
  * See https://cangjie-lang.cn/pages/LICENSE for license information.
  */
 
+// LEVEL: 3
 // DEPENDENCE: GcTestCase.cj MemAllocTestCase.cj MemAllocUtil.cj ThreadTest.cj FinalizerAlloc.cj
 // EXEC: %compiler %cmp_opt GcTestCase.cj MemAllocTestCase.cj MemAllocUtil.cj ThreadTest.cj FinalizerAlloc.cj %f
 // Only compile, not run on ci.

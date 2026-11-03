@@ -6,6 +6,7 @@
  * See https://cangjie-lang.cn/pages/LICENSE for license information.
  */
 
+// LEVEL: 3
 // EXEC: %compiler %cmp_opt -O2 %overflow_wrapping %f -o %output
 // RUN-EXEC: %run %run_opt %output 3 %run_args
 

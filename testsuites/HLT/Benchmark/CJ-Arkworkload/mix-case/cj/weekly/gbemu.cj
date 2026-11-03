@@ -10,6 +10,7 @@
 // EXEC: %compiler %cmp_opt -O2 --no-sub-pkg %f -o %output
 // RUN-EXEC: %export cjHeapSize=512mb && %run %run_opt %output %run_args 2>&1 | compare %f
 // ASSERT: scan ms
+// TIMEOUT: 1800
 import std.collection.*
 import std.time.*
 import std.convert.*

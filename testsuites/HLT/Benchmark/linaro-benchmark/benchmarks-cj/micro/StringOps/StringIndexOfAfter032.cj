@@ -6,6 +6,7 @@
  * See https://cangjie-lang.cn/pages/LICENSE for license information.
  */
 
+// LEVEL: 3
 // EXEC: %compiler %cmp_opt -O2 %overflow_wrapping %f -o %output
 // RUN-EXEC: %export cjHeapSize=16GB && %export JETVMPROP="-Xmx2G" && %run %run_opt %output %run_args
 

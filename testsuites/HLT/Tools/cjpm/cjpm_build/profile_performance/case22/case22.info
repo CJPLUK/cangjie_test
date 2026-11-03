@@ -1,0 +1,13 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ *
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+
+// LEVEL: 0
+// DEPENDENCE: ../%n
+// (target_linux | target_android | target_ohos) EXEC: cd %n && %cjpm build %cjpm_opt -V 2>&1 | compare %f
+// (target_linux | target_android | target_ohos) ASSERT: scan --lto=full
+// (target_linux | target_android | target_ohos) ASSERT: scan cjpm build success

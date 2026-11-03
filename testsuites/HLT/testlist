@@ -11,5 +11,6 @@ Tools/
 compiler/
 regression/
 Runtime/
+Benchmark/
 
 [EXCLUDE-TEST-CASE]

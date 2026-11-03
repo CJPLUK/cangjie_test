@@ -1,0 +1,22 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ *
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+
+// LEVEL: 0
+// DEPENDENCE: ../%n
+// (not host_mac) EXEC: cd %n && %cjpm build && %ls target/release/performance_analysis | compare %f
+// ASSERT: scan case19.time.prof
+// ASSERT: scan case19.mem.prof
+// ASSERT: scan case19.info.prof
+// ASSERT: scan case19.pkg1.time.prof
+// ASSERT: scan case19.pkg1.mem.prof
+// ASSERT: scan case19.pkg1.info.prof
+// ASSERT: scan case19.pkg2.time.prof
+// ASSERT: scan case19.pkg2.mem.prof
+// ASSERT: scan case19.pkg2.info.prof
+// ASSERT: scan time_cost.json
+// ASSERT: scan memory_cost.json
