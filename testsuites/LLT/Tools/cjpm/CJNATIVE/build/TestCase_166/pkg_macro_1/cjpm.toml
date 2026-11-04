@@ -1,0 +1,36 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+# This source file is part of the Cangjie project, licensed under Apache-2.0
+# with Runtime Library Exception.
+#
+# See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+[package]
+  cjc-version = "1.2.0"
+  name = "pkg_macro_1"
+  organization = ""
+  description = "这是一个仓颉工程描述"
+  version = "1.3.2"
+  target-dir = "build_out"
+  script-dir = "build_out"
+  output-type = "static"
+  compile-option = "-Woff=all --compile-macro"
+  override-compile-option = ""
+  link-option = ""
+
+[package.package-configuration."pkg_macro_1"]
+  combine-all-deps = false
+
+[profile.build]
+  lto = "full"
+  enable-heuristic-parallelism = true
+
+[profile.customized-option]
+  cfg0 = "-O0"
+
+[dependencies]
+  pkg_macro_0 = { path = "../pkg_macro_0" }
+
+[test-dependencies]
+  app_1 = { path = "../app_1" }
+  pkg_lib_3 = { path = "../pkg_lib_3" }
+

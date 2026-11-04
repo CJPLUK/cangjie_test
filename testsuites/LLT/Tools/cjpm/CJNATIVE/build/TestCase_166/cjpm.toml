@@ -1,0 +1,39 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+# This source file is part of the Cangjie project, licensed under Apache-2.0
+# with Runtime Library Exception.
+#
+# See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+[package]
+  cjc-version = "1.2.0"
+  name = "package_fuzz"
+  organization = ""
+  description = "multi-word description with spaces, commas, and 123 数字"
+  version = "6.5.0"
+  target-dir = "build_out"
+  script-dir = "custom_target"
+  output-type = "executable"
+  compile-option = "-Woff=all"
+  override-compile-option = ""
+  link-option = ""
+
+[package.package-configuration."package_fuzz"]
+  combine-all-deps = false
+
+[profile.build]
+  enable-heuristic-parallelism = true
+  lto = "full"
+  cjc-jobs = 1
+  performance_analysis = true
+
+[dependencies]
+  app_1 = { path = "./app_1" }
+  pkg_lib_0 = { path = "./pkg_lib_0" }
+  pkg_lib_1 = { path = "./pkg_lib_1" }
+  pkg_lib_2 = { path = "./pkg_lib_2" }
+  pkg_lib_3 = { path = "./pkg_lib_3" }
+  pkg_lib_4 = { path = "./pkg_lib_4" }
+  pkg_macro_0 = { path = "./pkg_macro_0" }
+  pkg_macro_1 = { path = "./pkg_macro_1" }
+  pkg_tf_0 = { path = "./pkg_tf_0" }
+
