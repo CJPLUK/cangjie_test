@@ -86,7 +86,7 @@ error: cannot convert an integer literal to type 'Unit'
    |            ^ 
    | 
 
-error: the return type of this function cannot be calculated from the function body and all the return expressions
+error: the return type of this function cannot be calculated from the function body and all the return and exclave expressions
   ==> funcDecl2.cj:31:5:
    | 
 31 |     return
@@ -157,7 +157,7 @@ error: no matching function declaration for function reference 'fun'
    |                     ^ 
    | 
 
-error: the return type of this function cannot be calculated from the function body and all the return expressions
+error: the return type of this function cannot be calculated from the function body and all the return and exclave expressions
   ==> funcDecl2.cj:71:5:
    | 
 71 |     1
@@ -167,7 +167,7 @@ error: the return type of this function cannot be calculated from the function b
 The types 'Bool' and 'Int64' do not have the smallest common supertype
 
 
-error: the return type of this function cannot be calculated from the function body and all the return expressions
+error: the return type of this function cannot be calculated from the function body and all the return and exclave expressions
   ==> funcDecl2.cj:78:5:
    | 
 78 |     1

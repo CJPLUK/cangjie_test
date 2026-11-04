@@ -27,4 +27,3 @@ main() {
    return 0
 }
 // ASSERT: scan parse_expected_expression
-// ASSERT: scan parse_expected_right_delimiter

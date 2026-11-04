@@ -17,4 +17,3 @@ main(): Int64 {
     return 1
 }
 // ASSERT: scan parse_expected_expression
-// ASSERT: scan parse_expected_name

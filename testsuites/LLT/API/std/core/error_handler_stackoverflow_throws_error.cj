@@ -5,8 +5,11 @@
  *
  * See https://cangjie-lang.cn/pages/LICENSE for license information.
  */
-// EXEC: %compiler %cmp_opt -o %n.%suffix %f
-// EXEC: %run %run_opt %n.%suffix %run_args 2>&1 | compare %f
+// EXEC: %compiler %cmp_opt %disableFuncInlining -o %n.%suffix %f
+// Use a fixed initial stack; disable growth only on the worker that triggers overflow.
+// (Unix) EXEC: export cjStackSize=1mb && %run %run_opt %n.%suffix %run_args 2>&1 | compare %f
+// (Windows) EXEC: (set cjStackSize=1mb) && %run %run_opt %n.%suffix %run_args 2>&1 | compare %f
+// ASSERT: scan StackOverflowError
 // ASSERT: scan throws an error in the error handler
 
 /* Output will be like: 
@@ -28,6 +31,12 @@ Thread id: 2 throws an error in the error handler
 [1]    147289 segmentation fault  ./errorHandlerSOF
 */
 
+import std.runtime.*
+
+foreign {
+    func CJ_CJThreadSetStackGrow(enabled: Bool): Int32
+}
+
 var a = 0
 
 main() {
@@ -39,6 +48,10 @@ main() {
   Thread.handleUncaughtErrorBy(handler)
 
   let fut = spawn {
+    // Preserve the SDK stack-map mode while bounding this worker's real stack overflow.
+    if (unsafe { CJ_CJThreadSetStackGrow(false) } != 0) {
+      throw Exception("Failed to disable worker stack growth")
+    }
     test()
   }
   
@@ -52,6 +65,11 @@ main() {
 }
 
 func test(): Unit {
+    // Reach the stack limit with a bounded number of frames. Tiny recursive
+    // frames otherwise spend the test timeout scanning millions of stack maps.
+    let padding = VArray<Int64, $8192>(repeat: 0)
+    blackBox(padding)
     test()
+    blackBox(padding)
     a++
 }

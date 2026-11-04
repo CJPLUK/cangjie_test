@@ -59,18 +59,11 @@ error: mismatched types
    |               ^^ expected 'Int64', found 'Unit'
    | 
 
-error: 'd' is not a member of enum 'E1'
-  ==> enum17_prop2.cj:30:7:
-   | 
-30 |     b.d
-   |       ^ 
-   | 
-
 error: cannot assign to immutable value
   ==> enum17_prop2.cj:28:5:
    | 
 28 |     a.a = 1
-   |     ^^^^^^^ 
+   |     ^^^ 
    | 
 note: property 'a' is immutable
   ==> enum17_prop2.cj:12:17:
@@ -83,13 +76,20 @@ error: cannot assign to immutable value
   ==> enum17_prop2.cj:29:5:
    | 
 29 |     b.b = 1
-   |     ^^^^^^^ 
+   |     ^^^ 
    | 
 note: property 'b' is immutable
   ==> enum17_prop2.cj:17:17:
    | 
 17 |     public prop b: Int64 {
    |                 ^ 
+   | 
+
+error: 'd' is not a member of enum 'E1'
+  ==> enum17_prop2.cj:30:7:
+   | 
+30 |     b.d
+   |       ^ 
    | 
 
 6 errors generated, 6 errors printed.

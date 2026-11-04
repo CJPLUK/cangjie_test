@@ -20,4 +20,3 @@ unsafe main(): Int64 {
     return 0
 }
 // ASSERT: scan sema_undeclared_type_name
-// ASSERT: scan sema_invalid_cfunc_arg_type

@@ -7,7 +7,7 @@
 #   外加字节级破坏操作;fixture 运行时现场生成,套件不预存 .cjo。
 #
 # 用法:
-#   --patch-cjo <file> --set-cjo-version M.m.p   改写 cjoVersion 三元组
+#   --patch-cjo <file> --set-cjo-version M.m.p|next-minor   改写 cjoVersion 三元组
 #   --patch-cjo <file> --set-version-string S    改写 version 字符串
 #   --patch-cjo <file> --clear-version-string    删除 version 字符串
 #   --patch-cjo <file> --truncate [N]            截断至前 N 字节(缺省减半)
@@ -228,7 +228,8 @@ def main():
     ap = argparse.ArgumentParser(description='CJO version fixture surgery tool')
     ap.add_argument('--patch-cjo', metavar='FILE')
     ap.add_argument('--generate', nargs=2, metavar=('BASE', 'OUT'))
-    ap.add_argument('--set-cjo-version', metavar='M.m.p')
+    ap.add_argument('--set-cjo-version', metavar='M.m.p|next-minor',
+                    help='Use a fixed triple or increment the input file minor version')
     ap.add_argument('--set-version-string', metavar='S')
     ap.add_argument('--clear-version-string', action='store_true')
     ap.add_argument('--truncate', nargs='?', const='', default=None, metavar='N')
@@ -287,7 +288,7 @@ def main():
         ap.error('nothing to do: need --patch-cjo FILE or --generate BASE OUT')
 
     triple = None
-    if args.set_cjo_version:
+    if args.set_cjo_version and args.set_cjo_version != 'next-minor':
         parts = args.set_cjo_version.split('.')
         if len(parts) != 3:
             ap.error('--set-cjo-version expects M.m.p')
@@ -296,7 +297,12 @@ def main():
     for path in targets:
         def mutate(txt):
             txt2 = txt
-            if triple is not None:
+            if args.set_cjo_version == 'next-minor':
+                major, minor, _ = read_triple(txt2)
+                if minor == 255:
+                    raise SystemExit('cjo_mutate.py: cannot increment minor 255')
+                txt2 = set_triple(txt2, major, minor + 1, 0)
+            elif triple is not None:
                 txt2 = set_triple(txt2, *triple)
             if args.set_version_string is not None:
                 new, n = VERSION_STR_RE.subn('version: "%s"' % args.set_version_string,

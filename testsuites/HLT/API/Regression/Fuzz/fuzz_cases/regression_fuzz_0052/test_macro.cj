@@ -1465,12 +1465,12 @@ extend Aggregate332 {
 extend Class15 {
 
 }
-// ASSERT: scan parse_expected_right_delimiter
-// ASSERT: scan parse_expected_expression
 // ASSERT: scan parse_expected_character
-// ASSERT: scan parse_expected_left_brace
-// ASSERT: scan parse_expected_expr_or_decl_in
 // ASSERT: scan parse_expected_decl
-// ASSERT: scan parse_illegal_or_pattern
-// ASSERT: scan parse_chained_none_associative
-// ASSERT: scan parse_tuple_pattern_expected_more_field
+// ASSERT: scan parse_expected_expression
+// ASSERT: scan parse_expected_expr_or_decl_in
+// ASSERT: scan parse_expected_left_brace
+// ASSERT: scan parse_expected_right_delimiter
+// ASSERT: scan parse_illegal_modifier_in_scope
+// ASSERT: scan parse_unexpected_declaration_in_scope
+// ASSERT: scan parse_unmatched_right_delimiter

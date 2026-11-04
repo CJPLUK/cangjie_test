@@ -13,7 +13,7 @@
 // EXEC: %compiler %cmp_opt %pkg_opt pkg_a %compile_lib_opt -o a.%middle
 // EXEC: %compiler %cmp_opt %pkg_opt pkg_c %compile_lib_opt -o c.%middle
 // EXEC: %compiler %cmp_opt %pkg_opt pkg_b %compile_lib_opt -o b.%middle
-// EXEC: %python tools/cjo_mutate.py --patch-cjo b.cjo --set-cjo-version 0.2.0
+// EXEC: %python tools/cjo_mutate.py --patch-cjo b.cjo --set-cjo-version next-minor
 // EXEC-PIPE-1: %compiler %cmp_opt a.%middle b.%middle c.%middle %f -o %output 2>&1 | compare diag_reject.txt
 // ASSERT: scan is incompatible: compiled with cjc
 // ASSERT: scan b.cjo

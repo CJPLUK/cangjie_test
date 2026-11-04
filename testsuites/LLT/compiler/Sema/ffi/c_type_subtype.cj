@@ -12,6 +12,6 @@ main() {
     return 0
 }
 
-// ASSERT: scan-1 sema_generic_type_argument_not_match_constraint
-// ASSERT: scan-1 sema_unable_to_infer_generic_func
-// ASSERT: scan "Errors": 2
+// ASSERT: scan-1 "DiagKind": "sema_unable_to_infer_generic_func",
+// ASSERT: scan-1 "DiagKind": "sema_generic_type_argument_not_match_constraint",
+// ASSERT: scan "Errors": 2,

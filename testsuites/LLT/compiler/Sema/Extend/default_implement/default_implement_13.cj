@@ -23,14 +23,14 @@ extend A <: I2 {}
 main() {}
 
 /* SCAN
-error: interface function 'foo' must be implemented in 'extend A'
+error: interface function 'foo(): ' must be implemented in 'extend A'
   ==> default_implement_13.cj:19:1:
    | 
 19 | extend A <: I1 {}
    | ^ 
    | 
 
-error: interface function 'foo' must be implemented in 'extend A'
+error: interface function 'foo(): ' must be implemented in 'extend A'
   ==> default_implement_13.cj:21:1:
    | 
 21 | extend A <: I2 {}

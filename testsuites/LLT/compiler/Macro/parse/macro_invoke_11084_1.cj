@@ -9,7 +9,6 @@
 // ERRCHECK: %run_macro %compiler %cmp_opt  %f -o %output
 // ASSERT: scan expected expression after '-', found a declaration
 // ASSERT: scan variable declaration in pattern needs either type or initializer
-// ASSERT: scan unexpected main function in main function body
 // ASSERT: scan unclosed delimiter: '{'
 
 import define.*

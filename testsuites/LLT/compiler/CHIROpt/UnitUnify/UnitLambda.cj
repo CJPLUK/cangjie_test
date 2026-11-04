@@ -23,7 +23,7 @@ main() {
     0
 }
 
-// ASSERT: scan-2 = Constant(unit)
+// ASSERT: scan-3 = Constant(unit)
 // ASSERT: regex-1 = Apply\(@_CN7default1fHv\)
 // ASSERT: regex-1 = Apply\(@_CN7default1gHu,
 // ASSERT: regex-begin ^Block #0:
@@ -37,4 +37,6 @@ main() {
 // ASSERT: regex-after Unit = Store\(%(?P=closure), %(?P<slot>\d+)\)
 // ASSERT: regex-after %(?P<callee>\d+): \(\) -> Unit = Load\(%(?P=slot)\)
 // ASSERT: regex-after %\d+: Unit = Apply\(%(?P=callee)\)
-// ASSERT: regex-after Int64 = Apply\(@_CN7default1gHu, %(?P=outerUnit)\)
+// ASSERT: regex-after Unit = Debug\(%(?P=outerUnit), a\)
+// ASSERT: regex-after %(?P<argumentUnit>\d+): Unit = Constant\(unit\)
+// ASSERT: regex-after Int64 = Apply\(@_CN7default1gHu, %(?P=argumentUnit)\)

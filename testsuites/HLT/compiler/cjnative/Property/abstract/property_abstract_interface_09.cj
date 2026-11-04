@@ -24,4 +24,5 @@ abstract class B <: A {
 main(): Int64 {
     return 0
 }
-// ASSERT: scan sema_property_override_implement_type_diff
+// ASSERT: scan sema_inherit_member_type_inconsistent
+// ASSERT: scan sema_prop_redefinition

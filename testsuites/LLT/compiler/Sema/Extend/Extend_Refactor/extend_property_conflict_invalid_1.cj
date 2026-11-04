@@ -33,14 +33,14 @@ main() {
 }
 
 /* SCAN
-error: interface property 'foo' must be implemented in 'extend C1'
+error: interface property 'foo: Int64' must be implemented in 'extend C1'
   ==> extend_property_conflict_invalid_1.cj:27:1:
    | 
 27 | extend C1 <: I1 {}
    | ^ 
    | 
 
-error: interface property 'foo' must be implemented in 'extend C1'
+error: interface property 'foo: Int64' must be implemented in 'extend C1'
   ==> extend_property_conflict_invalid_1.cj:29:1:
    | 
 29 | extend C1 <: I2 {}

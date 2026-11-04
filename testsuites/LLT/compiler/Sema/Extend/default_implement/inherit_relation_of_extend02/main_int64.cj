@@ -30,14 +30,14 @@ main() {
 }
 
 /* SCAN
-error: interface function 'containsValue' must be implemented in 'extend Int64'
+error: interface function 'containsValue(value: V, fn: (V, V) -> Bool): Bool' must be implemented in 'extend Int64'
   ==> main_int64.cj:24:1:
    | 
 24 | extend Int64 <: I1<Int64> {}
    | ^ 
    | 
 
-error: interface function 'containsValue' must be implemented in 'extend Int64'
+error: interface function 'containsValue(value: V, fn: (V, V) -> Bool): Bool' must be implemented in 'extend Int64'
   ==> main_int64.cj:26:1:
    | 
 26 | extend Int64 <: I2<Int64> {}

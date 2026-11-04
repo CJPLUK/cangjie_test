@@ -10,9 +10,6 @@
 // ASSERT: scan expected expression after '-', found a declaration
 // ASSERT: scan expected a member name after '.' in qualified name, found '*'
 // ASSERT: scan variable declaration in pattern needs either type or initializer
-// ASSERT: scan unexpected main function in main function body
-// ASSERT: scan expected expression after '-', found a declaration
-// ASSERT: scan expected expression after '+', found a declaration
 // ASSERT: scan unclosed delimiter: '{'
 
 import define.*

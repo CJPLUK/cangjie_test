@@ -52,14 +52,14 @@ note: found conflict here
    |          ^^^ 
    | 
 
-error: interface property 'foo' must be implemented in 'extend C1'
+error: interface property 'foo: Int64' must be implemented in 'extend C1'
   ==> extend_property_conflict_invalid_3.cj:33:1:
    | 
 33 | extend C1 <: I1 {}
    | ^ 
    | 
 
-error: interface property 'foo' must be implemented in 'extend C1'
+error: interface property 'foo: Int64' must be implemented in 'extend C1'
   ==> extend_property_conflict_invalid_3.cj:35:1:
    | 
 35 | extend C1 <: I2 {}

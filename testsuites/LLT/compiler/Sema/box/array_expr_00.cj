@@ -4,19 +4,11 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// ERRCHECK: %compiler %cmp_opt %n.cj -o %output
+// EXEC-PIPE-1: %frontendCompiler %diag_json %f 2>&1 | compare %f
 
 main() {
     let x: Bool = Array<Int64>()
 }
 
-/* SCAN
-error: mismatched types
-  ==> array_expr_00.cj:10:19:
-   | 
-10 |     let x: Bool = Array<Int64>()
-   |                   ^^^^^^^^^^^^^^ expected 'Bool', found 'Struct-Array<Int64>'
-   | 
-
-1 error generated, 1 error printed.
-*/
+// ASSERT: scan "DiagKind": "sema_mismatched_types",
+// ASSERT: scan "Errors": 1,

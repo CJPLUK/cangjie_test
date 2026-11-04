@@ -19,6 +19,7 @@ framework/
 **/.*_Cache/*
 *.ast
 *.cjo
+*.cjo.flag
 *.o
 *.bc
 *.cbc

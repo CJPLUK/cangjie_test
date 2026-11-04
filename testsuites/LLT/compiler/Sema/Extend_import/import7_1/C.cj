@@ -8,7 +8,7 @@
 // EXEC: %compiler %cmp_opt %compile_lib_opt A.cj -o A.%middle
 // EXEC: %compiler %cmp_opt %compile_lib_opt B.cj -o B.%middle
 // EXEC: %compiler %cmp_opt %compile_lib_opt %f 2>&1 | compare %f
-// ASSERT: regex interface function 'f' must be implemented in 'extend Foo'
+// ASSERT: regex interface function 'f\(\): Unit' must be implemented in 'extend Foo'
 
 package C
 

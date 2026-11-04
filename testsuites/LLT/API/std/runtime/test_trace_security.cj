@@ -9,7 +9,7 @@
 // (CJNATIVE and Linux) EXEC: %compiler %cmp_opt %f -o %output
 // (CJNATIVE and Linux) EXEC: cjTracePath=../../../tmp/malicious.trace %run %run_opt %output %run_args
 // ASSERT: scan Trace not started with path traversal
-// (CJNATIVE and Linux) EXEC: cjTracePath=~/secret.trace %run %run_opt %output %run_args
+// (CJNATIVE and Linux) EXEC: cjTracePath='~/secret.trace' %run %run_opt %output %run_args
 // ASSERT: scan Trace not started with tilde
 // (CJNATIVE and Linux) EXEC: cjTracePath=tmp/relative.trace %run %run_opt %output %run_args
 // ASSERT: scan Trace not started with relative path without ./

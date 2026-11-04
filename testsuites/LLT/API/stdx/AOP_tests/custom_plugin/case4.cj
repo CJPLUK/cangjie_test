@@ -11,7 +11,8 @@
 // EXEC-PIPE-0: export LD_LIBRARY_PATH=$CANGJIE_HOME/tools/lib:$CANGJIE_STDX_PATH:$LD_LIBRARY_PATH && %compiler %cmp_opt -Woff unused %f -o %output --plugin=./libplugin_to_string_dump.%dylib_suffix 2>&1 | compare %f
 // ASSERT: scan has predecessors: true\n
 // ASSERT: scan has funcKind: true\n
-// ASSERT: scan has paramDft: true\n
+// ASSERT: scan has paramDftHost: true\n
+// ASSERT: scan has paramDftFunc: true\n
 // ASSERT: scan has propLocation: true\n
 // ASSERT: scan has fastNative: true\n
 // ASSERT: scan toString dump ok\n

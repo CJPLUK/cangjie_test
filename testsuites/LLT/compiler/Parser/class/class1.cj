@@ -1,3 +1,9 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
 // EXEC-PIPE-1: %compiler %cmp_opt %f 2>&1 | compare %f
 
 class Base {
@@ -79,158 +85,152 @@ class Base9 {
 
 /* SCAN
 error: expected ';' or '<NL>', found ','
- ==> class1.cj:9:32:
-  | 
-9 |     public   mut  prop d:Int64 , 
-  |                                ^ expected ';' or '<NL>' here
-  | 
+  ==> class1.cj:15:32:
+   | 
+15 |     public   mut  prop d:Int64 , 
+   |                                ^ expected ';' or '<NL>' here
+   | 
 
 error: setter must contain 1 parameter
-  ==> class1.cj:14:12:
+  ==> class1.cj:20:12:
    | 
-14 |         set(){} 
+20 |         set(){} 
    |            ^^ expected 1 parameter inside
    | 
 
 error: unclosed delimiter: '('
-  ==> class1.cj:26:13:
+  ==> class1.cj:32:13:
    | 
-26 |         set( {} 
+32 |         set( {} 
    |            ~^ expected ')' here
    |            |
    |            to match this opening '('
    | 
 
 error: expected a argument name after '(' in parameter list, found '{'
-  ==> class1.cj:26:14:
+  ==> class1.cj:32:14:
    | 
-26 |         set( {} 
+32 |         set( {} 
    |            ~ ^ expected a argument name here
    |            |
    |            after '(' in parameter list
    | 
 
 error: setter must contain 1 parameter
-  ==> class1.cj:32:12:
+  ==> class1.cj:38:12:
    | 
-32 |         set() {} 
+38 |         set() {} 
    |            ^^ expected 1 parameter inside
    | 
 
 error: duplicated 'set' in prop
-  ==> class1.cj:33:9:
+  ==> class1.cj:39:9:
    | 
-31 |     public   mut  prop d:Int64{
+37 |     public   mut  prop d:Int64{
    |                   ~~~~ 
-32 |         set() {} 
+38 |         set() {} 
    |         ~~~~~~~~ previous one
-33 |         set() {} 
+39 |         set() {} 
    |         ^^^ duplicated 'set'
    | 
 
 error: setter must contain 1 parameter
-  ==> class1.cj:33:12:
+  ==> class1.cj:39:12:
    | 
-33 |         set() {} 
+39 |         set() {} 
    |            ^^ expected 1 parameter inside
    | 
 
 error: duplicated 'set' in prop
-  ==> class1.cj:34:9:
+  ==> class1.cj:40:9:
    | 
-31 |     public   mut  prop d:Int64{
+37 |     public   mut  prop d:Int64{
    |                   ~~~~ 
-32 |         set() {} 
-33 |         set() {} 
+38 |         set() {} 
+39 |         set() {} 
    |         ~~~~~~~~ previous one
-34 |         set() {} 
+40 |         set() {} 
    |         ^^^ duplicated 'set'
-   | 
-
-error: setter must contain 1 parameter
-  ==> class1.cj:34:12:
-   | 
-34 |         set() {} 
-   |            ^^ expected 1 parameter inside
    | 
 
 error: setter must contain 1 parameter
   ==> class1.cj:40:12:
    | 
-40 |         set() {}
+40 |         set() {} 
+   |            ^^ expected 1 parameter inside
+   | 
+
+error: setter must contain 1 parameter
+  ==> class1.cj:46:12:
+   | 
+46 |         set() {}
    |            ^^ expected 1 parameter inside
    | 
 
 error: duplicated 'set' in prop
-  ==> class1.cj:41:9:
+  ==> class1.cj:47:9:
    | 
-39 |     public   mut  prop d:Int64{
+45 |     public   mut  prop d:Int64{
    |                   ~~~~ 
-40 |         set() {}
+46 |         set() {}
    |         ~~~~~~~~ previous one
-41 |         set() {} 
+47 |         set() {} 
    |         ^^^ duplicated 'set'
    | 
 
 error: setter must contain 1 parameter
-  ==> class1.cj:41:12:
+  ==> class1.cj:47:12:
    | 
-41 |         set() {} 
+47 |         set() {} 
    |            ^^ expected 1 parameter inside
    | 
 
 error: expected no modifier before setter function, found 'static'
-  ==> class1.cj:47:9:
+  ==> class1.cj:53:9:
    | 
-47 |         static set(x){} 
+53 |         static set(x){} 
    |         ^^^^^^ ~~~ before setter function
    |         |
    |         expected no modifier here
    | 
 
 error: expected 'get' or 'set' in prop body, found '@'
-  ==> class1.cj:59:9:
+  ==> class1.cj:65:9:
    | 
-57 |     public   mut  prop d:Int64 { 
+63 |     public   mut  prop d:Int64 { 
    |                   ~~~~ 
-58 | 
-59 |         @sset 
+64 | 
+65 |         @sset 
    |         ^ expected 'get' or 'set' here
    | 
 
 error: expected no modifier before setter function, found 'static'
-  ==> class1.cj:66:9:
+  ==> class1.cj:72:9:
    | 
-66 |         static set(,){} 
+72 |         static set(,){} 
    |         ^^^^^^ ~~~ before setter function
    |         |
    |         expected no modifier here
    | 
 
 error: expected a argument name after '(' in parameter list, found ','
-  ==> class1.cj:66:20:
+  ==> class1.cj:72:20:
    | 
-66 |         static set(,){} 
+72 |         static set(,){} 
    |                   ~^ expected a argument name here
    |                   |
    |                   after '(' in parameter list
    | 
 
 error: unclosed delimiter: '{'
-  ==> class1.cj:77:3:
+  ==> class1.cj:83:3:
    | 
-75 |  class Base1 {  
+81 |  class Base1 {  
    |              ~ to match this opening '{'
-76 |      public   mut  prop d:Int64 {
-77 |  } 
+82 |      public   mut  prop d:Int64 {
+83 |  } 
    |   ^ expected '}' here
    | 
 
 17 errors generated, 17 errors printed.
 */
-
-// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
-// This source file is part of the Cangjie project, licensed under Apache-2.0
-// with Runtime Library Exception.
-//
-// See https://cangjie-lang.cn/pages/LICENSE for license information.

@@ -32,14 +32,14 @@ class B<T, V> <: I1<T> & I2<V> {
 }
 
 /* SCAN
-error: interface function 'foo' must be implemented in 'J'
+error: interface function 'foo(): Int64' must be implemented in 'J'
   ==> generic_inheritance_nongeneric_funcParameters_1.cj:24:1:
    | 
 24 | interface J<T, V> <: I1<T> & I2<V> {}
    | ^ 
    | 
 
-error: interface function 'foo' must be implemented in 'B'
+error: interface function 'foo(): Int64' must be implemented in 'B'
   ==> generic_inheritance_nongeneric_funcParameters_1.cj:26:1:
    | 
 26 | class B<T, V> <: I1<T> & I2<V> {

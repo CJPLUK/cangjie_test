@@ -17,5 +17,5 @@ b,b 31,Breakpoint 1
 AOT r,r,-> 31
 Android c,c,31
 CJVM c,c,
-AOT s,s,T, Int64
+AOT s,s,x1=0x.*, y1=6
 q,q,

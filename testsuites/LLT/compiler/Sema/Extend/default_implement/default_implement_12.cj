@@ -21,7 +21,7 @@ main() {
 }
 
 /* SCAN
-error: interface function 'foo' must be implemented in 'extend A'
+error: interface function 'foo(): ' must be implemented in 'extend A'
   ==> default_implement_12.cj:17:1:
    | 
 17 | extend A <: I1 & I2 {} // failed
