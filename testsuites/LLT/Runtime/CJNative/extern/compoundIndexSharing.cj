@@ -123,9 +123,9 @@ main() {
     b[next()]--
     check("both --", indexCalls == 1 && conversions == 2 && b.values == [11, 20])
     reset()
-    // The branches of the if are converted, so the if has type Extern<RT> and is shared after the conversion.
+    // Like any other index, an if is shared before the conversion, which each operator applies to the whole value.
     b[if (indexCalls >= 0) { next() } else { 0 }] += 1
-    check("both if", indexCalls == 1 && conversions == 1 && b.values == [12, 20])
+    check("both if", indexCalls == 1 && conversions == 2 && b.values == [12, 20])
     // An explicit conversion is part of the shared index.
     reset()
     b[RT.toExtern(next())] += 1
