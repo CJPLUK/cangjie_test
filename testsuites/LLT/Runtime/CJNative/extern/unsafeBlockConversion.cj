@@ -7,8 +7,8 @@
 // EXEC-0: %compiler %cmp_opt %f -o %output
 // RUN-EXEC: %run %run_opt %output %run_args
 
-// A block is never converted as a whole, only its value is. So the value of an unsafe block is converted within that
-// block, where the unsafe toExtern function of the runtime may be called, wherever Extern<T> is expected.
+// The unsafe toExtern function of the runtime may be called wherever Extern<T> is expected within an unsafe block or an
+// unsafe function.
 
 var conversions = 0
 
@@ -29,16 +29,26 @@ class RT <: ForeignRuntime<RT> {
     }
 }
 
-func body(): Extern<RT> {
-    unsafe { 1 }
+class Both {
+    let values = [10, 20]
+    operator func [](index: Extern<RT>): Int64 {
+        values[RT.fromExtern<Int64>(index)]
+    }
+    operator func [](index: Extern<RT>, value!: Int64): Unit {
+        values[RT.fromExtern<Int64>(index)] = value
+    }
 }
 
-func returned(): Extern<RT> {
-    return unsafe { 2 }
+unsafe func body(): Extern<RT> {
+    1
+}
+
+unsafe func returned(): Extern<RT> {
+    return 2
 }
 
 func lambdaResult(): () -> Extern<RT> {
-    { => unsafe { 3 } }
+    unsafe { { => 3 } }
 }
 
 func argument(e: Extern<RT>): Extern<RT> {
@@ -53,28 +63,36 @@ func check(name: String, e: Extern<RT>, expected: Int64, expectedConversions: In
 }
 
 main() {
-    let initialized: Extern<RT> = unsafe { 0 }
-    check("initializer", initialized, 0, 1)
-    check("function body", body(), 1, 1)
-    check("return", returned(), 2, 1)
-    check("lambda body", lambdaResult()(), 3, 1)
-    var assigned = initialized
-    assigned = unsafe { 4 }
-    check("assignment", assigned, 4, 1)
-    check("argument", argument(unsafe { 5 }), 5, 1)
-    let nested: Extern<RT> = unsafe { unsafe { 6 } }
-    check("nested unsafe blocks", nested, 6, 1)
-    let branch: Extern<RT> = unsafe { if (initialized is Extern<RT>) { 7 } else { 0 } }
-    check("branch in unsafe block", branch, 7, 1)
-    let statements: Extern<RT> = unsafe {
-        let x = 4
-        x * 2
+    let initialized: Extern<RT> = unsafe { RT.toExtern(0) }
+    check("explicit conversion", initialized, 0, 1)
+    unsafe {
+        let declared: Extern<RT> = 1
+        check("initializer", declared, 1, 1)
+        check("function body", body(), 1, 1)
+        check("return", returned(), 2, 1)
+        check("lambda body", lambdaResult()(), 3, 1)
+        var assigned = initialized
+        assigned = 4
+        check("assignment", assigned, 4, 1)
+        check("argument", argument(5), 5, 1)
+        let block: Extern<RT> = unsafe { 6 }
+        check("unsafe block", block, 6, 1)
+        let parenthesized: Extern<RT> = (unsafe { 7 })
+        check("parenthesized unsafe block", parenthesized, 7, 1)
+        let branch: Extern<RT> = if (initialized is Extern<RT>) { 8 } else { 0 }
+        check("if", branch, 8, 1)
+        let elements: Array<Extern<RT>> = [9, 10]
+        check("array elements", elements[1], 10, 2)
+        let tuple: (Extern<RT>, Int64) = (11, 0)
+        check("tuple element", tuple[0], 11, 1)
+        let b = Both()
+        b[0] += 1
+        b[(unsafe { 1 })]++
+        if (b.values != [11, 21] || conversions != 4) {
+            throw Exception("shared index: values=${b.values}, conversions=${conversions}")
+        }
+        conversions = 0
     }
-    check("statements before the value", statements, 8, 1)
-    let elements: Array<Extern<RT>> = [unsafe { 9 }, unsafe { 10 }]
-    check("array elements", elements[1], 10, 2)
-    let tuple: (Extern<RT>, Int64) = (unsafe { 11 }, 0)
-    check("tuple element", tuple[0], 11, 1)
     let noConversion: Extern<RT> = unsafe { initialized }
     check("Extern value", noConversion, 0, 0)
     0

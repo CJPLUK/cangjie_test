@@ -7,9 +7,9 @@
 // EXEC-0: %compiler %cmp_opt %f -o %output
 // RUN-EXEC: %run %run_opt %output %run_args
 
-// In c[i] op= v, c[i]++ and c[i]--, an index that is an if, a try, a match or a parenthesized expression is evaluated
-// once and shared before any conversion, like any other index. Each operator that takes Extern<T> converts the whole
-// shared value, whichever of the getter and the setter it is.
+// In c[i] op= v, c[i]++ and c[i]--, an index that is an if, a try, a match, a block or a parenthesized expression is
+// evaluated once and shared before any conversion, like any other index. Each operator that takes Extern<T> converts
+// the whole shared value, whichever of the getter and the setter it is.
 
 var indexCalls = 0
 var conversions = 0
@@ -88,8 +88,12 @@ main() {
     check("getter match", g.values == [10, 23], 1)
     g[(one())] += 1
     check("getter paren", g.values == [10, 24], 1)
+    g[unsafe { one() }] += 1
+    check("getter block", g.values == [10, 25], 1)
+    g[(unsafe { one() })] += 1
+    check("getter paren block", g.values == [10, 26], 1)
     g[if (flag) { one() } else { 0 }]++
-    check("getter ++", g.values == [10, 25], 1)
+    check("getter ++", g.values == [10, 27], 1)
 
     let s = SetterExtern()
     s[if (flag) { one() } else { 0 }] += 1
@@ -102,5 +106,9 @@ main() {
     let b = Both()
     b[if (flag) { one() } else { 0 }] += 1
     check("both if", b.values == [10, 21], 2)
+    b[(one())] += 1
+    check("both paren", b.values == [10, 22], 2)
+    b[unsafe { one() }] += 1
+    check("both block", b.values == [10, 23], 2)
     0
 }
