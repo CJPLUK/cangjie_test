@@ -183,7 +183,7 @@ func classify(n: Int64): Extern<RT> {
     if (n < 0) {
         return "negative"
     } else if (n == 0) {
-        "zero"
+        return "zero"
     } else if (n < 10) {
         match (n % 2) {
             case 0 => n

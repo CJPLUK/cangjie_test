@@ -63,7 +63,7 @@ func tuple(x!: (Extern<DummyRT>, Int64) = ("one", 2)): String {
     DummyRT.fromExtern<String>(x[0])
 }
 
-func branch(c: Bool, x!: Extern<DummyRT> = if (c) { 1 } else { "no" }): String {
+func branch(c: Bool, x!: Extern<DummyRT> = if (c) { "yes" } else { "no" }): String {
     DummyRT.fromExtern<String>(x)
 }
 

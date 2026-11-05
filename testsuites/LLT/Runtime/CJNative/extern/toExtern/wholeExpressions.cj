@@ -118,12 +118,12 @@ main() {
     expectConverted(["Int64"], "synchronized")
     check(DummyRT.fromExtern<Int64>(sync) == 5, "synchronized")
 
-    // unsafe blocks and if-let are a block and an if: their values are converted, not the whole expression.
+    // unsafe blocks and if-let are converted as a whole, like any other expression.
     let u: Extern<DummyRT> = unsafe { 6 }
     expectConverted(["Int64"], "unsafe block")
     check(DummyRT.fromExtern<Int64>(u) == 6, "unsafe block")
 
-    let ifLet: Extern<DummyRT> = if (let Some(v) <- o) { v } else { "none" }
+    let ifLet: Extern<DummyRT> = if (let Some(v) <- o) { v } else { 0 }
     expectConverted(["Int64"], "if-let")
     check(DummyRT.fromExtern<Int64>(ifLet) == 4, "if-let")
 
