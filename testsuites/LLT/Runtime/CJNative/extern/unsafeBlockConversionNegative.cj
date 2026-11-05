@@ -5,12 +5,11 @@
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
 // RUN-EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>&1 | compare %f
-// ASSERT: scan-3 unsafe function or native function should be invoked in unsafe context.
+// ASSERT: scan-8 unsafe function or native function should be invoked in unsafe context.
 // ASSERT: scan-not Assertion
 
-// The value of an unsafe block is converted within that block, but a value produced outside any unsafe block is
-// still converted outside it, so the unsafe toExtern function of the runtime cannot be called. Each conversion
-// outside an unsafe block is reported once.
+// The unsafe toExtern function of the runtime cannot be called outside an unsafe block or an unsafe function, also when
+// the converted expression is itself an unsafe block. Each conversion outside an unsafe context is reported once.
 
 class RT <: ForeignRuntime<RT> {
     public static func memberAccess(e: Extern<RT>, name: String): Extern<RT> { throw Exception() }
@@ -22,11 +21,21 @@ class RT <: ForeignRuntime<RT> {
     public unsafe static func toExtern<R>(value: R): Extern<RT> { Extern<RT>(value) }
 }
 
+func body(): Extern<RT> {
+    unsafe { 1 }                                                    // The unsafe block is converted.
+}
+
+func argument(e: Extern<RT>): Extern<RT> {
+    e
+}
+
 main() {
     let c = true
-    let a: Extern<RT> = unsafe { 1 }                                // OK, converted within the unsafe block.
-    let b: Extern<RT> = if (c) { unsafe { 2 } } else { 3 }          // Only 3 is converted outside an unsafe block.
-    let d: Array<Extern<RT>> = [unsafe { 4 }, 5]                    // Only 5 is converted outside an unsafe block.
-    let e: Extern<RT> = 6                                           // Converted outside an unsafe block.
+    let a: Extern<RT> = unsafe { 2 }                                // The unsafe block is converted.
+    let p: Extern<RT> = (unsafe { 3 })                              // The parenthesized expression is converted.
+    let b: Extern<RT> = if (c) { unsafe { 4 } } else { 5 }          // The if is converted.
+    let d: Array<Extern<RT>> = [unsafe { 6 }, 7]                    // Each element is converted.
+    let e = argument(unsafe { 8 })                                  // The unsafe block is converted.
+    let f: Extern<RT> = 9                                           // 9 is converted.
     0
 }
