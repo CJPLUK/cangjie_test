@@ -47,6 +47,7 @@ func clientConfig(): TlsClientConfig {
     var tlsConfig = TlsClientConfig()
     let pem = String.fromUtf8(readToEnd(File("data/root_rsa.cer", Read)))
     tlsConfig.verifyMode = CustomCA(X509Certificate.decodeFromPem(pem).map({c => c}))
+    tlsConfig.serverName = "oss.PMS.com"
     tlsConfig.supportedAlpnProtocols = ["http/1.1"]
     tlsConfig
 }
