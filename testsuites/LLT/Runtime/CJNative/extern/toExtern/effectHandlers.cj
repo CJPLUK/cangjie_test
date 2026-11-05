@@ -79,10 +79,10 @@ main() {
         perform Stop()
         2
     } handle (_: Stop) {
-        "handler"
+        3
     }
     expectConversions(1, "handler value")
-    check(DummyRT.fromExtern<String>(early) == "handler", "handler value")
+    check(DummyRT.fromExtern<Int64>(early) == 3, "handler value")
 
     check(DummyRT.fromExtern<Int64>(body()) == 42, "function body")
     expectConversions(1, "function body")
@@ -109,7 +109,7 @@ main() {
 
     let inArray: Array<Extern<DummyRT>> = [try {
         perform Stop()
-        3
+        "body"
     } handle (_: Stop) {
         "element"
     }]
