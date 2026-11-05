@@ -1,0 +1,40 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+# This source file is part of the Cangjie project, licensed under Apache-2.0
+# with Runtime Library Exception.
+#
+# See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+[package]
+  cjc-version = "1.2.0"
+  name = "pkg_lib_2"
+  organization = ""
+  description = "multi-word description with spaces, commas, and 123 数字"
+  version = "4.4.8"
+  target-dir = "artifacts"
+  script-dir = "custom_target"
+  output-type = "static"
+  compile-option = "-Woff=all"
+  override-compile-option = ""
+  link-option = ""
+
+[package.package-configuration."pkg_lib_2"]
+  combine-all-deps = false
+
+[profile.build]
+  lto = "thin"
+  cjc-jobs = 15
+
+[profile.customized-option]
+  cfg0 = "-O1"
+  cfg1 = "-O0"
+
+[dependencies]
+  pkg_lib_0 = { path = "../pkg_lib_0" }
+  pkg_macro_0 = { path = "../pkg_macro_0" }
+  pkg_macro_1 = { path = "../pkg_macro_1" }
+  pkg_lib_3 = { path = "../pkg_lib_3" }
+  pkg_tf_0 = { path = "../pkg_tf_0" }
+
+[test-dependencies]
+  pkg_lib_3 = { path = "../pkg_lib_3" }
+
