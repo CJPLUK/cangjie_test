@@ -1,0 +1,43 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ * 
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+ 
+// DEPENDENCE: test.toml test.h
+// EXEC: ObjCInteropGen test.toml
+// EXEC: %cat test.cj | compare %f
+/* SCAN-IN
+@ObjC
+public open foreign class NSObject {
+}
+
+@ObjC
+public open foreign class M1 <: NSObject {
+    @ForeignName["toString"] protected var toString_: Int32
+}
+
+@ObjC
+public open foreign class M2 <: NSObject {
+    @ForeignName["toString"] public open mut prop toString_: Int32
+}
+
+@ObjC
+public open foreign class M3 <: NSObject {
+    @ForeignName["toString"] public open func toString_(): Int32
+}
+
+@ObjC
+public open foreign class M4 <: NSObject {
+    @ForeignName["toString"] protected var toString_: Int32
+    @ForeignName["toString"] public open mut prop toString__: Int32
+}
+
+@ObjC
+public open foreign class N {
+    @ForeignName["toString"] protected var toStringVar: Int32
+    public open mut prop toString: Int32
+}
+*/
