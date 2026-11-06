@@ -6,7 +6,7 @@
 
 // RUN-EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>&1 | compare %f
 // ASSERT: scan-2 unable to infer generic argument of this function
-// ASSERT: scan of type 'Tuple<Int64, Struct-String>', should match parameter type 'Tuple<Int64, Generics-T>'
+// ASSERT: scan of type 'Tuple<Int64, Struct-String>', should match parameter type 'Tuple<Struct-Extern<Class-RT>, Generics-T>'
 // ASSERT: scan expected 'Tuple<Struct-Extern<Class-RT>, Int64>', found 'Tuple<Int64, Int64>'
 // ASSERT: scan expected 'Struct-Array<Tuple<Int64, Struct-Extern<Class-RT>>>', found 'Struct-Array<Tuple<Int64, Int64>>'
 // ASSERT: scan expected '() -> Tuple<Struct-Extern<Class-RT>, Int64>', found '() -> Tuple<Int64, Int64>'

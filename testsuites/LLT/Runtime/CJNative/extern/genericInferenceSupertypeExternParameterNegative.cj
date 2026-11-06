@@ -6,9 +6,9 @@
 
 // RUN-EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>&1 | compare %f
 // ASSERT: scan-2 unable to infer generic argument of this function
-// ASSERT: scan of type 'Struct-Array<Tuple<Int64, Struct-String>>', should match parameter type 'Interface-Collection<Tuple<Int64, Generics-T>>'
+// ASSERT: scan of type 'Struct-Array<Tuple<Int64, Struct-String>>', should match parameter type 'Interface-Collection<Tuple<Struct-Extern<Class-RT>, Generics-T>>'
 // ASSERT: scan expected 'Interface-Collection<Tuple<Struct-Extern<Class-RT>, Int64>>', found 'Struct-Array<Tuple<Int64, Int64>>'
-// ASSERT: scan of type 'Tuple<Int64, Struct-String>', should match parameter type 'Enum-Option<Tuple<Int64, Generics-T>>'
+// ASSERT: scan of type 'Tuple<Int64, Struct-String>', should match parameter type 'Enum-Option<Tuple<Struct-Extern<Class-RT>, Generics-T>>'
 // ASSERT: scan-not Assertion
 
 // In a parameter type mixing Extern<T> and type variables, a literal whose type is a subtype of it only has the parts
