@@ -4,11 +4,9 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (DEBUG_OPTION)EXEC-PIPE-0: %compiler %enableO2 %debugCHIROpt %cmp_opt %n.cj -o %output | compare %f
-// (DEBUG_OPTION)RUN-EXEC-PIPE-0: %run %output
-// ASSERT: scan [UnitUnify] unit unify at [20,17].
-// ASSERT: scan-not core dumped
-// ASSERT: scan-not stack trace
+// DEPENDENCE: ../pick_defination.py
+// EXEC: %frontendCompiler %enableO2 %dumpCHIRDebug -Woff all %f -o unit-unify.out
+// EXEC: %python pick_defination.py unit-unify_CHIR/[0-9]*_Unit_Unify.chirtxt "Func @_CN7default6<main>Hv" | compare %f
 
 class A <: Exception {}
 
@@ -18,10 +16,20 @@ main():Int64 {
         throw A();
     } catch (e : A) {
         let a = e.printStackTrace()
-        let x = a
+        var x = a
     } finally {
         print("finally one.\n")
     }
     print("success.\n")
     return a-1
 }
+
+// ASSERT: scan-1 = Constant(unit)
+// ASSERT: regex-1 = TryApply\(.*15printStackTraceHv,
+// ASSERT: regex-3 = Apply\(@_CNat5printHRNat6StringEb,
+// ASSERT: regex-begin ^Block #0:
+// ASSERT: regex-next ^\s*%(?P<unit>\d+): Unit = Constant\(unit\)
+// ASSERT: regex-after %\d+: Unit = TryApply\(.*15printStackTraceHv, %\d+, normal: #(?P<success>\d+), exception: #\d+\)
+// ASSERT: regex-after ^Block #(?P=success):
+// ASSERT: regex-after %(?P<x>\d+)\[x\]: Unit& = Allocate\(Unit\)
+// ASSERT: regex-after Unit = Store\(%(?P=unit), %(?P=x)\)

@@ -130,7 +130,7 @@ bool* __cj_sancov_bool_flag_ctor(uint64_t n)
 
  void __cj_sancov_update_stack_depth()
 {
-    register void* sp = __builtin_frame_address(0);
+    void* sp = __builtin_frame_address(0);
     if (sp < __sancov_lowest_stack) {
         __sancov_lowest_stack = sp;
     }

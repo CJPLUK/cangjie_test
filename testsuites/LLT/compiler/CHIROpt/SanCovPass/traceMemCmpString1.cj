@@ -4,20 +4,9 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// DEPENDENCE: sancov.h sancov.cpp
-// (CJNATIVE and DEBUG_OPTION) EXEC: %clang++ -c -fPIC %stdc++_opt sancov.cpp -o sancov.o
-// (CJNATIVE and DEBUG_OPTION) EXEC: %compiler %debugCHIROpt --sanitizer-coverage-trace-memcmp sancov.o %n.cj -o %output  2>&1 | compare %f
-// (not CJNATIVE and DEBUG_OPTION) EXEC: %clang++ -shared -fPIC %stdc++_opt sancov.cpp -o libsancov.so
-// (not CJNATIVE and DEBUG_OPTION) EXEC: %compiler %debugCHIROpt --sanitizer-coverage-trace-memcmp -o %n.%suffix %n.cj -lsancov 2>&1 | compare %f
-
-// ASSERT: scan [SanitizerCoverage] Add trace Memory Compare at [23,9].
-// ASSERT: scan [SanitizerCoverage] Add trace Memory Compare at [26,9].
-// ASSERT: scan [SanitizerCoverage] Add trace Memory Compare at [29,9].
-// ASSERT: scan [SanitizerCoverage] Add trace Memory Compare at [32,9].
-// ASSERT: scan [SanitizerCoverage] Add trace Memory Compare at [35,9].
-// ASSERT: scan [SanitizerCoverage] Add trace Memory Compare at [35,9].
-// ASSERT: scan [SanitizerCoverage] Add trace Memory Compare at [38,9].
-// ASSERT: scan-not error
+// DEPENDENCE: ../pick_defination.py
+// EXEC: %frontendCompiler %dumpCHIRDebug --sanitizer-coverage-trace-memcmp -Woff all %f -o sancov.out
+// EXEC: %python pick_defination.py sancov_CHIR/[0-9]*_Sanitizer_Coverage.chirtxt WHOLE | compare %f
 
 func f1(s1: String, s2: String, s3: String): String {
     if (s1 == "test") {
@@ -45,3 +34,35 @@ main() {
     f1("test", "test", "test")
     0
 }
+
+// ASSERT: regex-7 = Apply\(@__cj_sanitizer_weak_hook_memcmp[,)]
+// ASSERT: regex-begin Func @_CN7default2f1
+// ASSERT: regex-after %(?P<s1>\d+)\[s1\]:
+// ASSERT: regex-after %(?P<literal>\d+): Struct-\S+ = Constant\("test"\)
+// ASSERT: regex-after %(?P<straarray>\d+): RawArray<UInt8>& = Field\(%(?P=s1), 0\)
+// ASSERT: regex-after %(?P<straoffset>\d+): UInt32 = Field\(%(?P=s1), 1\)
+// ASSERT: regex-after %(?P<stracast>\d+): Int64 = NumericCast\(%(?P=straoffset)\)
+// ASSERT: regex-after %(?P<straraw>\d+): CPointer<UInt8> = Intrinsic\(acquireRawData<UInt8>, %(?P=straarray)\)
+// ASSERT: regex-after %(?P<straptr>\d+): CPointer<UInt8> = Intrinsic\(addPointer<UInt8>, %(?P=straraw), %(?P=stracast)\)
+// ASSERT: regex-after %(?P<strbarray>\d+): RawArray<UInt8>& = Field\(%(?P=literal), 0\)
+// ASSERT: regex-after %(?P<strboffset>\d+): UInt32 = Field\(%(?P=literal), 1\)
+// ASSERT: regex-after %(?P<strbcast>\d+): Int64 = NumericCast\(%(?P=strboffset)\)
+// ASSERT: regex-after %(?P<strbraw>\d+): CPointer<UInt8> = Intrinsic\(acquireRawData<UInt8>, %(?P=strbarray)\)
+// ASSERT: regex-after %(?P<strbptr>\d+): CPointer<UInt8> = Intrinsic\(addPointer<UInt8>, %(?P=strbraw), %(?P=strbcast)\)
+// ASSERT: regex-after %(?P<strleft>\d+): CPointer<Void> = Intrinsic\(pointerInit1, %(?P=straptr)\)
+// ASSERT: regex-after %(?P<strright>\d+): CPointer<Void> = Intrinsic\(pointerInit1, %(?P=strbptr)\)
+// ASSERT: regex-after %(?P<length>\d+): UInt32 = Field\(%(?P=s1), 2\)
+// ASSERT: regex-after Unit = Apply\(@__cj_sanitizer_weak_hook_memcmp, %(?P=strleft), %(?P=strright), %(?P=length)\)
+// ASSERT: regex-after Bool = Apply\(.*Stringeq\w*, %(?P=s1), %(?P=literal)\)
+// ASSERT: regex-after Unit = Apply\(@__cj_sanitizer_weak_hook_memcmp, %\d+, %\d+, %\d+\)
+// ASSERT: regex-after = Apply\(.*startsWith\w*,
+// ASSERT: regex-after Unit = Apply\(@__cj_sanitizer_weak_hook_memcmp, %\d+, %\d+, %\d+\)
+// ASSERT: regex-after = Apply\(.*endsWith\w*,
+// ASSERT: regex-after Unit = Apply\(@__cj_sanitizer_weak_hook_memcmp, %\d+, %\d+, %\d+\)
+// ASSERT: regex-after = Apply\(.*indexOf\w*,
+// ASSERT: regex-after Unit = Apply\(@__cj_sanitizer_weak_hook_memcmp, %\d+, %\d+, %\d+\)
+// ASSERT: regex-after = Apply\(.*replace\w*,
+// ASSERT: regex-after Unit = Apply\(@__cj_sanitizer_weak_hook_memcmp, %\d+, %\d+, %\d+\)
+// ASSERT: regex-after = Apply\(.*Stringeq\w*,
+// ASSERT: regex-after Unit = Apply\(@__cj_sanitizer_weak_hook_memcmp, %\d+, %\d+, %\d+\)
+// ASSERT: regex-after = Apply\(.*contains\w*,
