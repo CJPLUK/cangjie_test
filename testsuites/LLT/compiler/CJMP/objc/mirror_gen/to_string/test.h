@@ -6,32 +6,61 @@
  * See https://cangjie-lang.cn/pages/LICENSE for license information.
  */
 
-@interface NSObject
+@interface NSString
 @end
 
-@interface M1 : NSObject {
+@interface M1 {
   int toString;
 }
 @end
 
-@interface M2 : NSObject
+@interface M2
 @property int toString;
 @end
 
-@interface M3 : NSObject
--(int)toString;
+@interface M3
+- (int)toString;
+- (int)toString: (int)x;
 @end
 
-@interface M4 : NSObject {
+@interface M4 {
   int toString;
 }
 @property int toString;
--(int)toString;
+- (int)toString;
+- (int)toString: (int)x;
 @end
 
-@interface N {
-  int toString;
-}
-@property int toString;
--(int)toString;
+@interface M5
+- (int)toString;
+- (int)toString_;
 @end
+
+@interface N1 {
+  NSString* toString;
+}
+@end
+
+@interface N2
+@property NSString* toString;
+@end
+
+@interface N3
+-(NSString*)toString;
+-(NSString*)toString: (int)x;
+@end
+
+@interface N4 {
+  NSString* toString;
+}
+@property NSString* toString;
+-(NSString*)toString;
+-(NSString*)toString: (int)x;
+@end
+
+@interface N5
+- (NSString*)toString;
+- (NSString*)toNSString;
+- (NSString*)toNSString_;
+@end
+

@@ -11,33 +11,65 @@
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
 @ObjC
-public open foreign class NSObject {
+public open foreign class NSString {
 }
 
 @ObjC
-public open foreign class M1 <: NSObject {
-    @ForeignName["toString"] protected var toString_: Int32
-}
-
-@ObjC
-public open foreign class M2 <: NSObject {
-    @ForeignName["toString"] public open mut prop toString_: Int32
-}
-
-@ObjC
-public open foreign class M3 <: NSObject {
-    @ForeignName["toString"] public open func toString_(): Int32
-}
-
-@ObjC
-public open foreign class M4 <: NSObject {
-    @ForeignName["toString"] protected var toString_: Int32
-    @ForeignName["toString"] public open mut prop toString__: Int32
-}
-
-@ObjC
-public open foreign class N {
+public open foreign class M1 {
     @ForeignName["toString"] protected var toStringVar: Int32
-    public open mut prop toString: Int32
+}
+
+@ObjC
+public open foreign class M2 {
+    @ForeignName["toString"] public open mut prop toStringProp: Int32
+}
+
+@ObjC
+public open foreign class M3 {
+    @ForeignName["toString"] public open func toString_(): Int32
+    @ForeignName["toString:"] public open func toString(x: Int32): Int32
+}
+
+@ObjC
+public open foreign class M4 {
+    @ForeignName["toString"] protected var toStringVar: Int32
+    @ForeignName["toString"] public open mut prop toStringProp: Int32
+    @ForeignName["toString:"] public open func toString(x: Int32): Int32
+}
+
+@ObjC
+public open foreign class M5 {
+    @ForeignName["toString"] public open func toString__(): Int32
+    public open func toString_(): Int32
+}
+
+@ObjC
+public open foreign class N1 {
+    @ForeignName["toString"] protected var toNSString: ?NSString
+}
+
+@ObjC
+public open foreign class N2 {
+    @ForeignName["toString"] public open mut prop toNSString: ?NSString
+}
+
+@ObjC
+public open foreign class N3 {
+    @ForeignName["toString"] public open func toNSString(): ?NSString
+    @ForeignName["toString:"] public open func toString(x: Int32): ?NSString
+}
+
+@ObjC
+public open foreign class N4 {
+    @ForeignName["toString"] protected var toNSString: ?NSString
+    @ForeignName["toString"] public open mut prop toNSString_: ?NSString
+    @ForeignName["toString:"] public open func toString(x: Int32): ?NSString
+}
+
+@ObjC
+public open foreign class N5 {
+    @ForeignName["toString"] public open func toNSString__(): ?NSString
+    public open func toNSString(): ?NSString
+    public open func toNSString_(): ?NSString
 }
 */
