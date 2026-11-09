@@ -28,18 +28,15 @@ main() {
     return 0
 }
 
-// The 2026-10-23 compiler change (fix: exclave init check) settles the lambda
-// parameter inference: with two map-like candidates still in the sum the
-// parameter stays ambiguous and the diagnostic is the same as in the sibling
-// guards (lambda_param_sum_keep_01/02/03). The earlier `mismatched types` at
-// `f(h)` is no longer reachable, so the case pins the current text instead.
+// With the current map overloads, inference selects TreeMap<String, Int64>.
+// Passing a HashMap then reports a type mismatch at the call site.
 
 /* SCAN
-error: parameters of this lambda expression must have type annotations
-  ==> lambda_param_sum_keep_04.cj:17:14:
+error: mismatched types
+  ==> lambda_param_sum_keep_04.cj:22:7:
    | 
-17 |     let f = {m =>
-   |              ^ 
+22 |     f(h)
+   |       ^ expected 'Class-TreeMap<Struct-String, Int64>', found 'Class-HashMap<Struct-String, Int64>'
    | 
 
 1 error generated, 1 error printed.
