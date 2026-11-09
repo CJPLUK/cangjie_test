@@ -1,0 +1,12 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: x17_macro_doxygen_comment_dropped.h
+// EXEC: %hle_c --module-name="my_module" -i x17_macro_doxygen_comment_dropped.h -o . --clang-args=""
+// EXEC-PIPE: %cat x17_macro_doxygen_comment_dropped.cj | compare %f
+// ASSERT: scan public const X17_MACRO: Int64 = 17
+// ASSERT: scan-not X17: doxygen block before macro

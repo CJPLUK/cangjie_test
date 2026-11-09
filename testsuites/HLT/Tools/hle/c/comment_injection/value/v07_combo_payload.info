@@ -1,0 +1,12 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 0
+// DEPENDENCE: v07_combo_payload.h
+// EXEC: %hle_c --module-name="my_module" -i v07_combo_payload.h -o . --clang-args=""
+// EXEC-PIPE: %cat v07_combo_payload.cj | compare %f
+// ASSERT: scan // String value: a\\nb *\/ c /\* d
+// ASSERT: scan public const V7ComboStr: VArray<UInt8, $14>

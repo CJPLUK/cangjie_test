@@ -1,0 +1,11 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: s06_numeric_enum_value.d.ts
+// EXEC: %hle_arkts -i s06_numeric_enum_value.d.ts -o . --module-name="my_module"
+// EXEC-PIPE: %cat cj/s06_numeric_enum_value/src/s06_numeric_enum_value.cj | compare %f
+// ASSERT: scan case EvilNumeric => 1

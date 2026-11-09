@@ -1,0 +1,11 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: v12_array_init_list.h
+// EXEC: %hle_c --module-name="my_module" -i v12_array_init_list.h -o . --clang-args=""
+// EXEC-PIPE: %cat v12_array_init_list.cj | compare %f
+// ASSERT: scan /* int V12Array [ 3 ] = { 1 , 2 , 3 } */

@@ -1,0 +1,12 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: x10_enum_trailing_line.h
+// EXEC: %hle_c --module-name="my_module" -i x10_enum_trailing_line.h -o . --clang-args=""
+// EXEC-PIPE: %cat x10_enum_trailing_line.cj | compare %f
+// ASSERT: scan //!< X10: trailing doxygen line after member, payload */
+// ASSERT: scan public const XEnum_X10_B: XEnum = 0

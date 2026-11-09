@@ -1,0 +1,14 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 0
+// DEPENDENCE: m01_multi_line_join_escape.d.ts
+// EXEC: %hle_arkts -i m01_multi_line_join_escape.d.ts -o . --module-name="my_module"
+// EXEC-PIPE: %cat cj/m01_multi_line_join_escape/src/m01_multi_line_join_escape.cj | compare %f
+// ASSERT: scan // M1: first line comment with *\/ payload
+// ASSERT: scan // M1: second line comment with /\* payload
+// ASSERT: scan public const M1MultiLineNoInit = 0/* FIXME: Initialization is required */
+// ASSERT: scan-not first line comment with */ payload

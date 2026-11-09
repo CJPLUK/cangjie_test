@@ -1,0 +1,13 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 0
+// DEPENDENCE: d18_member_mis_attach.h
+// EXEC: %hle_c --module-name="my_module" -i d18_member_mis_attach.h -o . --clang-args=""
+// EXEC-PIPE: %cat d18_member_mis_attach.cj | compare %f
+// ASSERT: scan-2 // D18: source member doxygen line, payload */
+// ASSERT: scan public const D14Enum_D18_A: D14Enum = 0
+// ASSERT: scan public const D14Enum_D18_B: D14Enum = 1

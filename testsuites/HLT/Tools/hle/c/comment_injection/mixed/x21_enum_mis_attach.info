@@ -1,0 +1,13 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 0
+// DEPENDENCE: x21_enum_mis_attach.h
+// EXEC: %hle_c --module-name="my_module" -i x21_enum_mis_attach.h -o . --clang-args=""
+// EXEC-PIPE: %cat x21_enum_mis_attach.cj | compare %f
+// ASSERT: scan-2 // X21: member A doxygen line comment, payload */
+// ASSERT: scan public const XMisEnum_X21_A: XMisEnum = 0
+// ASSERT: scan public const XMisEnum_X21_B: XMisEnum = 1

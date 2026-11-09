@@ -1,0 +1,12 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: t09_function_tuple_payload.d.ts
+// EXEC: %hle_arkts -i t09_function_tuple_payload.d.ts -o . --module-name="my_module"
+// EXEC-PIPE: %cat cj/t09_function_tuple_payload/src/t09_function_tuple_payload.cj | compare %f
+// ASSERT: scan @brief t9TupleFunc(p: ["*\/t9_param/\*"]): ["*\/t9_return/\*"]
+// ASSERT: scan public func t9TupleFunc(p: (JSValue/* FIXME:

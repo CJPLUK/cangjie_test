@@ -1,0 +1,14 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: t10_trailing_comment_leading.d.ts
+// EXEC: %hle_arkts -i t10_trailing_comment_leading.d.ts -o . --module-name="my_module"
+// EXEC-PIPE: %cat cj/t10_trailing_comment_leading/src/t10_trailing_comment_leading.cj | compare %f
+// ASSERT: scan public type T10Alias = JSValue/* FIXME:
+// ASSERT: scan "*\/t10_alias/\*"
+// ASSERT: scan // T10: trailing comment becomes leading comment of next declaration with *\/ payload
+// ASSERT: scan public const T10ConstNoInit = 0/* FIXME: Initialization is required */

@@ -1,0 +1,12 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: d16_enum_member_block_doc.h
+// EXEC: %hle_c --module-name="my_module" -i d16_enum_member_block_doc.h -o . --clang-args=""
+// EXEC-PIPE: %cat d16_enum_member_block_doc.cj | compare %f
+// ASSERT: scan // D16: enum member preceding doxygen block, payload /*
+// ASSERT: scan public const D14Enum_D16_B: D14Enum = 0

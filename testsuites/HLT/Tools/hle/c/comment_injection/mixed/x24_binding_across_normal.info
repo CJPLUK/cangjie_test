@@ -1,0 +1,13 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 0
+// DEPENDENCE: x24_binding_across_normal.h
+// EXEC: %hle_c --module-name="my_module" -i x24_binding_across_normal.h -o . --clang-args=""
+// EXEC-PIPE: %cat x24_binding_across_normal.cj | compare %f
+// ASSERT: scan // X24: doxygen block binding across normal comment, payload /*
+// ASSERT: scan foreign func x24_func(a: Int32): Int32
+// ASSERT: scan-not X24: normal line comment between doxygen and declaration
