@@ -1,0 +1,75 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ * 
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+ 
+// DEPENDENCE: test.toml test.h
+// EXEC: ObjCInteropGen test.toml
+// EXEC: %cat test.cj | compare %f
+/* SCAN-IN
+@ObjC
+public open foreign class NSString {
+}
+
+@ObjC
+public open foreign class M1 {
+    @ForeignName["toString"] protected var toStringVar: Int32
+}
+
+@ObjC
+public open foreign class M2 {
+    @ForeignName["toString"] public open mut prop toStringProp: Int32
+}
+
+@ObjC
+public open foreign class M3 {
+    @ForeignName["toString"] public open func toString_(): Int32
+    @ForeignName["toString:"] public open func toString(x: Int32): Int32
+}
+
+@ObjC
+public open foreign class M4 {
+    @ForeignName["toString"] protected var toStringVar: Int32
+    @ForeignName["toString"] public open mut prop toStringProp: Int32
+    @ForeignName["toString:"] public open func toString(x: Int32): Int32
+}
+
+@ObjC
+public open foreign class M5 {
+    @ForeignName["toString"] public open func toString__(): Int32
+    public open func toString_(): Int32
+}
+
+@ObjC
+public open foreign class N1 {
+    @ForeignName["toString"] protected var toNSString: ?NSString
+}
+
+@ObjC
+public open foreign class N2 {
+    @ForeignName["toString"] public open mut prop toNSString: ?NSString
+}
+
+@ObjC
+public open foreign class N3 {
+    @ForeignName["toString"] public open func toNSString(): ?NSString
+    @ForeignName["toString:"] public open func toString(x: Int32): ?NSString
+}
+
+@ObjC
+public open foreign class N4 {
+    @ForeignName["toString"] protected var toNSString: ?NSString
+    @ForeignName["toString"] public open mut prop toNSString_: ?NSString
+    @ForeignName["toString:"] public open func toString(x: Int32): ?NSString
+}
+
+@ObjC
+public open foreign class N5 {
+    @ForeignName["toString"] public open func toNSString__(): ?NSString
+    public open func toNSString(): ?NSString
+    public open func toNSString_(): ?NSString
+}
+*/
