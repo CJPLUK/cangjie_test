@@ -13,7 +13,11 @@ package cmp
 
 public interface I1 { func f1(): Int64 }
 
-extend Int64 <: I1 { public func f1(): Int64 { 1 } }
+extend Int64 <: I1 {
+    private func helper1(): Int64 { 1 }
+    @Frozen
+    public func f1(): Int64 { helper1() }
+}
 
 public common func foo(): Int64
 
@@ -23,7 +27,11 @@ package cmp
 
 public interface I2 { func f2(): Int64 }
 
-extend Int64 <: I2 { public func f2(): Int64 { 20 } }
+extend Int64 <: I2 {
+    private func helper2(): Int64 { 20 }
+    @Frozen
+    public func f2(): Int64 { helper2() }
+}
 
 public specific func foo(): Int64 { 300 }
 
@@ -36,7 +44,11 @@ package cmp
 
 public interface I3 { func f3(): Int64 }
 
-extend Int64 <: I3 { public func f3(): Int64 { 4000 } }
+extend Int64 <: I3 {
+    private func helper3(): Int64 { 4000 }
+    @Frozen
+    public func f3(): Int64 { helper3() }
+}
 
 public specific func bar(): Int64 { 50000 }
 
