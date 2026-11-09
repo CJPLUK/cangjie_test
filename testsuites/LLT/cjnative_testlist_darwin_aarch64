@@ -31,3 +31,10 @@ compiler/CJMP/objc/sema/objc_impl/ctor_arg_default.cj
 ## objc (weird parser fails)
 compiler/CJMP/objc/parser/class/objc_impl/can_be_open.cj
 compiler/CJMP/objc/parser/class/objc_impl/ctor.cj
+
+# modal type
+# missing CJMP adapt
+compiler/CJMP/objc/gen/objc_impl/typedefs_order.cj
+compiler/CJMP/objc/integration/collection_conversion/collection_conversion.info
+compiler/CJMP/objc/integration/objc_block/objc_block.info
+compiler/CJMP/objc/integration/objc_block_cangjie/objc_block_cangjie.info

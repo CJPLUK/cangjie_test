@@ -11,7 +11,7 @@
 
 // DEPENDENCE: c p ../tools
 // EXEC-0: %compiler %cmp_opt --experimental c/c.cj --output-type=chir --output-dir ./c
-// EXEC: %python tools/cjo_mutate.py --patch-cjo c/cmp.cjo --set-cjo-version 0.2.0
+// EXEC: %python tools/cjo_mutate.py --patch-cjo c/cmp.cjo --set-cjo-version next-minor
 // EXEC-PIPE-1: %compiler %cmp_opt --experimental p/p.cj --common-part-chir=c/cmp.chir --common-part-cjo=c/cmp.cjo --output-type=dylib --output-dir ./p 2>&1 | compare %f
 // ASSERT: scan is incompatible: compiled with cjc
 // (Linux)EXEC: test ! -f ./p/libp.so

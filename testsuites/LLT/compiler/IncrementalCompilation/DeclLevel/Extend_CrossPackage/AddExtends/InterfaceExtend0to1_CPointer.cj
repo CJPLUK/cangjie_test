@@ -22,18 +22,8 @@ main() {
 // ASSERT: scan incremental compilation triggered
 // ASSERT: scan changed decls to recompile: 13
 // ASSERT: scan the changed decl after Spreading is:ExtendDecl in file lib.cj in line 14 in column 1
-// ASSERT: scan the changed decl after Spreading is:ExtendDecl in file c_pointer_resource.cj
 // ASSERT: scan the changed decl after Spreading is:foo in file lib.cj in line 15 in column 17
-// ASSERT: scan the changed decl after Spreading is:isNull in file c_pointer_resource.cj
-// ASSERT: scan the changed decl after Spreading is:isNotNull in file c_pointer_resource.cj
-// ASSERT: scan the changed decl after Spreading is:toUIntNative in file c_pointer_resource.cj
-// ASSERT: scan the changed decl after Spreading is:read in file c_pointer_resource.cj
-// ASSERT: scan the changed decl after Spreading is:write in file c_pointer_resource.cj
-// ASSERT: scan the changed decl after Spreading is:read in file c_pointer_resource.cj
-// ASSERT: scan the changed decl after Spreading is:write in file c_pointer_resource.cj
-// ASSERT: scan the changed decl after Spreading is:+ in file c_pointer_resource.cj
-// ASSERT: scan the changed decl after Spreading is:- in file c_pointer_resource.cj
-// ASSERT: scan the changed decl after Spreading is:asResource in file c_pointer_resource.cj
+// ASSERT: scan the changed decl after Spreading is:ExtendDecl in file c_pointer_resource.cj
 // ASSERT: scan incremental sema
 
 

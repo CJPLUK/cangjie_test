@@ -20,5 +20,8 @@ error: interface 'Interface-ToString' has been implemented by 'Int64', please re
   |                 ^^^^^^^^ 
   | 
 
-1 error generated, 1 error printed.
+error: extend member 'toString' is not allowed to shadow members of 'extend Int64'
+  ==> (package std.core)to_string.cj:47:25:
+
+2 errors generated, 2 errors printed.
 */

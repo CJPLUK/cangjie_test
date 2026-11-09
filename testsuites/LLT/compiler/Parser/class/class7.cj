@@ -33,6 +33,32 @@ error: property must have accessors
   | |_____^
   | 
 
+error: cannot assign to immutable value
+  ==> class7.cj:11:9:
+   | 
+11 |         a = 2 
+   |         ^ 
+   | 
+note: property 'a' is immutable
+ ==> class7.cj:7:18:
+  | 
+7 |      public prop a: Int64  { 
+  |                  ^ 
+  | 
+
+error: cannot assign to immutable value
+  ==> class7.cj:17:9:
+   | 
+17 |         x.a = 4 
+   |         ^^^ 
+   | 
+note: property 'a' is immutable
+ ==> class7.cj:7:18:
+  | 
+7 |      public prop a: Int64  { 
+  |                  ^ 
+  | 
+
 error: 'a' is not a member of class 'Base12'
   ==> class7.cj:18:14:
    | 
@@ -46,32 +72,6 @@ error: 'a' is not a member of class 'Base12'
 19 |             print("${x.a}")
    |                        ^ 
    | 
-
-error: cannot assign to immutable value
-  ==> class7.cj:11:9:
-   | 
-11 |         a = 2 
-   |         ^^^^^ 
-   | 
-note: property 'a' is immutable
- ==> class7.cj:7:18:
-  | 
-7 |      public prop a: Int64  { 
-  |                  ^ 
-  | 
-
-error: cannot assign to immutable value
-  ==> class7.cj:17:9:
-   | 
-17 |         x.a = 4 
-   |         ^^^^^^^ 
-   | 
-note: property 'a' is immutable
- ==> class7.cj:7:18:
-  | 
-7 |      public prop a: Int64  { 
-  |                  ^ 
-  | 
 
 5 errors generated, 5 errors printed.
 */

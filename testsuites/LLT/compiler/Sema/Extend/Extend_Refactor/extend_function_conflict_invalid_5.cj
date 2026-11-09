@@ -27,7 +27,7 @@ main() {
 }
 
 /* SCAN
-error: interface function 'foo' must be implemented in 'extend C1'
+error: interface function 'foo(): Int64' must be implemented in 'extend C1'
   ==> extend_function_conflict_invalid_5.cj:23:1:
    | 
 23 | extend C1 <: I2 & I1 {}

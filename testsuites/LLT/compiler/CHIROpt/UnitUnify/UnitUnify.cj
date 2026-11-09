@@ -22,15 +22,16 @@ main() {
     test()
 }
 
-// ASSERT: scan-2 = Constant(unit)
+// ASSERT: scan-3 = Constant(unit)
 // ASSERT: regex-1 = Apply\(@_CN7default3fooHv\)
 // ASSERT: regex-1 = Apply\(.*->@_CNat5ArrayIuEixHl,
 // ASSERT: regex-begin ^Block #0:
 // ASSERT: regex-next ^\s*%(?P<unit>\d+): Unit = Constant\(unit\)
 // ASSERT: regex-after %(?P<count>\d+): Int64 = Constant\(5i\)
 // ASSERT: regex-after %\d+: Unit = Apply\(@_CN7default3fooHv\)
+// ASSERT: regex-after %(?P<repeatUnit>\d+): Unit = Constant\(unit\)
 // ASSERT: regex-after %(?P<array>\d+): Struct-_CNat5ArrayIG_E<Unit>& = Allocate\(Struct-_CNat5ArrayIG_E<Unit>\)
-// ASSERT: regex-after Void = Apply\(.*->@_CNat5ArrayIuE6<init>Hlu, %(?P=array), %(?P=count), %(?P=unit)\)
+// ASSERT: regex-after Void = Apply\(.*->@_CNat5ArrayIuE6<init>Hlu, %(?P=array), %(?P=count), %(?P=repeatUnit)\)
 // ASSERT: regex-after %(?P<value>\d+): Struct-_CNat5ArrayIG_E<Unit> = Load\(%(?P=array)\)
 // ASSERT: regex-after %(?P<element>\d+)\[element\]: Unit& = Allocate\(Unit\)
 // ASSERT: regex-after %(?P<index>\d+): Int64 = Constant\(0i\)

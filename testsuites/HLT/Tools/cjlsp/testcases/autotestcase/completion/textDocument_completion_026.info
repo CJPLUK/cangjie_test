@@ -2,7 +2,7 @@
  * Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
  * This source file is part of the Cangjie project, licensed under Apache-2.0
  * with Runtime Library Exception.
- * 
+ *
  * See https://cangjie-lang.cn/pages/LICENSE for license information.
  */
 
@@ -21,4 +21,4 @@ Req#
 {"jsonrpc": "2.0", "method": "exit", "params": {}}
 
 Rev#
-{"id": 424,"jsonrpc": "2.0","result": [{"deprecated": false,"detail": "open class E2 <: A2<Int32>","documentation": "","filterText": "E2","insertText": "E2","insertTextFormat": 1,"kind": 7,"label": "E2","sortText": ""}]}
+{"id": 424,"jsonrpc": "2.0","result": [{"deprecated": false,"detail": "open class E2 <: A2<Int32>","documentation": "","filterText": "E2","insertText": "E2","insertTextFormat": 1,"kind": 7,"label": "E2","sortText": ""},{"deprecated":false,"detail":"","documentation":"","filterText":"zeroValue2","insertText":"zeroValue2","insertTextFormat":1,"kind":2,"label":"zeroValue2","sortText":"636000"},{"deprecated":false,"detail":"public unsafe func zeroValue2<T>(): T","documentation":"","filterText":"zeroValue2","insertText":"zeroValue2<${1:T}>()","insertTextFormat":2,"kind":2,"label":"zeroValue2<T>()","sortText":"636000"}]}

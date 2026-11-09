@@ -13,7 +13,7 @@
 // EXEC: %cp pkg.old.cj pkg.cj
 // EXEC: %compiler %cmp_opt pkg.cj %compile_lib_opt -o pkg.%middle
 // EXEC: %compiler %incremental_compile %cmp_opt pkg.%middle %f -o %output
-// EXEC: %python tools/cjo_mutate.py --patch-cjo pkg.cjo --set-cjo-version 0.2.0 --clear-version-string
+// EXEC: %python tools/cjo_mutate.py --patch-cjo pkg.cjo --set-cjo-version next-minor --clear-version-string
 // EXEC-PIPE-1: %compiler %incremental_compile %cmp_opt pkg.%middle %f -o %output 2>&1 | compare %f
 // ASSERT: scan is incompatible: compiled with cjc
 // ASSERT: scan cjc 'unknown'

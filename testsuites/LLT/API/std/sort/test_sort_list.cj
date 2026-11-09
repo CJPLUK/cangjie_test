@@ -5,7 +5,7 @@
  *
  * See https://cangjie-lang.cn/pages/LICENSE for license information.
  */
-// EXEC:  %compiler %cmp_opt %f -o %output %cmp_utest_opt
+// EXEC:  %compiler %local %cmp_opt %f -o %output %cmp_utest_opt
 // EXEC: %run %run_opt %output %run_utest_opt
 
 import std.sort.*
@@ -54,6 +54,29 @@ public class MyArrayList<T> <: List<T> {
     public prop last: ?T {
         get() {
             get(mySize - 1)
+        }
+    }
+
+    // gap audit 2026-09-24 #2-5：ReadOnlyList 新增 first/last @local!/@local? 抽象声明
+    // 后的实现义务；body 与 plain 版同形（exclave 包裹，形状对齐 ArrayList 同名 prop）。
+    public prop first: ?T @local! {
+        get() {
+            exclave { get(0) }
+        }
+    }
+    public prop first: ?T @local? {
+        get() {
+            exclave { get(0) }
+        }
+    }
+    public prop last: ?T @local! {
+        get() {
+            exclave { get(mySize - 1) }
+        }
+    }
+    public prop last: ?T @local? {
+        get() {
+            exclave { get(mySize - 1) }
         }
     }
 

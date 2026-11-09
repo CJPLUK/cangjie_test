@@ -54,6 +54,7 @@ Options:
   --profile-compile-time      Write time spent of all phases to <package>.time.prof in the output directory
   --profile-compile-memory    Write memory usage of all phases to <package>.mem.prof in the output directory
   --enable-eh                 Enables experimental support for effect handlers (Experimental)
+  --enable-local-mode         Enables experimental support for local mode (Experimental)
   --dump-ast                  Dump human readable AST when compiling for debug
   --dump-chir                 Dump human readable CHIR when compiling for debug
   --dump-ir                   Dump human readable IR

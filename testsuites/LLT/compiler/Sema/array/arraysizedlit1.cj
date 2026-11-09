@@ -18,7 +18,7 @@ error: mismatched types
   ==> arraysizedlit1.cj:11:25:
    | 
 11 | var c = Array<Int32>(a, b)
-   |                         ^ expected '(Int64) -> Int32', found 'Int32'
+   |                         ^ expected '((Int64) -> Int32 @local!) @local?', found 'Int32'
    | 
 
 error: mismatched types
@@ -32,7 +32,7 @@ error: mismatched types
   ==> arraysizedlit1.cj:13:25:
    | 
 13 | var e = Array<Int32>(a, [b])
-   |                         ^^^ expected '(Int64) -> Int32', found 'Array'
+   |                         ^^^ expected '(Int64) -> Int32 @local!', found 'Array'
    | 
 
 error: mismatched types

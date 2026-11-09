@@ -20,7 +20,7 @@ class S {}
 extend S <: A & B {}
 
 /* SCAN
-error: interface function 'add' must be implemented in 'extend S'
+error: interface function 'add(): Unit' must be implemented in 'extend S'
   ==> extend_interface2.cj:20:1:
    | 
 20 | extend S <: A & B {}

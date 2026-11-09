@@ -11,7 +11,7 @@ main() {
 }
 
 /* SCAN
-error: invalid subscript operator [] on type 'Class-Object' with index types 'Int64', Rune'
+error: invalid subscript operator [] on type 'Class-Object' with index types 'Int64', 'Rune'
   ==> subscript_02.cj:10:13:
    | 
 10 |     var a = Object()[1, r'c']

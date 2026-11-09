@@ -26,5 +26,6 @@ class B <: A {
 main(): Int64 {
     return 0
 }
+// ASSERT: scan sema_class_need_abstract_modifier_or_func_need_impl
 // ASSERT: scan sema_invalid_member_visibility_in_class
-// ASSERT: scan sema_property_override_implement_type_diff
+// ASSERT: scan sema_prop_redefinition

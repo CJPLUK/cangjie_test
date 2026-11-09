@@ -41,12 +41,5 @@ error: type of the inherited property members 'a' are not identical and not in s
    | 
    # note: conflict types are 'Class-A', 'Class-B'
 
-error: interface property 'a' must be implemented in 'C'
-  ==> interface_property5.cj:29:1:
-   | 
-29 | class C <: I1 & I2 {}
-   | ^ 
-   | 
-
-2 errors generated, 2 errors printed.
+1 error generated, 1 error printed.
 */

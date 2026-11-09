@@ -22,7 +22,7 @@ main(): Int64 {
 }
 
 /* SCAN
-error: the return type of this function cannot be calculated from the function body and all the return expressions
+error: the return type of this function cannot be calculated from the function body and all the return and exclave expressions
   ==> bottomType03.cj:16:5:
    | 
 16 |     return a + b

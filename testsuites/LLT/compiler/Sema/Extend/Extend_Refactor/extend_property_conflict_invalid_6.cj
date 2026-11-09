@@ -52,5 +52,18 @@ error: The type of the override/implement property must be the same
    |     ^ 
    | 
 
-2 errors generated, 2 errors printed.
+error: overloaded instance property must be of the same data type
+  ==> extend_property_conflict_invalid_6.cj:28:17:
+   | 
+28 |     public prop foo: Int64 {
+   |                 ^^^ 
+   | 
+note: 'foo' is previously declared here
+  ==> extend_property_conflict_invalid_6.cj:18:10:
+   | 
+18 |     prop foo: Int32 {
+   |          ^^^ 
+   | 
+
+3 errors generated, 3 errors printed.
 */

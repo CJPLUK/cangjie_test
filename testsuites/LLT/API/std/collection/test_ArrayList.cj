@@ -264,7 +264,7 @@ class ArrayListTest {
             var _ = arr.slice(range)
             @Expect("Should throw exception", "")
         } catch (e: IndexOutOfBoundsException) {
-            @Expect(e.message, "Closed range end '5' is greater than size '1'.")
+            @Expect(e.message, "Closed range end '5' is greater than or equal to size '1'.")
         }
     }
 

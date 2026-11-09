@@ -26,7 +26,9 @@ main() {
     0
 }
 
-// ASSERT_BEFORE: regex-3 = Allocate\(Int64\)
+// Both slots are live in the current AST2CHIR output: the return slot and value,
+// which must retain the last completed assignment on an exception edge.
+// ASSERT_BEFORE: regex-2 = Allocate\(Int64\)
 // ASSERT_BEFORE: regex-5 = Store\(
 // ASSERT_BEFORE: regex-1 = Load\(
 

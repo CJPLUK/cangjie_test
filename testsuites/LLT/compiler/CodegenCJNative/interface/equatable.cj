@@ -47,21 +47,10 @@ main() {
     0
 }
 
-/* SCAN
-error: a deriving member must be at least as visible as its base member
-  ==> equatable.cj:34:7:
-   | 
-34 | class B <: A {
-   |       ^ '!=' is inherited
-   | 
-note: the deriving '!=' is defined here
-  ==> equatable.cj:26:19:
-   | 
-26 |     operator func !=(rhs: A): Bool {
-   |                   ^^ the visibility of the deriving '!=' is 'internal'
-   | 
-note: the visibility of the base '!=' is 'public'
-  ==> (package std.core)equatable.cj:20:19:
-
-1 error generated, 1 error printed.
-*/
+// Match the diagnostic contract independently of standard-library source positions.
+// ASSERT: regex error: a deriving member must be at least as visible as its base member
+// ASSERT: regex '!=' is inherited
+// ASSERT: regex note: the deriving '!=' is defined here
+// ASSERT: regex the visibility of the deriving '!=' is 'internal'
+// ASSERT: regex note: the visibility of the base '!=' is 'public'
+// ASSERT: regex 1 error generated, 1 error printed\.

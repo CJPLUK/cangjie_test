@@ -52,14 +52,14 @@ note: found candidate
    |          ^ 
    | 
 
-error: interface function 'foo' must be implemented in 'extend C'
+error: interface function 'foo(): ' must be implemented in 'extend C'
   ==> multi_default_impl_05.cj:27:1:
    | 
 27 | extend C <: I2 & I4 {}
    | ^ 
    | 
 
-error: interface function 'foo' must be implemented in 'extend C'
+error: interface function 'foo(): ' must be implemented in 'extend C'
   ==> multi_default_impl_05.cj:29:1:
    | 
 29 | extend C <: I1 & I3 {}

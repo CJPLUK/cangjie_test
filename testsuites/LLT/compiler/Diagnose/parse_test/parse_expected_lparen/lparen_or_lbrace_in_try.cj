@@ -20,11 +20,11 @@ error: expected '{' or '(', found '+'
    | 
    # note: try expression must have block or resources
 
-error: expected expression after '+', found '}'
+error: expected expression or declaration, found '}'
   ==> lparen_or_lbrace_in_try.cj:12:1:
    | 
 12 | }
-   | ^ expected expression here
+   | ^ expected expression or declaration here
    | 
 
 2 errors generated, 2 errors printed.

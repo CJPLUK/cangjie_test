@@ -11,7 +11,7 @@
 
 // DEPENDENCE: pkg ../tools
 // EXEC: %compiler %cmp_opt %pkg_opt pkg %compile_lib_opt -o pkg.%middle
-// EXEC: %python tools/cjo_mutate.py --patch-cjo pkg.cjo --set-cjo-version 0.2.0
+// EXEC: %python tools/cjo_mutate.py --patch-cjo pkg.cjo --set-cjo-version next-minor
 // EXEC-PIPE-1: %compiler %cmp_opt pkg.%middle %f -o %output 2>&1 | compare %f
 // ASSERT: scan is incompatible: compiled with cjc
 // ASSERT: scan-not cjoVersion

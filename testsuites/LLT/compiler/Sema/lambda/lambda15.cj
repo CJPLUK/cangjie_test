@@ -19,7 +19,7 @@ error: mismatched types
   ==> lambda15.cj:12:29:
    | 
 12 |     let _ = Array<Int32>(5, {=>})
-   |                             ^^^^ expected '(Int64) -> Int32', found '() -> Unit'
+   |                             ^^^^ expected '((Int64) -> Int32 @local!) @local?', found '() -> Unit'
    | 
 
 error: mismatched types
