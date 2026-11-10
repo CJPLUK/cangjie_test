@@ -59,3 +59,12 @@ Benchmark/linaro-benchmark/benchmarks-cj/stanford/Puzzle/Puzzle.cj
 
 # case25 performance gate failed, A ticket has been filed
 Benchmark/requirements-benchmark/case25_http_complex_json_stream/case25_http_complex_json_stream.info
+
+# https://gitcode.com/Cangjie/cangjie_runtime/issues/1063
+API/net/WebSocket/http1.1_websocket/test_websocket_behavior.cj
+API/net/New_HTTP/Cookie/test_cookie_jar_integration.cj
+API/net/New_HTTP/Cookie/test_cookie_parse_behavior.cj
+API/net/New_HTTP/Cookie/test_cookie_store_behavior.cj
+API/net/New_HTTP/Redirect/test_redirect_behavior.cj
+API/net/New_HTTP/ResponseTolerance/test_response_tolerance.cj
+API/net/New_HTTP/ReuseH2/test_headers_reuse_h2.cj
