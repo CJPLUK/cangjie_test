@@ -21,8 +21,8 @@
 // 实测约束（勿再踩）：
 //   1. @local!/@local? 变量不能被普通 lambda 捕获 → 断言就地 try/catch。
 //   2. 局部 conformer 需同时提供 `init()` 与 `exclave init(this @local!)`。
-//   3. MapEntryView 的 plain key/value 必须由 conformer 实现（接口默认体只在
-//      省略时才走），因此 plain 断言用一个不实现它们的夹具。
+//   3. MapEntryView 的 plain `key`/`value` 在 std 里是抽象成员、没有默认体，
+//      conformer 必须实现；本用例只覆盖 @local?/@local! 的 throwing 默认体。
 
 import std.collection.*
 import std.core.*
@@ -69,10 +69,15 @@ class MinMap <: Map<Int64, Int64> {
     public operator func [](key: Int64, value!: Int64): Unit { }
 }
 
-// 最小 MapEntryView：省略 key/value 的 plain 与 local 成员，全部落到默认体。
+// 最小 MapEntryView：plain key/value 必须实现，local 成员留给默认体。
 class MinEntryView <: MapEntryView<Int64, Int64> {
     init() {}
     exclave init(this @local!) {}
+    public prop key: Int64 { get() { 0 } }
+    public mut prop value: ?Int64 {
+        get() { None }
+        set(v) { }
+    }
 }
 
 // 空集合夹具：用于 Map.add(all:)/remove(all:) 的 @local! 默认体调用。
@@ -89,13 +94,6 @@ exclave func emptyInts(): Collection<Int64> @local! {
 main(): Int64 {
     var failed = 0
     var hits = 0
-
-    // ============ MapEntryView plain 默认体（key / value）============
-    let view: MapEntryView<Int64, Int64> = MinEntryView()
-    hits = 0
-    try { let _ = view.key } catch (e: UnimplementedException) { hits += 1 }
-    try { let _ = view.value } catch (e: UnimplementedException) { hits += 1 }
-    failed += assertEq(hits, 2, "MI_entryview_plain_defaults_throw")
 
     // ============ MapEntryView @local? key 与 @local! value 默认体 ============
     let viewHalf: MapEntryView<Int64, Int64> @local? = MinEntryView()

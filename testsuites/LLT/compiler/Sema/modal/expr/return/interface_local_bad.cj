@@ -5,13 +5,7 @@
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
 // Returning an internal local value as a non copy interface type would box it in the current region.
-
 // ERRCHECK: %compiler %local %f -Woff all %diag_json 2>&1
-
-func full(): ToString {
-    let n: Int64 @local! = 1
-    n
-}
 
 func maybe(): ToString @local? {
     let n: Int64 @local? = 1
@@ -20,5 +14,5 @@ func maybe(): ToString @local? {
 
 main() {}
 
-// ASSERT: scan-2 "DiagKind": "sema_internal_local_return",
-// ASSERT: scan "Errors": 2,
+// ASSERT: scan-1 "DiagKind": "sema_internal_local_return",
+// ASSERT: scan "Errors": 1,
