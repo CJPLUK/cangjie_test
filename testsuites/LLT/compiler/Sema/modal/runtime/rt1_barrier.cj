@@ -17,7 +17,7 @@ import std.collection.*
 import std.core.*
 
 main(): Int64 {
-    // 路径1：Array initElement @local! 构造（内部 arraySet2 写 local RawArray）
+    // 路径1：Array initElement @local! 构造（内部 arraySet 写 local RawArray）
     let a1 = Array<Int64>(3, {i => i}) @local!
     println("a1=${a1[0]}")
 
