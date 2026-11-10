@@ -1,0 +1,11 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 0
+// DEPENDENCE: v09_bottom_const_path.h
+// EXEC: %hle_c --module-name="my_module" -i v09_bottom_const_path.h -o . --clang-args=""
+// EXEC-PIPE: %cat v09_bottom_const_path.cj | compare %f
+// ASSERT: scan /* const char * V9BottomConstStr = "*\/ bottom_const_payload /\*" */

@@ -1,0 +1,13 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: m04_since_split_brief.d.ts
+// EXEC: %hle_arkts -i m04_since_split_brief.d.ts -o . --module-name="my_module"
+// EXEC-PIPE: %cat cj/m04_since_split_brief/src/m04_since_split_brief.cj | compare %f
+// ASSERT: scan @brief m4SinceFunc(p: number): void
+// ASSERT: scan // M4: trailing line comment after since tag
+// ASSERT: scan-not @since 10

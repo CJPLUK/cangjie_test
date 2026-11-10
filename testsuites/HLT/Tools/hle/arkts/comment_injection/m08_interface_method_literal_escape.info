@@ -1,0 +1,15 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 0
+// DEPENDENCE: m08_interface_method_literal_escape.d.ts
+// EXEC: %hle_arkts -i m08_interface_method_literal_escape.d.ts -o . --module-name="my_module"
+// EXEC-PIPE: %cat cj/m08_interface_method_literal_escape/src/m08_interface_method_literal_escape.cj | compare %f
+// ASSERT: scan // M8: line comment with */ payload
+// ASSERT: scan @brief m8Method(mode: "*\/mixed_param/\*"): "*\/mixed_return/\*"
+// ASSERT: scan public func m8Method(mode: JSValue/* FIXME:
+// ASSERT: scan-not "*/mixed_param/*
+// ASSERT: scan-not "*/mixed_return/*

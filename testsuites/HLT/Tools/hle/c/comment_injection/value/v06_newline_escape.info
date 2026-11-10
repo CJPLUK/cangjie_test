@@ -1,0 +1,13 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 0
+// DEPENDENCE: v06_newline_escape.h
+// EXEC: %hle_c --module-name="my_module" -i v06_newline_escape.h -o . --clang-args=""
+// EXEC-PIPE: %cat v06_newline_escape.cj | compare %f
+// ASSERT: scan // String value: line1\\nline2 *\/ tail
+// ASSERT: scan public const V6MultilineStr: VArray<UInt8, $20>
+// ASSERT: scan 101, 49, 10, 108

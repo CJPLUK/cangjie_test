@@ -1,0 +1,15 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: s05_string_enum_quote_safety.d.ts
+// EXEC: %hle_arkts -i s05_string_enum_quote_safety.d.ts -o . --module-name="my_module"
+// EXEC-PIPE: %cat cj/s05_string_enum_quote_safety/src/s05_string_enum_quote_safety.cj | compare %f
+// ASSERT: scan case EvilSingle => "*/single_quote_payload/*"
+// ASSERT: scan case "*/single_quote_payload/*" => EvilSingle
+// ASSERT: scan case EvilDouble => "*/double_quote_payload/*"
+// ASSERT: scan EvilSingle = *\/single_quote_payload/\*
+// ASSERT: scan EvilDouble = *\/double_quote_payload/\*

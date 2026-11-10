@@ -1,0 +1,12 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: v08_static_varstring.h
+// EXEC: %hle_c --module-name="my_module" -i v08_static_varstring.h -o . --clang-args=""
+// EXEC-PIPE: %cat v08_static_varstring.cj | compare %f
+// ASSERT: scan // String value: *\/ static_payload /\*
+// ASSERT: scan public const V8StaticStr: VArray<UInt8, $21>

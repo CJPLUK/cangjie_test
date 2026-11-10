@@ -1,0 +1,17 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: b04_class_member_comments.d.ts
+// EXEC: %hle_arkts -i b04_class_member_comments.d.ts -o . --module-name="my_module"
+// EXEC-PIPE: %cat cj/b04_class_member_comments/src/b04_class_member_comments.cj | compare %f
+// ASSERT: scan /* B4: class preceding block comment, no payload */
+// ASSERT: scan public class B4BlockClass {
+// ASSERT: scan @brief constructor(): void
+// ASSERT: scan /* B4: class constructor preceding block comment, no payload */
+// ASSERT: scan /* B4: class property preceding block comment, no payload */
+// ASSERT: scan @brief b4Method(): void
+// ASSERT: scan /* B4: class method preceding block comment, no payload */

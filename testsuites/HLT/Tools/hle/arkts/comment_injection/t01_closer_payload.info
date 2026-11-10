@@ -1,0 +1,13 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 0
+// DEPENDENCE: t01_closer_payload.d.ts
+// EXEC: %hle_arkts -i t01_closer_payload.d.ts -o . --module-name="my_module"
+// EXEC-PIPE: %cat cj/t01_closer_payload/src/t01_closer_payload.cj | compare %f
+// ASSERT: scan public type T1CloserType = JSValue/* FIXME:
+// ASSERT: scan "*\/closer_only"
+// ASSERT: scan-not "*/closer_only"

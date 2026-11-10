@@ -1,0 +1,12 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: x19_doxygen_after_normal_binds.h
+// EXEC: %hle_c --module-name="my_module" -i x19_doxygen_after_normal_binds.h -o . --clang-args=""
+// EXEC-PIPE: %cat x19_doxygen_after_normal_binds.cj | compare %f
+// ASSERT: scan // X19: doxygen block after normal comment, payload /* opener
+// ASSERT: scan foreign func x19_func(a: Int32): Int32

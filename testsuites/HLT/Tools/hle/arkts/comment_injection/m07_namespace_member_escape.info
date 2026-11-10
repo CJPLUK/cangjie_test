@@ -1,0 +1,13 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: m07_namespace_member_escape.d.ts
+// EXEC: %hle_arkts -i m07_namespace_member_escape.d.ts -o . --module-name="my_module"
+// EXEC-PIPE: %cat cj/m07_namespace_member_escape/src/m07_namespace_member_escape.cj | compare %f
+// ASSERT: scan-not M7: namespace level line comment
+// ASSERT: scan // M7: member line comment with *\/ payload
+// ASSERT: scan public const M7MemberNoInit = 0/* FIXME: Initialization is required */

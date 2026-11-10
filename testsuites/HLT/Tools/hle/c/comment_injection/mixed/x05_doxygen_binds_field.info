@@ -1,0 +1,12 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: x05_doxygen_binds_field.h
+// EXEC: %hle_c --module-name="my_module" -i x05_doxygen_binds_field.h -o . --clang-args=""
+// EXEC-PIPE: %cat x05_doxygen_binds_field.cj | compare %f
+// ASSERT: scan // X5: doxygen line before adjacent field, payload */
+// ASSERT: scan public let x5a: Int32

@@ -1,0 +1,14 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 0
+// DEPENDENCE: b10_multiline_block_opener_escape.d.ts
+// EXEC: %hle_arkts -i b10_multiline_block_opener_escape.d.ts -o . --module-name="my_module"
+// EXEC-PIPE: %cat cj/b10_multiline_block_opener_escape/src/b10_multiline_block_opener_escape.cj | compare %f
+// ASSERT: scan /\* B10: multi-line block const no init comment
+// ASSERT: scan * third line with /\* opener payload
+// ASSERT: scan public const B10BlockConstNoInit = 0/* FIXME: Initialization is required */
+// ASSERT: scan-not opener payload */

@@ -1,0 +1,12 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: d22_funcptr_typedef_doc.h
+// EXEC: %hle_c --module-name="my_module" -i d22_funcptr_typedef_doc.h -o . --clang-args=""
+// EXEC-PIPE: %cat d22_funcptr_typedef_doc.cj | compare %f
+// ASSERT: scan // D22: function pointer typedef preceding doxygen line, payload */
+// ASSERT: scan public type d22_cb = CFunc<(arg1: Int32) -> Unit>
