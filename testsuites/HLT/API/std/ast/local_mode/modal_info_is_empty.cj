@@ -10,13 +10,30 @@
 
 import std.ast.*
 
+func typeModal(t: TypeNode): ModalInfo {
+    match (t) {
+        case p: PrimitiveType => p.modal
+        case r: RefType => r.modal
+        case q: QualifiedType => q.modal
+        case pt: ParenType => pt.modal
+        case tt: TupleType => tt.modal
+        case st: ThisType => st.modal
+        case ft: PrefixType => ft.modal
+        case fnt: FuncType => fnt.modal
+        case vt: VArrayType => vt.modal
+        case _ => throw Exception("unreachable TypeNode subtype")
+    }
+}
+
 func checkMode(source: String, expected: ASTMode, absent: Bool): Unit {
     let parsed = parseType(cangjieLex(source))
-    if (parsed.modal.mode != expected || parsed.modal.isEmpty() != absent) {
+    let parsedModal = typeModal(parsed)
+    if (parsedModal.mode != expected || parsedModal.isEmpty() != absent) {
         throw Exception("Unexpected modal state for '${source}'")
     }
     let roundtrip = parseType(parsed.toTokens())
-    if (roundtrip.modal.mode != expected || roundtrip.modal.isEmpty() != absent) {
+    let roundtripModal = typeModal(roundtrip)
+    if (roundtripModal.mode != expected || roundtripModal.isEmpty() != absent) {
         throw Exception("Modal state did not survive a token roundtrip for '${source}'")
     }
 }

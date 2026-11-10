@@ -29,5 +29,12 @@ main() {
     if (param.colon.kind == ILLEGAL) {
         return 4
     }
+
+    // Multi-param input must be rejected instead of silently keeping the first one.
+    var threw = false
+    try { let _ = FuncParam(quote(a: A, b: B)) } catch (e: ASTException) { threw = true }
+    if (!threw) {
+        return 5
+    }
     return 0
 }

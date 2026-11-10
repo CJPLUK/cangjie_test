@@ -52,9 +52,39 @@ func inspect(node: Node, label: String, expected: Int64): ModalCounter {
     visitor
 }
 
+func typeModal(t: TypeNode): ModalInfo {
+    match (t) {
+        case p: PrimitiveType => p.modal
+        case r: RefType => r.modal
+        case q: QualifiedType => q.modal
+        case pt: ParenType => pt.modal
+        case tt: TupleType => tt.modal
+        case st: ThisType => st.modal
+        case ft: PrefixType => ft.modal
+        case fnt: FuncType => fnt.modal
+        case vt: VArrayType => vt.modal
+        case _ => throw Exception("unreachable TypeNode subtype")
+    }
+}
+
+func setTypeModal(t: TypeNode, m: ModalInfo): Unit {
+    match (t) {
+        case p: PrimitiveType => p.modal = m
+        case r: RefType => r.modal = m
+        case q: QualifiedType => q.modal = m
+        case pt: ParenType => pt.modal = m
+        case tt: TupleType => tt.modal = m
+        case st: ThisType => st.modal = m
+        case ft: PrefixType => ft.modal = m
+        case fnt: FuncType => fnt.modal = m
+        case vt: VArrayType => vt.modal = m
+        case _ => ()
+    }
+}
+
 main(): Int64 {
-    let full = parseType(cangjieLex("Value @local!")).modal
-    let half = parseType(cangjieLex("Value @local?")).modal
+    let full = typeModal(parseType(cangjieLex("Value @local!")))
+    let half = typeModal(parseType(cangjieLex("Value @local?")))
     let receiver = ThisParam()
     receiver.modal = full
     let function = FuncDecl(cangjieLex("func f() { 0 }"))
@@ -83,7 +113,7 @@ main(): Int64 {
     let types: Array<TypeNode> = [PrimitiveType(), RefType(), QualifiedType(), ParenType(), TupleType(),
         ThisType(), PrefixType(), FuncType(), VArrayType()]
     for (i in 0..types.size) {
-        types[i].modal = full
+        setTypeModal(types[i], full)
         inspect(types[i], "TYPE_${i}", 1)
     }
 
