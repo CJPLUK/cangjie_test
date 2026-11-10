@@ -1,0 +1,11 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// `cjpm run` reports a missing '--compat-version' value.
+// DEPENDENCE: ../%n
+// ERRCHECK: cd %n && %cjpm run --compat-version
+// ASSERT: scan Error: the '--compat-version' option needs a value
+// ASSERT: scan cjpm run failed

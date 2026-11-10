@@ -1,0 +1,15 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// The help of every supported subcommand lists `--compat-version`.
+// DEPENDENCE: ../%n
+// EXEC: cd %n && { %cjpm build -h; %cjpm run -h; %cjpm test -h; %cjpm bench -h; %cjpm install -h; %cjpm check -h; %cjpm tree -h; } 2>&1 | compare %f
+// ASSERT: scan-7 --compat-version <value>
+// ASSERT: scan-3 generate artifacts according to the specified compatibility version
+// ASSERT: scan check dependencies according to the specified compatibility version
+// ASSERT: scan compile tests according to the specified compatibility version
+// ASSERT: scan compile benchmarks according to the specified compatibility version
+// ASSERT: scan display dependencies for the specified compatibility version
