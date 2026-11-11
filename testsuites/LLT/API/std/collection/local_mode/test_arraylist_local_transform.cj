@@ -43,7 +43,7 @@ func t323EmptyFilterMap(a: ArrayList<Int64> @local!): Int64 {
             throw ArithmeticException("T323_empty_filter_callback")
         })
         let mapped: ArrayList<String> @local! = a.map({x: Int64 @local! =>
-            "unexpected"
+            exclave { "unexpected" }
         })
         if (filtered.size == 0 && mapped.size == 0) { 0 } else { 1 }
     }
@@ -52,11 +52,13 @@ func t323EmptyFilterMap(a: ArrayList<Int64> @local!): Int64 {
 func t325T326EmptyAdvanced(a: ArrayList<Int64> @local!): Int64 {
     exclave {
         let flat: ArrayList<String> @local! = a.flatMap({x: Int64 @local! =>
-            let empty: ArrayList<String> @local! = ArrayList<String>() @local!
-            empty
+            exclave {
+                let empty: ArrayList<String> @local! = ArrayList<String>() @local!
+                empty
+            }
         })
         let selected: ArrayList<String> @local! = a.filterMap<String>({x: Int64 @local! =>
-            None<String>
+            exclave { None<String> }
         })
         if (flat.size == 0 && selected.size == 0) { 0 } else { 1 }
     }
