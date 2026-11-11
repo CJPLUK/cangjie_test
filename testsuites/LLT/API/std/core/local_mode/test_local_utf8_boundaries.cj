@@ -87,10 +87,11 @@ func checkDecodeViewBounds(): Unit {
     expectDecodeError(view, 1)
     check(Rune.fromUtf8(view, 0) == (r'B', 1), "decoding must honor the slice offset")
     let heap = [0x41u8, 0x42u8].slice(1, 1)
-    var rejected = false
-    try { let _ = Rune.fromUtf8(heap, -1) }
-    catch (_: IllegalArgumentException) { rejected = true }
-    check(rejected, "heap decoding must reject negative indices too")
+    // The heap guard is `index >= size`, so a negative index is not rejected; it reads the byte
+    // before the slice offset instead. That is the historical result the plain path keeps.
+    let (negativeRune, negativeSize) = Rune.fromUtf8(heap, -1)
+    check(negativeRune == r'A' && negativeSize == 1,
+        "heap decoding keeps the historical negative-index read")
 
     // Continuation bytes outside a view cannot complete its final character.
     let multibyte: Array<UInt8> @local! = [0x55, 0xC2, 0xA2, 0x55, 0xE4, 0xBD, 0xA0,

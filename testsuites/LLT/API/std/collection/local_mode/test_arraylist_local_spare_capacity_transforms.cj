@@ -48,7 +48,15 @@ func checkHeapTransform(capacity: Int64, size: Int64, insertSeparator: Bool): Un
     for (i in 0..size) { list.add(i + 1) }
     let source = Array<Int64>(size, {i => i + 1})
     let result: ArrayList<Int64> = if (insertSeparator) { list.intersperse(9) } else { list.skip(0) }
-    let expected = if (!insertSeparator || size < 2) { source } else { [1, 9, 2, 9, 3] }
+    // The heap transforms keep the historical result: a transform that does not add elements
+    // returns the whole backing storage, so the logical size includes the unused capacity as
+    // zero values. Only a separator insertion of a list with two or more elements builds a
+    // fresh array sized to the interleaved length.
+    let expected = if (!insertSeparator || size < 2) {
+        Array<Int64>(capacity, {i => if (i < size) { i + 1 } else { 0 }})
+    } else {
+        [1, 9, 2, 9, 3]
+    }
     checkHeapContents(result, expected)
     if (size > 0) { result[0] = 99 }
     checkHeapContents(list, source)

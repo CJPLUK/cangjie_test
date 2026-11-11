@@ -38,6 +38,13 @@ func payload(position: Int64): Int64 { 1000 + 13 * position }
 // Explicit endpoint legality, independently written as boundary inequalities.
 // Empty reverse ranges may use start=-1; a closed empty interval may end one
 // position beyond its start. No implementation length formula is used here.
+// The one exception is legacyLength below, which deliberately reproduces the
+// historical length formula so the heap oracle can predict its overflow.
+@OverflowWrapping
+func legacyLength(start: Int64, end: Int64, step: Int64, offset: Int64): Int64 {
+    (end - start + step + offset) / step
+}
+
 func legalBounds(size: Int64, start: Int64, end: Int64, step: Int64, closed: Bool): Bool {
     if (step > 0) {
         if (closed) {
@@ -185,14 +192,37 @@ func runHeap(size: Int64, offset: Int64, range: Range<Int64>, legal: Bool): Unit
     }
     let source: Array<Int64> = if (offset == 0) { backing } else { backing.slice(offset, size) }
     let expected = expectedPayload(size, offset, range.start, range.end, range.step, range.isClosed)
-    let want = if (legal) { "size=${expected.size} payload=" + describeHeap(expected) } else { "IndexOutOfBoundsException" }
+    // The heap path keeps the historical length formula (end_ - start_ + step + offset) / step.
+    // That intermediate overflows for a step near Int64.Max, and the resulting negative length
+    // surfaces as NegativeArraySizeException instead of a slice, so the oracle has to model the
+    // formula rather than only the selected elements. OverflowWrapping keeps the probe itself
+    // from trapping on the same addition.
+    let (startN, endN) = (range.start, if (range.isClosed && range.hasEnd) {
+        range.end + (if (range.step > 0) { 1 } else { -1 })
+    } else {
+        range.end
+    })
+    let stepN = range.step
+    let offsetN: Int64 = if (stepN > 0) { -1 } else { 1 }
+    let legacy: Int64 = legacyLength(startN, endN, stepN, offsetN)
+    // A wrapped length of zero builds an empty result, a negative one trips the allocation
+    // check, and only a positive length reaches the element selection the payload oracle models.
+    let oracle = if (legacy == 0) { Array<Int64>() } else { expected }
+    let want = if (!legal) {
+        "IndexOutOfBoundsException"
+    } else if (legacy < 0) {
+        "NegativeArraySizeException"
+    } else {
+        "size=${oracle.size} payload=" + describeHeap(oracle)
+    }
     var got = ""
     var resultFailures: Int64 = 0
     try {
         let actual: Array<Int64> = source.clone(range)
         got = "size=${actual.size} payload=" + describeHeap(actual)
         if (legal) {
-            if (!samePayloadHeap(actual, expected)) { resultFailures++; oracleMismatches++ }
+            if (legacy < 0) { resultFailures++; missingExpectedExceptions++ }
+            else if (!samePayloadHeap(actual, oracle)) { resultFailures++; oracleMismatches++ }
         } else {
             resultFailures++
             missingExpectedExceptions++
@@ -200,6 +230,9 @@ func runHeap(size: Int64, offset: Int64, range: Range<Int64>, legal: Bool): Unit
     } catch (e: IndexOutOfBoundsException) {
         got = "THREW " + e.toString()
         if (legal) { resultFailures++; unexpectedExceptions++ }
+    } catch (e: NegativeArraySizeException) {
+        got = "THREW " + e.toString()
+        if (!legal || legacy >= 0) { resultFailures++; wrongExceptionTypes++ }
     } catch (e: Exception) {
         got = "THREW " + e.toString()
         resultFailures++

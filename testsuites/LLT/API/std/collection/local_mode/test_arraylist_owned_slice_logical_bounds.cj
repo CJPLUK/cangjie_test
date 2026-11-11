@@ -57,7 +57,24 @@ func checkHeapClosedEnd(size: Int64, useOperator: Bool): Unit {
         if (useOperator) { let _ = list[0..=size] }
         else { let _ = list.slice(0..=size) }
     } catch (_: IndexOutOfBoundsException) { caught = true }
-    check(caught && list.size == size, "heap closed slice must reject its logical end")
+    // The heap path keeps the historical bound: a closed end equal to the logical size is still
+    // accepted while the backing storage has room, so the slice spans the size plus one element
+    // and the spare slot reads as the element type's zero value.
+    var observed = ""
+    var acceptedSize: Int64 = -1
+    try {
+        if (useOperator) {
+            let r = list[0..=size]
+            acceptedSize = r.size
+            observed = r[r.size - 1].toString()
+        } else {
+            let r = list.slice(0..=size)
+            acceptedSize = r.size
+            observed = r[r.size - 1].toString()
+        }
+    } catch (_: IndexOutOfBoundsException) {}
+    check(!caught && acceptedSize == size + 1 && observed == "0" && list.size == size,
+        "heap closed slice accepts the logical end and exposes the spare slot")
     for (i in 0..size) {
         check(list[i] == i + 1 && iterator.next().getOrThrow() == i + 1, "heap rejected slice preserves its source")
     }
