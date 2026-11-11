@@ -10,7 +10,7 @@
 // '--apc=1'.
 
 // (CJNATIVE & Linux) EXEC-PIPE-0: %frontendCompiler --apc=4 -o %n.bc %f 2>&1 | compare %f
-// ASSERT: regex warning.*: '--apc' conflicts with '-o .*\.bc' which expects a single bitcode file\. '--apc' is set to 1\.
+// ASSERT: regex warning.*: '--apc' conflicts with '-o .*\.bc' which expects a single output file\. '--apc' is set to 1\.
 
 main() {
     return 0
