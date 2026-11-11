@@ -10,9 +10,9 @@
 // EXEC: ObjCInteropGen test.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-foreign func M_(): Unit
+// foreign func M(): Unit
 
-foreign func M__(_: Int32): Unit
+// foreign func M(_: Int32): Unit
 
 foreign func M(_: Float64): Unit
 */
