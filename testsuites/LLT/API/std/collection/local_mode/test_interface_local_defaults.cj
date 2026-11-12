@@ -20,8 +20,8 @@
 // 实测约束（勿再踩）：
 //   1. @local!/@local? 变量不能被普通 lambda 捕获，因此断言必须就地 try/catch，
 //      不能抽成 `filter { => ... }` 那样的 helper。
-//   2. conformer 若自己实现了 plain `first`/`last`，plain 默认体就永远不会执行；
-//      想覆盖 plain 默认体必须省略这两个属性。
+//   2. plain `first`/`last` 在 std 里是抽象属性、没有默认体，conformer 必须实现；
+//      本用例只覆盖 @local!/@local? 的 throwing 默认体。
 //   3. 局部 conformer 需要 `init()` 与 `exclave init(this @local!)` 才能构造
 //      @local! 实例；只给 plain init 会报 no matching constructor。
 
@@ -30,7 +30,7 @@ import std.core.*
 
 // ---------------------------------------------------------------- 夹具
 
-// ReadOnlyList 最小面：省略 plain first/last（只有默认体可走）。
+// ReadOnlyList 最小面：plain 成员含 first/last 全部实现，local 面留给默认体。
 class MinReadOnlyList <: ReadOnlyList<Int64> {
     init() {}
     exclave init(this @local!) {}
@@ -39,6 +39,8 @@ class MinReadOnlyList <: ReadOnlyList<Int64> {
     public func iterator(): Iterator<Int64> { Array<Int64>().iterator() }
     public func get(index: Int64): ?Int64 { None }
     public operator func [](index: Int64): Int64 { 0 }
+    public prop first: ?Int64 { get() { None } }
+    public prop last: ?Int64 { get() { None } }
 }
 
 // List 最小面：plain 全给实现，local 面全部留给默认体。
@@ -66,13 +68,6 @@ class MinList <: List<Int64> {
 main(): Int64 {
     var failed = 0
     var hits = 0
-
-    // ============ ReadOnlyList plain 默认体（first / last）============
-    let ro: ReadOnlyList<Int64> = MinReadOnlyList()
-    hits = 0
-    try { let _ = ro.first } catch (e: UnimplementedException) { hits += 1 }
-    try { let _ = ro.last } catch (e: UnimplementedException) { hits += 1 }
-    failed += assertEq(hits, 2, "LI_readonly_plain_first_last_default_throws")
 
     // ============ ReadOnlyList @local! 默认体（get / [] / first / last）============
     let roBang: ReadOnlyList<Int64> @local! = MinReadOnlyList()
