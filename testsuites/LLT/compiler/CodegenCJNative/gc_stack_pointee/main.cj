@@ -11,7 +11,7 @@
 // EXEC: %compiler %warnOffAll %cmp_opt %enableO2 %f --save-temps . -o %output
 // EXEC: %llvmDissembler cj_world.opt.bc -o main.opt.ll
 // EXEC-PIPE: %cat main.opt.ll 2>&1 | compare %f
-// ASSERT: scan "struct-live"({ %TypeInfo*, %"ObjLayout.cj_world:$ClN8cj_world5fun38HlNNat6OptionICNat6ObjectEEY2_Y2_EL7_E$0" }* %2, { %TypeInfo*, %"ObjLayout.cj_world:LocalBox" }* %3, { %TypeInfo*, %"ObjLayout.cj_world:LocalBox" }* %5)
+// ASSERT: regex "struct-live"\({ %TypeInfo\*, %"ObjLayout\.cj_world:\$ClN8cj_world5fun38HlNNat6OptionICNat6ObjectEEY2_Y2_EL7_E\$0" \}\* %\d+, { %TypeInfo\*, %"ObjLayout\.cj_world:LocalBox" \}\* %\d+, { %TypeInfo\*, %"ObjLayout\.cj_world:LocalBox" \}\* %\d+\)
 
 package cj_world
 
