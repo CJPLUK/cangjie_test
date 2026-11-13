@@ -11,7 +11,7 @@
 // EXEC: %run %run_opt %output %run_args
 //
 // 2026-09-28 已解锁（T134 恢复 EXEC）：七个 `Array<T> @local?` 搜索重载改为
-// **就地循环**实现（arrayGetUnchecked3 + == @local?），约束从
+// **就地循环**实现（arrayGetUnchecked + == @local?），约束从
 // `T <: Copyable & Equatable<T>` 收窄为仅 `T <: Equatable<T>`——本用例的
 // non-Copyable、Equatable-by-id Box（target 的 tag 与 receiver 中不同）现已通过。
 // 设计期望（裸 Option<Int64>）：indexOf(target,2)=Some(2)，indexOf([2,3])=Some(2)，

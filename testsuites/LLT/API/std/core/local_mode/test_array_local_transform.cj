@@ -12,7 +12,7 @@
 //
 // 覆盖设计项（LM-DOC-20260910）：T109/T110/T111/T112/T113/T114/T115/T116/T117。
 //
-// map/filter/step(非空)/intersperse(长度>=2) 的结果数组通过 arraySet2 向 local
+// map/filter/step(非空)/intersperse(长度>=2) 的结果数组通过 arraySet 向 local
 // 对象写入；该路径在当前 runtime 可用，对应的值、顺序、计数与独立性断言均已启用。
 // flatMap/filterMap 的 local 回调返回值需要显式泛型参数。
 // T117 的 non-Copyable String 裸 R fold 是设计与当前 R@local! 实现的 CONFLICT，
