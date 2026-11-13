@@ -93,5 +93,24 @@ main () {
         }
     }
 
+    // The constructors without a message, and the class names used by toString.
+    let withoutMessage: Array<(Exception, String)> = [
+        (ExternMemberAccessException(), "ExternMemberAccessException"),
+        (ExternFunctionAccessException(), "ExternFunctionAccessException"),
+        (ExternFunctionCallException(), "ExternFunctionCallException"),
+        (ExternIndexedAccessException(), "ExternIndexedAccessException"),
+        (ExternConversionException(), "ExternConversionException"),
+        (ForeignRuntimeException(), "ForeignRuntimeException")
+    ]
+    for ((e, name) in withoutMessage) {
+        if (!e.message.isEmpty() || e.toString() != name) {
+            throw Exception("Unexpected exception without message: " + e.toString())
+        }
+    }
+    let withMessage = ExternConversionException("Test 7")
+    if (withMessage.toString() != "ExternConversionException: Test 7") {
+        throw Exception("Unexpected exception with message: " + withMessage.toString())
+    }
+
     0
 }
