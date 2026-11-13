@@ -6,13 +6,19 @@
  * See https://cangjie-lang.cn/pages/LICENSE for license information.
  */
 
-// DEPENDENCE: ../test.toml test.h
+// DEPENDENCE: ../test.toml test.h overloadable.h
 // EXEC: ObjCInteropGen test.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-// foreign func M(): Unit
+// [overloadable] foreign func M(_: Int8): Unit
 
-// foreign func M(_: Int32): Unit
+// [overloadable] foreign func M(_: Int16): Unit
 
-foreign func M(_: Float64): Unit
+foreign func M(): Unit
+
+// [overloadable] @ObjCMirror
+// public func M(_: ?ObjCId): Unit
+
+// [overloadable] @ObjCMirror
+// public func M(_: ?C): Unit
 */

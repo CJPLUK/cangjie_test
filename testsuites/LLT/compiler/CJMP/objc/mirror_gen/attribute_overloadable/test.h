@@ -6,8 +6,13 @@
  * See https://cangjie-lang.cn/pages/LICENSE for license information.
  */
 
-__attribute__((overloadable)) void M(void);
-__attribute__((overloadable)) void M(int);
-void M(double);
-__attribute__((overloadable)) void M(void);
-void M(double);
+#include "overloadable.h"
+
+@class C;
+
+__attribute__((overloadable)) void M(char);
+__attribute__((__overloadable__)) void M(short);
+void M(void);
+OVERLOADABLE1 void M(id);
+OVERLOADABLE2 void M(C*);
+FAKE_OVERLOADABLE void M(void);
