@@ -14,7 +14,7 @@ main(): Int64 {
 }
 
 /* SCAN
-error: trailing lambda cannot be used for non-function type
+error: trailing lambda cannot be used for non function nor option of function type
   ==> trailing_closure_type_mismatch_02.cj:12:10:
    | 
 12 |     test {=> 1}
