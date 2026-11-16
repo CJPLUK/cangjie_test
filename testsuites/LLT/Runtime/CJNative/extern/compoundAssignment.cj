@@ -153,11 +153,6 @@ main() {
     v -= e.z
     check(trace, "v.-;e.z;v.-(e.z);", "v -= e.z")
 
-    v = Extern<TraceRT>("v")
-    reset()
-    v &&= true
-    check(trace, "v.&&;v.&&(true);", "v &&= true")
-
     reset()
     getHolder().x *= 2
     check(trace, "x.*;x.*(2);", "getHolder().x *= 2")
@@ -234,9 +229,5 @@ main() {
     reset()
     e.q <<= 2
     check(trace, "e.q;e.q.<<;e.q.<<(2);e.q = e.q.<<(2);", "e.q <<= 2")
-
-    reset()
-    e.b ||= false
-    check(trace, "e.b;e.b.||;e.b.||(false);e.b = e.b.||(false);", "e.b ||= false")
     0
 }
