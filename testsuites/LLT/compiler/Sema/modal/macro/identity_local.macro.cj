@@ -17,7 +17,7 @@ func tryRoundTrip(code: String): Unit {
 }
 
 // Parse-round-trip local-mode surfaces, then emit a runnable subset.
-public macro Identity(input: Tokens): Tokens {
+public macro Identity(input: Tokens @~local): Tokens @~local {
     tryRoundTrip(
         """
 class Box {

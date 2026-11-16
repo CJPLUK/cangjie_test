@@ -69,7 +69,15 @@ struct StructPrimaryCtorLocalHalfMemberNotAllowedWithImplicitNotLocalThis {
     var a: Data @local? = Data()
 }
 
+class ExplicitNotLocalMember {
+    let value: Int64 @~local = 0
+}
+
+struct StructExplicitNotLocalMember {
+    let value: Int64 @~local = 0
+}
+
 main() {}
 
-// ASSERT: scan-12 "DiagKind": "sema_expected_data_type",
-// ASSERT: scan "Errors": 12,
+// ASSERT: scan-14 "DiagKind": "parse_unexpected_modal_type",
+// ASSERT: scan "Errors": 14,
