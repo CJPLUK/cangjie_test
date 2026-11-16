@@ -31,8 +31,8 @@ public open foreign class A {
 @ObjC
 public open foreign class M <: A {
     public static func f1Static(): Unit
-    public open func f4(x: ?A): ?A
-    public static func f5(x: ?A): ?A
+    @ForeignName["f4:"] public open func f4(x: ?A): ?A
+    @ForeignName["f5:"] public static func f5(x: ?A): ?A
     @ForeignName["setF9:"] public open func setF9(x: Int32): Unit
     public open mut prop f10: Int32
     public open func get_f11(): Int32

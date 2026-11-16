@@ -20,7 +20,7 @@ public open foreign class NSObject {
 
 @ObjC
 public open foreign class M/*<T>*/ <: NSObject {
-    @ForeignName["initWithThing:"] public init(thing: ?P /*T<P>*/)
+    @ObjCInit @ForeignName["initWithThing:"] public static func initWithThing(thing: ?P /*T<P>*/): M/*<T>*/
     @ObjCInit @ForeignName["initWithProtocol:"] public static func initWithProtocol(thing: ?P): M/*<T>*/
 }
 */
