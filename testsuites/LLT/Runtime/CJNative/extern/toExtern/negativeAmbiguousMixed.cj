@@ -38,7 +38,7 @@ public class DummyRT <: ForeignRuntime<DummyRT> {
 }
 
 // Only the Extern<DummyRT> candidate converts its argument, but conversions play no part in overload ranking and
-// neither candidate is more specific, also when the converted values are the branches of an if or a match.
+// neither candidate is more specific, also when the converted value is an if or a match.
 func amb(_: Int64): Int64 {
     1
 }

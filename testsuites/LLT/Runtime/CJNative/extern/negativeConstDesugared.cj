@@ -9,9 +9,10 @@
 // ASSERT: scan-not dynamic operation on 'Extern'
 // ASSERT: scan-not expected 'const'
 
-// Implicit conversions to Extern<T> are rejected in 'const' code also when the converted value comes from an 'else if'
-// branch, from a case of a 'match' without a selector, or from a branch that is empty or ends with a declaration, whose
-// value is the unit value, and in the argument of a pipeline, which is desugared into a call.
+// Implicit conversions to Extern<T> are rejected in 'const' code also for an 'if' with an 'else if' branch, a 'match'
+// without a selector, or an 'if' with a branch that is empty or ends with a declaration, whose value is the unit value.
+// When some branch is not of type Extern<T>, the expression is converted as a whole, and the error is reported on it.
+// They are also rejected in the argument of a pipeline, which is desugared into a call.
 
 public class DummyRT <: ForeignRuntime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {

@@ -54,7 +54,7 @@ func bothAny(e: Extern<DummyRT>): Int64 {
 }
 
 // Conversions play no part in overload ranking: Extern<DummyRT> is more specific than Any, so it is called even when
-// its argument needs a conversion, including a conversion of the branches of an if or a match.
+// its argument needs a conversion, including an if or a match, which is converted as a whole.
 main() {
     if (bothAny(42) != 142) {
         throw Exception("Any overload selected over the more specific Extern overload")
