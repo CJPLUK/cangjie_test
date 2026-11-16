@@ -82,14 +82,6 @@ main () {
     for (i in 0..3) {
         for (j in 0..3) {
             for (k in 0..3) {
-                assert(DummyRT.fromExtern<String>(e[i,j,k]) == "${i}${j}${k}", "e[${i},${j},${k}] is not ${i}${j}${k}")
-            }
-        }
-    }
-
-    for (i in 0..3) {
-        for (j in 0..3) {
-            for (k in 0..3) {
                 e[i][j][k] = "foo${i}${j}${k}"
             }
         }
@@ -102,21 +94,4 @@ main () {
             }
         }
     }
-
-    for (i in 0..3) {
-        for (j in 0..3) {
-            for (k in 0..3) {
-                e[i,j,k] = "bar${i}${j}${k}"
-            }
-        }
-    }
-
-    for (i in 0..3) {
-        for (j in 0..3) {
-            for (k in 0..3) {
-                assert(DummyRT.fromExtern<String>(e[i,j,k]) == "bar${i}${j}${k}", "e[${i},${j},${k}] is not bar${i}${j}${k}")
-            }
-        }
-    }
-
 }

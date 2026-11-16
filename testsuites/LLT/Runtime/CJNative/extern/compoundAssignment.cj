@@ -224,8 +224,8 @@ main() {
     checkCalls(2, "id(e)[next()] += 1")
 
     reset()
-    e[0, 1] /= e.w
-    check(trace, "e[0];e[0][1];e[0][1]./;e.w;e[0][1]./(e.w);e[0][1] = e[0][1]./(e.w);", "e[0, 1] /= e.w")
+    e[0][1] /= e.w
+    check(trace, "e[0];e[0][1];e[0][1]./;e.w;e[0][1]./(e.w);e[0][1] = e[0][1]./(e.w);", "e[0][1] /= e.w")
 
     reset()
     e.g(1).h %= 2

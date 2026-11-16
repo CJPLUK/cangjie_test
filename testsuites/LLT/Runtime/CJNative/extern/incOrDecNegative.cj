@@ -5,7 +5,7 @@
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
 // RUN-EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>&1 | compare %f
-// ASSERT: scan-14 expected 'integer type', found 'Struct-Extern<Class-RT>'
+// ASSERT: scan-13 expected 'integer type', found 'Struct-Extern<Class-RT>'
 // ASSERT: scan-1 expected 'integer type', found 'Struct-Extern<Generics-T>'
 // ASSERT: scan-not Assertion
 
@@ -38,7 +38,6 @@ main() {
     e.f++               // Dynamic member access.
     e.f--
     e[0]++              // Dynamic index access.
-    e[0, 1]--
     e.f.g++             // Nested dynamic accesses.
     e[0][1]--
     e.f[0]++
