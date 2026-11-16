@@ -10,7 +10,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public open class A <: M {
     public init() {
         println("in cj A init1")
@@ -19,7 +19,7 @@ public open class A <: M {
         println("in cj A init2, ${a}")
     }
 }
-@ObjCImpl
+@ObjC
 public class B <: A {
     public init() {
         println("in cj B init1")

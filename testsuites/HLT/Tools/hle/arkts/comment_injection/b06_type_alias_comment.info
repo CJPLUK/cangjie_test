@@ -1,0 +1,12 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: b06_type_alias_comment.d.ts
+// EXEC: %hle_arkts -i b06_type_alias_comment.d.ts -o . --module-name="my_module"
+// EXEC-PIPE: %cat cj/b06_type_alias_comment/src/b06_type_alias_comment.cj | compare %f
+// ASSERT: scan /* B6: type alias preceding block comment, no payload */
+// ASSERT: scan public type B6BlockType = String

@@ -10,7 +10,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     private var a: Int64 = 123
     mut prop p: Int64 {

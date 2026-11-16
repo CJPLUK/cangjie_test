@@ -29,7 +29,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 private class TestClass <: JavaClass {
     public init() {
         super()
@@ -52,7 +52,7 @@ private class TestClass <: JavaClass {
     }
 }
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     public init() {
         println("in CangjieInvoke Init")

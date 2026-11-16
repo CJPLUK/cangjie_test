@@ -4,7 +4,7 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// Verify optimized enum tables retain if-let and while-let diagnostic sources.
+// Enum payload constants are not propagated yet; constructor-only while-let remains diagnosed.
 // EXEC-PIPE-0: %compiler %cmp_opt %f -o %output 2>&1 | compare %f
 // EXEC: %compiler %cmp_opt -O2 %f -o %output
 
@@ -27,19 +27,6 @@ main() {
         break
     }
 }
-
-/* SCAN-IN
-warning: unreachable block in 'if' expression
-  ==> enum_table_condition_source.cj:20:12:
-   | 
-20 |       } else {
-   |  ____________^
-21 | |         println("unreachable else")
-22 | |     }
-   | |_____^ unreachable block in 'if' expression
-   | 
-   # note: this warning can be suppressed by setting the compiler option `-Woff unused`
-*/
 
 /* SCAN-IN
 warning: unreachable block in 'while' expression

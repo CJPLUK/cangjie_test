@@ -10,8 +10,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public class N {
+@ObjC
+public foreign class N {
     init()
 
     @ForeignName["zeroParams"]
@@ -27,14 +27,14 @@ public class N {
     public func fiveParams(first: ObjCPointer<A>, second: IntNative, third: Float64, fourth: A, fifth: ObjCPointer<Byte>): M
 }
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     init() {
         super()
     }
 }
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     init()
 }

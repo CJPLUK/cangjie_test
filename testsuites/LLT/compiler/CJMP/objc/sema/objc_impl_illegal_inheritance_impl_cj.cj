@@ -6,11 +6,11 @@
 
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
 
-// ASSERT: scan error: @ObjCImpl declaration must inherit @ObjCMirror
+// ASSERT: scan error: exported '@ObjC' declaration must inherit either foreign or exported '@ObjC' type
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class N <: M {
     init() {}
 }

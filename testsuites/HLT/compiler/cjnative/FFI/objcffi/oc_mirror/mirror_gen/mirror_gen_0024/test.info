@@ -18,20 +18,20 @@ import objc.foundation.NSObjectProtocol
 import objc.foundation.NSString
 import objc.lang.*
 
-@ObjCMirror
-public open class A <: NSObject {
+@ObjC
+public open foreign class A <: NSObject {
 }
 
-@ObjCMirror
-public interface B <: NSObjectProtocol {
+@ObjC
+public foreign interface B <: NSObjectProtocol {
 }
 
 @C
 public struct S {
 }
 
-@ObjCMirror
-public open class test <: NSObject {
+@ObjC
+public open foreign class test <: NSObject {
     public init()
     @ForeignName["initWithA:"] public init(a: Int32)
     @ForeignName["initWithS:"] public init(s: ?NSString)

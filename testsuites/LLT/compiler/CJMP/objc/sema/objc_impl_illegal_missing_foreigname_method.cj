@@ -4,13 +4,11 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
-
-// ASSERT: scan error: @ObjCImpl declaration method 'someFuncWithParams' with more than one parameter must have @ForeignName annotation
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class N <: M {
     public init() {}
 
@@ -19,7 +17,11 @@ public class N <: M {
     public func someFuncWithParams(first: Int32, second: Int32) {}
 }
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     init()
 }
+
+// ASSERT: scan sema_objc_method_must_have_foreign_name
+// ASSERT: scan member function 'someFuncWithParams' in exported '@ObjC' declaration must be annotated with '@ForeignName'
+// ASSERT: scan member function with more than one parameter must be annotated with '@ForeignName'

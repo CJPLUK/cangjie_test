@@ -8,11 +8,11 @@
 
 import java.lang.*
 
-@JavaMirror
-abstract class Parent {
+@Java
+abstract foreign class Parent {
     public abstract func foo(): Unit
 }
 
-@JavaMirror
-abstract class Child {
+@Java
+abstract foreign class Child {
 }

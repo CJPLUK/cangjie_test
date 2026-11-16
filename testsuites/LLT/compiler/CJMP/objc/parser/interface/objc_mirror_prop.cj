@@ -8,8 +8,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-interface M {
+@ObjC
+foreign interface M {
     prop x: Int64
     mut prop xm: Int64
     static prop xs: Int64

@@ -18,7 +18,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class TestClass <: ImplAbstractMirror {
     public init(aInt: JArray<Int32>) {
         super(aInt)
@@ -34,7 +34,7 @@ public class TestClass <: ImplAbstractMirror {
     }
 }
 
-@JavaImpl
+@Java
 public class Impl <: JObject {
     public init() {
         let arr = JArray<Int32>(10)

@@ -29,7 +29,7 @@ package UNNAMED
 
 import java.lang.JObject
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     public init() {
         println("in CangjieInvoke Init")

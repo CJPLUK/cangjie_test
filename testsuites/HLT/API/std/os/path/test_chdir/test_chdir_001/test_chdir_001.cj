@@ -7,9 +7,9 @@
  */
 
 // LEVEL: 0
-// (not Windows) EXEC-PIPE: %compiler %cmp_opt %f -o %output
-// (not Windows) RUN-EXEC-PIPE: %run %run_opt %output %run_args | compare %f
-// (not Windows) ASSERT: scan pass
+// (!target_win) EXEC-PIPE: %compiler %cmp_opt %f -o %output
+// (!target_win) RUN-EXEC-PIPE: %run %run_opt %output %run_args | compare %f
+// (!target_win) ASSERT: scan pass
 
 import std.posix.*
 

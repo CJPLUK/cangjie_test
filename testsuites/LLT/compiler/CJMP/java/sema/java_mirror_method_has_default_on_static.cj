@@ -8,8 +8,8 @@
 
 import java.lang.JObject
 
-@JavaMirror
-interface M {
+@Java
+foreign interface M {
     @JavaHasDefault
     public static func foo(): Unit
 }

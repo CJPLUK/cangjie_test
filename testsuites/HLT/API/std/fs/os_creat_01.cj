@@ -8,9 +8,9 @@
 
 // LEVEL: 0
 // DEPENDENCE: caserunner.cj test_fj.txt test_fj_notnull.txt
-// (not MAC and not Windows) EXEC-PIPE: %compiler %cmp_opt caserunner.cj -o %output %f
-// (not MAC and not Windows) RUN-EXEC-PIPE: %run %run_opt %output %run_args | compare %f
-// (not MAC and not Windows) ASSERT: scan-not AssertionError
+// (!target_mac & !target_win) EXEC-PIPE: %compiler %cmp_opt caserunner.cj -o %output %f
+// (!target_mac & !target_win) RUN-EXEC-PIPE: %run %run_opt %output %run_args | compare %f
+// (!target_mac & !target_win) ASSERT: scan-not AssertionError
 import std.posix.*
 
 main() {

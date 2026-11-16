@@ -10,7 +10,7 @@
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class N <: M {
     init() {}
 
@@ -23,8 +23,8 @@ public class N <: M {
     }
 }
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     init()
 }
 

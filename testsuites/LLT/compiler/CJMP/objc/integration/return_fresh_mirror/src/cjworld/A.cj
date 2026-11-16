@@ -9,7 +9,7 @@ import std.collection.*
 import std.runtime.*
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: NSObject {
     static let markerList = ArrayList<TrackedObject>()
 

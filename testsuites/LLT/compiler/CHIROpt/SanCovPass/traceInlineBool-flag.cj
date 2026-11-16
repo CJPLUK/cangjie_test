@@ -4,19 +4,11 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// DEPENDENCE: sancov.h sancov.cpp
-// (CJNATIVE and DEBUG_OPTION) EXEC: %clang++ -c -fPIC %stdc++_opt sancov.cpp -o sancov.o
-// (CJNATIVE and DEBUG_OPTION) EXEC: %compiler --sanitizer-coverage-level=1 --sanitizer-coverage-inline-bool-flag sancov.o %n.cj -o %output
-// (CJNATIVE and DEBUG_OPTION) EXEC: %run %run_opt %output %run_args
-// (CJNATIVE and DEBUG_OPTION) EXEC: %compiler %debugCHIROpt --sanitizer-coverage-inline-bool-flag sancov.o %n.cj -o %output 2>&1 | compare %f
-// (CJNATIVE and DEBUG_OPTION) EXEC: %run %run_opt %output %run_args
-// (not CJNATIVE and DEBUG_OPTION) EXEC: %clang++ -shared -fPIC %stdc++_opt sancov.cpp -o libsancov.so
-// (not CJNATIVE and DEBUG_OPTION) EXEC: %compiler --sanitizer-coverage-level=1 --sanitizer-coverage-inline-bool-flag -o %n.%suffix %n.cj -lsancov
-// (not CJNATIVE and DEBUG_OPTION) RUN-EXEC: LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:. %run %n.%suffix %run_args
-// (not CJNATIVE and DEBUG_OPTION) EXEC: %compiler %debugCHIROpt --sanitizer-coverage-inline-bool-flag -o %n.%suffix %n.cj -lsancov 2>&1 | compare %f
-// (not CJNATIVE and DEBUG_OPTION) RUN-EXEC: LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:. %run %n.%suffix %run_args
-
-// ASSERT: scan-16 [SanitizerCoverage] Add trace inline bool at [0,0].
+// DEPENDENCE: ../pick_defination.py
+// EXEC: %frontendCompiler %dumpCHIRDebug --sanitizer-coverage-level=1 --sanitizer-coverage-inline-bool-flag -Woff all %f -o sancov-function.out
+// EXEC: %python pick_defination.py sancov-function_CHIR/[0-9]*_Sanitizer_Coverage.chirtxt WHOLE | compare %f --assert_flag=ASSERT_FUNCTION
+// EXEC: %frontendCompiler %dumpCHIRDebug --sanitizer-coverage-level=2 --sanitizer-coverage-inline-bool-flag -Woff all %f -o sancov-block.out
+// EXEC: %python pick_defination.py sancov-block_CHIR/[0-9]*_Sanitizer_Coverage.chirtxt WHOLE | compare %f
 
 func f1(t1: Int8, t2: Int16, t4: Int32, t8: Int64): Int64 {
     if (t1 != 0) {
@@ -59,3 +51,29 @@ main() {
     f2()
     0
 }
+
+// ASSERT_FUNCTION: regex-4 = Intrinsic\(writePointer<Bool>
+// ASSERT_FUNCTION: regex-1 = Apply\(@__cj_sancov_bool_flag_ctor[,)]
+// ASSERT_FUNCTION: regex-begin Func @\S*0\.sancov\$_bool_flagHv
+// ASSERT_FUNCTION: regex-after %(?P<size>\d+): UInt64 = Constant\(4u\)
+// ASSERT_FUNCTION: regex-after %(?P<storage>\d+): CPointer<Bool> = Apply\(@__cj_sancov_bool_flag_ctor, %(?P=size)\)
+// ASSERT_FUNCTION: regex-after Unit = Store\(%(?P=storage), @sancov\$_bool_flag\)
+// ASSERT_FUNCTION: regex-begin Func @_CN7default6<main>
+// ASSERT_FUNCTION: regex-after %(?P<counter>\d+): CPointer<Bool> = Load\(@sancov\$_bool_flag\)
+// ASSERT_FUNCTION: regex-after %(?P<offset>\d+): Int64 = Constant\(\d+i\)
+// ASSERT_FUNCTION: regex-after %(?P<true>\d+): Bool = Constant\(true\)
+// ASSERT_FUNCTION: regex-after Unit = Intrinsic\(writePointer<Bool>, %(?P=counter), %(?P=offset), %(?P=true)\)
+// ASSERT_FUNCTION: scan-not = Intrinsic(readPointer<Bool>
+
+// ASSERT: regex-16 = Intrinsic\(writePointer<Bool>
+// ASSERT: regex-1 = Apply\(@__cj_sancov_bool_flag_ctor[,)]
+// ASSERT: regex-begin Func @\S*0\.sancov\$_bool_flagHv
+// ASSERT: regex-after %(?P<size>\d+): UInt64 = Constant\(16u\)
+// ASSERT: regex-after %(?P<storage>\d+): CPointer<Bool> = Apply\(@__cj_sancov_bool_flag_ctor, %(?P=size)\)
+// ASSERT: regex-after Unit = Store\(%(?P=storage), @sancov\$_bool_flag\)
+// ASSERT: regex-begin Func @_CN7default6<main>
+// ASSERT: regex-after %(?P<counter>\d+): CPointer<Bool> = Load\(@sancov\$_bool_flag\)
+// ASSERT: regex-after %(?P<offset>\d+): Int64 = Constant\(\d+i\)
+// ASSERT: regex-after %(?P<true>\d+): Bool = Constant\(true\)
+// ASSERT: regex-after Unit = Intrinsic\(writePointer<Bool>, %(?P=counter), %(?P=offset), %(?P=true)\)
+// ASSERT: scan-not = Intrinsic(readPointer<Bool>

@@ -4,20 +4,12 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output 2>& 1 | compare %f
 
-@ObjCMirror
-class M {
+@ObjC
+foreign class M {
     init() {}
 }
 
-/* SCAN-IN
-error: @ObjCMirror declaration constructor cannot have body
-  ==> objc_mirror_init_ctor_with_body.cj:11:12:
-   | 
-11 |     init() {}
-   |            ^ @ObjCMirror declaration constructor cannot have body
-   | 
-
-1 error generated, 1 error printed.
-*/
+// ASSERT: scan parse_objc_mirror_ctor_cannot_have_body
+// ASSERT: scan "Errors": 1

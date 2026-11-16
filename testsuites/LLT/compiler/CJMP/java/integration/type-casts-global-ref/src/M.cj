@@ -8,8 +8,8 @@ package cjworld
 
 import java.lang.*
 
-@JavaMirror["cjworld.M"]
-public open class M {
+@Java["cjworld.M"]
+public open foreign class M {
     public init()
 
     public open func foo(): Unit

@@ -22,8 +22,9 @@
 *- @Priority: P0
 */
 
+// LEVEL: 0
 // Description:
-// DEPENDENCE: utils upstream crosspkg
+// DEPENDENCE: ../../../utils upstream crosspkg
 // EXEC: %compiler %cmp_opt %compile_lib_opt -p utils
 // EXEC: %compiler %cmp_opt %compile_lib_opt -p upstream
 // EXEC: %compiler %cmp_opt %compile_lib_opt -p crosspkg

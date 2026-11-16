@@ -15,7 +15,7 @@ package cj
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class Impl <: MyObject {
     public init() {
         // Primitive argument

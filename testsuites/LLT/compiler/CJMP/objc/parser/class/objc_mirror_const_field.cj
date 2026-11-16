@@ -1,7 +1,7 @@
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>& 1 | compare %f
 
-@ObjCMirror
-class M {
+@ObjC
+foreign class M {
     public const let y: Int64
 }
 

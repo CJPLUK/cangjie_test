@@ -55,16 +55,16 @@ change CJ struct: x -> 44 , y -> 55 , z -> 66
 foreign func PassStructToC_6S(aStruct: BiggerStruct, bStruct: BiggerStruct, cStruct: BiggerStruct,
     dStruct: BiggerStruct, eStruct: BiggerStruct, fStruct: BiggerStruct): BiggerStruct
 
-foreign func PassStructToC_6int1S(a: Int64, b: Int64, c: Int64, d: Int64, e: Int64, f: Int64, fStruct: BiggerStruct): BiggerStruct
+foreign func PassStructToC_6int1S(a: Int32, b: Int32, c: Int32, d: Int32, e: Int32, f: Int32, fStruct: BiggerStruct): BiggerStruct
 
-foreign func PassStructToC_6int(a: Int64, b: Int64, c: Int64, d: Int64, e: Int64, f: Int64, g: Int64): Int64
+foreign func PassStructToC_6int(a: Int32, b: Int32, c: Int32, d: Int32, e: Int32, f: Int32, g: Int32): Int32
 
-foreign func PassStructToC_1S6int(aStruct: BiggerStruct, a: Int64, b: Int64, c: Int64, d: Int64, e: Int64, f: Int64): BiggerStruct
+foreign func PassStructToC_1S6int(aStruct: BiggerStruct, a: Int32, b: Int32, c: Int32, d: Int32, e: Int32, f: Int32): BiggerStruct
 
-foreign func PassStructToC_3int1S3int1S(a: Int64, b: Int64, c: Int64, aStruct: BiggerStruct, d: Int64, e: Int64,
-    f: Int64, bStruct: BiggerStruct): BiggerStruct
+foreign func PassStructToC_3int1S3int1S(a: Int32, b: Int32, c: Int32, aStruct: BiggerStruct, d: Int32, e: Int32,
+    f: Int32, bStruct: BiggerStruct): BiggerStruct
 
-func CJ_6int(a: Int64, b: Int64, c: Int64, d: Int64, e: Int64, f: Int64): Int64 {
+func CJ_6int(a: Int32, b: Int32, c: Int32, d: Int32, e: Int64, f: Int64): Int32 {
     println(a.toString())
     println(b.toString())
     println(c.toString())
@@ -74,7 +74,7 @@ func CJ_6int(a: Int64, b: Int64, c: Int64, d: Int64, e: Int64, f: Int64): Int64 
     return 0
 }
 
-func CJ_1S6int(aStruct: BiggerStruct, a: Int64, b: Int64, c: Int64, d: Int64, e: Int64, f: Int64): Int64 {
+func CJ_1S6int(aStruct: BiggerStruct, a: Int32, b: Int32, c: Int32, d: Int32, e: Int32, f: Int32): Int32 {
     CJ_6int(a, b, c, d, aStruct.x, aStruct.y)
     println(a.toString())
     println(b.toString())
@@ -109,13 +109,13 @@ main() {
         var eee: BiggerStruct = BiggerStruct(34, 35, 36)
         var fff: BiggerStruct = BiggerStruct(44, 45, 46)
 
-        var g: Int64 = 1
-        var h: Int64 = 2
-        var i: Int64 = 3
-        var j: Int64 = 4
-        var k: Int64 = 5
-        var l: Int64 = 6
-        var m: Int64 = 7
+        var g: Int32 = 1
+        var h: Int32 = 2
+        var i: Int32 = 3
+        var j: Int32 = 4
+        var k: Int32 = 5
+        var l: Int32 = 6
+        var m: Int32 = 7
 
         PassStructToC_6S(aaa, bbb, ccc, ddd, eee, fff)
         PassStructToC_6int(g, h, i, j, k, l, m)

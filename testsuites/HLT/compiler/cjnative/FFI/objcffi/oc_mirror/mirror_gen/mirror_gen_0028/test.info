@@ -16,8 +16,8 @@ package cjworld
 import objc.foundation.NSObject
 import objc.lang.*
 
-@ObjCMirror
-public open class test <: NSObject {
+@ObjC
+public open foreign class test <: NSObject {
     protected var a1: Int32
     protected var a2: Int32
     protected var a5: Int32

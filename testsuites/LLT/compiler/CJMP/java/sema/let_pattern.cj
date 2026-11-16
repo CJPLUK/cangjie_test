@@ -7,12 +7,12 @@ import java.lang.JObject
 import std.unittest.assertEqual
 import std.unittest.testmacro.Assert
 
-@JavaMirror
-open class M {
+@Java
+open foreign class M {
     init()
 }
 
-@JavaImpl
+@Java
 class A <: M {
     A() {
         super()
@@ -74,4 +74,3 @@ error: Java interoperability feature 'let type patterns with JavaImpl or JavaMir
 // with Runtime Library Exception.
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
-

@@ -10,8 +10,8 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaMirror["com.Father"]
-public open class Father {
+@Java["com.Father"]
+public open foreign class Father {
     public mut prop aBoolean: JArray<Bool>
 
     public mut prop aInt: JArray<Int32>
@@ -22,5 +22,3 @@ public open class Father {
 
     public init() 
 }
-
-

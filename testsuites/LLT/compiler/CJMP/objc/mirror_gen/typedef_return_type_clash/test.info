@@ -12,13 +12,13 @@
 /* SCAN-IN
 public type PM = M
 
-@ObjCMirror
-public open class A {
+@ObjC
+public open foreign class A {
     public open func foo(): PM
 }
 
-@ObjCMirror
-public open class M <: A {
+@ObjC
+public open foreign class M <: A {
     public open func foo(): PM
 }
 */

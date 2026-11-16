@@ -1,0 +1,21 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+# This source file is part of the Cangjie project, licensed under Apache-2.0
+# with Runtime Library Exception.
+#
+# See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+# 构造格式错误的 lock：未知字段、类型错误、重复条目、悬空引用，期望明确报错且原文件不变
+version = 1
+
+[requires."test_repo_7"]
+version = "1.0.0"
+source = "registry+https://mirror-centralrepo.devcloud.cn-north-4.huaweicloud.com/artifactory/api/cjpm/cangjie-central-cjpm-test/"
+checksum = "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+unknown-field = 1
+dependencies = "not-an-array"
+
+[requires."test_repo_7"]
+version = "1.0.0"
+
+[requires."ghost"]
+version = "1.0.0"

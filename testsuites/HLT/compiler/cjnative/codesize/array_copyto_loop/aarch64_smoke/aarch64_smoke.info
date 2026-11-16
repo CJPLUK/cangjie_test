@@ -1,0 +1,14 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ *
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+
+// LEVEL: 2
+// DESC: Array.copyTo AArch64 平台冒烟：非常量长度循环路径编译+运行通过，数据正确（平台边界）
+// DEPENDENCE: main.cj ../check.py
+// (target_aarch64) EXEC: %compiler %cmp_opt main.cj -o %output
+// (target_aarch64) RUN-EXEC: %run %run_opt %output %run_args
+// (target_aarch64) EXEC: %python check.py --file %output --max-size 5000000

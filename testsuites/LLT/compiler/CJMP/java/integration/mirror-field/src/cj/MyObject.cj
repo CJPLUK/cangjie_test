@@ -8,8 +8,8 @@ package cj
 
 import java.lang.JObject
 
-@JavaMirror["com.java.lib.MyObject"]
-public open class MyObject <: JObject {
+@Java["com.java.lib.MyObject"]
+public open foreign class MyObject <: JObject {
     public var obj: JObject
     public static var sobj: JObject
     public init(a:Int16)

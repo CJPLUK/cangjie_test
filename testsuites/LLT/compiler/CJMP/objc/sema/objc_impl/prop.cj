@@ -9,15 +9,15 @@
 
 import objc.lang.*
 
-@ObjCMirror
-open class M {
+@ObjC
+public open foreign class M {
     init()
 }
 
-@ObjCImpl
+@ObjC
 public class Impl <: M {}
 
-@ObjCImpl
+@ObjC
 class A <: M {
     public init() {
 

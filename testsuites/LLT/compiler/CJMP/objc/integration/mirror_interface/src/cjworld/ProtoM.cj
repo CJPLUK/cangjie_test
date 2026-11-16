@@ -8,8 +8,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-interface ProtoM {
+@ObjC
+foreign interface ProtoM {
   mut prop idProp: ObjCId
   mut prop protoProp: ProtoM1
 

@@ -31,7 +31,7 @@ error: unexpected modifier 'abstract' on property declaration in interface body
   |     unexpected modifier
   | 
 
-error: only common/specific or Native FFI mirror abstract classes can have explicitly abstract property
+error: only common/specific or '@Java' foreign abstract classes can have explicitly abstract property
  ==> c/c.cj:5:27:
   | 
 5 |     abstract prop p1: Unit
@@ -50,7 +50,7 @@ error: unexpected modifier 'abstract' on property declaration in interface body
   |     unexpected modifier
   | 
 
-error: only common/specific or Native FFI mirror abstract classes can have explicitly abstract property
+error: only common/specific or '@Java' foreign abstract classes can have explicitly abstract property
  ==> c/c.cj:6:43:
   | 
 6 |     abstract prop p2: Unit { get() { 1 } }
@@ -96,7 +96,7 @@ error: unexpected modifier 'abstract' on property declaration in interface body
   |     unexpected modifier
   | 
 
-error: only common/specific or Native FFI mirror abstract classes can have explicitly abstract property
+error: only common/specific or '@Java' foreign abstract classes can have explicitly abstract property
  ==> c/c.cj:9:34:
   | 
 9 |     abstract static prop p5: Unit
@@ -116,7 +116,7 @@ error: unexpected modifier 'abstract' on property declaration in interface body
    |     unexpected modifier
    | 
 
-error: only common/specific or Native FFI mirror abstract classes can have explicitly abstract property
+error: only common/specific or '@Java' foreign abstract classes can have explicitly abstract property
   ==> c/c.cj:10:50:
    | 
 10 |     abstract static prop p6: Unit { get() { 1 } }

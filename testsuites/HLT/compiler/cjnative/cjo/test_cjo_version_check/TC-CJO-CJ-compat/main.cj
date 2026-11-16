@@ -10,8 +10,8 @@
 
 
 // DEPENDENCE: c p
-// EXEC-0: %compiler --diagnostic-format=noColor --experimental c/c.cj --output-type=chir --output-dir ./c
-// EXEC-PIPE-0: %compiler --diagnostic-format=json --experimental p/p.cj --common-part-chir=c/cmp.chir --common-part-cjo=c/cmp.cjo --output-type=dylib --output-dir ./p 2>&1 | compare %f
+// EXEC-0: %compiler %cmp_opt --experimental c/c.cj --output-type=chir --output-dir ./c
+// EXEC-PIPE-0: %compiler %cmp_opt --experimental p/p.cj --common-part-chir=c/cmp.chir --common-part-cjo=c/cmp.cjo --output-type=dylib --output-dir ./p 2>&1 | compare %f
 // ASSERT: scan-not is incompatible: compiled with cjc
 // ASSERT: scan-not validation of
 

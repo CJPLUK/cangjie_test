@@ -8,7 +8,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class B <: Base {
     public B() {}
 }

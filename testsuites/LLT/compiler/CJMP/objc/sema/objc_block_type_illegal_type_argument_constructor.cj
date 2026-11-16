@@ -6,7 +6,7 @@
 
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
 
-// ASSERT: scan-9 error: ObjCBlock can only be used with function type over Objective-C compatible types
+// ASSERT: scan-9 error: 'ObjCBlock' can only be used with function type over Objective-C compatible types
 
 import objc.lang.*
 

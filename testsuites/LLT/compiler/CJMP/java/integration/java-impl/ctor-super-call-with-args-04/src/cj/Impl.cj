@@ -29,7 +29,7 @@ func a2(v0: ?MyObject, v1: ?MyObject): JArray<?MyObject> {
     return ret
 }
 
-@JavaImpl
+@Java
 public class Impl <: MyObject & I2 {
     public init(value: I2) {
         // Primitive argument

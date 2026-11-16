@@ -8,9 +8,9 @@
 
 // LEVEL:2
 // DEPENDENCE: %n.c cfg.json
-// (not Windows) EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg.json
-// (not Windows) EXEC: %clang %clang_opt %n.c -o %cffi_output
-// (not Windows) EXEC-PIPE-1: %compiler %cmp_opt %ffic_opt -o %output 2>&1 | compare %f
+// EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg.json
+// EXEC: %clang %clang_opt %n.c -o %cffi_output
+// EXEC-PIPE-1: %compiler %cmp_opt %ffic_opt -o %output 2>&1 | compare %f
 
 @C
 struct teststruct {
@@ -32,6 +32,6 @@ unsafe main(): Int64 {
 
     return 0
 }
-// (not Windows) ASSERT: scan sema_class_uninitialized_field
-// (not Windows) ASSERT: scan sema_invalid_tuple_field_ctype
-// (not Windows) ASSERT: scan sema_wrong_number_of_arguments
+// ASSERT: scan sema_class_uninitialized_field
+// ASSERT: scan sema_invalid_tuple_field_ctype
+// ASSERT: scan sema_wrong_number_of_arguments

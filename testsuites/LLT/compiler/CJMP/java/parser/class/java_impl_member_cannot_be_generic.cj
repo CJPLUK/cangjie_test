@@ -8,8 +8,7 @@
 // ASSERT: scan parse_java_impl_cannot_be_generic
 
 
-@JavaImpl
+@Java
 class I <: JObject {
     public func foo<T>() {}
 }
-

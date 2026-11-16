@@ -1,0 +1,14 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ *
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+
+// LEVEL: 1
+// DESC: 注解 outline：Full LTO 挂载（LTOBackend），反射结果不变，_imp helper 存在（LTO 仅 linux/ohos/android）
+// DEPENDENCE: main.cj ../check.py
+// (target_linux | target_ohos | target_android) EXEC: %compiler %cmp_opt -O2 --lto=full main.cj -o %output
+// (target_linux | target_ohos | target_android) RUN-EXEC: %run %run_opt %output %run_args
+// (target_linux | target_ohos | target_android) EXEC: %python check.py --file %output --max-size 5000000 --nm-has _imp

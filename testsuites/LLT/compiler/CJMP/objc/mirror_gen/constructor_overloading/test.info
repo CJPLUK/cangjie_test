@@ -10,16 +10,16 @@
 // EXEC: ObjCInteropGen test.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-@ObjCMirror
-public interface P {
+@ObjC
+public foreign interface P {
 }
 
-@ObjCMirror
-public open class NSObject {
+@ObjC
+public open foreign class NSObject {
 }
 
-@ObjCMirror
-public open class M/*<T>*/ <: NSObject {
+@ObjC
+public open foreign class M/*<T>*/ <: NSObject {
     @ForeignName["initWithThing:"] public init(thing: ?P /*T<P>*/)
     @ObjCInit @ForeignName["initWithProtocol:"] public static func initWithProtocol(thing: ?P): M/*<T>*/
 }

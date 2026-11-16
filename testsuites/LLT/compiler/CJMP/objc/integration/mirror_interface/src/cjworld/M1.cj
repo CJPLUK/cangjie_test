@@ -8,8 +8,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-class M1 <: ProtoM1 {
+@ObjC
+foreign class M1 <: ProtoM1 {
     @ForeignName["initWithValue:"]
     public init(value: Int64)
-} 
+}

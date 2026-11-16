@@ -6,12 +6,12 @@
 
 package cjmp.interop.java
 
-@JavaMirror["java.lang.Enum"]
-public abstract class JEnum {
+@Java["java.lang.Enum"]
+public abstract foreign class JEnum {
     public func ordinal(): Int32
 }
 
-@JavaMirror["java.lang.Enum"]
-public abstract class JEnum1 {
+@Java["java.lang.Enum"]
+public abstract foreign class JEnum1 {
     public func ordinal(): Int32
 }

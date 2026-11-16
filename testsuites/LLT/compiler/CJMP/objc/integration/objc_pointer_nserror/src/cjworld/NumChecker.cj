@@ -7,8 +7,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class NumChecker <: NSObject {
+@ObjC
+public open foreign class NumChecker <: NSObject {
     public init()
     @ForeignName["checkWithNumber:andError:"]
     public open func checkWithNumberAndError(num: ?NSNumber, error: ObjCPointer<?NSError>): ?NSNumber

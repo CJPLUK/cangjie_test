@@ -8,8 +8,8 @@ package cj
 
 import java.lang.JObject
 
-@JavaMirror["com.java.lib.Base"]
-open class Base <: JObject {
+@Java["com.java.lib.Base"]
+open foreign class Base <: JObject {
     public init()
     public open func bar(): Bool
     public open func foo(i: Int64): Int64

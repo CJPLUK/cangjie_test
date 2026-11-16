@@ -16,7 +16,7 @@
 // (target_linux | target_android | target_ohos) EXEC: %compiler %cmp_opt %compile_lib_opt --lto=full pkgb.cj -o libpkgb.bc
 // (target_linux | target_android | target_ohos) EXEC: %compiler %cmp_opt --lto=thin -O2 --disable-reflection lib.cj libpkgs.bc libpkga.bc libpkgb.bc --output-type=dylib -o libtrim.%dylib_suffix
 // (target_linux | target_android | target_ohos) EXEC: rm -rf llvmcache-* thinlto-cache .thinlto-cache
-// (target_linux | target_android | target_ohos) EXEC: %compiler %cmp_opt --lto=full -O2 lib.cj libpkgs.bc libpkga.bc libpkgb.bc --output-type=dylib -o libctrl.%dylib_suffix
+// (target_linux | target_android | target_ohos) EXEC: %compiler %cmp_opt --lto=thin -O2 lib.cj libpkgs.bc libpkga.bc libpkgb.bc --output-type=dylib -o libctrl.%dylib_suffix
 // (target_linux | target_android | target_ohos) EXEC: $CANGJIE_HOME/third_party/llvm/bin/llvm-objdump -t libtrim.%dylib_suffix 2>&1 | compare %f
 // (target_linux | target_android | target_ohos) ASSERT: scan pkgs:Data.tt.fieldnames
 // (target_linux | target_android | target_ohos) ASSERT: scan pkgs:Data.tt.reflect.dbg

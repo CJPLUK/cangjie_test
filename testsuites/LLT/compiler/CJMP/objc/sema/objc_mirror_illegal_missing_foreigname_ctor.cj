@@ -9,8 +9,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     init()
 
     init(first: Int32, second: Int32)

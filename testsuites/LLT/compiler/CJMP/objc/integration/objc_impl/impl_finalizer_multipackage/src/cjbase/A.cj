@@ -8,12 +8,12 @@ package cjbase
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     public init()
 }
 
-@ObjCImpl
+@ObjC
 public open class A <: M {
     /// Moved into `A$reg`, from where the subtype's companion inherits it.
     public var weight: Int64 = 0

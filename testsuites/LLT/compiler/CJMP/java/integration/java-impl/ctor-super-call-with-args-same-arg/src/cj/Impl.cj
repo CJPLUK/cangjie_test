@@ -14,7 +14,7 @@ package cj
 import java.lang.*
 
 
-@JavaImpl
+@Java
 public class Impl <: MyObject {
 
     // Test Case: reference to the same param

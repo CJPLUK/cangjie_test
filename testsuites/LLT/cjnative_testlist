@@ -18,19 +18,7 @@ compiler/CHIR/ComputeAnnotations
 compiler/CHIR/InvokeNodetest
 compiler/CHIR/RemoveRedundantRet
 compiler/CHIR/ScalarReplacementOfArray
-compiler/CHIROpt/FlatForInExpr
 compiler/CHIROpt/FunctionInline
-compiler/CHIROpt/MarkClassHasInited
-compiler/CHIROpt/MergeBlocks
-compiler/CHIROpt/NoSideEffectMarker
-compiler/CHIROpt/NonVisibleWrapperClear
-compiler/CHIROpt/O2Optimization
-compiler/CHIROpt/Optimizations
-compiler/CHIROpt/RedundantFuture
-compiler/CHIROpt/RedundantGetOrThrowElimination
-compiler/CHIROpt/SanCovPass
-compiler/CHIROpt/UnitUnify
-compiler/CHIROpt/UselessAllocateElimination
 compiler/CHIROpt/ValueRangeAnalysis
 compiler/CHIROpt/VarInitCheck
 compiler/CHIROpt/lambda_reduce
@@ -119,6 +107,14 @@ API/std/socket/redesign/syscalls/tcp_bind_to_device.cj
 compiler/Sema/generics/generic_subst_perf.cj
 
 
+# modal type
+# problem of implementing default member of interface, this is not caused by local mode
+API/stdx/net/http/server/serve_tls_test.cj
+compiler/Sema/Extend/extend_duplicate_interfaces9.cj
+# composition in modal type requires redesign (not in #1165 scope)
+compiler/Sema/modal/expr/composition/local_good.cj
+compiler/Sema/modal/expr/composition/local_good2.cj
+
 # daignose is changed
 compiler/Parser/function/missing_func_keyword.cj
 
@@ -181,3 +177,6 @@ compiler/CJMP/merging/classes/vtable/import1.cj
 # Driver permission related cases.
 compiler/ConditionalCompilation/cfg/read_file_fail.cj
 compiler/Driver/temporary_files/TMPDIR_illegal_3.cj
+
+# https://gitcode.com/Cangjie/cangjie_compiler/issues/1208
+API/stdx/AOP_tests/replaceFuncBody_struct_mut.cj

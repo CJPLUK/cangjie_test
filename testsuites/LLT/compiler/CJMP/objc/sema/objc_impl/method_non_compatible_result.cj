@@ -4,12 +4,12 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
 
 import objc.lang.*
 
-@ObjCMirror
-public open class Base {
+@ObjC
+public open foreign class Base {
     public init()
     public open func arg0(): Bool
     @ForeignName["primitive1WithArg0:"]
@@ -20,7 +20,7 @@ public open class Base {
     public open func primitive3(i: Int64, f: Float32, b: Bool): Int64
 }
 
-@ObjCImpl
+@ObjC
 public class Derived <: Base {
     public init() {}
     public func foo(): String {
@@ -28,11 +28,6 @@ public class Derived <: Base {
     }
 }
 
-/* SCAN-IN
-error: return type of Objective-C mirror method must be Objective-C compatible
-  ==> method_non_compatible_result.cj:26:24:
-   | 
-26 |     public func foo(): String {
-   |                        ^^^^^^ 
-   |
-*/
+// ASSERT: scan sema_objc_interop_method_ret_must_be_objc_compatible
+// ASSERT: scan 'String' is not Objective-C compatible type
+// ASSERT: scan "Errors": 1

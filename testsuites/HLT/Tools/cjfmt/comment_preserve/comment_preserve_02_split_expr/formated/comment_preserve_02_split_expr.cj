@@ -7,8 +7,8 @@
  */
 
 func longexpr(a: Int64, b: Int64, c: Int64, d: Int64): Int64 {
-    let total = a + b + c + d + a + b + c + d + a /* mark */ + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c +
-        d
+    let total = a + b + c + d + a + b + c + d + a /* mark */ + b + c + d + a + b + c + d + a + b + c + d + a + b + c +
+        d + a + b + c + d
     return total
 }
 

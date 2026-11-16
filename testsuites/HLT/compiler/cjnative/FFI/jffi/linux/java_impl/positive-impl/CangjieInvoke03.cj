@@ -27,7 +27,7 @@ public class Version {
 }
 
 @Version[1]
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     public let a1: Any = 1
     public var a2 = 2

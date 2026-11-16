@@ -6,7 +6,7 @@
 
 package cjworld
 
-@ObjCImpl
+@ObjC
 class C <: Base & BaseProto {
     public C() {}
     public func identify() {

@@ -38,12 +38,12 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     init()
 }
 
-@ObjCImpl["CustomName"]
+@ObjC["CustomName"]
 public class A <: M {
     public mut prop a: A {
         get() {

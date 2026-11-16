@@ -12,11 +12,9 @@ main(): Int64 {
     0
 }
 
-/* SCAN
-description: integer_literal, token_id: 139, token_literal_value: 1, fileID: 1, line: 10, column: 19
-description: add, token_id: 12, token_literal_value: +, fileID: 1, line: 10, column: 21
-description: integer_literal, token_id: 139, token_literal_value: 2, fileID: 20, line: 40, column: 26
-*/
+// ASSERT: scan description: integer_literal, token_id: 139, token_literal_value: 1
+// ASSERT: scan description: add, token_id: 12, token_literal_value: +
+// ASSERT: scan description: integer_literal, token_id: 139, token_literal_value: 2
 // Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
 // This source file is part of the Cangjie project, licensed under Apache-2.0
 // with Runtime Library Exception.

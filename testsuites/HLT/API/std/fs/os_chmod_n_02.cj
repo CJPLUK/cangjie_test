@@ -8,10 +8,10 @@
 
 // LEVEL: 0
 // DEPENDENCE: caserunner.cj
-// (not Windows) EXEC: %compiler %cmp_opt caserunner.cj -o %output %f
-// (not Windows) RUN-EXEC: %run %run_opt %output %run_args
-// (not Windows) RUN-EXEC-PIPE: %target_ls -l | compare %f
-// (not Windows) ASSERT: scan-not test_fj1.txt
+// (!target_win) EXEC: %compiler %cmp_opt caserunner.cj -o %output %f
+// (!target_win) RUN-EXEC: %run %run_opt %output %run_args
+// (!target_win) RUN-EXEC-PIPE: %target_ls -l | compare %f
+// (!target_win) ASSERT: scan-not test_fj1.txt
 
 import std.posix.*
 

@@ -22,5 +22,18 @@ error: the upper bound '(Int64) -> Int64' of generic parameter 'Generics-T' must
   |           ^ 
   | 
 
-1 error generated, 1 error printed.
+error: trailing lambda cannot be used for non function nor option of function type
+  ==> trailing_closure_generic_upper.cj:14:17:
+   | 
+14 |     return test {i => i}
+   |                 ^^^^^^^^ declaration type of parameter: 'Generics-T'
+   | 
+note: found candidate
+ ==> trailing_closure_generic_upper.cj:9:6:
+  | 
+9 | func test<T>(a: T) where T <: (Int64) -> Int64 {
+  |      ^^^^ 
+  | 
+
+2 errors generated, 2 errors printed.
 */

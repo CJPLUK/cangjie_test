@@ -10,16 +10,16 @@
 // EXEC: ObjCInteropGen test.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-@ObjCMirror
-public open class Base {
+@ObjC
+public open foreign class Base {
     public static func static_basic_foo0(): ?Base
     public open func instance_basic_foo0(): ?Base
     public static func static_basic_foo(): Base
     public open func instance_basic_foo(): Base
 }
 
-@ObjCMirror
-public open class M <: Base {
+@ObjC
+public open foreign class M <: Base {
     public static func static_basic_foo0(): ?Base
     public open func instance_basic_foo0(): ?Base
     public static func static_foo0(): ?M

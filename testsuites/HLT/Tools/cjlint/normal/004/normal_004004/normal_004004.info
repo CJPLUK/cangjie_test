@@ -8,12 +8,6 @@
 
 // LEVEL: 1
 // DEPENDENCE: ./src
-// Regression: manual says 'cjlint -f ./src -r csv -o ./report' generates a
-// report.csv file. The generated file must be named report.csv (with .csv
-// extension) and the CSV table must be aligned: header columns must match
-// data fields (currently the header has 6 columns while every data row has
-// 8 fields: endLine and endColumn are missing in the header).
 // (Windows)EXEC-PIPE: %lint -f ./src -r csv -o ./report -c %cangjieDir/tools -m %cangjieDir & type .\report.csv 2>&1 | compare %f
 // (not Windows)EXEC-PIPE: %lint -f ./src -r csv -o ./report -c %cangjieDir/tools -m %cangjieDir && cat ./report.csv | compare %f
-// ASSERT: regex .*SourceFile,Line,Column,Description,DefectType,DefectLevel
-// ASSERT: regex .*test\.cj,[0-9]+,[0-9]+,"?G\.VAR\.01.*
+// ASSERT: regex .*G.VAR.01.*

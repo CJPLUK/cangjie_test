@@ -4,8 +4,6 @@
 #
 # See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-
-
 [dependencies]
 stdx = {path = "cangjie_stdx",output-type="dynamic"}
 
@@ -13,5 +11,24 @@ stdx = {path = "cangjie_stdx",output-type="dynamic"}
 members = ["aoo" ,"boo", "coo"]
 target-dir = ""
 script-dir = "newDir"
-  
 
+[target.x86_64-linux-ohos]
+  compile-option = "-B=${OHOS_ROOT}/llvm/prebuilt/x86_64-linux-ohos/bin --sysroot=${OHOS_ROOT}/llvm/prebuilt/x86_64-linux-ohos/sysroot"
+[target.aarch64-linux-ohos]
+  compile-option = "-B${OHOS_ROOT}/sysroot/usr/lib/aarch64-linux-ohos -B${OHOS_ROOT}/llvm/bin -L${OHOS_ROOT}/llvm/lib/clang/15.0.4/lib/aarch64-linux-ohos -L${OHOS_ROOT}/llvm/lib/aarch64-linux-ohos -L${OHOS_ROOT}/sysroot/usr/lib/aarch64-linux-ohos"
+[target.aarch64-linux-android26]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.aarch64-linux-android31]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.aarch64-linux-android32]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.aarch64-linux-android35]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.arm-linux-android23]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.aarch64-linux-android23]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.arm64-apple-ios-simulator]
+  compile-option = "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ --sysroot=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk"
+[target.x86_64-apple-ios-simulator]
+  compile-option = "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ --sysroot=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk"

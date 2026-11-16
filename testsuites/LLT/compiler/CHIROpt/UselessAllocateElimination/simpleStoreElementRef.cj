@@ -4,7 +4,10 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (DEBUG_OPTION)EXEC-PIPE-0: %frontendCompiler %debugCHIROpt %disableCodegen %enableO2 -Woff all %f -o %n.%suffix 2>&1 | compare %f
+// DEPENDENCE: ../pick_defination.py
+// EXEC: %frontendCompiler %enableO2 %dumpCHIRDebug -Woff all %f -o allocate.out
+// EXEC: %python pick_defination.py allocate_CHIR/[0-9]*_RedundantLoadElimination.chirtxt "Func @_CN7default6<main>Hv" | compare %f --assert_flag=ASSERT_BEFORE
+// EXEC: %python pick_defination.py allocate_CHIR/[0-9]*_UselessAllocateElimination.chirtxt "Func @_CN7default6<main>Hv" | compare %f
 
 struct A {
     var a = 1
@@ -15,4 +18,15 @@ main() {
     a.a = 3
 }
 
-// ASSERT: scan [UselessAllocateElimination] Allocate at [14,5] and its users have been deleted
+// ASSERT_BEFORE: regex-2 = Allocate\(Struct-_CN7default1AE\)
+// ASSERT_BEFORE: regex-2 = StoreElementRef\(
+
+// ASSERT: regex-1 = Allocate\(Struct-_CN7default1AE\)
+// ASSERT: regex-1 = StoreElementRef\(
+// ASSERT: regex-begin \[ret\] %(?P<ret>\d+): Unit& = Allocate\(Unit\)
+// ASSERT: regex-after %(?P<temporary>\d+): Struct-_CN7default1AE& = Allocate\(Struct-_CN7default1AE\)
+// ASSERT: regex-after %(?P<initial>\d+): Int64 = Constant\(1i\)
+// ASSERT: regex-after Unit = StoreElementRef\(%(?P=initial), %(?P=temporary), 0\)
+// ASSERT: regex-after Struct-_CN7default1AE = Load\(%(?P=temporary)\)
+// ASSERT: regex-after %(?P<unit>\d+): Unit = Constant\(unit\)
+// ASSERT: regex-after Unit = Store\(%(?P=unit), %(?P=ret)\)

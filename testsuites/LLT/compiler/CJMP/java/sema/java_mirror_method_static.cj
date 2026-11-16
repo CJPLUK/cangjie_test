@@ -8,13 +8,13 @@
 
 import java.lang.JObject
 
-@JavaMirror
-class Foo {
+@Java
+foreign class Foo {
 
 }
 
-@JavaMirror
-class M {
+@Java
+foreign class M {
     public static func foo(a: Int64, b: Foo, c: Bool, d: Int16): Foo
 }
 

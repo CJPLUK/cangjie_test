@@ -10,7 +10,7 @@
 
 import java.lang.*
 
-@JavaImpl
+@Java
 class M {
     let s: String
 

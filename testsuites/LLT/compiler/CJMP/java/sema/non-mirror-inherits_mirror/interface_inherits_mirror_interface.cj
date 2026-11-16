@@ -4,22 +4,16 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt %import_java_interop  --output-javagen-dir=./ 2>& 1 | compare %f 
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output %compile_shared_lib_opt %import_java_interop  --output-javagen-dir=./ 2>& 1 | compare %f 
 
 import java.lang.*
 
-
-@JavaMirror["com.MyJavaMirrorInterface"]
-public interface MyJavaMirrorInterface {
+@Java["com.MyJavaMirrorInterface"]
+public foreign interface MyJavaMirrorInterface {
     func sayHello(): Unit
 }
 
 public interface PureInterface <: MyJavaMirrorInterface {}
 
-/* SCAN-IN
-error: super declaration 'MyJavaMirrorInterface' is inheritable only for declaration annotated with @JavaMirror or @JavaImpl
-  ==> interface_inherits_mirror_interface.cj:17:1:
-   | 
-17 | public interface PureInterface <: MyJavaMirrorInterface {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-*/
+// ASSERT: scan sema_java_mirror_subtype_must_be_annotated
+// ASSERT: scan 'PureInterface' must be annotated with either '@Java' or '@Java foreign'

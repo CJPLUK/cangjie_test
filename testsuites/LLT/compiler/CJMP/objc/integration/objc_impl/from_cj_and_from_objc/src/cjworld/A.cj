@@ -9,7 +9,7 @@ package cjworld
 import objc.lang.*
 
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     @ForeignName["initWithA:andB:"]
     public init(a: Int64, b: Float64) {

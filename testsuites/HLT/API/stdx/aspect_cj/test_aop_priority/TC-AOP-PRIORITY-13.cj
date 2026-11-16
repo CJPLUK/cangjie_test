@@ -10,11 +10,11 @@
  * @TestCaseID: TC-AOP-PRIORITY-13
  * @TestCaseName: stdx.aspect_cj — priority: global_to_instance_param_mismatch_over_func_type_str_mismatch
  * @TestCaseType: 负面测试
- * @Design Description: 错误优先级判定：同一份代码同时触发两处违规，collect 插件只报先检查的违规（同一函数叠加报最先违规；两函数按声明序各报一条）
+ * @Design Description: 同一份代码有两处违规：ReplaceFuncBody 的 original 额外携带 receiver（如 (WovenStruct) -> Unit），以及 InsertAtEntry 的 funcTypeStr 与目标函数不一致。断言收集报错含切面函数类型不匹配
  * @Priority: P0
  * @Condition: 仓颉工具链及 stdx.aspect_cj 扩展库已安装
- * @Brief: 1. 构造同时触发 global_to_instance_param_mismatch_over_func_type_str_mismatch 两违规的切面代码
- * @Brief: 2. collect 阶段编译，断言报错锚为先检查的违规
+ * @Brief: 1. annotatedFunction 的 original 额外携带 receiver((WovenStruct) -> Unit）；aspectFtStr 的 funcTypeStr 为 (Bool)->Unit，与全局 wovenFunction 不一致
+ * @Brief: 2. collect 阶段编译，断言报错锚为 original 类型不匹配
  * @Expect: 报错锚 = has function type
  */
 // LEVEL: 2
@@ -29,7 +29,7 @@ import stdx.aspect_cj.*
 
 @ReplaceFuncBody[packageName: "AOP_demo1", className: "WovenStruct", methodName: "wovenFunction", isStatic: false,
     recursive: false]
-public func annotatedFunction(self: WovenStruct, original: () -> Unit): Unit {
+public func annotatedFunction(self: WovenStruct, original: (WovenStruct) -> Unit): Unit {
     println("annotatedFunction")
 }
 

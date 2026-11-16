@@ -18,8 +18,8 @@ import objc.foundation.NSObject
 import objc.foundation.NSUInteger
 import objc.lang.*
 
-@ObjCMirror
-public open class test <: NSObject {
+@ObjC
+public open foreign class test <: NSObject {
     public open func f1(): Int8
     public open func f2(): Int16
     public open func f3(): Int32

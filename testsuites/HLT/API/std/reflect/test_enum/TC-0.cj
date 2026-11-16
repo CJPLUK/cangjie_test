@@ -24,12 +24,13 @@
  * - @Priority: P0
  */
 
+// LEVEL: 0
 // Description:
-// DEPENDENCE: utils upstream
-// EXEC: %compiler %cmp_opt %compile_lib_opt -p utils
-// EXEC: %compiler %cmp_opt %compile_lib_opt -p upstream
-// EXEC: %compiler %cmp_opt %f -L . -lutils -lupstream -o %output %cmp_utest_opt
-// RUN-EXEC: %run %run_opt %output %run_utest_opt %run_args
+// DEPENDENCE: ../utils upstream
+// (!target_ohos) EXEC: %compiler %cmp_opt %compile_lib_opt -p utils
+// (!target_ohos) EXEC: %compiler %cmp_opt %compile_lib_opt -p upstream
+// (!target_ohos) EXEC: %compiler %cmp_opt %f -L . -lutils -lupstream -o %output %cmp_utest_opt
+// (!target_ohos) RUN-EXEC: %run %run_opt %output %run_utest_opt %run_args
 
 import std.unittest.*
 import std.unittest.common.*
@@ -50,7 +51,7 @@ class TestEnum {
         @Expect[anyValue](EnumTypeInfo.get("upstream.Enum").getConstructor("D", argsCount: 1i64).apply([((), ())]), EnumTypeInfo.get("upstream.Enum").getConstructor("D", argsCount: 1i64).apply([((), ())]))
         @Expect[anyValue](EnumTypeInfo.get("upstream.Enum").getConstructor("E", argsCount: 1i64).apply([{p0: Int64 =>true
         }]), EnumTypeInfo.get("upstream.Enum").getConstructor("E", argsCount: 1i64).apply([{p0: Int64 =>true
-    }]))
+        }]))
         @Expect(EnumTypeInfo.get("upstream.Enum").getConstructor("A", argsCount: 0i64).name, "A")
         @Expect(EnumTypeInfo.get("upstream.Enum").getConstructor("B", argsCount: 3i64).name, "B")
         @Expect(EnumTypeInfo.get("upstream.Enum").getConstructor("C", argsCount: 3i64).name, "C")

@@ -5,15 +5,15 @@
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %frontendCompiler %dump-parse %cmp_opt %f -o %output %compile_shared_lib_opt 2>& 1 | compare %f
-// ASSERT: scan-8 error: Objective-C mirror property type must be Objective-C compatible
+// ASSERT: scan-8 error: type of member variable in '@ObjC' foreign declaration must be Objective-C compatible
 // ASSERT: scan 8 errors generated, 8 errors printed
 
 import objc.lang.*
 
 class A {}
 
-@ObjCMirror["M1"]
-class M {
+@ObjC["M1"]
+foreign class M {
    init()
    public let a: String
    public let b: Array<Int64>

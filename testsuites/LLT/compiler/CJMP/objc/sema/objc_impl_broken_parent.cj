@@ -8,17 +8,18 @@
 
 // `A` is marked broken by the member check, so it gets no registry companion. `B` stays clean, and restoring its
 // companion hierarchy must skip it instead of dereferencing the parent companion that was never created.
-// ASSERT: scan error: return type of Objective-C mirror method must be Objective-C compatible
+// ASSERT: scan error: return type of member function in exported '@ObjC' declaration must be Objective-C compatible
+// ASSERTk scan 'Array<Int64>' is not Objective-C compatible type
 // ASSERT: scan-not Internal Compiler Error
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     init()
 }
 
-@ObjCImpl
+@ObjC
 public open class A <: M {
     init() {}
 
@@ -27,7 +28,7 @@ public open class A <: M {
     }
 }
 
-@ObjCImpl
+@ObjC
 public class B <: A {
     init() {}
 }

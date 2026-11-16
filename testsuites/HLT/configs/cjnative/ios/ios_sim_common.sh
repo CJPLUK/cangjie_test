@@ -87,20 +87,44 @@ get_simulator_udid() {
     echo "$udid"
 }
  
+# Build (once, cached in TMPDIR) the SIGILL context-capture dylib for the
+# given architecture and print its path. Enabled by setting CJ_TRACE_STACK.
+# See sigill_catch.c for the capture mechanism and its design constraints.
+ensure_sigill_dylib() {
+    local arch="$1"
+    local self="${BASH_SOURCE[0]:-${funcsourcetrace[1]%:*}}"
+    local script_dir
+    script_dir="$(cd "$(dirname "$self")" && pwd)"
+    bash "$script_dir/build_sigill_dylib.sh" "$arch"
+}
+
 # Run an executable on the simulator, injecting the runtime library directory for dynamic linking.
 # The architecture is detected from the executable itself, so x64 builds pick the
 # x86_64 runtime directory automatically. The current working directory is appended
 # to SIMCTL_CHILD_DYLD_LIBRARY_PATH so case-local glue dylibs (e.g. libcjworld.dylib
 # produced in the work_dir) are also loadable at spawn time.
+# When CJ_TRACE_STACK is set, the SIGILL context-capture dylib is injected too:
+# on SIGILL the process logs pc/base/frame chain to stderr before dying with SIGILL.
 # Usage: run_on_simulator <udid> <exe> [args...]
 run_on_simulator() {
     local udid="$1"
     local exe="$2"
     shift 2
-    local lib_dir arch
+    local lib_dir arch dylib
     arch=$(macho_arch "$exe")
     lib_dir=$(ios_runtime_lib_dir "$arch")
     echo "running './$exe' on simulator $udid (runtime: $lib_dir)"
+    if [ -n "$CJ_TRACE_STACK" ]; then
+        dylib=$(ensure_sigill_dylib "$arch") || {
+            echo "Error: failed to build sigill capture dylib" >&2
+            return 255
+        }
+        if [ -n "${SIMCTL_CHILD_DYLD_INSERT_LIBRARIES:-}" ]; then
+            export SIMCTL_CHILD_DYLD_INSERT_LIBRARIES="$dylib:${SIMCTL_CHILD_DYLD_INSERT_LIBRARIES}"
+        else
+            export SIMCTL_CHILD_DYLD_INSERT_LIBRARIES="$dylib"
+        fi
+    fi
     SIMCTL_CHILD_DYLD_LIBRARY_PATH="$lib_dir:$(pwd)" xcrun simctl spawn "$udid" "./$exe" "$@"
     return $?
 }

@@ -10,8 +10,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     public var a
     public init()
 }

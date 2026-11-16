@@ -10,8 +10,8 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaMirror["com.JavaClass"]
-public open class JavaClass <: Father {
+@Java["com.JavaClass"]
+public open foreign class JavaClass <: Father {
     public init(arg0: JArray<Int32>) 
 
     public open func getAInt(): JArray<Int32>
@@ -24,5 +24,3 @@ public open class JavaClass <: Father {
 
     public init() 
 }
-
-

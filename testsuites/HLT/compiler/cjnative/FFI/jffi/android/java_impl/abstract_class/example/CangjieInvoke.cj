@@ -16,8 +16,8 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaMirror["com.ImplAbstractMirror"]
-public open class ImplAbstractMirror <: AbstractMirror {
+@Java["com.ImplAbstractMirror"]
+public open foreign class ImplAbstractMirror <: AbstractMirror {
     public init() 
 
     public open func abstractFunc(): Unit
@@ -27,8 +27,8 @@ public open class ImplAbstractMirror <: AbstractMirror {
     public open func idImpl(arg0: ImplAbstractMirror): AbstractMirror
 }
 
-@JavaMirror["com.AbstractMirror"]
-public abstract open class AbstractMirror {
+@Java["com.AbstractMirror"]
+public abstract open foreign class AbstractMirror {
     public init() 
 
     public static func staticFunc(): Unit
@@ -38,7 +38,7 @@ public abstract open class AbstractMirror {
     public open func instanceFunc(): Unit
 }
 
-@JavaImpl
+@Java
 public class Impl <: JObject {
     public init() {
         let i = ImplAbstractMirror()

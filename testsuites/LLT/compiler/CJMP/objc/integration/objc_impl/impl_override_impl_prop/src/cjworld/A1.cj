@@ -8,7 +8,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 class A1 <: A {
     public prop answer: Int64 {
         get() {

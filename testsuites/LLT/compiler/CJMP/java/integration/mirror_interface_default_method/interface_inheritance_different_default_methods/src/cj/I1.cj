@@ -10,8 +10,8 @@ import java.lang.*;
 
 import dom.java.lib.I0
 
-@JavaMirror["com.java.lib.I1"]
-public interface I1 <: I0 {
+@Java["com.java.lib.I1"]
+public foreign interface I1 <: I0 {
     @JavaHasDefault
     func g(): Unit
 }

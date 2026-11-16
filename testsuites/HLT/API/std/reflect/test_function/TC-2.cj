@@ -24,12 +24,13 @@
  * - @Priority: P0
  */
 
+// LEVEL: 3
 // Description:
-// DEPENDENCE: utils upstream
-// EXEC: %compiler %cmp_opt %compile_lib_opt -p utils
-// EXEC: %compiler %cmp_opt %compile_lib_opt -p upstream
-// EXEC: %compiler %cmp_opt %f -L . -lutils -lupstream -o %output %cmp_utest_opt
-// RUN-EXEC: %run %run_opt %output %run_utest_opt %run_args
+// DEPENDENCE: ../utils upstream
+// (!target_ohos) EXEC: %compiler %cmp_opt %compile_lib_opt -p utils
+// (!target_ohos) EXEC: %compiler %cmp_opt %compile_lib_opt -p upstream
+// (!target_ohos) EXEC: %compiler %cmp_opt %f -L . -lutils -lupstream -o %output %cmp_utest_opt
+// (!target_ohos) RUN-EXEC: %run %run_opt %output %run_utest_opt %run_args
 
 import std.unittest.*
 import std.unittest.common.*
@@ -45,25 +46,25 @@ class TestFunction {
         @Expect(FunctionTypeInfo.of({p0: Int64 =>1i64
         }).parameters.size, 1i64)
         @Expect(FunctionTypeInfo.of({p0: Int64 =>1i64
-    }).parameters.get(0i64).getOrThrow().name, "Int64")
+        }).parameters.get(0i64).getOrThrow().name, "Int64")
         @Expect(FunctionTypeInfo.of({p0: Int64 =>1i64
-}).returnType.name, "Int64")
+        }).returnType.name, "Int64")
         @Expect[annotations](FunctionTypeInfo.of({p0: Int64 =>1i64
-}).annotations, [])
+        }).annotations, [])
         @Expect(FunctionTypeInfo.of({p0: Int64 =>1i64
-}).modifiers.toArray().size >= 0i64)
+        }).modifiers.toArray().size >= 0i64)
         @Expect(FunctionTypeInfo.of({p0: Int64 =>1i64
-}).superInterfaces.toArray().size >= 0i64)
+        }).superInterfaces.toArray().size >= 0i64)
         @Expect(FunctionTypeInfo.of({p0: Int64 =>1i64
-}).hashCode() == FunctionTypeInfo.of({p0: Int64 =>1i64
-}).hashCode())
+        }).hashCode() == FunctionTypeInfo.of({p0: Int64 =>1i64
+        }).hashCode())
         @Expect(FunctionTypeInfo.of({p0: Int64 =>1i64
-}).toString() != "")
+        }).toString() != "")
         @Expect[anyValue](FunctionTypeInfo.of({p0: Int64 =>1i64
-}).apply({p0: Int64 =>1i64
-}, [1i64]), FunctionTypeInfo.of({p0: Int64 =>1i64
-}).apply({p0: Int64 =>1i64
-}, [1i64]))
+        }).apply({p0: Int64 =>1i64
+        }, [1i64]), FunctionTypeInfo.of({p0: Int64 =>1i64
+        }).apply({p0: Int64 =>1i64
+        }, [1i64]))
         @ExpectThrows[IllegalTypeException](FunctionTypeInfo.of(0i64))
     }
 }

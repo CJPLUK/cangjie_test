@@ -9,8 +9,8 @@ package cj.other
 
 import java.lang.*
 
-@JavaMirror["com.java.lib.JBase"]
-public open class JBase <: JObject {
+@Java["com.java.lib.JBase"]
+public open foreign class JBase <: JObject {
     public init()
 
     @ForeignName["id"]
@@ -26,15 +26,15 @@ public open class JBase <: JObject {
     public open func myGetName(): String
 }
 
-@JavaMirror["com.java.lib.JAbs"]
-public abstract class JAbs {
+@Java["com.java.lib.JAbs"]
+public abstract foreign class JAbs {
     // open should be ommited
     @ForeignName["getAbsString"]
     public open abstract func getAbs(): String
 }
 
-@JavaMirror["com.java.lib.JIface"]
-public interface JIface {
+@Java["com.java.lib.JIface"]
+public foreign interface JIface {
     @ForeignName["getIfaceString"]
     func getIface(): String
 }
@@ -52,43 +52,43 @@ import java.lang.*
 
 import cj.other.*
 
-@JavaMirror["com.java.lib.JDer"]
-public open class JDer <: JBase {
+@Java["com.java.lib.JDer"]
+public open foreign class JDer <: JBase {
     public init()
 }
 
-@JavaMirror["com.java.lib.JDerDer"]
-public open class JDerDer <: JDer {
-    public init()
-
-    public static func myGetClassName(): String
-    public open func myGetName(): String
-}
-
-@JavaMirror["com.java.lib.JDerDerDer"]
-public open class JDerDerDer <: JDerDer {
+@Java["com.java.lib.JDerDer"]
+public open foreign class JDerDer <: JDer {
     public init()
 
     public static func myGetClassName(): String
     public open func myGetName(): String
 }
 
-@JavaMirror["com.java.lib.JClass"]
-public open class JClass <: JAbs & JIface {
+@Java["com.java.lib.JDerDerDer"]
+public open foreign class JDerDerDer <: JDerDer {
+    public init()
+
+    public static func myGetClassName(): String
+    public open func myGetName(): String
+}
+
+@Java["com.java.lib.JClass"]
+public open foreign class JClass <: JAbs & JIface {
     public init()
 
     public override func getAbs(): String
     public open override func getIface(): String
 }
 
-@JavaMirror["com.java.lib.JOtherClass"]
-public open class JOtherClass <: JClass {
+@Java["com.java.lib.JOtherClass"]
+public open foreign class JOtherClass <: JClass {
     public init()
 
     public override func getIface(): String
 }
 
-@JavaImpl
+@Java
 public class Main <: JObject {
     @ForeignName["main"]
     public static func entry(args: JArray<JString>): Unit {

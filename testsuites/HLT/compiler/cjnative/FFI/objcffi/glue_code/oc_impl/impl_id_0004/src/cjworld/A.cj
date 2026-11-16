@@ -10,7 +10,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public mut prop v: ObjCId {
         get() { M(1) }

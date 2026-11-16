@@ -10,7 +10,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public open class A <: M {
     public init() {}
     public var a1 = 1
@@ -24,13 +24,13 @@ public open class A <: M {
     public static func s_f1() {1}
     public static func s_f2() {1}
 }
-@ObjCImpl
+@ObjC
 public open class A1 <: A {}
-@ObjCImpl
+@ObjC
 public open class A2 <: A1 {}
-@ObjCImpl
+@ObjC
 public open class A3 <: A2 {}
-@ObjCImpl
+@ObjC
 public class B <: A3 {
     public init() {}
     public var b1 = 1

@@ -9,4 +9,10 @@
 // EXEC: cd %n && %cjpm build
 // EXEC: cd %n && %cjpm update
 // EXEC: cd %n && %cat cjpm.lock 2>&1 | compare %f
-// ASSERT: regex  stdx = {git = "https://gitcode.com/yaoruili/cangjie_stdx_9191", commitId = "[a-zA-Z0-9]+", branch = "dev", output-type = "dynamic"}
+// ASSERT: regex version = 1
+// ASSERT: regex \[requires\."stdx"\]
+// ASSERT: regex version = "1.0.5"
+// ASSERT: regex source = "git\+https://gitcode\.com/yaoruili/cangjie_stdx_9191\?branch=dev#[0-9a-f]{40}"
+// ASSERT: regex output-type = "dynamic"
+// ASSERT: regex dependencies = \[\]
+// ASSERT: scan-not checksum

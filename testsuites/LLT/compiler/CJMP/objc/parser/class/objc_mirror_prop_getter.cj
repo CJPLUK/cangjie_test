@@ -4,25 +4,14 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output 2>& 1 | compare %f
 
-@ObjCMirror
-class M {
+@ObjC
+foreign class M {
     public prop x: Int64 {
         get() { 0 }
     }
 }
 
-/* SCAN-IN
-error: @ObjCMirror declaration property 'x' cannot have getter
-  ==> objc_mirror_prop_getter.cj:11:5:
-   | 
-11 |       public prop x: Int64 {
-   |  _____^
-12 | |         get() { 0 }
-13 | |     }
-   | |_____^ @ObjCMirror declaration property cannot have getter
-   | 
-
-1 error generated, 1 error printed.
-*/
+// ASSERT: scan parse_objc_mirror_prop_cannot_have_getter
+// ASSERT: scan "Errors": 1

@@ -8,7 +8,7 @@ package cj
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class Impl <: MyObject {
     private let id: Int64
 

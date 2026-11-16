@@ -17,7 +17,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     public init() {}
     public func test(a!: Bool = false) {

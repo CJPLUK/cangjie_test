@@ -4,14 +4,20 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (DEBUG_OPTION)EXEC-PIPE-0: %compiler %enableO2 %debugCHIROpt %cmp_opt %n.cj -o %output | compare %f
-// (DEBUG_OPTION)RUN-EXEC-PIPE-0: %run %output
-// ASSERT: scan-not core dumped
-// ASSERT: scan-not stack trace
+// DEPENDENCE: ../pick_defination.py
+// EXEC: %frontendCompiler %enableO2 %dumpCHIRDebug -Woff all %f -o unit-unify.out
+// EXEC: %python pick_defination.py unit-unify_CHIR/[0-9]*_Unit_Unify.chirtxt "Func @_CN7default6<main>Hv" | compare %f
 
 main() {
     let a:Unit = ()
     let b = a
-    let c = b
+    var c = b
     0
 }
+
+// ASSERT: scan-1 = Constant(unit)
+// ASSERT: regex-begin ^Block #0:
+// ASSERT: regex-next ^\s*\[ret\] %\d+: Int64& = Allocate\(Int64\)
+// ASSERT: regex-after %(?P<unit>\d+): Unit = Constant\(unit\)
+// ASSERT: regex-after %(?P<c>\d+)\[c\]: Unit& = Allocate\(Unit\)
+// ASSERT: regex-after Unit = Store\(%(?P=unit), %(?P=c)\)

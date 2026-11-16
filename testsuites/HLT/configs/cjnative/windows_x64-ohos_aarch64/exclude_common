@@ -4,87 +4,24 @@
 #
 # See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-# ======================== API exclude ========================
-
+# https://gitcode.com/Cangjie/cangjie_test/issues/523
 Tools/cjprof
-# linux与win环境问题
-API/std/os/env/test_setEnv/test_setEnv_002/test_setEnv_002.cj
-API/std/os/env/test_setEnv/test_setEnv_005/test_setEnv_005.cj
 
 Tools/cjpm/stdx/c/build_mock/build_mock.info
-
-# time 库时区相关信息不需要用户自己下载时区文件
-API/std/time/TimeZone/Location/test_load_001.cj
-API/std/time/TimeZone/Location/test_load_002.cj
-API/std/time/TimeZone/Location/test_load_003.cj
-API/std/time/TimeZone/Location/test_load_004.cj
-API/std/time/TimeZone/Location/test_load_005.cj
-API/std/time/TimeZone/Location/test_load_007.cj
 
 # windows不支持~,无法解析成绝对路径
 API/std/os/env/test_getArgs/test_getArgs_003/test_getArgs_003.cj
 
-# windows没有"/"目录
-API/std/os/path/test_chdir/test_chdir_001/test_chdir_001.cj
-
-# windows不支持 chown
-API/std/fs/os_chown_0.cj
-API/std/fs/os_chown_1.cj
-API/std/fs/os_chown_2.cj
-API/std/fs/os_chown_3.cj
-API/std/fs/os_chown_4.cj
-
-# windows不支持常量O_NOCTTY、O_NOFOLLOW、O_NONBLOCK、O_SYNC
-# 常量不支持未在api文档中说明
-API/std/fs/os_const_01.cj
-API/std/fs/os_creat_01.cj
-API/std/fs/os_faccessat.cj
-
 # windows 不支持 fchmod
-API/std/fs/os_fchmod_n_01.cj
-API/std/fs/os_fchmod_n_02.cj
-API/std/fs/os_fchmod_n_03.cj
-API/std/fs/os_fchmod_n_04.cj
-API/std/fs/os_fchmod_n_05.cj
 API/std/os/file/test_fchmod/test_fchmod.cj
 
 # windows 不支持 fchmodat
-API/std/fs/os_fchmodat.cj
 API/std/os/file/test_fchmodat/test_fchmodat.cj
 
-# windows 不支持fchown
-API/std/fs/os_fchown.cj
-API/std/os/file/test_fchown/test_fchown.cj
-
-# windows 不支持fchownat
-API/std/fs/os_fchownat.cj
-API/std/os/file/test_fchownat/test_fchownat.cj
-
 # windows 不支持lchown
-API/std/fs/os_lchown.cj
-API/std/fs/os_lchown_1.cj
 API/std/fs/os_lchown_2.cj
 API/std/fs/os_lchown_3.cj
 API/std/fs/os_lchown_4.cj
-API/std/os/file/test_lchown/test_lchown.cj
-
-# windows 不支持openat64
-API/std/fs/os_openat64_01.cj
-API/std/fs/os_openat64_02.cj
-API/std/os/file/test_openat64/test_openat64.cj
-
-# windows 不支持openat
-API/std/fs/os_openat_01.cj
-API/std/os/file/test_openat/test_openat.cj
-
-# windows 不支持sethostname
-API/std/os/info/test_sethostname/test_sethostname_002/test_sethostname_002.cj
-API/std/os/info/test_sethostname/test_sethostname_003/test_sethostname_003.cj
-API/std/os/info/test_sethostname/test_sethostname_001/test_sethostname_001.cj
-
-# windows 不支持fchdir
-API/std/os/path/test_fchdir/test_fchdir_001/test_fchdir_001.cj
-API/std/os/path/test_fchdir/test_fchdir_002/test_fchdir_002.cj
 
 # windows 不支持getgid
 API/std/os/process/test_getgid/test_getgid_001/test_getgid_001.cj
@@ -104,67 +41,18 @@ API/std/os/process/test_getpgid/test_getpgid_001/test_getpgid_001.cj
 # windows 不支持getpgrd
 API/std/os/process/test_getpgrp/test_getpgrp_001/test_getpgrp_001.cj
 
-# windows 不支持getppid
-API/std/os/process/test_getppid/test_getppid_001/test_getppid_001.cj
-
 # windows 不支持getuid
 API/std/os/process/test_getuid/test_getuid_001/test_getuid_001.cj
 
-# windows 不支持setpgrp
-API/std/os/process/test_setpgrp/test_setpgrp_001/test_setpgrp_001.cj
-
-# os.posix标准库函数不支持
-API/std/os/file/test_isType/test_isType.cj
-API/std/os/file/test_isLnk/test_isLnk.cj
-API/std/os/file/test_isSock/test_isSock.cj
-API/std/os/file/test_link/test_link.cj
-API/std/os/file/test_linkat/test_linkat.cj
-API/std/os/file/test_open64/test_open64.cj
-API/std/os/file/test_pread/test_pread.cj
-API/std/os/file/test_pwrite/test_pwrite.cj
-API/std/os/file/test_symlink/test_symlink.cj
-API/std/os/file/test_symlinkat/test_symlinkat.cj
-API/std/os/file/test_renameat/test_renameat.cj
-API/std/os/file/test_unlink/test_unlink.cj
-API/std/os/file/test_unlinkat/test_unlinkat.cj
-
-# windows 不支持ttyname
-API/std/os/tty/test_ttyname/test_ttyname_001/test_ttyname_001.cj
-API/std/os/tty/test_ttyname/test_ttyname_002/test_ttyname_002.cj
-
 # cmd不支持同一行中同时设置和读取变量
 API/std/os/env/test_currentDir/test_currentDir_001/test_currentDir_001.cj
-API/std/os/env/test_homeDir/test_homeDir_001/test_homeDir_001.cj
-API/std/time/TimeZone/Location/test_local_001.cj
-API/std/time/Time/test_local_001.cj
 API/std/os/env/test_envVars/test_envVars_002/test_envVars_002.cj
 API/std/os/env/test_getEnv/test_getEnv_004/test_getEnv_004.cj
 
-# windows环境中缺少/etc/localtime，无法通过Location.load("Local")获取本地时区
-API/std/time/TimeZone/Location/test_load_008.cj
-
 # windows的差异适配
-API/std/io/file/io_seek_seekPosition_begin_03.cj
-API/std/fs/os_chmod_n_01.cj
-API/std/fs/os_chmod_n_02.cj
-API/std/fs/os_chmod_n_04.cj
-API/std/log/SimpleLogger/logger_setoutput_01.cj
 API/std/fs/os_isBlk_01.cj
-API/std/fs/os_isChr_01.cj
 API/std/fs/os_isLink_01.cj
-API/std/io/StringReader/StringReader_readln_13_01.cj
-API/std/io/StringReader/StringReader_readUntil_char_19_01.cj
-API/std/io/StringReader/StringReader_readUntil_predicate_22_01.cj
-API/net/handler/FileHandler/file_handler_init_03.cj
 API/net/handler/FileHandler/file_handler_init_06.cj
-API/net/handler/FileHandler/file_handler_init_09.cj
-API/net/handler/FileHandler/file_handler_init_12.cj
-API/net/handler/FileHandler/file_handler_init_15.cj
-API/net/handler/FileHandler/file_handler_init_15n.cj
-API/net/handler/FileHandler/file_handler_init_18n.cj
-API/std/fs/directory/windows/test_unc_dirapis.cj
-API/net/Client/ClientBuilder/Http2/ClientBuilder_sendRequest_and_getResponse.cj
-API/net/Server/ServerBuilder/Http2/ServerBuilder_servicePoolConfig_H2.cj
 
 # windows绑定socket时的SO_REUSEADDR，默认为true
 API/net/Server/ServerBuilder/Http1/ServerBuilder_afterBind.cj
@@ -172,29 +60,11 @@ API/net/Server/ServerBuilder/Http2/ServerBuilder_afterBind_H2.cj
 API/net/Server/registerOnShutdown/server_registerOnShutdown_00006.cj
 API/net/Server/listenAndServe/server_listen_00001.cj
 
-# 标准库的'kill'函数，windows不支持（标准库兼容性限制）
-API/std/os/process/test_kill/test_kill_001/test_kill_001.cj
-API/std/os/process/test_kill/test_kill_002/test_kill_002.cj
-API/std/os/process/test_kill/test_kill_003/test_kill_003.cj
-API/std/os/process/test_kill/test_kill_004/test_kill_004.cj
-API/std/os/process/test_kill/test_kill_005/test_kill_005.cj
-API/std/os/process/test_kill/test_kill_006/test_kill_006.cj
-API/std/os/process/test_kill/test_kill_007/test_kill_007.cj
-API/std/os/process/test_kill/test_kill_008/test_kill_008.cj
-
 # 'mkfifo' is not recognized as an internal or external command,
 API/std/fs/os_isFIFO_path_mode.cj
 
 # windows上的宏暂时都不支持
 API/std/os/file/test_access/test_access.cj
-API/std/os/file/test_dup2/test_dup2.cj
-API/std/os/file/test_lseek/test_lseek.cj
-API/std/os/file/test_read/test_read.cj
-API/std/os/file/test_remove/test_remove.cj
-API/std/os/file/test_rename/test_rename.cj
-API/std/os/file/test_write/test_write.cj
-API/std/os/file/test_chown/test_chown.cj
-API/std/unittest/option/test_option_081/test_option_081.cj
 
 # Filesystem: some command not support on windows
 API/std/fs/directory/linux
@@ -202,97 +72,18 @@ API/std/fs/fileinfo/linux
 API/std/fs/file/linux
 API/std/fs/path/linux
 
-# OS: chmod not support on windows
-API/std/os/chmod/test_chmod_linux_02.cj
-
 # Lead to win-daily fail: test-framework cannot kill subprocess when testcase timeout
 API/std/os/os_Process
-
-# Net: UnixSocket not support on windows
-API/std/socket/UnixDatagramSocket
-API/std/socket/UnixSocket
-
-# windows 未授予创建软连接权限
-API/std/fs/path/windows/unc_path/test_path_unequal_02.cj
 
 # ======================== Compiler exclude ========================
 # linux和win的命令行差异
 
-# cannot find -l:libcangjie-std-ffi.python.a: No such file or directory (windows平台python还不支持)
-compiler/cjnative/FFI/Python
-API/std/ffi/Python
-
 # old jffi can only be run with cjvm.
 compiler/cjnative/FFI/jffi
 
-# cannot find -ldl: No such file or directory （不支持 ldl）
-compiler/cjnative/FFI/cffi/c_ffi_007/c_ffi_00785/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_007/c_ffi_00786/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_007/c_ffi_00787/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_007/c_ffi_00788/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_007/c_ffi_00790/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_007/c_ffi_00791/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_007/c_ffi_00789/c_ffi.cj
-
 # 命令有sed
-compiler/cjnative/FFI/cffi/c_ffi_012/c_ffi_01202n/c_ffi_main.cj
-compiler/cjnative/FFI/cffi/c_ffi_012/c_ffi_01203n/c_ffi_main.cj
-compiler/cjnative/FFI/cffi/c_ffi_012/c_ffi_01205n/c_ffi_main.cj
-compiler/cjnative/FFI/cffi/c_ffi_012/c_ffi_01206n/c_ffi_main.cj
-compiler/cjnative/FFI/cffi/c_ffi_006/c_ffi_00611n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_006/c_ffi_00621n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_007/c_ffi_00704n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_007/c_ffi_00708n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_007/c_ffi_00719n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_008/c_ffi_00801/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_008/c_ffi_00801n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_008/c_ffi_00802n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_008/c_ffi_00803n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_008/c_ffi_00804n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_008/c_ffi_00805n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_008/c_ffi_00809n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_008/c_ffi_00810/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_008/c_ffi_00811/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_008/c_ffi_00812n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_009/c_ffi_00911n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_009/c_ffi_00912n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_009/c_ffi_00913n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_009/c_ffi_00914n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_011/c_ffi_01129n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_011/c_ffi_01130n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_011/c_ffi_01131n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_011/c_ffi_01132n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_011/c_ffi_01133n/c_ffi.cj
-compiler/cjnative/FFI/cffi/c_ffi_012/c_ffi_01201n/c_ffi_main.cj
-compiler/cjnative/USG/14cffi/usg_14foreign_01/usg_14foreign_01.cj
-compiler/cjnative/USG/14cffi/usg_14foreign_02/usg_14foreign_02.cj
-compiler/cjnative/USG/14cffi/usg_14foreign_03/usg_14foreign_03.cj
-compiler/cjnative/USG/23FFI/usg_ffi_23.1CallCTest/usg_ffi_23.1CallCTest.cj
-compiler/cjnative/USG/23FFI/usg_ffi_23.2Foreign/usg_ffi_23.2Foreign.cj
-compiler/cjnative/USG/23FFI/usg_ffi_23.2Unsafe/usg_ffi_23.2Unsafe.cj
-compiler/cjnative/USG/23FFI/usg_ffi_23.3Rename/usg_ffi_23.3Rename.cj
-compiler/cjnative/USG/23FFI/usg_ffi_23.4CallingConv/usg_ffi_23.4CallingConv.cj
-compiler/cjnative/USG/23FFI/usg_ffi_23.5Fmt/usg_ffi_23.5Fmt.cj
-compiler/cjnative/USG/23FFI/usg_ffi_23.6CType/usg_ffi_23.6CType.cj
-compiler/cjnative/USG/23FFI/usg_ffi_23.7CPointer/usg_ffi_23.7CPointer.cj
-compiler/cjnative/USG/23FFI/usg_ffi_23.8CPointerTrans/usg_ffi_23.8CPointerTrans.cj
-compiler/cjnative/USG/23FFI/usg_ffi_23.9CString/usg_ffi_23.9CString.cj
 compiler/cli/Option/obfuscation/009/obfuscation_90302.cj
 compiler/cli/Option/obfuscation/009/obfuscation_93104.cj
-
-# source file 'spec_types_2.1.1.2OperatorsSupportedbyNumberTypes_04Self-increment_decrement.cj' doesn't exist
-compiler/cjnative/TypesAndVariables/spec/spec_types_2.1.1.2OperatorsSupportedbyNumberTypes_04Self-increment_decrement.cj
-compiler/cjnative/TypesAndVariables/spec/spec_types_2.1.1.2OperatorsSupportedbyNumberTypes_07supportedbyfloating-point.cj
-Regression/Fuzz/B025coredump/Aborted_Core_Dumped/id_000046_sig_06_src_000213_op_arith8_pos_152_val__19_B015HMS.cj
-Regression/Fuzz/B025coredump/Segmentation_Fault_Core_Dumped/id_000050_sig_11_src_000383_op_arith8_pos_165_val__34_B015HMS.cj
-Regression/Fuzz/B025coredump/Segmentation_Fault_Core_Dumped/id_000126_sig_11_src_000423_op_arith8_pos_143_val__34_B015HMS.cj
-Regression/Fuzz/B025coredump/Segmentation_Fault_Core_Dumped/id_000136_sig_11_src_000466_op_arith8_pos_185_val__24_B015HMS.cj
-Regression/Fuzz/B025coredump/Segmentation_Fault_Core_Dumped/id_000157_sig_11_src_000423_op_arith8_pos_143_val__34_B015HMS.cj
-Regression/Fuzz/B025coredump/Segmentation_Fault_Core_Dumped/id_000162_sig_11_src_000466_op_arith8_pos_185_val__24_B015HMS.cj
-Regression/Fuzz/B025coredump/Segmentation_Fault_Core_Dumped/id_000177_sig_11_src_000617_op_arith8_pos_157_val__34_B015HMS.cj
-Regression/Fuzz/B025coredump/Segmentation_Fault_Core_Dumped/id_000184_sig_11_src_000661_op_arith8_pos_163_val__34_B015HMS.cj
-Regression/Fuzz/B025coredump/Segmentation_Fault_Core_Dumped/id_000237_sig_11_src_001061_op_arith8_pos_145_val__34_B015HMS.cj
-Regression/Fuzz/B025coredump/Segmentation_Fault_Core_Dumped/id_000244_sig_11_src_000981_op_arith8_pos_187_val__34_B015HMS.cj
 
 # 用例头待修改 linux和win命令行不适配的问题
 # invalid file or directory 'command_injection_0005.cj > a.txt'
@@ -305,9 +96,7 @@ compiler/cli/command_injection/command_injection_0025.cj
 compiler/cli/command_injection/command_injection_0015.cj
 compiler/cli/command_injection/command_injection_0013.cj
 
-#乱码
-compiler/cli/command_injection/command_injection_0009.cj
-compiler/cli/command_injection/command_injection_0010.cj
+# 乱码
 compiler/cli/command_injection/command_injection_0012.cj
 compiler/cli/command_injection/command_injection_0014.cj
 compiler/cli/command_injection/command_injection_0016.cj
@@ -323,7 +112,6 @@ compiler/cli/command_injection/command_injection_0026.cj
 compiler/cli/command_injection/command_injection_0027.cj
 compiler/cli/command_injection/command_injection_0028.cj
 compiler/cli/command_injection/command_injection_0030.cj
-compiler/cli/driver_backend_14.cj
 compiler/cli/Option/other/option_other_00004.cj
 
 # rm不支持
@@ -336,110 +124,22 @@ compiler/cli/Option/library/option_library_00006.cj
 compiler/cli/Option/parallel_compile
 
 # 不支持反引号
-compiler/cli/Option/obfuscation/005/obfuscation_50001.cj
-compiler/cli/Option/obfuscation/005/obfuscation_50002.cj
 compiler/cli/Option/obfuscation/006/obfuscation_60002.cj
 compiler/cli/Option/obfuscation/006/obfuscation_60002_1.cj
-compiler/cli/Option/obfuscation/007/obfuscation_70002.cj
-
-# Windows not support lto
-compiler/cli/Option/lto
-
-# ======================== Tools exclude ========================
-# CJLint
-# API not support on windows: such as gethostname
-
-# Command not not support on windows
 
 # 修改文档表示 windows 不支持 pgo
 compiler/cli/Option/pgo/pgo_001.cj
 compiler/cli/Option/pgo/pgo_004.cj
 compiler/cli/Option/pgo/pgo_005.cj
 
-Regression/External/I4AZMP.cj
-
-# syntax will be supported in future
-API/syntax/visit/ASTRewriter/test_rewriter_02.cj
-
-API/std/io/file/File_create_03.cj
-API/std/fs/file/linux/test_linux_file_no_permission.cj
-API/std/io/StringReader/StringReader_readln_13_01.cj
-
-# https://gitcode.com/Cangjie/cangjie_compiler/issues/442
-compiler/cjnative/Packages/org_name/import_decl/backtick_in_org_name_0.cj
-compiler/cjnative/Packages/org_name/import_decl/backtick_in_org_name_1.cj
-
-# https://gitcode.com/Cangjie/cangjie_compiler/issues/443
-compiler/cjnative/Packages/org_name/import_decl/invalid_colon_0.cj
-compiler/cjnative/Packages/org_name/package_decl/invalid_colon_0.cj
-compiler/cjnative/Packages/org_name/package_decl/invalid_colon_1.cj
-compiler/cjnative/Packages/org_name/package_decl/no_package_name_0.cj
-compiler/cjnative/Packages/org_name/package_decl/no_package_name_1.cj
-compiler/cjnative/Packages/org_name/package_decl/no_package_name_2.cj
-
-# https://gitcode.com/Cangjie/cangjie_test/issues/211
-compiler/cjnative/Packages/cjmp/cjmp_03018/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_03019/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_03020/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_03021/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_03022/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_03023/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_03024/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_04029/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_04038/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_04073/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_04076/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_04077/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_04082/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_04083/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_11037/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_11039/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_13007/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_16007/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_16009/test.cj
-
-# file name too long
-Tools\cjpm\source_set\source_set003\source_set_identifier002
-
-# flaky tests with ACCESS VIOLATION on windows
-Tools\cjpm\stdx\stdx_c\check_01\check_01.info
-Tools\cjpm\stdx\stdx_c\tree_01\tree_01.info
-
-# https://gitcode.com/Cangjie/cangjie_test/issues/315
-compiler\cjnative\Chir\CompileOption\plugin\testpath\test_plugin_path_03.cj
-compiler\cjnative\Chir\CompileOption\plugin\testpath\test_plugin_path_04.cj
-
-# cjmp
-# While Cangjie toolchain for windows does not contain interop library
-# ObjectiveC interop tests should be excluded
-compiler/cjnative/FFI/objcffi/glue_code
-
-# cjpm本地可以通过看板失败，需后面对其环境适配用例
-Tools/cjpm/source_set/007/cross001/cross001.info
-
-API/syntax/parseFunc/parseDir/path/parsedir_path_004.cj
-API/syntax/parseFunc/parseDir/path/parsedir_path_012n.cj
-API/syntax/parseFunc/parseFile/path/parsefile_path_004.cj
-API/syntax/parseFunc/parseFile/path/parsefile_path_005.cj
-API/syntax/parseFunc/parseFile/path/parsefile_path_011n.cj
-
-API/net/TLS_new/KeylessTlsServerConfig/test_KeylessTlsServerConfig.cj
 # cjcov, 回合main分支，暂时屏蔽
-Tools\cjcov\cjcov_special_filename\cjcov_special_filename_017
-Tools\cjcov\cjcov_special_filename\cjcov_special_filename_018
+Tools/cjcov/cjcov_special_filename/cjcov_special_filename_017
+Tools/cjcov/cjcov_special_filename/cjcov_special_filename_018
 
-API\compress\ParamCheck\test_archive_param_check.cj
-API\std\ast\API\Expr\Parse\047MacroDecl\expr_parser_04704n.cj
-API\syntax\parseFunc\parseText\Expr\LitConstStrExpr\parseText_litconststrexpr003.cj
-API\syntax\parseFunc\parseTokens\Expr\LitConstStrExpr\parseTokens_litconststrexpr003.cj
-Tools\cjcov\cjcov_special_filename\cjcov_special_filename_017\cjcov_special_filename_017.info
-Tools\cjcov\cjcov_special_filename\cjcov_special_filename_018\cjcov_special_filename_018.info
-
-API/std/console/stdin/test_stdin_windows_35.cj
+API/compress/ParamCheck/test_archive_param_check.cj
 
 # OHOS does not support reflection of enum type currently.
 API/std/reflect/cjnative/enum_type
 
 # std.concurrent is not built for OHOS
 API/std/concurrent
-

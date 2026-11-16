@@ -10,8 +10,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public class N {
+@ObjC
+public foreign class N {
     init()
 
     @ForeignName["zeroParams"]

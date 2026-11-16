@@ -1075,7 +1075,7 @@ extend Enum92 {}
 // ASSERT: scan parse_expected_decl
 // ASSERT: scan parse_expected_left_brace
 // ASSERT: scan parse_expected_name
-// ASSERT: scan parse_unmatched_right_delimiter
+// ASSERT: scan parse_missing_body
 // ASSERT: scan parse_illegal_modifier_in_scope
 // ASSERT: scan parse_unexpected_declaration_in_scope
 

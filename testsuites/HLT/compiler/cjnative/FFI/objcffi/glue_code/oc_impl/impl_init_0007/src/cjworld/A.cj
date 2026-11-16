@@ -10,7 +10,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     @ForeignName["initWithA:AndB:AndC:"]
     public init(a: Int64, b: Float64, c: Bool) {

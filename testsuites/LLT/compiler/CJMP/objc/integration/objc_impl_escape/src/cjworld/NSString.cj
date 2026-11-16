@@ -7,7 +7,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class NSString <: NSObject {
+@ObjC
+public open foreign class NSString <: NSObject {
     public init()
 }

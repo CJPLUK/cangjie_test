@@ -11,7 +11,7 @@ import java.lang.*;
 import dom.java.lib.I0
 import c.m.I1
 
-@JavaImpl["com.java.lib.Impl"]
+@Java["com.java.lib.Impl"]
 public class Impl <: I1 {
     public init() {
         print("In CJ Impl: start\n", flush: true)

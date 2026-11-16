@@ -8,7 +8,7 @@ package cj
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class Impl <: JObject {
     public init() {
         print("Impl()\n", flush: true)

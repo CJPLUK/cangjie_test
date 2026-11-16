@@ -8,9 +8,9 @@
 
 // LEVEL:2
 // DEPENDENCE: ../%n.c cfg.json
-// (not Windows) EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg.json
-// (not Windows) EXEC: %clang %clang_opt %n.c -o %cffi_output
-// (not Windows) EXEC-PIPE-1: %compiler %cmp_opt %ffic_opt -o %output 2>&1 | compare %f
+// EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg.json
+// EXEC: %clang %clang_opt %n.c -o %cffi_output
+// EXEC-PIPE-1: %compiler %cmp_opt %ffic_opt -o %output 2>&1 | compare %f
 
 foreign func printf(fmt: CString): Int32
 
@@ -37,4 +37,4 @@ main(): Int64 {
     unsafe { LibC.free(b) }
     return 0
 }
-// (not Windows) ASSERT: scan sema_exceed_num_value_range
+// ASSERT: scan sema_exceed_num_value_range

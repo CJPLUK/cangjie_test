@@ -9,8 +9,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     @ForeignName["initWithA:"]
     init(a: Bool)
     @ForeignName["initWithM:andB"]
@@ -19,7 +19,7 @@ public open class M {
     init(a: M, m: M)
 }
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     @ForeignName["init"]
     public init() {

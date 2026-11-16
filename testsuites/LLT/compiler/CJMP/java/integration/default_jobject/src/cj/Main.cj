@@ -8,7 +8,7 @@ package cj
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class Main{
     @ForeignName["main"]
     public static func entry(args: JArray<JString>): Unit {

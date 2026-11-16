@@ -6,7 +6,7 @@
 
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
 
-// ASSERT: scan-12 error: ObjCPointer can only be used with Objective-C compatible types
+// ASSERT: scan-12 error: 'ObjCPointer' can only be used with Objective-C compatible type
 
 package objc.test
 

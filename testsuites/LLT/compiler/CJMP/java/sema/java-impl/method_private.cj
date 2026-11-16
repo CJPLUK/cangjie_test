@@ -14,12 +14,12 @@ class PureCangjie {
 
 }
 
-@JavaMirror
-open class M {
+@Java
+open foreign class M {
     init()
 }
 
-@JavaImpl
+@Java
 class L <: M {
     L() {
         super()

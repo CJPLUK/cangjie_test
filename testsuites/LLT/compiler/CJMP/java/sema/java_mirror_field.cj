@@ -10,8 +10,8 @@
 
 import java.lang.JObject
 
-@JavaMirror
-class M {
+@Java
+foreign class M {
     public var x: Bool
     public let y: Int16
     public static var sx: Int32

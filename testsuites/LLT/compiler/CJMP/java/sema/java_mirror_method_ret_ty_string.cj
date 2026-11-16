@@ -10,7 +10,7 @@
 
 import java.lang.JObject
 
-@JavaMirror
-class M {
+@Java
+foreign class M {
     public func foo(): String
 }

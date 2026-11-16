@@ -4,7 +4,7 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// LEVEL: 1
+// LEVEL: 0
 // DEPENDENCE: ../%n
 // EXEC: cd %n && %cjpm bundle --skip-test --skip-lint && tar -zxf target/demo-1.0.0.cjp && %ls demo-1.0.0/src 2>&1 | compare %f
 // ASSERT: scan-not other

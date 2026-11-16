@@ -9,8 +9,8 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaMirror["com.example.myapplication.Logger"]
-public open class _Logger {
+@Java["com.example.myapplication.Logger"]
+public open foreign class _Logger {
     public static func print(message: JString): Unit
     public static func println(message: JString): Unit
 }

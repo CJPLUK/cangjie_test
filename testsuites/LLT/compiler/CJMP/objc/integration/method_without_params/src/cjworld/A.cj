@@ -8,7 +8,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public func fooBar(): M1 {
         let res0 = super.goo()

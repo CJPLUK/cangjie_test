@@ -11,20 +11,20 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-open class Bar {
+@ObjC
+public open foreign class Bar {
     init()
 }
 
-@ObjCImpl
+@ObjC
 class Mem <: Bar {
     init() {
         super()
     }
 }
 
-@ObjCMirror
-class Foo {
+@ObjC
+foreign class Foo {
     public prop a: ObjCPointer<Mem>
     public prop b: ObjCPointer<Float64>
     public prop c: ObjCPointer<Int64>

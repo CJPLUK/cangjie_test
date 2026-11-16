@@ -45,6 +45,5 @@ class Coo<T> <: Boo<T> {
         }
     }
 }
-// ASSERT: scan sema_property_override_implement_type_diff
-// ASSERT: scan sema_extend_member_cannot_shadow
-// ASSERT: scan sema_extend_function_cannot_overridden
+// ASSERT: scan sema_class_need_abstract_modifier_or_func_need_impl
+// ASSERT: scan sema_prop_redefinition

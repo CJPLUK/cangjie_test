@@ -7,13 +7,13 @@
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
 // ASSERT: scan error: unexpected annotation '@ObjCOptional' on prop
 // ASSERT: scan error: unexpected annotation '@ObjCOptional' on class
-// ASSERT: scan error: @ObjCOptional method must be declared within '@ObjCMirror' interface
+// ASSERT: scan error: '@ObjCOptional' member function must be declared within '@ObjC' foreign interface
 // ASSERT: scan 3 errors generated, 3 errors printed
 
 import objc.lang.*
 
-@ObjCMirror
-public interface I {
+@ObjC
+public foreign interface I {
     @ObjCOptional // unexpected annotation '@ObjCOptional' on prop
     prop a: UInt64
 }
@@ -23,10 +23,10 @@ public class M {
     init() {}
 }
 
-@ObjCMirror
-public class N {
+@ObjC
+public foreign class N {
     init()
 
-    @ObjCOptional // @ObjCOptional method must be declared within '@ObjCMirror' interface
+    @ObjCOptional // @ObjCOptional method must be declared within '@Obj' foreign interface
     func bar(): Unit
 }

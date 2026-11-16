@@ -17,7 +17,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: Java02 {
     public init() {
     }

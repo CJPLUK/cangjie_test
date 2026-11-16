@@ -4,27 +4,13 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output 2>& 1 | compare %f
  
-@ObjCMirror
-class M {
+@ObjC
+foreign class M {
     ~init()
 }
- 
-/* SCAN-IN
-error: @ObjCMirror declaration cannot have finalizer
-  ==> objc_mirror_finalizer.cj:11:5:
-   | 
-11 |     ~init()
-   |     ^^^^^^^ 
-   | 
 
-error: body of finalizer is missing
-  ==> objc_mirror_finalizer.cj:11:12:
-   | 
-11 |     ~init()
-   |            ^ missing finalizer body here
-   | 
-
-2 errors generated, 2 errors printed.
-*/
+// ASSERT: scan parse_objc_mirror_cannot_have_finalizer
+// ASSERT: scan parse_missing_body
+// ASSERT: scan "Errors": 2

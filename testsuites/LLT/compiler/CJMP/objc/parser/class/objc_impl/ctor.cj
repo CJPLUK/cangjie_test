@@ -10,13 +10,13 @@
 
 import objc.lang.*
 
-@ObjCMirror
-open class M {
+@ObjC
+public open foreign class M {
     init(a: Bool)
     init()
 }
 
-@ObjCImpl
+@ObjC
 class A <: M {
     A() {
         super()
@@ -30,7 +30,7 @@ class A <: M {
     init(a: Int64, b: Bool, c: ?ObjCId, d: M, e: ?M) { }
 }
 
-@ObjCImpl
+@ObjC
 class B <: M {
     B() {
         super()

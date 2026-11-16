@@ -4,7 +4,9 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (DEBUG_OPTION)EXEC-PIPE-0: %frontendCompiler %debugCHIROpt %disableCodegen %enableChir2RGetOrThrowE -Woff all %f -o %n.%suffix 2>&1 | compare %f
+// DEPENDENCE: ../pick_defination.py
+// EXEC: %frontendCompiler %enableO2 --fno-chir-function-inlining %dumpCHIRDebug -Woff all %f -o getorthrow.out
+// EXEC: %python pick_defination.py getorthrow_CHIR/[0-9]*_RedundantGetOrThrowElimination.chirtxt "Func @_CN7default3goo" | compare %f
 
 func goo(cond: Bool) {
     var a = Some(100)
@@ -23,5 +25,10 @@ main() {
     0
 }
 
-// ASSERT: scan [RGetOtThrowE] The usages of the result of getOrThrow at [14,18] have been replaced by the value at [13,18]
-// ASSERT: scan [RGetOtThrowE] The usages of the result of getOrThrow at [18,14] have been replaced by the value at [17,14]
+// ASSERT: scan-2 10getOrThrowHv,
+// ASSERT: regex-begin %(?P<first>\d+): Int64 = Apply\(.*10getOrThrowHv, %\d+[,)]
+// ASSERT: regex-after %(?P<b3>\d+)\[b3\]: Int64& = Allocate\(Int64\)
+// ASSERT: regex-after %\d+: Unit = Store\(%(?P=first), %(?P=b3)\)
+// ASSERT: regex-after %(?P<second>\d+): Int64 = Apply\(.*10getOrThrowHv, %\d+[,)]
+// ASSERT: regex-after %(?P<b6>\d+)\[b6\]: Int64& = Allocate\(Int64\)
+// ASSERT: regex-after %\d+: Unit = Store\(%(?P=second), %(?P=b6)\)

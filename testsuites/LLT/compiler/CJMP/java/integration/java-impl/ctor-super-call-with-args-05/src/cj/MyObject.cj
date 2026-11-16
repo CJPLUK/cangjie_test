@@ -8,8 +8,8 @@ package cj
 
 import java.lang.*
 
-@JavaMirror["com.java.lib.MyObject"]
-public open class MyObject {
+@Java["com.java.lib.MyObject"]
+public open foreign class MyObject {
     public init(arg0: Int8, arg1: ?JArray<Float32>, arg2: ?JArray<Int32>, arg3: ?JArray<Float64>)
 
     public init(arg0: Int32, arg1: Float32, arg2: ?JArray<Int8>, arg3: Int16)

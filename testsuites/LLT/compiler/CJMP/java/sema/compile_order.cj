@@ -12,13 +12,13 @@
 
 import java.lang.JObject
 
-@JavaMirror
-open class M {
+@Java
+open foreign class M {
     init(a: Bool)
     init()
 }
 
-@JavaImpl
+@Java
 class A <: M {
     A() {
         super()
@@ -26,26 +26,26 @@ class A <: M {
 }
 
 // MMI is declared above MM
-@JavaImpl
+@Java
 class MMI <: MM {
     init() {
     }
 }
 
 // MMM is declared above MM
-@JavaMirror
-class MMM <: MM {
+@Java
+foreign class MMM <: MM {
     init()
 }
 
-@JavaMirror
-open class MM {
+@Java
+open foreign class MM {
     init(a: Bool)
     init()
 }
 
 // B is declared below MM
-@JavaImpl
+@Java
 class B <: MM {
     B() {
         super()   

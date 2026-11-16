@@ -72,14 +72,14 @@ package cj
 
 import java.lang.*
 
-@JavaMirror["com.java.lib.MyObject"]
-public open class MyObject {
+@Java["com.java.lib.MyObject"]
+public open foreign class MyObject {
     public init(value: Int64)
     public init(value: MyObject)
     public open func getValue(): Int64
 }
 
-@JavaImpl
+@Java
 public class Impl <: MyObject {
     public init() {
         // Primitive argument

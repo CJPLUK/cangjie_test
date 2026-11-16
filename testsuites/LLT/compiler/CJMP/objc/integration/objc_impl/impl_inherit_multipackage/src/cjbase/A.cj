@@ -8,12 +8,12 @@ package cjbase
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     public init()
 }
 
-@ObjCImpl
+@ObjC
 public open class A <: M {
     /// Moved into `A$reg`, so a subtype in another package reaches it through the restored companion parent.
     public var shared: Int64 = 0

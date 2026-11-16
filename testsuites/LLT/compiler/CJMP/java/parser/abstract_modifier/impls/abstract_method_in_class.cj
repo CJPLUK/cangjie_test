@@ -4,7 +4,7 @@
 
 import java.lang.*
 
-@JavaImpl
+@Java
 class C {
     public abstract func foo(): Unit
 }
@@ -25,4 +25,3 @@ error: unexpected modifier 'abstract' on function declaration in class body
 // with Runtime Library Exception.
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
-

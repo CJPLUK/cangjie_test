@@ -8,8 +8,8 @@ package cj
 
 import java.lang.*
 
-@JavaMirror["com.java.lib.MyObject"]
-open class MyObject <: JObject {
+@Java["com.java.lib.MyObject"]
+open foreign class MyObject <: JObject {
     public init()
     public func getSize(arr: JArray<?JObject>): Int32
     public func hasNull(arr: JArray<?JObject>): Bool

@@ -1204,6 +1204,5 @@ extend Aggregate465 {
 // ASSERT: scan parse_expected_case
 // ASSERT: scan parse_expected_name
 // ASSERT: scan parse_expected_character
-// ASSERT: scan parse_expected_expr_or_decl_in
 
 

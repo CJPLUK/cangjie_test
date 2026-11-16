@@ -10,8 +10,8 @@
 // EXEC: ObjCInteropGen test.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-@ObjCMirror
-public open class Base {
+@ObjC
+public open foreign class Base {
     public open func f0(): ?Base
     public open func f1(): Base
     public open func f2(): ?Base
@@ -20,8 +20,8 @@ public open class Base {
     public open func f5(): Base
 }
 
-@ObjCMirror
-public open class M <: Base {
+@ObjC
+public open foreign class M <: Base {
     public open func f0(): ?Base
     public open func f1(): Base
     public open func f2(): ?Base

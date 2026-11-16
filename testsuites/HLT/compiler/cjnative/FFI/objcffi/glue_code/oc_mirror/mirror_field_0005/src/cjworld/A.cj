@@ -10,7 +10,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public init() {}
     public open func foo() {
@@ -21,5 +21,3 @@ public class A <: M {
 func test() {
     println("in cangjie test, a: ${M().a}")
 }
-
-

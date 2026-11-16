@@ -8,8 +8,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-class A {
+@ObjC
+foreign class A {
    @ObjCMirror
    func foo(): Int64
 }

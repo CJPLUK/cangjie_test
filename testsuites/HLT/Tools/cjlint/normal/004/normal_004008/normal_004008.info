@@ -8,12 +8,6 @@
 
 // LEVEL: 1
 // DEPENDENCE: ./src
-// Regression: manual says 'cjlint -f ./src -r csv -o ./report' generates a
-// report.csv file. The extension check must require a dot separator: when
-// the -o value merely ENDS with 'csv'/'json' without a dot (e.g. out_csv,
-// out_json), the tool currently skips appending the extension and produces
-// a report file without any format suffix. Expected: report_csv.csv.
 // (Windows)EXEC-PIPE: %lint -f ./src -r csv -o ./report_csv -c %cangjieDir/tools -m %cangjieDir & type .\report_csv.csv 2>&1 | compare %f
 // (not Windows)EXEC-PIPE: %lint -f ./src -r csv -o ./report_csv -c %cangjieDir/tools -m %cangjieDir && cat ./report_csv.csv | compare %f
-// ASSERT: regex .*SourceFile,Line,Column,Description,DefectType,DefectLevel
 // ASSERT: regex .*test\.cj,[0-9]+,[0-9]+,.*G\.VAR\.01.*

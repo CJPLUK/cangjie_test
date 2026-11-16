@@ -11,7 +11,7 @@
 
 import objc.lang.*
 
-@ObjCMirror
-class M {
+@ObjC
+foreign class M {
     init()
 }

@@ -4,22 +4,9 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// DEPENDENCE: sancov.h sancov.cpp
-// (CJNATIVE and DEBUG_OPTION) EXEC: %clang++ -c -fPIC %stdc++_opt sancov.cpp -o sancov.o
-// (CJNATIVE and DEBUG_OPTION) EXEC: %compiler %debugCHIROpt --sanitizer-coverage-trace-compares sancov.o %n.cj -o %output 
-// (CJNATIVE and DEBUG_OPTION) RUN-EXEC-PIPE: %run %run_opt %output %run_args 2>&1 | compare %f
-// (not CJNATIVE and DEBUG_OPTION) EXEC: %clang++ -shared -fPIC %stdc++_opt sancov.cpp -o libsancov.so
-// (not CJNATIVE and DEBUG_OPTION) EXEC: %compiler %cmp_opt %debugCHIROpt --sanitizer-coverage-trace-compares -o %n.%suffix %n.cj -lsancov
-// (not CJNATIVE and DEBUG_OPTION) RUN-EXEC-PIPE: LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:. %run %n.%suffix %run_args 2>&1 | compare %f
-
-// ASSERT: scan-begin enter step1
-// ASSERT: scan-next enter step2
-// ASSERT: scan-next exit step2
-// ASSERT: scan-next trace_const_cmp4: (0, 0)
-// ASSERT: regex-next caller PC=0x?[A-Za-z0-9]+
-// ASSERT: scan-next exit step1: AAA
-// ASSERT: scan-next exit step1: BBB
-// ASSERT: scan-end
+// DEPENDENCE: ../pick_defination.py
+// EXEC: %frontendCompiler %dumpCHIRDebug --sanitizer-coverage-trace-compares -Woff all %f -o sancov.out
+// EXEC: %python pick_defination.py sancov_CHIR/[0-9]*_Sanitizer_Coverage.chirtxt WHOLE | compare %f
 
 public func step1(): Bool {
     println("enter step1")
@@ -42,3 +29,14 @@ main() {
     step1()
     return 0
 }
+
+// ASSERT: regex-1 = Apply\(@_CN7default5step2Hv[,)]
+// ASSERT: regex-1 = Apply\(@__sanitizer_cov_trace_const_cmp4[,)]
+// ASSERT: regex-begin Func @_CN7default5step1
+// ASSERT: regex-after %(?P<result>\d+): Int32 = Apply\(@_CN7default5step2Hv\)
+// ASSERT: regex-after %(?P<zero>\d+): Int32 = Constant\(0i\)
+// ASSERT: regex-after %(?P<lhs>\d+): UInt32 = NumericCast\(%(?P=result)\)
+// ASSERT: regex-after %(?P<rhs>\d+): UInt32 = NumericCast\(%(?P=zero)\)
+// ASSERT: regex-after Unit = Apply\(@__sanitizer_cov_trace_const_cmp4, %(?P=lhs), %(?P=rhs)\)
+// ASSERT: regex-after %(?P<equal>\d+): Bool = Equal\(%(?P=result), %(?P=zero)\)
+// ASSERT: regex-after Branch\(%(?P=equal), #\d+, #\d+\)

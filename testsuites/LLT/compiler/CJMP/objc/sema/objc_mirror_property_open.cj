@@ -11,15 +11,15 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-open class Base {
+@ObjC
+public open foreign class Base {
     init()
     public open prop a: Int64
     public open prop b: Int64
 }
 
-@ObjCMirror
-class Derived <: Base {
+@ObjC
+foreign class Derived <: Base {
     init()
     public prop a: Int64
     public override prop b: Int64

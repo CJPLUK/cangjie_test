@@ -14,9 +14,9 @@ import std.unittest.*
 import std.unittest.testmacro.*
 
 main():Unit {
-    @When[os=="iOS"]
+    @When[os == "iOS" && env == ""]
     var size:Int64=3
-    @When[os!="iOS"]
+    @When[os != "iOS" || env != ""]
     var size:Int64=2
     let _thread = spawn {
         while (true) {

@@ -11,12 +11,12 @@ import objc.lang.*
 
 class PureCangjie {}
 
-@ObjCMirror
-open class M {
+@ObjC
+public open foreign class M {
     init()
 }
 
-@ObjCImpl
+@ObjC
 class L <: M {
     init() {
         super()

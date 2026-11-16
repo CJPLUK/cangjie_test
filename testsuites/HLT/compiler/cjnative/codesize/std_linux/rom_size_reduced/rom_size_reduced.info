@@ -1,0 +1,12 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ *
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+
+// LEVEL: 1
+// DESC: Linux ROM 运行时产物体积回归：按入库的 rom_runtime_so.list 清单到 $CANGJIE_HOME/runtime/lib/linux_*_cjnative/ 读取各 .so 真实 size，求和须小于基线 13330（Linux 不要求优化 5%），否则用例报错
+// DEPENDENCE: ../check.py ../rom_runtime_so.list
+// (target_linux) EXEC: %python check.py

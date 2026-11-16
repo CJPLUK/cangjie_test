@@ -35,7 +35,7 @@ warning: unreachable pattern
   ==> enum_table_sibling_cases.cj:18:14:
    | 
 18 |         case Active(1, 0) | Active(1, 1) => 0
-   |              ^^^^^^^^^^^^ 
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
    | 
    # note: this warning can be suppressed by setting the compiler option `-Woff unused`
 */
@@ -65,7 +65,7 @@ warning: unreachable pattern
   ==> enum_table_sibling_cases.cj:26:14:
    | 
 26 |         case Active(1, 1) | Active(_, 2) => 0
-   |              ^^^^^^^^^^^^ 
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
    | 
    # note: this warning can be suppressed by setting the compiler option `-Woff unused`
 */

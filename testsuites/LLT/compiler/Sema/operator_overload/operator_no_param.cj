@@ -24,12 +24,5 @@ error: expected a argument name after '(' in parameter list, found ':'
    |                            after '(' in parameter list
    | 
 
-error: body of function '>=' is missing
-  ==> operator_no_param.cj:10:34:
-   | 
-10 |     public operator func >=(:A<T>):Int16 {return 0}
-   |                                  ^ missing function body here
-   | 
-
-2 errors generated, 2 errors printed.
+1 error generated, 1 error printed.
 */

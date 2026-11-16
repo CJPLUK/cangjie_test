@@ -4,7 +4,7 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
 
 import objc.lang.*
 
@@ -32,50 +32,7 @@ func f(): ObjCFunc<(Unit) -> Float64> {
     return unsafe { zeroValue() }
 }
 
-/* SCAN-IN
-error: ObjCFunc can only be used with function type over Objective-C compatible types
-  ==> objc_func_type_illegal_type_argument.cj:11:20:
-   | 
-11 | func a(): ObjCFunc<Unit> {
-   |                    ^^^^ 
-*/
 
-/* SCAN-IN
-error: ObjCFunc can only be used with function type over Objective-C compatible types
-  ==> objc_func_type_illegal_type_argument.cj:15:20:
-   | 
-15 | func b(): ObjCFunc<Float64> {
-   |                    ^^^^^^^ 
-*/
-
-/* SCAN-IN
-error: ObjCFunc can only be used with function type over Objective-C compatible types
-  ==> objc_func_type_illegal_type_argument.cj:19:20:
-   | 
-19 | func c(): ObjCFunc<String> {
-   |                    ^^^^^^ 
-*/
-
-/* SCAN-IN
-error: ObjCFunc can only be used with function type over Objective-C compatible types
-  ==> objc_func_type_illegal_type_argument.cj:23:21:
-   | 
-23 | func d(): ObjCFunc<(String) -> Float64> {
-   |                     ^^^^^^ 
-*/
-
-/* SCAN-IN
-error: ObjCFunc can only be used with function type over Objective-C compatible types
-  ==> objc_func_type_illegal_type_argument.cj:27:48:
-   | 
-27 | func e(): ObjCFunc<(Int64, ObjCPointer<Int64>, String) -> Float64> {
-   |                                                ^^^^^^ 
-*/
-
-/* SCAN-IN
-error: ObjCFunc can only be used with function type over Objective-C compatible types
-  ==> objc_func_type_illegal_type_argument.cj:31:21:
-   | 
-31 | func f(): ObjCFunc<(Unit) -> Float64> {
-   |                     ^^^^
-*/
+// ASSERT: scan-6 sema_objc_func_argument_must_be_objc_compatible
+// ASSERT: scan-6 'ObjCFunc' can only be used with function type over Objective-C compatible types
+// ASSERT: scan "Errors": 6

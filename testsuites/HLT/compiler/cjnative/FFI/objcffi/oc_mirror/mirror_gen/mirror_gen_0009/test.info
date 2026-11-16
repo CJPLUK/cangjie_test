@@ -17,20 +17,20 @@ import objc.foundation.NSObject
 import objc.foundation.NSObjectProtocol
 import objc.lang.*
 
-@ObjCMirror
-public open class A <: NSObject {
+@ObjC
+public open foreign class A <: NSObject {
 }
 
-@ObjCMirror
-public interface B <: NSObjectProtocol {
+@ObjC
+public foreign interface B <: NSObjectProtocol {
 }
 
 @C
 public struct S {
 }
 
-@ObjCMirror
-public open class test <: NSObject {
+@ObjC
+public open foreign class test <: NSObject {
     @ForeignName["f1WithA:andB:andS:"] public static func f1WithAAndBAndS(a: ?A, b: ?B, s: S): ?A
     @ForeignName["f2WithA:andB:andS:"] public static func f2WithAAndBAndS(a: ?A, b: ?B, s: S): ?B
     @ForeignName["f3WithA:andB:andS:"] public static func f3WithAAndBAndS(a: ?A, b: ?B, s: S): S

@@ -17,7 +17,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JavaClass {
     public func foo(): JArray<Int64> {
         JArray<Int64>(44)

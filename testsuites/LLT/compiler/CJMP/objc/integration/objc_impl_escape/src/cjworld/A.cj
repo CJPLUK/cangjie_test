@@ -8,7 +8,7 @@ package cjworld
 import std.runtime.*
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     private var visits = 0
 

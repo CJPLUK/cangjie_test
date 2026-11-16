@@ -11,8 +11,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     init()
 }
 
@@ -24,7 +24,7 @@ public struct PureCangjieStruct {}
 
 public enum PureCangjieEnum { A | B }
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     @ForeignName["initWithPureCangjieClass:"]
     public init(c: PureCangjieClass) { }

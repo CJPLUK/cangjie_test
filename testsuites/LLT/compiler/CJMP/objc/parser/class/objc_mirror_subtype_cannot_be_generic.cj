@@ -7,8 +7,8 @@
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output 2>& 1 | compare %f
 // ASSERT: scan parse_objc_impl_cannot_be_generic
 
-@ObjCMirror
-class M {}
+@ObjC
+foreign class M {}
 
-@ObjCImpl
+@ObjC
 class I<T> <: M {}

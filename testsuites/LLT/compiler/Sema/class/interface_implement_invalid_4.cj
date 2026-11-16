@@ -29,7 +29,7 @@ main(): Int64 {
 }
 
 /* SCAN
-error: interface function 'foo' must be implemented in 'C1'
+error: interface function 'foo(): Int64' must be implemented in 'C1'
   ==> interface_implement_invalid_4.cj:25:1:
    | 
 25 | class C1 <: I2 & I3 {}

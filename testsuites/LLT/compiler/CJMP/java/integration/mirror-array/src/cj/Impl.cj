@@ -8,8 +8,8 @@ package cj
 
 import java.lang.*
 
-@JavaMirror["com.java.lib.JImpl"]
-open class JImpl <: JObject {
+@Java["com.java.lib.JImpl"]
+open foreign class JImpl <: JObject {
     public init()
     public func takeArr(arr: JArray<Int64>): Unit
     public func takeArr(arr: ?JArray<Int32>): Unit
@@ -24,7 +24,7 @@ class Bar <: ToString {
     public func toString() { "this is Bar" }
 }
 
-@JavaImpl
+@Java
 public class Impl <: JImpl {
     public func foo(): JArray<Int64> {
         JArray<Int64>(44)

@@ -4,22 +4,16 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt %import_java_interop 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output %compile_shared_lib_opt %import_java_interop 2>& 1 | compare %f
 
 import java.lang.*
 
-@JavaMirror
-class M {
+@Java
+foreign class M {
     public func foo(f: Unit): Unit
 }
 
-/* SCAN-IN
-error: argument type of java-mirrored function must be of @JavaMirror type
-  ==> java_mirror_method_param_ty_unit.cj:13:21:
-   | 
-13 |     public func foo(f: Unit): Unit
-   |                     ^^^^^^^ 
-   | 
+// ASSERT: scan sema_java_mirror_method_arg_must_be_java_mirror
+// ASSERT: scan 'Unit' is not java-compatible type
+// ASSERT: scan "Errors"
 
-1 error generated, 1 error printed.
-*/

@@ -10,7 +10,7 @@ import objc.lang.*
 
 foreign func malloc(size: UIntNative): CPointer<Unit>
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public init() {
         println("cj: A()")

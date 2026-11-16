@@ -1,0 +1,13 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: t02_opener_payload.d.ts
+// EXEC: %hle_arkts -i t02_opener_payload.d.ts -o . --module-name="my_module"
+// EXEC-PIPE: %cat cj/t02_opener_payload/src/t02_opener_payload.cj | compare %f
+// ASSERT: scan public type T2OpenerType = JSValue/* FIXME:
+// ASSERT: scan "/\*opener_only"
+// ASSERT: scan-not "/*opener_only"

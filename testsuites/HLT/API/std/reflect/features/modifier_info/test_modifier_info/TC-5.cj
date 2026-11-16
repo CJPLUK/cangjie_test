@@ -22,8 +22,9 @@
 *- @Priority: P0
 */
 
+// LEVEL: 3
 // Description:
-// DEPENDENCE: utils redefpkg upstream
+// DEPENDENCE: ../../../utils redefpkg upstream
 // EXEC: %compiler %cmp_opt %compile_lib_opt -p utils
 // EXEC: %compiler %cmp_opt %compile_lib_opt -p redefpkg
 // EXEC: %compiler %cmp_opt %compile_lib_opt -p upstream

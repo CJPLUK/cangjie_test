@@ -12,7 +12,10 @@
 // (!host_win) EXEC: %compiler -L. -l%n.c.cfile %f %cmp_opt -o %output
 // (!host_win) RUN-EXEC-PIPE-139: %run %run_opt %output %run_args 2>&1 | compare %f
 // (!host_win & target_android) ASSERT: scan Segmentation fault
-// (!host_win & !target_android) ASSERT: scan SIGSEGV
+// (!host_win & target_ohos) ASSERT: scan Signal 11 (core dumped)
+// (!host_win & (target_ios | target_ios_simulator)) ASSERT: scan Segmentation fault
+// (!host_win & target_mac) ASSERT: scan Segmentation fault
+// (!host_win & target_linux) ASSERT: scan Segmentation fault
 
 foreign func foo(): Unit
 

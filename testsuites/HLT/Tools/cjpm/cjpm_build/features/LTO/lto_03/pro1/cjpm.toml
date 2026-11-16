@@ -1,7 +1,7 @@
 # Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
 # This source file is part of the Cangjie project, licensed under Apache-2.0
 # with Runtime Library Exception.
-# 
+#
 # See https://cangjie-lang.cn/pages/LICENSE for license information.
 
 [dependencies]
@@ -27,3 +27,24 @@
     env = {}
   [profile.test]
     build = {lto = "full"}
+
+[target.x86_64-linux-ohos]
+  compile-option = "-B=${OHOS_ROOT}/llvm/prebuilt/x86_64-linux-ohos/bin --sysroot=${OHOS_ROOT}/llvm/prebuilt/x86_64-linux-ohos/sysroot"
+[target.aarch64-linux-ohos]
+  compile-option = "-B${OHOS_ROOT}/sysroot/usr/lib/aarch64-linux-ohos -B${OHOS_ROOT}/llvm/bin -L${OHOS_ROOT}/llvm/lib/clang/15.0.4/lib/aarch64-linux-ohos -L${OHOS_ROOT}/llvm/lib/aarch64-linux-ohos -L${OHOS_ROOT}/sysroot/usr/lib/aarch64-linux-ohos"
+[target.aarch64-linux-android26]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.aarch64-linux-android31]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.aarch64-linux-android32]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.aarch64-linux-android35]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.arm-linux-android23]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.aarch64-linux-android23]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.arm64-apple-ios-simulator]
+  compile-option = "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ --sysroot=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk"
+[target.x86_64-apple-ios-simulator]
+  compile-option = "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ --sysroot=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk"

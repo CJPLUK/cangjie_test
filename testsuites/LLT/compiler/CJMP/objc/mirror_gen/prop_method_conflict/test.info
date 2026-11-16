@@ -10,16 +10,16 @@
 // EXEC: ObjCInteropGen test.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-@ObjCMirror
-public open class A {
+@ObjC
+public open foreign class A {
     @ForeignName["foo:"] public open func foo_(x: Int32): Unit
     public open mut prop foo: Int32
     @ForeignName["bar:"] public open func bar(x: Int32): Unit
     public open mut prop baz: Int32
 }
 
-@ObjCMirror
-public open class M <: A {
+@ObjC
+public open foreign class M <: A {
     public open func foo_(x: Int32): Unit
     @ForeignName["bar"] public open mut prop bar_: Int32
     @ForeignName["baz:"] public open func baz_(x: Int32): Unit

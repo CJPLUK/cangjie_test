@@ -21,8 +21,9 @@
 *- @Priority: P0
 */
 
+// LEVEL: 3
 // Description:
-// DEPENDENCE: utils
+// DEPENDENCE: ../../../utils
 // EXEC: %compiler %cmp_opt %compile_lib_opt -p utils
 // EXEC: %compiler %cmp_opt %f -L . -lutils -o %output %cmp_utest_opt
 // RUN-EXEC: %run %run_opt %output %run_utest_opt %run_args
@@ -56,8 +57,8 @@ class TestPtiAcq {
         @Expect[strArrayContent](PrimitiveTypeInfo.of<Bool>().getStaticFunctions("__nonExistent__"), [])
         @ExpectThrows[InfoNotFoundException](PrimitiveTypeInfo.of<Bool>().getStaticProperty("__nonExistent__"))
         @Expect[annotations](PrimitiveTypeInfo.of<Bool>().annotations, [])
-        @Expect[annotationsArray](PrimitiveTypeInfo.of<Bool>().findAllAnnotations<Tag>(), [])
-        @Expect(PrimitiveTypeInfo.of<Bool>().findAnnotation<Tag>().isNone(), true)
+        @Expect[annotationsArray](PrimitiveTypeInfo.of<Bool>().findAllAnnotations<PtiTag>(), [])
+        @Expect(PrimitiveTypeInfo.of<Bool>().findAnnotation<PtiTag>().isNone(), true)
         @Expect(PrimitiveTypeInfo.of<Bool>().getAllAnnotations().size, 0i64)
         @Expect[containsIfaceName](PrimitiveTypeInfo.of<Bool>().superInterfaces, "Any")
         @Expect[notContainsModifiers](PrimitiveTypeInfo.of<Bool>().modifiers, ["open", "abstract", "sealed"])

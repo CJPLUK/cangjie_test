@@ -10,7 +10,7 @@
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 class A <: M {
     @ForeignSetterName["assignB:"]
     public mut prop b: Int32 {
@@ -19,8 +19,8 @@ class A <: M {
     }
 }
 
-@ObjCMirror
-open class M {
+@ObjC
+public open foreign class M {
     public init()
 
     @ForeignSetterName["assignA:"]

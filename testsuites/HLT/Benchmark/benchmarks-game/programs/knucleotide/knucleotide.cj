@@ -6,7 +6,8 @@
  * See https://cangjie-lang.cn/pages/LICENSE for license information.
  */
 
-// EXEC: %compiler %cmp_opt %optimization_level_2 %overflow_wrapping %f -o %output
+// LEVEL: 3
+// EXEC: %compiler %cmp_opt -O2 %overflow_wrapping %f -o %output
 // Throughput-oriented variant. It breaks one Benchmarks Game rule: stdin is streamed in large batches and parsed
 // in parallel instead of line by line. Counting is identical to the strict version: per reading frame into library
 // HashMaps grown from their default size, with 2-bit codes packed 32 per UInt64 and frames split across cores.

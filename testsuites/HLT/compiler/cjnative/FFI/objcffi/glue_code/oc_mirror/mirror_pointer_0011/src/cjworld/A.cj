@@ -10,7 +10,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public var p1: ObjCPointer<Int64> = unsafe { ObjCPointer<Int64>(CPointer<Unit>()) }
     public var p2: ObjCPointer<Int64> = unsafe { ObjCPointer<Int64>(CPointer<Unit>()) }

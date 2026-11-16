@@ -11,7 +11,7 @@ import objc.lang.*
 import std.unittest.*
 import std.unittest.testmacro.*
 
-@ObjCImpl
+@ObjC
 public class A <: NSObject {
     static let markerList = ArrayList<TrackedObject>()
 

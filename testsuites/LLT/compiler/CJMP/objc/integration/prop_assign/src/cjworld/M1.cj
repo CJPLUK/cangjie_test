@@ -8,8 +8,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror 
-public open class M1 <: I {
+@ObjC
+public open foreign class M1 <: I {
   public init(a: Int64)
   public open func f1(): Unit
 }

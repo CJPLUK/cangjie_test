@@ -8,7 +8,7 @@ package cj
 
 import java.lang.JObject
 
-@JavaImpl
+@Java
 public class Impl <: MyObject {
     public init(a: Int64, b: Bool) {
         println("cangjie: Impl(${a}, ${b})")

@@ -10,8 +10,8 @@ package cjworld
  
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     @ForeignName["init"]
     public init()
     @ForeignName["f1:"]
@@ -21,5 +21,3 @@ public open class M {
     public mut prop p1: Int64
     public static mut prop p2: Int64
 }
-
-

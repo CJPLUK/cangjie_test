@@ -3,12 +3,12 @@
 
 import java.lang.*
 
-@JavaMirror
-abstract class A {
+@Java
+abstract foreign class A {
     public abstract func foo(): Unit
 }
 
-@JavaImpl
+@Java
 class Impl {
     init() {
         let x = A()
@@ -28,4 +28,3 @@ error: abstract class 'A' can not be instantiated
 // with Runtime Library Exception.
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
-

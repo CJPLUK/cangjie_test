@@ -8,7 +8,7 @@ package javaapp.my
 
 import java.lang.JObject
 
-@JavaMirror
-open class M {
+@Java
+open foreign class M {
     init()
 }

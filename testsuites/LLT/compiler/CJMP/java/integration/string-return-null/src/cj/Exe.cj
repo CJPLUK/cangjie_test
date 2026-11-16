@@ -8,8 +8,8 @@ package cj
 
 //import java.lang.*
 
-@JavaMirror["com.java.lib.Exe"]
-public open class Exe {
+@Java["com.java.lib.Exe"]
+public open foreign class Exe {
     public init()
 
     // intentionally used type String to throw exception

@@ -8,7 +8,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: Base {
     let i: Int32
     public A(a: Int32) { i = a }

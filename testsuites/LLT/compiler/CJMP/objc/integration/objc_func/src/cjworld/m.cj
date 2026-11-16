@@ -8,12 +8,12 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class NSObject {
+@ObjC
+public open foreign class NSObject {
     public init()
 }
 
-@ObjCImpl
+@ObjC
 public class K <: NSObject {
     let fp: ObjCFunc<(Float64) -> Float64>
     mut prop fProp: ObjCFunc<(Float64) -> Float64> {
@@ -32,7 +32,7 @@ public class K <: NSObject {
     }
 }
 
-@ObjCImpl
+@ObjC
 public class L <: M {
     public init() {
         super()
@@ -58,8 +58,8 @@ public struct S {
     }
 }
 
-@ObjCMirror
-public class N {
+@ObjC
+public foreign class N {
     public init()
     @ForeignName["mapF:"]
     public func mapF(f: ObjCFunc<(Float64) -> Float64>): Float64
@@ -68,8 +68,8 @@ public class N {
     public func id(): Int64
 }
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     public init()
     public func fPtr(): ObjCFunc<(Float64) -> Float64>
     public func iPtr(): ObjCFunc<(Float64) -> Float64>

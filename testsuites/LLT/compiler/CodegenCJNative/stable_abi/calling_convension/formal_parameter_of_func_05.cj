@@ -8,7 +8,7 @@
 // (CJNATIVE) EXEC: %llvmDissembler %n.bc -o %n.ll
 // (CJNATIVE) EXEC: %cat %n.ll 2>&1 | compare %f
 // (CJNATIVE) ASSERT: scan define i64 @"_CN7default2SAIG_E3fooHb$withoutTI"(i8* nocapture readonly %this, i1 %x, %TypeInfo* %outerTI)
-// (CJNATIVE) ASSERT: scan define i64 @_CN7default2SAIG_E3fooHb(i8 addrspace(1)* %this.withTI, i1 %0, %TypeInfo* %1)
+// (CJNATIVE) ASSERT: scan define i64 @_CN7default2SAIG_E3fooHb(i8 addrspace(1)* nocapture readonly %this, i1 %x, %TypeInfo* %outerTI)
 
 struct SA<T> {
     SA(let x: T) {}

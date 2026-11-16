@@ -8,8 +8,8 @@ package cj
 
 import java.lang.*
 
-@JavaMirror["com.java.lib.MyObject"]
-public open class MyObject {
+@Java["com.java.lib.MyObject"]
+public open foreign class MyObject {
     public init(value: I2)
     public init(value: MyObject)
     public init(value: JString)

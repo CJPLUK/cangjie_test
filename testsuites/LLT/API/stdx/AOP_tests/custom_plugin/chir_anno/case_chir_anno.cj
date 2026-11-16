@@ -24,7 +24,7 @@
 // ASSERT: scan has sourceExpr Binary: true\n
 // ASSERT: scan has sourceExpr Quest: true\n
 // ASSERT: scan user ext linkage: 3\n
-// ASSERT: scan user non-ext linkage: 6\n
+// ASSERT: scan user non-ext linkage: 9\n
 // ASSERT: scan closure types: 0\n
 // ASSERT: scan chir anno probe ok\n
 // ASSERT: scan-not core dumped

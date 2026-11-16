@@ -8,7 +8,7 @@ package cj
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class Main <: Test{
     public func test(): Unit {
         print("test\n")

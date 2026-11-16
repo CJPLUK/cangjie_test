@@ -10,8 +10,8 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaMirror["com.JavaClass"]
-public open class JavaClass {
+@Java["com.JavaClass"]
+public open foreign class JavaClass {
     public mut prop aString: JArray<JString>
 
     public mut prop aInt: JArray<Int32>
@@ -30,5 +30,3 @@ public open class JavaClass {
 
     public init() 
 }
-
-

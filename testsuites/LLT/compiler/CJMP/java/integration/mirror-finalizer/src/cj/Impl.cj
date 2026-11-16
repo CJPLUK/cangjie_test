@@ -16,7 +16,7 @@ private class Stub {
     }
 }
  
-@JavaImpl
+@Java
 public class Impl <: JObject {
     public static func check(): Unit {
         MyObject.lock()

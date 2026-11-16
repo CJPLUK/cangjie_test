@@ -8,7 +8,7 @@ package abstract
 
 import java.lang.JObject
 
-@JavaMirror["com.java.lib.Abstract"]
-public abstract class Abstract {
+@Java["com.java.lib.Abstract"]
+public abstract foreign class Abstract {
     public abstract open func foo(): Abstract
 }

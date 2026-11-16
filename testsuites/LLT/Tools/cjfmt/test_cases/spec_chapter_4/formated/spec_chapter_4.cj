@@ -297,10 +297,10 @@ var howManyHours: Float32 = match (oneYear) {
     case Year(y) where y > 0.0f32 => y * Float32(365 * 24) // matched
     case Year(y) where y <= 0.0f32 => 0.0
     case Month(y, m) where y > 0.0f32 && m > 0.0f32 => y * Float32(365 * 24) + m * Float32(30 * 24)
-    case Day(y, m, d) where y > 0.0f32 && m > 0.0f32 && d > 0.0f32 => y * Float32(365 * 24) + m * Float32(30 * 24) + d *
-        Float32(24)
-    case Hour(y, m, d, h) where y > 0.0f32 && m > 0.0f32 && d > 0.0f32 && h > 0.0f32 => y * Float32(365 * 24) + m *
-        Float32(30 * 24) + d * Float32(24) + h
+    case Day(y, m, d) where y > 0.0f32 && m > 0.0f32 && d > 0.0f32 => y * Float32(365 * 24) + m * Float32(30 * 24) +
+        d * Float32(24)
+    case Hour(y, m, d, h) where y > 0.0f32 && m > 0.0f32 && d > 0.0f32 && h > 0.0f32 => y * Float32(365 * 24) +
+        m * Float32(30 * 24) + d * Float32(24) + h
     case _ => 0.0
 }
 

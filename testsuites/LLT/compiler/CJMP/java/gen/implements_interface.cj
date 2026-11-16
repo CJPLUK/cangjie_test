@@ -53,17 +53,17 @@ package cjworld.theworld
 
 import java.lang.JObject
 
-@JavaMirror
-public interface I2 {
+@Java
+public foreign interface I2 {
     func test(): Bool
 }
 
-@JavaMirror
-public interface I3 {
+@Java
+public foreign interface I3 {
     func test(): Bool
 }
 
-@JavaImpl
+@Java
 public class C2 <: I2 & I3 {
     public init() {
         println("in C2 Init")

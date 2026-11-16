@@ -32,7 +32,7 @@ error: unable to infer generic argument of this function
    |             ^^^^ 
    | 
 note: no information known for type variable 'Generics-T'
-  ==> (package std.core)option.cj:11:20:
+  ==> (package std.core)option.cj:20:20:
 
 error: generic type should be used with type argument
   ==> enum37.cj:15:11:

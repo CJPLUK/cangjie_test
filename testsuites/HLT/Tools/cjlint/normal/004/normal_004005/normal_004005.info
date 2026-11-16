@@ -8,10 +8,6 @@
 
 // LEVEL: 1
 // DEPENDENCE: ./src
-// Regression: when -o points to a nonexistent directory the tool must exit
-// with a non-zero code (255, consistent with other option errors such as an
-// unsupported -r value) and the error message must be fully formatted
-// (currently it contains a raw '%s' placeholder).
 // EXEC-PIPE-255: %lint -f ./src -o ./nodir/report -c %cangjieDir/tools -m %cangjieDir 2>&1 | compare %f
 // ASSERT: regex .*error.*Create target file.*error
 // ASSERT: regex-not .*%s.*

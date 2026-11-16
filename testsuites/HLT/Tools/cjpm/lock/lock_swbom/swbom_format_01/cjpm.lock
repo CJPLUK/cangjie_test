@@ -1,0 +1,14 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+# This source file is part of the Cangjie project, licensed under Apache-2.0
+# with Runtime Library Exception.
+#
+# See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+# 构造异常 lock：未知 version 号与未知字段，期望 cjpm 明确报错且不改写文件
+
+version = 99
+
+[requires."core"]
+version = "1.2.3"
+source = "registry+https://repo.example.com"
+unknown-field = 1

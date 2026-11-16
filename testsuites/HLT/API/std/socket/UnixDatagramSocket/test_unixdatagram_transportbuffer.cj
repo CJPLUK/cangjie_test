@@ -7,8 +7,8 @@
  */
 
 // LEVEL: 1
-// (not Windows)EXEC: %compiler %cmp_opt %f -o %output %cmp_utest_opt
-// (not Windows)RUN-EXEC: %run %run_opt %output %run_utest_opt %run_args
+// (!target_win)EXEC: %compiler %cmp_opt %f -o %output %cmp_utest_opt
+// (!target_win)RUN-EXEC: %run %run_opt %output %run_utest_opt %run_args
 
 /*
  * Test description: Test the bind and connect

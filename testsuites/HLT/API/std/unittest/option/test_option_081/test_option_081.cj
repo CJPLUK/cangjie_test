@@ -8,7 +8,7 @@
 
 // LEVEL: 2
 // DEPENDENCE: m1
-// (not Windows) EXEC: %compiler %cmp_opt %compile_lib_opt %pkg_opt m1/src %cmp_utest_opt -o %output
-// (not Windows) EXEC-PIPE-126: %run %run_opt %output %run_utest_opt %run_args 2>&1 | compare %f
-// (not Windows) ASSERT: scan Permission denied
+// (!target_win) EXEC: %compiler %cmp_opt %compile_lib_opt %pkg_opt m1/src %cmp_utest_opt -o %output
+// (!target_win) RUN-EXEC-PIPE-126: %run %run_opt %output %run_utest_opt %run_args 2>&1 | compare %f
+// (!target_win) ASSERT: scan Permission denied
 

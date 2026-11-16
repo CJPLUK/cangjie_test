@@ -8,8 +8,7 @@
 
 import java.lang.*
 
-@JavaMirror
-abstract class C {
+@Java
+abstract foreign class C {
     public abstract func foo(): Unit
 }
-

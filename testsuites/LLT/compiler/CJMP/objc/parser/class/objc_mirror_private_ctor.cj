@@ -4,20 +4,12 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output 2>& 1 | compare %f
 
-@ObjCMirror
-class M {
+@ObjC
+foreign class M {
     private init()
 }
 
-/* SCAN-IN
-error: @ObjCMirror declaration cannot have private member
-  ==> objc_mirror_private_ctor.cj:11:5:
-   | 
-11 |     private init()
-   |     ^^^^^^^^^^^^^^ 
-   | 
-
-1 error generated, 1 error printed.
-*/
+// ASSERT: scan parse_objc_mirror_cannot_have_private_member
+// ASSERT: scan "Errors": 1

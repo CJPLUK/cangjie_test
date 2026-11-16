@@ -8,7 +8,7 @@
 
 import java.lang.JObject
 
-@JavaImpl
+@Java
 class M1 <: JObject {
     @ForeignName["fooJava"]
     public func foo(): Unit {}

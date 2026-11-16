@@ -4,16 +4,9 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output %compile_shared_lib_opt 2>& 1 | compare %f
 
-@ObjCMirror
-class M {}
+@ObjC
+foreign class M {}
 
-/* SCAN-IN
-error: objc.lang must be imported to use Objective-C interoperability
-  ==> interop_lib_not_imported.cj:10:1:
-   | 
-10 | class M {}
-   | ^^^^^^^^^^ 
-   | 
-*/
+// ASSERT: scan sema_objc_mirror_interoplib_must_be_imported

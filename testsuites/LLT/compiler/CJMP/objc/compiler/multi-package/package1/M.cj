@@ -10,8 +10,8 @@ import objc.lang.*
 // It is important to not use the wildcard import
 import package0.I
 
-@ObjCMirror
-open class M {
+@ObjC
+public open foreign class M {
     public init()
     public open func boo(): I
 }

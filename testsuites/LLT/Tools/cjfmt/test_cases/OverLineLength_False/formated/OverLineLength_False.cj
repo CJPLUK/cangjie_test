@@ -25,8 +25,8 @@ public class SearchPage {
         Column() {
             Row() {
                 Image(@r(app.media.ic_arrow_left)).width(24).height(24).onClick {e => Router.back()}
-                TextInput(placeholder: "请输入搜索内容").height(36).layoutWeight(1).margin(left: 12).backgroundColor(
-                    CC.grey6)
+                TextInput(placeholder: "请输入搜索内容").height(36).layoutWeight(1).margin(left: 12)
+                    .backgroundColor(CC.grey6)
                 Text("取消").margin(left: 20)
             }.width(100.percent).padding(left: 16, right: 16)
             List() {

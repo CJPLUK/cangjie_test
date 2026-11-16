@@ -1,0 +1,31 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// (CJNATIVE and not Windows) DEPENDENCE: ../%n
+// (CJNATIVE and not Windows) RUN-EXEC-0: %cd %n && cjc %compile_shared_lib_opt -p src/cj %import_java_interop --output-javagen-dir=src/java/cj
+// (CJNATIVE and not Windows) RUN-EXEC-0: %cd %n && %javac %cp_cj_loader_java_interop src/java/cj/EchoImpl.java -h ./ -d ./
+// (CJNATIVE and not Windows) RUN-EXEC-0: %cd %n && %javac %cp_cj_loader_java_interop src/java/test/EchoBase.java -h ./ -d ./
+// (CJNATIVE and not Windows) RUN-EXEC-0: %cd %n && %javac %cp_cj_loader_java_interop src/java/test/EchoMirror.java -h ./ -d ./
+// (CJNATIVE and not Windows) RUN-EXEC-0: %cd %n && %javac %cp_cj_loader_java_interop src/java/Main.java -h ./ -d ./
+// (CJNATIVE and not Windows) RUN-EXEC-PIPE-0: %cd %n && %java %cp_cj_loader_java_interop -Djava.library.path./ Main 2>& 1 | compare %f
+
+/* SCAN-IN
+[JObject constructor] OK
+[JString constructor with value] OK
+[JString empty constructor] OK
+[JString default constructor] OK
+[JavaMirror constructor] OK
+[field getter] OK
+[field setter] OK
+[nullable field setter] OK
+[Java method call] OK
+[Java method with object argument and object result] OK
+[JArray constructor] OK
+[JArray method] OK
+[JArray get/set] OK
+[inherited Java method] OK
+[Java exception propagation] Caught Java exception: Exception: java.lang.IllegalStateException: expected Java exception
+*/

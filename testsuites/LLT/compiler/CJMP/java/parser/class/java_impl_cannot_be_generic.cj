@@ -7,7 +7,6 @@
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output %compile_shared_lib_opt 2>& 1 | compare %f
 // ASSERT: scan parse_java_impl_cannot_be_generic
 
-@JavaImpl
+@Java
 class I<T> <: JObject {
 }
-

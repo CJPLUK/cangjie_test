@@ -6,8 +6,8 @@
 
 // (CJNATIVE and not Windows) EXEC-PIPE-0: %frontendCompiler %dump-parse %cmp_opt %f -o %output %compile_shared_lib_opt
 
-@JavaMirror
-class M {
+@Java
+foreign class M {
     public var x: Bool
     public let y: Int16
     public static var sx: Int32

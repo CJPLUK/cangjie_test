@@ -8,7 +8,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public init() {
         super()
@@ -36,4 +36,3 @@ public class A <: M {
         println("cj: openFunc override ${first}")
     }
 }
-

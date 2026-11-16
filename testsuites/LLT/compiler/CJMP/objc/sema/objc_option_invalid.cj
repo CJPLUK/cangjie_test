@@ -5,14 +5,14 @@
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
-// ASSERT: scan-3 error: return type of Objective-C mirror method must be Objective-C compatible
-// ASSERT: scan-3 error: param type of Objective-C mirror method must be Objective-C compatible
+// ASSERT: scan-3 error: return type of member function in '@ObjC' foreign declaration must be Objective-C compatible
+// ASSERT: scan-3 error: parameter type of member function in '@ObjC' foreign declaration must be Objective-C compatible
 // ASSERT: scan 6 errors generated, 6 errors printed
 
 import objc.lang.*
 
-@ObjCMirror
-public class M {
+@ObjC
+public foreign class M {
     init()
 
     @ForeignName["PrimitiveOptionRet"]

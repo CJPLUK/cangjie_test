@@ -7,20 +7,20 @@
 // (CJNATIVE and not Windows) EXEC-PIPE-0: %frontendCompiler %dump-parse %cmp_opt %f -o %output %compile_shared_lib_opt
 
 
-@JavaMirror
-open class N {
+@Java
+open foreign class N {
     open func foo(): Unit
     open func bar(): Bool
 }
 
-@JavaMirror
-open class M <: N {
+@Java
+open foreign class M <: N {
     init()
 
     override func bar(): Bool
 }
 
-@JavaImpl
+@Java
 class L <: M {
     L() {
         super()

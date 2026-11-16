@@ -15,7 +15,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     public init() {
         println("run cj")
@@ -30,7 +30,7 @@ interface I {
     }
 }
 
-@JavaImpl
+@Java
 public class CangjieTest <: JObject {
     public init() {
         println("CangjieTest")

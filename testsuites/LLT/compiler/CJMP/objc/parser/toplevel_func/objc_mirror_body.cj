@@ -4,20 +4,14 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %frontendCompiler %dump-parse %cmp_opt %f -o %output %compile_shared_lib_opt 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %frontendCompiler %cmp_opt %diag_json %f -o %output %compile_shared_lib_opt 2>& 1 | compare %f
 
 import objc.lang.*
 
-@ObjCMirror
-func foo(): Int64 {
+@ObjC
+foreign func foo(): Int64 {
    0
 }
 
-/* SCAN-IN
-error: @ObjCMirror top-level function 'foo' cannot have body
-  ==> objc_mirror_body.cj:12:1:
-   | 
-12 | func foo(): Int64 {
-   | ^ 
-   | 
-*/
+// ASSERT: scan parse_objc_mirror_func_cannot_have_body
+// ASSERT: scan "Errors": 1

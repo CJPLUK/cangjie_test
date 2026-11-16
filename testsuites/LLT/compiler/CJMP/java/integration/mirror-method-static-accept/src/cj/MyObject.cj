@@ -8,8 +8,8 @@ package cj
 
 import java.lang.JObject
 
-@JavaMirror["com.java.lib.MyObject"]
-class MyObject <: JObject {
+@Java["com.java.lib.MyObject"]
+foreign class MyObject <: JObject {
     public init()
 
     public static func check(value: Int32): Unit

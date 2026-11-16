@@ -8,8 +8,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-class M {
+@ObjC
+foreign class M {
     static func foo(): Unit
     static func fooRet(): M
     @ForeignName["fooWithM:andMm:andMmm"]

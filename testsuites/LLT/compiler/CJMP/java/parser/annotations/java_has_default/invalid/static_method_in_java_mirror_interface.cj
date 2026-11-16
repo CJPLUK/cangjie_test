@@ -6,14 +6,14 @@
 
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>& 1 | compare %f
 
-@JavaMirror
-interface I {
+@Java
+foreign interface I {
     @JavaHasDefault
     static func f(): Int
 }
 
 /* SCAN-IN
-error: Illegal combination of '@JavaHasDefault' annotation and 'static' modifier.
+error: Illegal combination of '@JavaHasDefault' annotation and 'static' modifier
   ==> static_method_in_java_mirror_interface.cj:12:5:
    | 
 12 |     static func f(): Int

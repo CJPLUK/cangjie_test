@@ -10,13 +10,11 @@ package cjworld
  
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     public prop a: Int32 {
         get() { 1 }
         set(v) { v }
     }
     public init()
 }
-
-

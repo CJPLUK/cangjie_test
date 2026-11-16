@@ -8,13 +8,13 @@
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class MyObject {
 
 }
 
-@JavaMirror
-public interface MyInterface {
+@Java
+public foreign interface MyInterface {
     func foo(): Unit
 }
 

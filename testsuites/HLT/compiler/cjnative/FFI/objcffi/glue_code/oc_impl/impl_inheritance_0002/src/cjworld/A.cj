@@ -10,7 +10,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public open class A <: M {
     public init() {}
     public var a1 = 1
@@ -24,7 +24,7 @@ public open class A <: M {
     public static func s_f1() {1}
     public static func s_f2() {1}
 }
-@ObjCImpl
+@ObjC
 public class B <: A {
     public init() {
         var a = this.b1 + this.p2 + this.p3 + this.f2() + this.f3() + B.b2 + B.s_p2 + B.s_p3 + B.s_f2() + B.s_f3()

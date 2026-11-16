@@ -26,10 +26,10 @@ func impls(): ObjCFunc<(Foo) -> Foo> {
     return unsafe { zeroValue() }
 }
 
-@ObjCMirror
-open class Moo {
+@ObjC
+public open foreign class Moo {
     init()
 }
 
-@ObjCImpl
+@ObjC
 class Foo <: Moo {}

@@ -7,8 +7,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class NSMutableDictionary/*<KeyT, ValT>*/ <: NSDictionary/*<KeyT, ValT>*/ {
+@ObjC
+public open foreign class NSMutableDictionary/*<KeyT, ValT>*/ <: NSDictionary/*<KeyT, ValT>*/ {
     @ForeignName["initWithCapacity:"]
     public init(numItems: NSUInteger)
     public open func setValueForKey(value: ?ObjCId /*ValT*/, key: ?NSString): Unit

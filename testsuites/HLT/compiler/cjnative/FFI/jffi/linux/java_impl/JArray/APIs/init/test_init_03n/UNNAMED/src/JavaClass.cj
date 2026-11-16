@@ -10,13 +10,11 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaMirror["com.JavaClass"]
-public open class JavaClass {
+@Java["com.JavaClass"]
+public open foreign class JavaClass {
     public mut prop aInt: JArray<Int32>
 
     public mut static prop arrLong: JArray<Int64>
 
     public init() 
 }
-
-

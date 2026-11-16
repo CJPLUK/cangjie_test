@@ -14,9 +14,9 @@ import std.unittest.*
 import std.unittest.testmacro.*
 
 main():Unit {
-    @When[os=="iOS"]
+    @When[os == "iOS" && env == ""]
     var size:Int64=3
-    @When[os!="iOS"]
+    @When[os != "iOS" || env != ""]
     var size:Int64=2
     let _thread = spawn { sleep(Duration.second * 3) }
     func findThread(id: Int64, infos: Array<ThreadSnapshot>): ThreadSnapshot {

@@ -64,3 +64,30 @@ public static func ok(): Int64  {
 }
 
 }
+public struct StructStaticFuncShape  {
+public init() {
+}
+public static func sfGetValue(): Int64  {
+42i64
+}
+
+public static func sfDouble(v: Int64): Int64  {
+v * 2i64
+}
+
+public static func sfGreet(name: String): String  {
+"Hello " + name
+}
+
+}
+public struct StructGenericStaticFuncShape  {
+public init() {
+}
+public static func echo(v: Int64): Unit  {
+}
+
+public static func genIdent<T>(x: T): T  {
+x
+}
+
+}

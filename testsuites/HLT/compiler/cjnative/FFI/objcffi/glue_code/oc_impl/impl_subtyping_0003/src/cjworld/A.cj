@@ -12,5 +12,5 @@ import objc.lang.*
 
 public open class A {}
 
-@ObjCImpl
+@ObjC
 public class B <: A {}

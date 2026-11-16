@@ -29,7 +29,7 @@ package AOP_demo1
 import stdx.aspect_cj.*
 
 @InsertAtEntry[packageName: "AOP_demo1", className: "", methodName: "wovenFunction", isStatic: false, recursive: false,
-    funcTypeStr: "(String)->String"]
+    funcTypeStr: "(std.core.String)->std.core.String"]
 public func annotatedFunction(s: String): Unit {
     println("annotatedFunction")
 }

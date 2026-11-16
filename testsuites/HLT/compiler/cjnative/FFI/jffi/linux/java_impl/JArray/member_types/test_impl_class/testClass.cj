@@ -10,7 +10,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class testClass <: JObject {
     public let v1: Int64 = 10
 }

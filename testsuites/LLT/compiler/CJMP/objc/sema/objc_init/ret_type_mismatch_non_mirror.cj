@@ -12,8 +12,8 @@ import objc.lang.*
 
 public class P {}
 
-@ObjCMirror
-class M {
+@ObjC
+foreign class M {
     public init()
 
     @ObjCInit

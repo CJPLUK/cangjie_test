@@ -8,8 +8,8 @@ package cj
 
 import java.lang.*
 
-@JavaMirror["com.java.lib.JBase"]
-public open class JBase {
+@Java["com.java.lib.JBase"]
+public open foreign class JBase {
     public init()
 
     public func GetJString(): String
@@ -17,8 +17,8 @@ public open class JBase {
     public func GetOptNullJString(): ?String
 }
 
-@JavaMirror["com.java.lib.Exe"]
-public open class Exe {
+@Java["com.java.lib.Exe"]
+public open foreign class Exe {
     public init()
 
     public static func GetJBase(): JBase
@@ -28,7 +28,7 @@ public open class Exe {
     public static func PrintOptString(s: ?JString): Unit
 }
 
-@JavaImpl
+@Java
 public class CjExe <: Exe {
     public init(doTest: Bool) {
         if (!doTest) { return }
@@ -46,4 +46,3 @@ public class CjExe <: Exe {
         PrintOptString(None)
     }
 }
-

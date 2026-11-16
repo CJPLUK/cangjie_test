@@ -14,7 +14,7 @@ package cjworld.theworld
 
 import java.lang.JObject
 
-@JavaImpl
+@Java
 public class A <: JObject {
     public init() {}
 }

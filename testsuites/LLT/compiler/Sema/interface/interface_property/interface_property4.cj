@@ -29,7 +29,7 @@ main() {
 }
 
 /* SCAN
-error: interface property 'a' must be implemented in 'C'
+error: interface property 'a: Int32' must be implemented in 'C'
   ==> interface_property4.cj:25:1:
    | 
 25 | class C <: I1 & I2 {}

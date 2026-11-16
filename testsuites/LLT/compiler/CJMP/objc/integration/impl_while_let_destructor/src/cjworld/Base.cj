@@ -8,8 +8,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class Base {
+@ObjC
+public open foreign class Base {
     public init()
 
     public func generateNext(): Option<Base>

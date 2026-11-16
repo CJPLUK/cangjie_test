@@ -8,7 +8,7 @@ package cj
 
 import java.lang.JObject
 
-@JavaMirror["com.java.lib.I2"]
-public interface I2 {
+@Java["com.java.lib.I2"]
+public foreign interface I2 {
     func test(): Bool
 }

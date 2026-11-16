@@ -8,20 +8,20 @@
 
 import objc.lang.*
 
-@ObjCMirror
-open class N {
+@ObjC
+public open foreign class N {
     public open func foo(): Unit
     public open func bar(): Bool
 }
 
-@ObjCMirror
-open class M <: N {
+@ObjC
+public open foreign class M <: N {
     init()
 
     public override func bar(): Bool
 }
 
-@ObjCImpl
+@ObjC
 class L <: M {
     init() {
         super()

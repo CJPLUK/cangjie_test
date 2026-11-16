@@ -8,23 +8,23 @@ package com.java.lib
 
 import java.lang.*;
 
-@JavaMirror
-abstract class AbstractMirror {
+@Java
+abstract foreign class AbstractMirror {
     init()
     public static func staticFunc(): Unit
     protected open abstract func abstractFunc(): Unit
     public open func instanceFunc(): Unit
 }
 
-@JavaMirror
-open class ImplAbstractMirror <: AbstractMirror {
+@Java
+open foreign class ImplAbstractMirror <: AbstractMirror {
     init()
     public func abstractFunc(): Unit
     public func id(x: AbstractMirror): AbstractMirror
     public func idImpl(x: ImplAbstractMirror): AbstractMirror
 }
 
-@JavaImpl
+@Java
 class Impl <: JObject {
     public init() {
         print("In CJ Impl: start\n", flush: true)

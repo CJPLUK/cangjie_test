@@ -13,7 +13,7 @@ package n
 import java.lang.JObject
 import a.A
 
-@JavaMirror
-open class N <: A {
+@Java
+open foreign class N <: A {
     public open func foo(): Unit
 }

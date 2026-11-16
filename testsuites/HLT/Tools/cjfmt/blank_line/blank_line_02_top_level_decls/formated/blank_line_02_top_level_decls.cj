@@ -23,6 +23,13 @@ func f2(): Int64 {
 }
 
 class C {
+    var a = 0
+
+    var b = 0
+
+    let c = 1
+
+    let d = 2
     public func m(): Int64 {
         return 9
     }

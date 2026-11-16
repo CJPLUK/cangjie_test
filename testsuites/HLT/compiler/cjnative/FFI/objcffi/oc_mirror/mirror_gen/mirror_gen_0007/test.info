@@ -16,7 +16,7 @@ package cjworld
 import objc.foundation.NSString
 import objc.lang.*
 
-/* @ObjCMirror */
+/* @ObjC */
 public struct test {
     public var x: Int32 = 0
     public var y: ?NSString = None

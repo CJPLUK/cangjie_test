@@ -7,8 +7,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class NSNumber <: NSObject {
+@ObjC
+public open foreign class NSNumber <: NSObject {
     @ObjCInit 
     @ForeignName["initWithLongLong:"] 
     public static func initWithLongLong(value: Int64): NSNumber

@@ -7,8 +7,8 @@
  */
 
 // LEVEL: 3
-// (!target_oho & !target_android & !target_ios & !target_ios_simulator) EXEC: %compiler %cmp_opt %f -o %output
-// (!target_oho & !target_android & !target_ios & !target_ios_simulator) RUN-EXEC: %export cjHeapSize=4mb && %export cjHeapDumpOnOOM=on && %run %run_opt %output %run_args 2>&1 | compare %f
+// (!target_ohos & !target_android & !target_ios & !target_ios_simulator) EXEC: %compiler %cmp_opt %f -o %output
+// (!target_ohos & !target_android & !target_ios & !target_ios_simulator) RUN-EXEC: %export cjHeapSize=4mb && %export cjHeapDumpOnOOM=on && %run %run_opt %output %run_args 2>&1 | compare %f
 
 // ASSERT: scan-1 Heap dump log is writing into
 

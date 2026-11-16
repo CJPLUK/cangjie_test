@@ -27,13 +27,13 @@ package cjworldB
 import cjworldA.N
 import objc.lang.*
 
-@ObjCMirror
-public open class P {
+@ObjC
+public open foreign class P {
 }
 
-@ObjCMirror
-public open class M {
-    public open mut prop foo: ObjCPointer<N>
+@ObjC
+public open foreign class M {
+    public open mut prop foo: CPointer<N>
     @ForeignName["foo:"] public open func foo_(value: ?M): Unit
     @ForeignName["bar:"] public open func bar(value: ?P): Unit
     public open mut prop baz: ?P

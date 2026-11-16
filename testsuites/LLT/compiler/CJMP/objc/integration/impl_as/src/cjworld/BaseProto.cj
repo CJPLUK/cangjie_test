@@ -8,7 +8,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public interface BaseProto {
+@ObjC
+public foreign interface BaseProto {
     func identify(): Unit
 }

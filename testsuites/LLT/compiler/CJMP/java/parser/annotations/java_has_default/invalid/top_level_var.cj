@@ -12,8 +12,8 @@ let a = 1
 @JavaHasDefault
 var b = ""
 
-@JavaMirror
-class C {
+@Java
+foreign class C {
     public func foo(): Unit
 }
 

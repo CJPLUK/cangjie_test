@@ -34,7 +34,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class Cangjie_Invoke <: JavaClass_Child {
     public init() {
         println("in CangjieInvoke Init")
@@ -49,7 +49,7 @@ public class Cangjie_Invoke <: JavaClass_Child {
     }
 }
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     public init(v1: Int32) {
         let cjinvoke = Cangjie_Invoke()

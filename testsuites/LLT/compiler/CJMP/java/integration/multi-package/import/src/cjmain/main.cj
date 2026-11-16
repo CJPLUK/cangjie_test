@@ -11,7 +11,7 @@ import cjworld.*
 
 import java.lang.*
 
-@JavaImpl["com.java.lib.Main"]
+@Java["com.java.lib.Main"]
 public class Main {
     @ForeignName["main"]
     public static func entry(args: JArray<JString>): Unit {

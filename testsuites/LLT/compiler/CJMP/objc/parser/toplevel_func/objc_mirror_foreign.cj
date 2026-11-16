@@ -4,18 +4,12 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %frontendCompiler %dump-parse %cmp_opt %f -o %output %compile_shared_lib_opt 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-0: %frontendCompiler %dump-parse %cmp_opt %f -o %output %compile_shared_lib_opt 2>& 1
 
 import objc.lang.*
 
 @ObjCMirror
 foreign func foo(): Int64
 
-/* SCAN-IN
-error: @ObjCMirror top-level function 'foo' cannot be foreign
-  ==> objc_mirror_foreign.cj:12:9:
-   | 
-12 | foreign func foo(): Int64
-   |         ^ 
-   | 
-*/
+@ObjC
+foreign func bar(): Unit

@@ -10,13 +10,13 @@
 // ASSERT: scan-not A(int i)
 // ASSERT: scan-not initCJObjecti(int i);
 
-// This test checks that private constructor of @JavaImpl is not exported to java.
+// This test checks that private constructor of @Java is not exported to java.
 
 package cjworld.theworld
 
 import java.lang.*
 
-@JavaImpl["A"]
+@Java["A"]
 public class A {
     public init() {}
     private init(i: Int32) {}

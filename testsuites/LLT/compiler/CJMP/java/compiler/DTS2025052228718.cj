@@ -12,7 +12,7 @@
 
 import java.lang.JObject
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     public init() {}
     public func self(): This {

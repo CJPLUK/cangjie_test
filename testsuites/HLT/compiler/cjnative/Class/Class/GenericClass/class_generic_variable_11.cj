@@ -36,8 +36,9 @@ main(): Int64 {
     }
     return 1
 }
-// ASSERT: scan sema_type_uninitialized_static_field
-// ASSERT: scan sema_no_non_param_constructor_in_super_class
-// ASSERT: scan sema_type_incompatible
 // ASSERT: scan sema_mismatched_types
+// ASSERT: scan sema_no_non_param_constructor_in_super_class
+// ASSERT: scan sema_static_variable_use_generic_parameter
+// ASSERT: scan sema_type_incompatible
+// ASSERT: scan sema_type_uninitialized_static_field
 // ASSERT: scan sema_used_before_initialization

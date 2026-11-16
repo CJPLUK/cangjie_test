@@ -9,8 +9,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public open class Base {
+@ObjC
+public open foreign class Base {
     public init()
     public static func arg0(): Bool
     @ForeignName["primitive1WithArg0:"]
@@ -21,7 +21,7 @@ public open class Base {
     public static func primitive3(i: Int64, f: Float32, b: Bool): Int64
 }
 
-@ObjCImpl
+@ObjC
 public class Derived <: Base {
     public init() {}
     public redef static func arg0(): Bool {

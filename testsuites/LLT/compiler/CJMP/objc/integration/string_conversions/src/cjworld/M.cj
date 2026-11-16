@@ -8,8 +8,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-open class M <: NSObject {
+@ObjC
+public open foreign class M <: NSObject {
     public init()
     public static func helloAscii(): NSString
     public static func helloCyrillic(): NSString
@@ -22,13 +22,13 @@ open class M <: NSObject {
     public static func checkExportedImpl(): Unit
 }
 
-@ObjCMirror
-public open class NSObject {
+@ObjC
+public open foreign class NSObject {
     public init()
 }
 
-@ObjCMirror
-public class NSString <: NSObject {
+@ObjC
+public foreign class NSString <: NSObject {
     public init()
     public func isEqual(rhs: ObjCId): Bool
 }

@@ -10,8 +10,8 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaMirror["com.JavaClass"]
-public open class JavaClass {
+@Java["com.JavaClass"]
+public open foreign class JavaClass {
     public mut prop str: ?JString
 
     public init() 
@@ -20,5 +20,3 @@ public open class JavaClass {
 
     public open func loaction_param(param: ?JString): Unit
 }
-
-

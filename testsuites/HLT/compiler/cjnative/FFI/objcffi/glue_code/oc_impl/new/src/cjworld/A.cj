@@ -11,7 +11,7 @@ package cjworld
 import objc.lang.*
 import objc.foundation.*
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public init() {}
     public open func foo(): S {

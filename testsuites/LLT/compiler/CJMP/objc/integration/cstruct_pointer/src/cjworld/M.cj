@@ -2,8 +2,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-open class M {
+@ObjC
+public open foreign class M {
     @ForeignName["init"]
     public init()
 
@@ -15,4 +15,3 @@ open class M {
 // with Runtime Library Exception.
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
-

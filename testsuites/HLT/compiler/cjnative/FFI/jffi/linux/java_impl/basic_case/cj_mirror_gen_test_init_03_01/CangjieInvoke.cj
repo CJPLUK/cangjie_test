@@ -19,7 +19,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: Init03 {
     public init() {
         let class_01 = Init03()

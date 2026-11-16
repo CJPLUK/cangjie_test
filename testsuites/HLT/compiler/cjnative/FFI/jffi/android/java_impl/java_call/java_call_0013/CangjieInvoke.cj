@@ -17,7 +17,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     public init() {}
     public func test() {
@@ -28,7 +28,7 @@ public class CangjieInvoke <: JObject {
     }
 }
 
-@JavaImpl
+@Java
 public class CangjieTest <: JObject {
     public init() {}
     public func test() {

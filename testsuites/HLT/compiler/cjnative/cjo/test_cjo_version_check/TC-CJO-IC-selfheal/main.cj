@@ -23,7 +23,7 @@
 // EXEC-PIPE-0: %compiler %incremental_compile %cmp_opt pkg.%middle %f -o %output 2>&1 | compare diag_p2.txt
 // (Linux)EXEC: cat .cached/*.log | compare log_selfheal_p2.txt
 // (Windows)EXEC: powershell Get-Content .cached/*.log | compare log_selfheal_p2.txt
-// EXEC-0: %run %run_opt %output %run_args
+// RUN-EXEC-0: %run %run_opt %output %run_args
 
 import pkg.*
 

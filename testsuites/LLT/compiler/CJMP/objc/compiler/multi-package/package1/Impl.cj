@@ -10,7 +10,7 @@ import objc.lang.*
 // It is important to not use the wildcard import
 import package0.I
 
-@ObjCImpl
+@ObjC
 class Impl <: M & I {
     public init() {}
     public func foo(): Unit {}

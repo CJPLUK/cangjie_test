@@ -10,6 +10,7 @@
 // EXEC: %compiler %import-cangjie-stdx %cmp_opt -O2 --no-sub-pkg %f -o %output
 // RUN-EXEC: %export cjHeapSize=512mb && %run_stdx %output %run_args 2>&1 | compare %f
 // ASSERT: scan ms
+// TIMEOUT: 1800
 import stdx.encoding.json.*
 import std.io.*
 import std.time.*

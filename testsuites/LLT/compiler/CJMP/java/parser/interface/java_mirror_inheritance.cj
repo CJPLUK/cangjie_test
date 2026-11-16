@@ -6,13 +6,13 @@
 
 // (CJNATIVE and not Windows) EXEC-0: %frontendCompiler %dump-parse %cmp_opt %f -o %output %compile_shared_lib_opt
 
-@JavaMirror
-interface M {
+@Java
+foreign interface M {
     func foo(): Unit
     func bar(): Bool
 }
 
-@JavaMirror
-interface CM <: M {
+@Java
+foreign interface CM <: M {
     override func bar(): Bool
 }

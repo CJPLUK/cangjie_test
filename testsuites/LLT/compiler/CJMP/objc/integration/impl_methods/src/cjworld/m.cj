@@ -8,13 +8,13 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class Box {
+@ObjC
+public open foreign class Box {
     public init()
     public open mut prop value: Int64
 }
 
-@ObjCImpl
+@ObjC
 public class ImplBox <: Box {
     public init() {}
     private var _value: Int64 = 0;
@@ -28,8 +28,8 @@ public class ImplBox <: Box {
     }
 }
 
-@ObjCMirror
-public open class Base {
+@ObjC
+public open foreign class Base {
     public init()
     public open func arg0(): Bool
     @ForeignName["primitive1WithArg0:"]
@@ -59,7 +59,7 @@ public open class Base {
 
 }
 
-@ObjCImpl
+@ObjC
 public class Derived <: Base {
     public init() {}
     public override func arg0(): Bool {
@@ -116,8 +116,8 @@ public class Derived <: Base {
     }
 }
 
-@ObjCMirror
-public class Factory {
+@ObjC
+public foreign class Factory {
     public init()
     public func derived(): Derived
     public func base(): Base

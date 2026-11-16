@@ -8,8 +8,8 @@ package cj
 
 import java.lang.*
 
-@JavaMirror["com.java.lib.Exe"]
-public open class Exe {
+@Java["com.java.lib.Exe"]
+public open foreign class Exe {
     public init()
 
     public static func getArrayInt8(b: Int8): JObject
@@ -27,7 +27,7 @@ func fail(): Nothing {
     throw Exception("FAILURE")
 }
 
-@JavaImpl
+@Java
 public class CjExe <: Exe {
     public init(doTest: Bool) {
         if (!doTest) { return }

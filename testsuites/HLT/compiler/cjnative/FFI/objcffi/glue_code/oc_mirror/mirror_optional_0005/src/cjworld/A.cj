@@ -11,7 +11,7 @@ package cjworld
 import objc.lang.*
 import objc.foundation.*
 
-@ObjCImpl
+@ObjC
 public class A <: NSObject & I {
     public init() {}
     public func f1() { println("in cj f1") }

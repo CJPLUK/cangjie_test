@@ -18,7 +18,7 @@ package UNNAMED
 import java.lang.*
 
 // 当前区分不了是否抽象函数
-@JavaImpl
+@Java
 public class CangjieInvoke <: JavaClass {
     public init() {
         Logger.print("in CangjieInvoke Init\n")

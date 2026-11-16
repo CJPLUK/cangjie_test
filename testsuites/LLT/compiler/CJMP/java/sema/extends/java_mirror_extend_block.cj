@@ -11,8 +11,8 @@
 import java.lang.JObject
 import std.random.*
 
-@JavaMirror
-public class MyObject {
+@Java
+public foreign class MyObject {
 }
 
 extend MyObject {

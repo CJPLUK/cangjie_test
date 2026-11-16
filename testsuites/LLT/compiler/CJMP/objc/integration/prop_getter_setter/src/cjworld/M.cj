@@ -8,8 +8,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-open class M {
+@ObjC
+public open foreign class M {
     @ForeignGetterName["getFoo"]
     @ForeignSetterName["updateFoo:"]
     public mut prop foo: Int64

@@ -8,8 +8,8 @@ package cjbase
 
 import java.lang.*
 
-@JavaMirror["com.java.lib.Base"]
-public open class Base {
+@Java["com.java.lib.Base"]
+public open foreign class Base {
     public init()
     public open func foo(): Int64
     @ForeignName["getSelf"]

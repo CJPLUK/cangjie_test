@@ -16,10 +16,10 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public open class Father {}
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: Interface01 {
     public init() {}
 

@@ -12,12 +12,12 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-open class Base {
+@ObjC
+public open foreign class Base {
     public prop a: Int64
 }
 
-@ObjCMirror
-class Derived <: Base {
+@ObjC
+foreign class Derived <: Base {
     public prop a: Int64
 }

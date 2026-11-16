@@ -24,7 +24,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class testClass <: JavaClass {
     public init(aInt: JArray<Int32>) {
         super(aInt)
@@ -44,7 +44,7 @@ public class testClass <: JavaClass {
     }
 }
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     public init() {
         let arr = JArray<Int32>(10)

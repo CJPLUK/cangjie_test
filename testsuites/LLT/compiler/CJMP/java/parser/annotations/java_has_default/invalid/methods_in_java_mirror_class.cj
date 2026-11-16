@@ -6,14 +6,14 @@
 
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>& 1 | compare %f
 
-@JavaMirror
-class C {
+@Java
+foreign class C {
     @JavaHasDefault
     func f(): Unit
 }
 
 /* SCAN-IN
-error: '@JavaHasDefault' can be used only on @JavaMirror interface methods.
+error: '@JavaHasDefault' can only be used on member functions in '@Java' foreign interface
   ==> methods_in_java_mirror_class.cj:11:5:
    | 
 11 |     @JavaHasDefault

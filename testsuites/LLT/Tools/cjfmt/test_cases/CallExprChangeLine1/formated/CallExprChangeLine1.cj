@@ -18,9 +18,11 @@ class MyDialog {
     var controller: Option<CustomDialogController> = Option.None
     func build() {
         Row(60) {
-            Button("cancel").onClick {
-                evt => controller?.close()
-            }.id("close")
+            Button("cancel")
+                .onClick {
+                    evt => controller?.close()
+                }
+                .id("close")
 
             Button("confirm").onClick {
                 evt => controller?.close()
@@ -46,9 +48,11 @@ class HybridCustomDialog {
              * -@Expect: 自定义弹窗内容构造器
              */
             Text("CustomDialog_case_001,自定义弹窗内容构造器,，包含两个按钮 cancel 和 confirm")
-            Button("CustomDialog_case_001").onClick({
-                evt => dialogController001.open()
-            }).id("CustomDialog_case_001")
+            Button("CustomDialog_case_001")
+                .onClick({
+                    evt => dialogController001.open()
+                })
+                .id("CustomDialog_case_001")
         }
     }
 }

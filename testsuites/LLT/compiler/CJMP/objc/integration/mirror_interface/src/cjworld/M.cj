@@ -8,8 +8,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-open class M <: ProtoM & ProtoM1 {
+@ObjC
+open foreign class M <: ProtoM & ProtoM1 {
     public var idField: ObjCId
     public var protoField: ProtoM1
 

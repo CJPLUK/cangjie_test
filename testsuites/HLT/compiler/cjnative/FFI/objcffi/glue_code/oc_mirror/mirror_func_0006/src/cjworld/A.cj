@@ -10,12 +10,10 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M2 {
     public init() {}
     public open func foo() {
         println("in cangjie foo, return: ${M2().goo().foo()}")
     }
 }
-
-

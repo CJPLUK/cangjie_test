@@ -2,7 +2,7 @@
  * Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
  * This source file is part of the Cangjie project, licensed under Apache-2.0
  * with Runtime Library Exception.
- * 
+ *
  * See https://cangjie-lang.cn/pages/LICENSE for license information.
  */
 
@@ -16,17 +16,17 @@ public struct CType {
     public var b: Int32 = 0
 }
 
-/* @ObjCMirror */
+/* @ObjC */
 public struct ObjCCompat {
     public var a: ObjCPointer<?M> = ObjCPointer<?M>(CPointer<Unit>())
     public var b: Int32 = 0
 }
 
-@ObjCMirror
-public open class M {
-    protected var a: ObjCPointer<Int32>
+@ObjC
+public open foreign class M {
+    protected var a: CPointer<Int32>
     protected var b: ObjCPointer<?M>
-    protected var c: ObjCPointer<CType>
+    protected var c: CPointer<CType>
     // protected var d: ObjCPointer<ObjCCompat>
 }
 */

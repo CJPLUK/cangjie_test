@@ -8,12 +8,12 @@ package cjbase
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     public init()
 }
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public var value: Int64 = 3
 

@@ -48,7 +48,7 @@ func globalFunction4(p: Int32): Int16   {
 }
 
 
-@JavaImpl
+@Java
 public class Impl <: MyObject {
     // Test Case2: call global func
     public init(param0: JArray<Int32>, param1: Int8, param2: JArray<Float64>, param3: JArray<Float32>, param4: JArray<Float32>) {

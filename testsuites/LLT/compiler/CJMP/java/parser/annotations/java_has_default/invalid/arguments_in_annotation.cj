@@ -4,10 +4,10 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output 2>& 1 | compare %f
 
-@JavaMirror
-interface I {
+@Java
+foreign interface I {
     @JavaHasDefault[""]
     func foo(): Unit
     
@@ -15,20 +15,6 @@ interface I {
     func foo1(): Unit
 }
 
-/* SCAN-IN
-error: '@JavaHasDefault' can't have arguments
-  ==> arguments_in_annotation.cj:11:5:
-   | 
-11 |     @JavaHasDefault[""]
-   |     ^^^^^^^^^^^^^^^^^^^ 
-   | 
-*/
-
-/* SCAN-IN
-error: '@JavaHasDefault' can't have arguments
-  ==> arguments_in_annotation.cj:14:5:
-   | 
-14 |     @JavaHasDefault["", 1]
-   |     ^^^^^^^^^^^^^^^^^^^^^^ 
-   | 
-*/
+// ASSERT: scan-2 parse_annotation_no_arguments
+// ASSERT: scan-2 @JavaHasDefault accepts no arguments
+// ASSERT: scan "Errors": 2

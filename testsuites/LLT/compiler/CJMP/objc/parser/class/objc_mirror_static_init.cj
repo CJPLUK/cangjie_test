@@ -4,21 +4,13 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output 2>& 1 | compare %f
 
-@ObjCMirror
-class M {
+@ObjC
+foreign class M {
     @ForeignName["initialize"]
     static init()
 }
 
-/* SCAN-IN
-error: @ObjCMirror declaration cannot have static initializer
-  ==> objc_mirror_static_init.cj:12:5:
-   | 
-12 |     static init()
-   |     ^^^^^^^^^^^^^ 
-   | 
-
-1 error generated, 1 error printed.
-*/
+// ASSERT: scan parse_objc_mirror_cannot_have_static_init
+// ASSERT: scan "Errors": 1

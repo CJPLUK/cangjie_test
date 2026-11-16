@@ -8,10 +8,10 @@
 
 // LEVEL: 1
 // DEPENDENCE: getPath.sh test_fj.txt
-// (not Windows) EXEC-PIPE: chmod +x getPath.sh
-// (not Windows) EXEC-PIPE: ./getPath.sh c
-// (not Windows) EXEC-PIPE: %compiler %cmp_opt mypath.cj -o %output %f
-// (not Windows) RUN-EXEC-PIPE: %run %run_opt %output %run_args
+// (!target_win) EXEC-PIPE: chmod +x getPath.sh
+// (!target_win) EXEC-PIPE: ./getPath.sh c
+// (!target_win) EXEC-PIPE: %compiler %cmp_opt mypath.cj -o %output %f
+// (!target_win) RUN-EXEC-PIPE: %run %run_opt %output %run_args
 import std.posix.*
 
 main() {

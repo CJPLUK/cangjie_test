@@ -23,7 +23,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl["UNNAMED.CJImpl"]
+@Java["UNNAMED.CJImpl"]
 public class CJImpl <: JObject {
     public init() {
     }
@@ -36,7 +36,7 @@ public class CJImpl <: JObject {
     }
 }
 
-@JavaImpl["UNNAMED.CangjieInvoke"]
+@Java["UNNAMED.CangjieInvoke"]
 public class CangjieInvoke <: JObject {
     public init() {
         let class_01 = CJImpl()

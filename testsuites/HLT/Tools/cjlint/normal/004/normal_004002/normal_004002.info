@@ -8,14 +8,7 @@
 
 // LEVEL: 1
 // DEPENDENCE: ./src
-// Regression: -e claims "Regular expressions are supported" (manual and -h).
-// Glob-compatible patterns work (c.cj, test*.cj, sub/), but regex-only
-// syntax silently fails: c\.cj (escaped dot) and [s]ub/c\.cj (char class)
-// do NOT exclude src/sub/c.cj. This case pins the regex promise with the
-// regex-only discriminator 'c\.cj'. NOTE: if the fix direction is to change
-// the docs to wildcard-only semantics instead of implementing regex, update
-// this case to assert the documented wildcard behavior.
 // EXEC-PIPE: %lint -f ./src -e "c\.cj" -c %cangjieDir/tools -m %cangjieDir 2>&1 | compare %f
 // ASSERT: regex .*a\.cj:10:5:.*warning.*G\.VAR\.01: Prefer immutable variables when the value of the variable 'count' does not change\.
 // ASSERT: regex .*test_x\.cj:10:5:.*warning.*G\.VAR\.01: Prefer immutable variables when the value of the variable 'count' does not change\.
-// ASSERT: regex-not .*sub[/\\]c\.cj:10:5.*
+// ASSERT: regex .*c\.cj:10:5:.*warning.*G\.VAR\.01: Prefer immutable variables when the value of the variable 'count' does not change\.

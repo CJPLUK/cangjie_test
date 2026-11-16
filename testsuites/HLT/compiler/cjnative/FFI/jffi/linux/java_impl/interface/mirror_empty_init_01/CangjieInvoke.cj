@@ -22,7 +22,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke_Father <: JObject {
     // bug1
     // public init() {}
@@ -33,7 +33,7 @@ public class CangjieInvoke_Father <: JObject {
     }
 }
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     // bug2
     // public init() {

@@ -10,8 +10,8 @@
 // EXEC: ObjCInteropGen test.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     protected var clazz: ?ObjCClass
 }
 */

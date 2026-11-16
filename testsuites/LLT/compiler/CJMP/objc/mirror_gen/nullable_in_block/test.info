@@ -16,8 +16,8 @@ public type B0 = ObjCBlock<(?M) -> ?M>
 
 public type B1 = ObjCBlock<(M) -> M>
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     protected var b: B
     protected var b0: B0
     protected var b1: B1

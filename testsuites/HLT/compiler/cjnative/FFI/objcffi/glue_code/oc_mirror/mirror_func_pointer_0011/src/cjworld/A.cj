@@ -10,11 +10,11 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public init() {}
     public open func f() {
         var m = M()
-        m.fptr.call(1, true)
+        unsafe { m.fptr(1, true) }
     }
 }

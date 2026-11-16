@@ -1,0 +1,11 @@
+output/
+main
+apilib.klib
+libmmm.dylib
+libobjc.sample.dylib
+libobjc.sample.so
+ktsample.framework/
+*.log
+__pycache__/
+default.cjo
+default.cjo.flag

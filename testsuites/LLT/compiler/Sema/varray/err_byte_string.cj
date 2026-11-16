@@ -12,13 +12,9 @@ main() {
     f("123".toArray())
 }
 
-/* SCAN
-error: mismatched types
-  ==> err_byte_string.cj:12:7:
-   | 
-12 |     f("123".toArray())
-   |       ^^^^^^^^^^^^^^^ expected 'VArray<UInt8, $3>', found 'Struct-Array<UInt8>'
-   | 
-
-1 error generated, 1 error printed.
-*/
+// Match the diagnostic contract independently of standard-library source positions.
+// ASSERT: regex error: mismatched types
+// ASSERT: regex expected 'VArray<UInt8, \$3>', found 'Struct-Array<UInt8>'
+// ASSERT: regex error: no matching function declaration for function call 'toArray'
+// ASSERT: regex note: found function member of 'Struct-String'
+// ASSERT: regex 2 errors generated, 2 errors printed\.

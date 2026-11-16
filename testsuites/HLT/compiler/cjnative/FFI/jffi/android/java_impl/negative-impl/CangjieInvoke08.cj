@@ -16,10 +16,10 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class C1 {}
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     public init() {
         let class_01 = Init01()

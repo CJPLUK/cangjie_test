@@ -9,21 +9,21 @@
 
 import objc.lang.*
 
-@ObjCMirror
-open class M {
+@ObjC
+public open foreign class M {
     init(a: Bool)
     init()
     public func foo(): Int64
 }
 
-@ObjCImpl
+@ObjC
 open class A <: M {
     init() {
         super()
     }
 }
 
-@ObjCMirror
-class M1 <: A {
+@ObjC
+foreign class M1 <: A {
     init(a: Int64)
 }

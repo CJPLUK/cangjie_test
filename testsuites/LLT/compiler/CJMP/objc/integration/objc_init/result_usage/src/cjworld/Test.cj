@@ -13,7 +13,7 @@ import objc.lang.*
  * init(arg) and @ObjCInit static func behave same in runtime
 */
 
-@ObjCImpl
+@ObjC
 public class Test <: Base {
     public Test() {}
 

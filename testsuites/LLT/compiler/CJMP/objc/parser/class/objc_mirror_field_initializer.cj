@@ -4,28 +4,13 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %frontendCompiler %cmp_opt %f -o %output 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %frontendCompiler %cmp_opt %diag_json %f -o %output 2>& 1 | compare %f
 
-@ObjCMirror
-class M {
+@ObjC
+foreign class M {
     public let x = 42
     public var xm = 123
 }
 
-/* SCAN-IN
-error: @ObjCMirror declaration field cannot have initializer
-  ==> objc_mirror_field_initializer.cj:11:5:
-   | 
-11 |     public let x = 42
-   |     ^^^^^^^^^^^^^^^^^ 
-   | 
-
-error: @ObjCMirror declaration field cannot have initializer
-  ==> objc_mirror_field_initializer.cj:12:5:
-   | 
-12 |     public var xm = 123
-   |     ^^^^^^^^^^^^^^^^^^^ 
-   | 
-
-2 errors generated, 2 errors printed.
-*/
+// ASSERT: scan-2 parse_objc_mirror_field_cannot_have_initializer
+// ASSERT: scan "Errors": 2

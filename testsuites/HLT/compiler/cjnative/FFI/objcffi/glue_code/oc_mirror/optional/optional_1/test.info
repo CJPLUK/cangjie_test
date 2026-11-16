@@ -8,7 +8,7 @@
 
 // Level: 1
 // Description:
-// @ObjCImpl成员函数形参class类型，传入None
+// @ObjC成员函数形参class类型，传入None
 // DEPENDENCE: src test.toml
 // (iOSNative) EXEC: %mirror_gen test.toml
 // (iOSNative and not iOS) EXEC: %clang --shared -Isrc/objc src/objc/G.m -o libdep.dylib

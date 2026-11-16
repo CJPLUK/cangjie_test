@@ -24,8 +24,9 @@ main(): Int64 {
 
     func ttt() {
         var var40: Int16 = Int16(-18)
-        UInt16((Result<Int16>.Ok(Int16(3)) ?? [var40, var40, Int16(64), Int16(-34), Int16(-90),
-            Int16(-56), Int16(38), Int16(-111), Int16(-84), var40][5]));
+        UInt16((Result<Int16>.Ok(Int16(3)) ??
+            [var40, var40, Int16(64), Int16(-34), Int16(-90), Int16(-56), Int16(38), Int16(-111),
+            Int16(-84), var40][5]));
     }
 
     if (!fut1.isDone() || !fut2.isDone() || !fut3.isDone() || !fut4.isDone() || !fut5.isDone() ||
@@ -33,9 +34,9 @@ main(): Int64 {
         return 2
     }
 
-    if (TA13() is TI && TA12() is TI && TA11() is TI && TA10() is TI && TA9() is TI && TA8() is TI &&
-        TA7() is TI && TA6() is TI && TA5() is TI && TA4() is TI && TA3() is TI && TA2() is TI &&
-        TA1() is TI && TA() is TI) {
+    if (TA13() is TI && TA12() is TI && TA11() is TI && TA10() is TI && TA9() is TI &&
+        TA8() is TI && TA7() is TI && TA6() is TI && TA5() is TI && TA4() is TI && TA3() is TI &&
+        TA2() is TI && TA1() is TI && TA() is TI) {
         return 0
     }
 }

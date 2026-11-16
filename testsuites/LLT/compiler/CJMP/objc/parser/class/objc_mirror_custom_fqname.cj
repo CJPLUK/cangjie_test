@@ -8,6 +8,6 @@
 
 import objc.lang.*
 
-@ObjCMirror["M1"]
-class M {
+@ObjC["M1"]
+foreign class M {
 }

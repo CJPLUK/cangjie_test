@@ -38,10 +38,10 @@ func usePtrToImpl(v: ObjCPointer<Foo>): ObjCPointer<Foo> {
     return v
 }
 
-@ObjCMirror
-open class Moo {
+@ObjC
+public open foreign class Moo {
     init()
 }
 
-@ObjCImpl
+@ObjC
 class Foo <: Moo {}

@@ -10,7 +10,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public var a: Int64 = 0
     public init(a: Int64) {
@@ -18,7 +18,7 @@ public class A <: M {
     }
 }
 
-@ObjCImpl
+@ObjC
 public class B <: M {
     public var a: A
     public init(a: A) {

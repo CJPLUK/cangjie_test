@@ -7,10 +7,10 @@
  */
 
 // LEVEL: 1
-// (not Windows) EXEC: %compiler %cmp_opt   %f -o %output
-// (not Windows) RUN-EXEC-PIPE: %run %run_opt %output %run_args | compare %f
-// (not Windows) ASSERT: scan-not Failure
-// (not Windows) ASSERT: scan-not Exception
+// (!target_win) EXEC: %compiler %cmp_opt   %f -o %output
+// (!target_win) RUN-EXEC-PIPE: %run %run_opt %output %run_args | compare %f
+// (!target_win) ASSERT: scan-not Failure
+// (!target_win) ASSERT: scan-not Exception
 
 import std.time.*
 

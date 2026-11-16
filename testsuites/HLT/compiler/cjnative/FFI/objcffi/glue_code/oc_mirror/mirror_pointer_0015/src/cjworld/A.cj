@@ -10,11 +10,11 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public init() {}
-    public open func foo(): ObjCPointer<Unit> {
-        aPtr.write(())
+    public open func foo(): CPointer<Unit> {
+        unsafe { aPtr.write(()) }
         return aPtr
     }
 }

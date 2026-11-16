@@ -8,8 +8,8 @@ package a
 
 import java.lang.JObject
 
-@JavaMirror
-public abstract class A {
+@Java
+public abstract foreign class A {
     public init()
     public abstract open func foo(): Unit
 }

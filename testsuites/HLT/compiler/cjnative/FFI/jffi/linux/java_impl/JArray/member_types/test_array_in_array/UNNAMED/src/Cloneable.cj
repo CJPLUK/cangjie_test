@@ -10,5 +10,5 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaMirror["java.lang.Cloneable"]
-public interface Cloneable {}
+@Java["java.lang.Cloneable"]
+public foreign interface Cloneable {}

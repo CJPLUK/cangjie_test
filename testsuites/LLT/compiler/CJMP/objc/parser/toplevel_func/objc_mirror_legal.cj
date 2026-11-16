@@ -9,5 +9,5 @@
 
 import objc.lang.*
 
-@ObjCMirror
-func foo(): Int64
+@ObjC
+foreign func foo(): Int64

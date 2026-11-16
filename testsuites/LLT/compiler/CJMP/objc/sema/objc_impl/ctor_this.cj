@@ -9,13 +9,13 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     @ForeignName["initWithA:"]
     init(a: Bool)
 }
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     @ForeignName["initWithB:"]
     public init(b: Bool) {

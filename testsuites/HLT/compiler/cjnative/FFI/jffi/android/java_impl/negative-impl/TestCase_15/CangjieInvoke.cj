@@ -7,7 +7,7 @@
  */
 
 // LEVEL: 3
-// DESCRIPTION: extending @JavaImpl class, extended members are not accessible from Java, neither can it be accessed by Cangjie.
+// DESCRIPTION: extending @Java class, extended members are not accessible from Java, neither can it be accessed by Cangjie.
 // (Android) DEPENDENCE: com MainInstrumentedTest.java  
 // (Android) EXEC: %javac com/*.java %java_interop_util/Logger.java
 // (Android) EXEC: %java %java_mirror_gen com.Init01
@@ -18,7 +18,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     public init() {
         let class_01 = Init01()

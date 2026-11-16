@@ -20,7 +20,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JavaClass {
     public init() {
         let arr_Bool: JArray<Bool> = JArray<Bool>(1)

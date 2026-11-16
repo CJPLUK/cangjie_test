@@ -8,5 +8,5 @@
 
 // LEVEL: 2
 // DEPENDENCE: ../%n
-// (target_android)EXEC: cd %n && %cjpm build %cjpm_opt
-// (target_android)ASSERT: scan cjpm build success
+// (target_android) EXEC: cd %n && %cjpm build %cjpm_opt
+// (target_android) ASSERT: scan cjpm build success

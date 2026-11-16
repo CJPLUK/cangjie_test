@@ -11,5 +11,5 @@ import objc.lang.*
 
 public open class A {}
 
-@ObjCMirror
-public open class M <: A {}
+@ObjC
+public open foreign class M <: A {}

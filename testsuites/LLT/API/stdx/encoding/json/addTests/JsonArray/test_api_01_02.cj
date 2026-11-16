@@ -11,7 +11,7 @@ import stdx.encoding.json.*
 
 main(): Int64 {
     var initFunc = JsonArray()
-    // add 非法参数
+    // Reject an Array argument to add.
     var result = initFunc.add([1, 2, 3])
     return 0
 }

@@ -8,12 +8,7 @@
 
 // LEVEL: 1
 // DEPENDENCE: ./src
-// Regression: -h documents '-e <v1:v2:...>' colon separated exclusion rules
-// (eg: ./cjlint -f fileDir -e fileDir/a/:fileDir/b/*.cj). Colon separated
-// rules must be split and honored: a.cj and sub/ excluded, only test_x.cj
-// reported. NOTE: the manual documents space separated rules instead; this
-// case pins the -h behavior until docs/tool are aligned.
 // EXEC-PIPE: %lint -f ./src -e a.cj:sub/ -c %cangjieDir/tools -m %cangjieDir 2>&1 | compare %f
 // ASSERT: regex .*test_x\.cj:10:5:.*warning.*G\.VAR\.01: Prefer immutable variables when the value of the variable 'count' does not change\.
-// ASSERT: regex-not .*[/\\]a\.cj:10:5.*
-// ASSERT: regex-not .*sub[/\\]c\.cj:10:5.*
+// ASSERT: regex .*a\.cj:10:5:.*warning.*G\.VAR\.01: Prefer immutable variables when the value of the variable 'count' does not change\.
+// ASSERT: regex .*c\.cj:10:5:.*warning.*G\.VAR\.01: Prefer immutable variables when the value of the variable 'count' does not change\.

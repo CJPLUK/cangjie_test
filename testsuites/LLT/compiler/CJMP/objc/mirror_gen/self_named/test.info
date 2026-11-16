@@ -31,18 +31,18 @@ public struct S {
     public var T12: T13 = CPointer<T12>()
 }
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     // protected var S: S
-    // protected var T1: ObjCPointer<T1>
-    // protected var T12: ObjCPointer<T12> /*T13*/
+    // protected var T1: CPointer<T1>
+    protected var T12: T13
     // public open func T2(): T2
-    // public open func T3(): ObjCPointer<T3>
+    // public open func T3(): CPointer<T3>
     @ForeignName["foo:"] public open func foo(T3: T3): Unit
     // @ForeignName["T4:"] public open func T4(x: T4): Unit
-    // @ForeignName["T5:"] public open func T5(x: ObjCPointer<T5>): Unit
+    // @ForeignName["T5:"] public open func T5(x: CPointer<T5>): Unit
     // public open mut prop T6: T6
-    // public open mut prop T7: ObjCPointer<T7>
+    // public open mut prop T7: CPointer<T7>
     // public static func T8(): T8
     // public open func T9(): T9
     @ForeignName["T9"] public static func T9Static(): T9

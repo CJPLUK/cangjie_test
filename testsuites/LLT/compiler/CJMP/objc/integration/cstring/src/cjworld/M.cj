@@ -7,8 +7,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-open class M {
+@ObjC
+public open foreign class M {
     public var objCField: CString
     public mut prop objCProp: CString
 

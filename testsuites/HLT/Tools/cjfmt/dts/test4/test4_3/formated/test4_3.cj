@@ -30,9 +30,7 @@ public macro N(input: Tokens) {
     return quote(
         @sourceLine(
     )
-    )
-        + quote(+)
-        + input
+    ) + quote(+) + input
 }
 
 main() {

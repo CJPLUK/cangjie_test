@@ -10,7 +10,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M2 {
     public init() {
         var m1: M1 = M2.initWithA(1)

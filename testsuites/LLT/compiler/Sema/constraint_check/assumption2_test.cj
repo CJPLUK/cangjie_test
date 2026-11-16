@@ -20,5 +20,5 @@ main(): Int64 {
     return 0
 }
 
-// ASSERT: scan-2 sema_generic_type_argument_not_match_constraint
-// ASSERT: scan "Errors": 2
+// ASSERT: scan-1 sema_generic_type_argument_not_match_constraint
+// ASSERT: scan "Errors": 1

@@ -8,8 +8,8 @@
 
 // LEVEL: 0
 // DEPENDENCE: ./test_readUntil.txt
-// (not Windows) EXEC: %compiler %cmp_opt -o %output %f
-// (not Windows) RUN-EXEC: %run %run_opt %output %run_args
+// (!target_win) EXEC: %compiler %cmp_opt -o %output %f
+// (!target_win) RUN-EXEC: %run %run_opt %output %run_args
 
 import std.io.*
 import std.fs.*

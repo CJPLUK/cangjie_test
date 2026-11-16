@@ -32,17 +32,6 @@ error: expected expression after keyword 'return', found '>'
    |     ^ expected expression here
    | 
 
-error: unclosed delimiter: '{'
-  ==> return_rshift.cj:14:3:
-   | 
-10 | main() {
-   |        ~ to match this opening '{'
-11 |     return
-   | ...
-14 | }
-   |   ^ expected '}' here
-   | 
-
-2 errors generated, 2 errors printed.
+1 error generated, 1 error printed.
 1 warning generated, 1 warning printed.
 */

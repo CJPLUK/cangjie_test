@@ -10,11 +10,9 @@ package cjworld
  
 import objc.lang.*
 
-@ObjCMirror
-public open class M2 {
+@ObjC
+public open foreign class M2 {
     public init()
     @ForeignName["gooWithA:AndB:AndC:"]
     public open func goo(a: Float64, b: Bool, c: M1): Unit
 }
-
-

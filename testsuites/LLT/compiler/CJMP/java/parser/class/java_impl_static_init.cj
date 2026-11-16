@@ -8,7 +8,7 @@
 // ASSERT: scan parse_java_impl_cannot_have_static_init
 
 
-@JavaImpl
+@Java
 public class I <: JObject {
     static init() {}
 }

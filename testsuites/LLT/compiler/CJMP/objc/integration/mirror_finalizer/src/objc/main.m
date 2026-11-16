@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
         }
     }
 
-    // Draining the pool drops the last reference Objective-C holds to `a`, the one @ObjCImpl instance in
+    // Draining the pool drops the last reference Objective-C holds to `a`, the one @ObjC instance in
     // this test that Objective-C created itself. Nothing else keeps its peer alive, so it has to be gone.
     if ([M counter] != 0) {
         printf("objc: left after pool = %lld\n", (long long)[M counter]);

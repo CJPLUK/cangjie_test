@@ -9,14 +9,14 @@
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class N <: M {
     init() {}
 
     public init(first: Int32, second: Int32) {}
 }
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     init()
 }

@@ -13,9 +13,7 @@
 
     var res1    =   s1   != s2
 
-    if (res1
-        && res2 && res3
-        && res4 && res5 && res6 && res7 && res8) {
+    if (res1 && res2 && res3 && res4 && res5 && res6 && res7 && res8) {
         return 0
     }
     return 1

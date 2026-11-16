@@ -9,7 +9,7 @@ package cjworld
 import objc.lang.*
 
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public let letPrimitive: Int64
     public let letClass: M

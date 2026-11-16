@@ -8,9 +8,9 @@
 
 // LEVEL:2
 // DEPENDENCE: %n.c cfg.json
-// (not Windows) EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg.json
-// (not Windows) EXEC: %clang %clang_opt %n.c -o %cffi_output
-// (not Windows) EXEC-PIPE-1: %compiler %cmp_opt %ffic_opt -o %output 2>&1 | compare %f
+// EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg.json
+// EXEC: %clang %clang_opt %n.c -o %cffi_output
+// EXEC-PIPE-1: %compiler %cmp_opt %ffic_opt -o %output 2>&1 | compare %f
 
 foreign func testfunc(cb: CFunc<(Array<Int8>, Int8) -> Int8>): Int8
 
@@ -27,5 +27,5 @@ unsafe main(): Int64 {
     }
     return 0
 }
-// (not Windows) ASSERT: scan sema_invalid_cfunc_arg_type
-// (not Windows) ASSERT: scan sema_invalid_binary_expr
+// ASSERT: scan sema_invalid_cfunc_arg_type
+// ASSERT: scan sema_invalid_binary_expr

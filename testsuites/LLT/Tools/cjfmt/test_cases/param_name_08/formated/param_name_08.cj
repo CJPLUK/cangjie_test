@@ -10,7 +10,8 @@ public class DeploymentUtils {
      */
     public static func newRSNewReplicas(deployment: Deployment, allRSs: ReplicaSets, newRS: ReplicaSet): Int32 {
         match {
-            case (deployment.spec.strategy.`type` == DeploymentStrategyType.RecreateDeploymentStrategyType) => return AccessAssit
+            case (deployment.spec.strategy.`type` ==
+                DeploymentStrategyType.RecreateDeploymentStrategyType) => return AccessAssit
                 .getReplicas(deployment) // 直接以 deployment 副本数作为 ReplicaSet 的副本数
 
             case _ =>

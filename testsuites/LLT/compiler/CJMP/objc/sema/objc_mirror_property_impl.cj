@@ -11,20 +11,20 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-open class Bar {
+@ObjC
+public open foreign class Bar {
     init()
 }
 
-@ObjCImpl
+@ObjC
 class Mem <: Bar {
     init() {
         super()
     }
 }
 
-@ObjCMirror
-class Foo {
+@ObjC
+foreign class Foo {
     public prop a: Mem
 
     public static prop aStatic: Mem

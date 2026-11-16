@@ -10,12 +10,12 @@
 // EXEC: ObjCInteropGen test3.toml
 // EXEC: %cat mirrors/cjworldB/test.cj | compare %f
 /* SCAN-IN
-@ObjCMirror
-public open class U {
+@ObjC
+public open foreign class U {
 }
 
-@ObjCMirror
-public open class P {
+@ObjC
+public open foreign class P {
     public open mut prop u: ?U
 }
 */

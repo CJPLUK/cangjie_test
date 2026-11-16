@@ -50,37 +50,37 @@ package cjworld.theworld
 
 import java.lang.JObject
 
-@JavaMirror["Clas\\$"]
-public open class Outer {
+@Java["Clas\\$"]
+public open foreign class Outer {
     init()
 }
 
-@JavaMirror["Clas\\$$Inner"]
-public open class Inner {
+@Java["Clas\\$$Inner"]
+public open foreign class Inner {
     init()
 }
 
-@JavaMirror["Clas\\$$Inner$InnerCla\\$s"]
-public open class InnerInner {
+@Java["Clas\\$$Inner$InnerCla\\$s"]
+public open foreign class InnerInner {
     init()
 }
 
-@JavaMirror["other.Cla\\$s"]
-public open class OtherPackageOuter {
+@Java["other.Cla\\$s"]
+public open foreign class OtherPackageOuter {
     init()
 }
 
-@JavaMirror["other.Cla\\$s$Inner"]
-public open class OtherInner {
+@Java["other.Cla\\$s$Inner"]
+public open foreign class OtherInner {
     init()
 }
 
-@JavaMirror["other.Cla\\$s$Inner$InnerCla\\$s"]
-public open class OtherInnerInner {
+@Java["other.Cla\\$s$Inner$InnerCla\\$s"]
+public open foreign class OtherInnerInner {
     init()
 }
 
-@JavaImpl["A"]
+@Java["A"]
 public class A <: OtherInner {
     public init() {
         super()

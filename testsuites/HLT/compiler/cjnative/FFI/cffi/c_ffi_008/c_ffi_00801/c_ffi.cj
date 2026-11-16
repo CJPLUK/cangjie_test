@@ -8,10 +8,10 @@
 
 // LEVEL:2
 // DEPENDENCE: %n.c cfg.json
-// (not Windows) EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg.json
-// (not Windows) EXEC: %clang %clang_opt %n.c -o %cffi_output
-// (not Windows) EXEC: %compiler %cmp_opt %ffic_opt -o %output
-// (not Windows) RUN-EXEC: %run %run_opt %output %run_args
+// EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg.json
+// EXEC: %clang %clang_opt %n.c -o %cffi_output
+// EXEC: %compiler %cmp_opt %ffic_opt -o %output
+// RUN-EXEC: %run %run_opt %output %run_args
 
 foreign func testfunc(): CPointer<Bool>
 

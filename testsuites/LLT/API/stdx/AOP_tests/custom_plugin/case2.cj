@@ -12,7 +12,7 @@
 // ASSERT: scan function count: 8\n
 // ASSERT: scan-not core dumped
 // ASSERT: scan-not stack trace
-// serialize 覆盖：propLocation / paramDftValHostFunc / isSuperCall / MemberVar.location /
+// serialize 覆盖：propLocation / paramDftValHostParam / paramDftValFunc / isSuperCall / MemberVar.location /
 // Block.predecessors / landing-pad / isFastNative（依赖编译器 lowering + 插件路径再序列化）
 
 open class Base {

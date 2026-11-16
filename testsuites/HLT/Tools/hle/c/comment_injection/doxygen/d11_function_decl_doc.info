@@ -1,0 +1,12 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: d11_function_decl_doc.h
+// EXEC: %hle_c --module-name="my_module" -i d11_function_decl_doc.h -o . --clang-args=""
+// EXEC-PIPE: %cat d11_function_decl_doc.cj | compare %f
+// ASSERT: scan // D11: function declaration preceding doxygen line, payload */
+// ASSERT: scan foreign func d11_func_decl(a: Int32): Int32

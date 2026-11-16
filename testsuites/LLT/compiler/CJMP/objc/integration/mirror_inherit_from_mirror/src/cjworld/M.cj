@@ -8,8 +8,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-open class M <: M1 {
+@ObjC
+public open foreign class M <: M1 {
     public init()
     public override func goo(): Int64
 }

@@ -14,8 +14,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-class F {
+@ObjC
+foreign class F {
     init()
     func instancef(): Int64
     static func staticf(): Int64

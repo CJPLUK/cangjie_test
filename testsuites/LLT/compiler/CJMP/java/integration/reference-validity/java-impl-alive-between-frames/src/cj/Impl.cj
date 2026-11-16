@@ -10,7 +10,7 @@ import java.lang.JObject
 
 private var impl = Option<Impl>.None
 
-@JavaImpl
+@Java
 public class Impl {
     private let msg = "cangjie: Impl"
 

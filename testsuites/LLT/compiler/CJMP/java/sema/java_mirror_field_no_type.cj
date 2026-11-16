@@ -10,8 +10,8 @@
 
 import java.lang.*
 
-@JavaMirror
-public open class M {
+@Java
+public open foreign class M {
     public var a
     public init()
 }

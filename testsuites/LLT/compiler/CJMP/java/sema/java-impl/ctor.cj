@@ -10,13 +10,13 @@
 
 import java.lang.JObject
 
-@JavaMirror
-open class M {
+@Java
+open foreign class M {
     init(a: Bool)
     init()
 }
 
-@JavaImpl
+@Java
 class A <: M {
     A() {
         super()
@@ -30,7 +30,7 @@ class A <: M {
     init(a: Int64, b: Bool, c: ?JObject, d: M, e: ?M) { }
 }
 
-@JavaImpl
+@Java
 class B <: M {
     B() {
         super()

@@ -10,7 +10,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public init() {}
     public func foo(): Int64 {
@@ -18,7 +18,7 @@ public class A <: M {
     }
 }
 
-@ObjCImpl
+@ObjC
 public class B <: M {
     public init() {}
     @ForeignName["foo:"]

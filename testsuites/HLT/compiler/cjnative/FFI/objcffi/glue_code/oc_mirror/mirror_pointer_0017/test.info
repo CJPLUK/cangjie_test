@@ -9,5 +9,5 @@
 // LEVEL: 3 
 // DEPENDENCE: src
 // (iOSNative) ERRCHECK: %compiler %compile_dylib_opt %cmp_ocffi_opt %link_oc --link-options="-install_name @rpath/libcjworld.dylib" src/cjworld/*.cj -o libcjworld.dylib
-// ASSERT: scan param type of Objective-C mirror method must be Objective-C compatible
-// ASSERT: scan ObjCPointer can only be used with Objective-C compatible types
+// ASSERT: scan parameter type of member function in exported '@ObjC' declaration must be Objective-C compatible
+// ASSERT: scan 'ObjCPointer' can only be used with Objective-C compatible type

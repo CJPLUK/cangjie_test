@@ -10,23 +10,23 @@
 // EXEC: ObjCInteropGen test.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-@ObjCMirror
-public open class A {
+@ObjC
+public open foreign class A {
     public open func c(): ?C
 }
 
-@ObjCMirror
-public open class B {
+@ObjC
+public open foreign class B {
     public open func a(): ?A
 }
 
-@ObjCMirror
-public open class C {
+@ObjC
+public open foreign class C {
     public open func b(): ?B
 }
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     public open func c(): ?C
 }
 */

@@ -7,8 +7,8 @@
  */
 
 // LEVEL: 0
-// (not MAC and not Windows) EXEC: %compiler %cmp_opt %f -o %output %cmp_utest_opt
-// (not MAC and not Windows) RUN-EXEC: %run %run_opt %output %run_utest_opt %run_args
+// (!target_mac & !target_win) EXEC: %compiler %cmp_opt %f -o %output %cmp_utest_opt
+// (!target_mac & !target_win) RUN-EXEC: %run %run_opt %output %run_utest_opt %run_args
 import std.unittest.*
 import std.unittest.testmacro.*
 import std.posix.*

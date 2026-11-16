@@ -10,13 +10,13 @@
 // ASSERT: scan protected final void foo()
 // ASSERT: scan final native void foo(long $rid);
 
-// This test checks that protected method of @JavaImpl is exported to java.
+// This test checks that protected method of @Java is exported to java.
 
 package cjworld.theworld
 
 import java.lang.*
 
-@JavaImpl["A"]
+@Java["A"]
 public class A {
     public init() {}
     protected func foo(): Unit {}

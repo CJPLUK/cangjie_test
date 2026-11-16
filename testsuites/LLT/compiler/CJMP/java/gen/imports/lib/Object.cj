@@ -8,7 +8,7 @@ package java.cj.mirrors
 
 import java.lang.JObject
 
-@JavaMirror["java.cj.mirrors.Object"]
-public open class Obj {
+@Java["java.cj.mirrors.Object"]
+public open foreign class Obj {
     public init()
 }

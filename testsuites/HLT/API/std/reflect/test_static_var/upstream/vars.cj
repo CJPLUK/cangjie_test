@@ -37,7 +37,6 @@ public class MutableStaticVarClass {
 public class AnnotatedStaticVarClass {
     public init() {
     }
-
     @Deprecated
     public static let version: String = "1.0"
 }

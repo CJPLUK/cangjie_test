@@ -129,7 +129,16 @@ public class Test_IPv6_Cangjie_Httpconnection {
     func test_ipv6_https(ipv6str: String, protocol: (String, Protocol)) {
         var (str, pro) = protocol
         startHttpsServer(ipv6str, str)
-        startHttpsClient(ipv6str, str, pro)
+        // The unspecified address "::" can never match a certificate IP SAN,
+        // while the certificate purpose here is only to prove that the server
+        // bound to `ipv6str` accepts connections. Connect to the loopback
+        // address instead when binding to "::".
+        let connectAddr = if (ipv6str == "::") {
+            "::1"
+        } else {
+            ipv6str
+        }
+        startHttpsClient(connectAddr, str, pro)
         ser.getOrThrow().close()
         cli.getOrThrow().close()
         port = 0

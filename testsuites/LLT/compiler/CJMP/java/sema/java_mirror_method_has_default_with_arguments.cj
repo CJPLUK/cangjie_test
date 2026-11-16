@@ -8,10 +8,10 @@
 
 import java.lang.JObject
 
-@JavaMirror
-class M {
+@Java
+foreign class M {
     @JavaHasDefault["some value"]
     public func foo(): Unit
 }
 
-// ASSERT: scan sema_java_has_default_annotation_args
+// ASSERT: scan parse_annotation_no_arguments

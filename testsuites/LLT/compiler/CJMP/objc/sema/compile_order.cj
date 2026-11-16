@@ -10,39 +10,39 @@
 
 import objc.lang.*
 
-@ObjCMirror
-open class M {
+@ObjC
+public open foreign class M {
     @ForeignName["initWithA:"]
     init(a: Bool)
     init()
 }
 
-@ObjCImpl
+@ObjC
 class A <: M {
     init() {}
 }
 
 // MMI is declared above MM
-@ObjCImpl
+@ObjC
 class MMI <: MM {
     init() {}
 }
 
 // MMM is declared above MM
-@ObjCMirror
-class MMM <: MM {
+@ObjC
+foreign class MMM <: MM {
     init()
 }
 
-@ObjCMirror
-open class MM {
+@ObjC
+public open foreign class MM {
     @ForeignName["initWithA:"]
     init(a: Bool)
     init()
 }
 
 // B is declared below MM
-@ObjCImpl
+@ObjC
 class B <: MM {
     init() {}
 }

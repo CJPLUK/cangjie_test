@@ -1,0 +1,5 @@
+language = Objective-C
+headers = M.h
+compilerOpts = -Iobjcsample
+
+compilerOpts.linux =-MMD -MP -DGNUSTEP -DGNUSTEP_BASE_LIBRARY=1 -DGNUSTEP_RUNTIME=1 -D_NONFRAGILE_ABI=1 -DGNUSTEP_BASE_LIBRARY=1 -fno-strict-aliasing -fexceptions -fobjc-exceptions -D_NATIVE_OBJC_EXCEPTIONS -pthread -fPIC -Wall -DGSWARN -DGSDIAGNOSE -Wno-import -g -O2 -fobjc-runtime=gnustep-2.1 -fblocks -fconstant-string-class=NSConstantString -I. -I/home/belyaev/GNUstep/Library/Headers -I/usr/GNUstep/Local/Library/Headers -I/usr/GNUstep/System/Library/Headers -fuse-ld=/usr/bin/ld.gold -L/usr/local/lib -pthread -fexceptions -rdynamic -fobjc-runtime=gnustep-2.1 -fblocks -L/home/belyaev/GNUstep/Library/Libraries -L/usr/GNUstep/Local/Library/Libraries -L/usr/GNUstep/System/Library/Libraries -lgnustep-base -lpthread -lobjc -lm

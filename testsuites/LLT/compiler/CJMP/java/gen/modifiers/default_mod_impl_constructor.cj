@@ -10,13 +10,13 @@
 // ASSERT: scan-not A(int i)
 // ASSERT: scan-not initCJObjecti(int i);
 
-// This test checks that constructor of @JavaImpl with default modifier is not exported to java.
+// This test checks that constructor of @Java with default modifier is not exported to java.
 
 package cjworld.theworld
 
 import java.lang.*
 
-@JavaImpl["A"]
+@Java["A"]
 public class A {
     public init() {}
     init(i: Int32) {}

@@ -8,12 +8,12 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     init()
 }
 
-@ObjCImpl
+@ObjC
 class A <: M {
     @ForeignName[true]
     public init() {

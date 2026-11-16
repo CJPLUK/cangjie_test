@@ -3,13 +3,13 @@
 
 import java.lang.JObject
 
-@JavaMirror
-abstract class A {
+@Java
+abstract foreign class A {
     init()
     public abstract func f(): Unit
 }
 
-@JavaImpl
+@Java
 class Impl <: A {
     init() {
         super.f()
@@ -31,4 +31,3 @@ error: abstract method 'f' cannot be accessed directly
 // with Runtime Library Exception.
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
-

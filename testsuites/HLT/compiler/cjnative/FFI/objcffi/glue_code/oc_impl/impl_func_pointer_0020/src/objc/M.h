@@ -11,7 +11,7 @@
 @interface M : NSObject
 {
     @public
-    void (*fptr)(void);
+    void (*fptr)(id);
 }
 - (id)init;
 @end

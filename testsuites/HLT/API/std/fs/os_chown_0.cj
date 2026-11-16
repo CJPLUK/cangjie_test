@@ -7,9 +7,9 @@
  */
 
 // LEVEL: 0
-// (not Windows) EXEC-PIPE: %touch test_fj_0.txt
-// (not Windows) EXEC-PIPE: %compiler %cmp_opt -o %output %f
-// (not Windows) RUN-EXEC-PIPE: %run %run_opt %output %run_args
+// (!host_win) EXEC-PIPE: %touch test_fj_0.txt
+// (!host_win) EXEC-PIPE: %compiler %cmp_opt -o %output %f
+// (!host_win) RUN-EXEC-PIPE: %run %run_opt %output %run_args
 
 import std.posix.*
 

@@ -66,42 +66,42 @@ class Touch {
                         .onTouch {
                             event => this.message = """
                                     TouchType: ${event
-                                .eventType
-                                .toString()}
+                                        .eventType
+                                        .toString()}
                                     timestamp: ${event.timestamp}
                                     Distance between touch point and touch element:
                                     x: ${event
-                                .touches[0]
-                                .x}
+                                        .touches[0]
+                                        .x}
                                     y: ${event
-                                .touches[0]
-                                .y}
+                                        .touches[0]
+                                        .y}
                                     Component localPos:(${event
-                                .target
-                                .area
-                                .position
-                                .x}, ${event
-                                .target
-                                .area
-                                .position
-                                .y})
+                                        .target
+                                        .area
+                                        .position
+                                        .x}, ${event
+                                            .target
+                                            .area
+                                            .position
+                                            .y})
                                     Component globalPos:(${event
-                                .target
-                                .area
-                                .globalPosition
-                                .x}, ${event
-                                .target
-                                .area
-                                .globalPosition
-                                .y})
+                                        .target
+                                        .area
+                                        .globalPosition
+                                        .x}, ${event
+                                            .target
+                                            .area
+                                            .globalPosition
+                                            .y})
                                     width: ${event
-                                .target
-                                .area
-                                .width}
+                                        .target
+                                        .area
+                                        .width}
                                     height: ${event
-                                .target
-                                .area
-                                .height}
+                                        .target
+                                        .area
+                                        .height}
                                 """
                         }
 

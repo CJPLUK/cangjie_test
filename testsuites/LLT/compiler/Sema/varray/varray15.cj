@@ -96,5 +96,19 @@ error: expected expression after '>', found keyword 'var'
    |     ^^^ expected expression here
    | 
 
-8 errors generated, 8 errors printed.
+error: expected ';' or '<NL>', found ','
+  ==> varray15.cj:31:24:
+   | 
+31 |     var a: VArray<Int64, $1
+   |                        ^ expected ';' or '<NL>' here
+   | 
+
+error: expected expression or declaration, found '>'
+  ==> varray15.cj:32:5:
+   | 
+32 |     > // ok
+   |     ^ expected expression or declaration here
+   | 
+
+10 errors generated, 10 errors printed.
 */

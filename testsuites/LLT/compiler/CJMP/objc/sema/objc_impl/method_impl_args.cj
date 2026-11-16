@@ -9,13 +9,13 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public open class Box {
+@ObjC
+public open foreign class Box {
     public init()
     public open mut prop value: Int64
 }
 
-@ObjCImpl
+@ObjC
 public class ImplBox <: Box {
     public init() {}
     private var _value: Int64 = 0;
@@ -29,8 +29,8 @@ public class ImplBox <: Box {
     }
 }
 
-@ObjCMirror
-public open class Base {
+@ObjC
+public open foreign class Base {
     public init()
     @ForeignName["impl1WithArg0:"]
     public open func impl1(arg0: ImplBox): Int64
@@ -42,7 +42,7 @@ public open class Base {
     public open func returnImpl(box: ImplBox): ImplBox
 }
 
-@ObjCImpl
+@ObjC
 public class Derived <: Base {
     public init() {}
 

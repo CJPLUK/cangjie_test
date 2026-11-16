@@ -1,0 +1,14 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: t08_interface_property_payload.d.ts
+// EXEC: %hle_arkts -i t08_interface_property_payload.d.ts -o . --module-name="my_module"
+// EXEC-PIPE: %cat cj/t08_interface_property_payload/src/t08_interface_property_payload.cj | compare %f
+// ASSERT: scan public var t8Required: JSValue/* FIXME:
+// ASSERT: scan public var t8Optional: Option<JSValue/* FIXME:
+// ASSERT: scan "*\/t8_required/\*"
+// ASSERT: scan "*\/t8_optional/\*"

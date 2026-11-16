@@ -8,9 +8,9 @@
 
 // LEVEL:2
 // DEPENDENCE: %n.c cfg.json
-// (not Windows) EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg.json
-// (not Windows) EXEC: %clang %clang_opt %n.c -o %cffi_output
-// (not Windows) ERRCHECK: %compiler %cmp_opt %ffic_opt -o %output
+// EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg.json
+// EXEC: %clang %clang_opt %n.c -o %cffi_output
+// ERRCHECK: %compiler %cmp_opt %ffic_opt -o %output
 
 foreign func testfunc(cb: CFunc<(Int8, Int8) -> Int8>): Int8
 
@@ -26,4 +26,4 @@ unsafe main(): Int64 {
     }
     return 0
 }
-// (not Windows) ASSERT: scan sema_no_match_function_declaration_for_ref
+// ASSERT: scan sema_no_match_function_declaration_for_ref

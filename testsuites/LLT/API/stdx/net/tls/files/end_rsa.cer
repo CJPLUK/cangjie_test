@@ -2,16 +2,16 @@ Certificate:
     Data:
         Version: 3 (0x2)
         Serial Number:
-            25:ce:fd:e9:e6:a5:76:e1:00:00:00:00:00:00:00:01
+            22:67:2f:d9:45:e0:58:5e:06:a6:e0:11:1e:cb:d0:2e:5e:ee:33:ba
         Signature Algorithm: sha256WithRSAEncryption
         Issuer: C=CN, ST=GuangDong, L=ShenZhen, O=PMS Technologies Co., Ltd, OU=OSS & Service Tools Dept, CN=OSS3.0 CA
         Validity
-            Not Before: May 23 00:00:00 2021 GMT
-            Not After : May 22 00:00:00 2031 GMT
+            Not Before: Oct 27 04:53:24 2026 GMT
+            Not After : Oct 24 04:53:24 2036 GMT
         Subject: C=CN, O=PMS, CN=Platform Cert
         Subject Public Key Info:
             Public Key Algorithm: rsaEncryption
-                RSA Public-Key: (3072 bit)
+                Public-Key: (3072 bit)
                 Modulus:
                     00:ae:dc:b5:74:de:2d:2a:cc:ec:03:4a:bd:22:67:
                     0f:03:5b:2a:cc:d4:e1:37:7e:8a:4d:88:4b:8f:18:
@@ -43,77 +43,56 @@ Certificate:
         X509v3 extensions:
             X509v3 Basic Constraints: 
                 CA:FALSE
-            X509v3 Key Usage: critical
-                Digital Signature, Non Repudiation, Key Encipherment, Key Agreement
+            X509v3 Key Usage: 
+                Digital Signature, Key Encipherment
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication, TLS Web Client Authentication
+            X509v3 Subject Alternative Name: 
+                DNS:oss.PMS.com, IP Address:127.0.0.1
             X509v3 Subject Key Identifier: 
                 F4:F1:53:D8:0B:00:7F:8E:87:80:53:EF:E9:8C:18:CB:98:38:53:8C
             X509v3 Authority Key Identifier: 
-                keyid:83:A8:AB:64:5B:9E:DF:AE:8C:E2:A9:4B:03:80:63:0F:5C:0A:71:20
-                DirName:/C=CN/ST=GuangDong/L=ShenZhen/O=PMS Technologies Co., Ltd/OU=OSS & Service Tools Dept/CN=OSS3.0 CA
-                serial:25:CE:FD:E9:E6:A5:76:E1:00:00:00:00:00:00:00:00
-
-            X509v3 Subject Alternative Name: 
-                DNS:oss.PMS.com
-            X509v3 Certificate Policies: 
-                Policy: 1.1.1.1
-                  CPS: Self-signed certificate
-                  User Notice:
-                    Explicit Text: Self-signed certificate.
-
+                5A:3E:F0:64:95:8F:CC:83:D4:22:3C:FD:8A:07:86:63:45:EC:DE:4D
     Signature Algorithm: sha256WithRSAEncryption
-         27:09:60:e3:8e:d1:3c:5e:f5:ec:fd:23:6f:65:1a:05:00:2e:
-         36:70:8c:94:b4:f5:f1:59:d3:df:ea:75:a4:ba:fe:c6:95:4c:
-         f0:1b:95:99:f3:3a:9b:a8:21:09:94:cd:64:83:57:69:88:b2:
-         02:1a:c9:8b:37:00:e0:2b:f8:7f:9d:29:d8:eb:c9:e8:ec:19:
-         0f:d4:fc:42:14:4f:42:f2:bb:fe:8f:4c:79:42:cc:ec:d1:73:
-         5a:49:c8:a6:d1:dd:97:bf:80:2c:94:af:94:91:09:28:53:f0:
-         ef:b5:4b:1d:fe:5e:29:e7:65:58:bc:89:42:6f:09:1f:53:8b:
-         f1:38:52:91:de:c7:23:01:81:73:0c:b3:32:e9:79:0d:02:ae:
-         39:bc:9a:4f:64:af:f0:f8:18:b4:e5:9e:12:2c:47:d5:c3:1a:
-         7d:e2:02:c5:f3:78:99:e9:d0:b6:7a:dc:f0:d2:a2:ac:e9:80:
-         b5:d3:2b:d7:42:9e:49:cd:78:44:3f:94:b0:ad:f9:28:95:ea:
-         c5:e7:7b:db:51:fc:ce:17:2d:1b:e8:06:b6:ac:33:8c:96:70:
-         51:77:be:d4:10:51:42:10:75:07:db:35:5c:63:66:f4:2c:f8:
-         d8:6b:53:60:69:5a:2f:d1:be:0f:af:dc:09:5b:71:8d:52:be:
-         8d:6c:2c:2f:63:01:7a:cd:0e:da:3b:46:1e:5b:6a:e9:f1:b4:
-         8b:91:b5:9f:65:e1:d7:8a:57:76:3e:57:73:42:db:21:fd:dc:
-         6d:f8:6e:08:01:4a:46:41:a5:39:5a:ca:58:56:dd:41:a9:98:
-         f4:67:b8:fd:73:c5:c3:be:ae:f4:00:d2:91:97:3e:7f:ac:a2:
-         4a:a1:35:cc:61:7a:38:0b:95:f2:e5:08:44:8d:6a:be:38:9b:
-         f7:b5:20:b2:f3:68:df:76:b7:55:8d:78:f0:6d:28:75:36:2a:
-         8d:cb:b7:e4:e2:e1:58:fe:7a:7c:f5:ec:51:24:92:3c:4f:83:
-         0c:10:f9:e1:1c:aa
+    Signature Value:
+        a6:22:ba:ea:6f:7b:e7:2d:1a:ac:b6:e9:c7:52:2a:85:a9:98:
+        cf:e5:f9:f0:4c:80:0f:dc:de:5f:a5:69:a8:ba:de:a8:50:1b:
+        31:d4:86:d1:40:05:c5:77:fd:83:c7:2e:e2:b5:fb:da:4d:53:
+        fe:b3:4e:6d:45:86:42:c1:5e:c0:31:8d:07:39:66:88:0c:d1:
+        b5:bc:32:0e:ab:d3:77:97:b0:a4:03:08:79:62:e0:23:f0:f1:
+        b9:66:03:c3:ec:37:42:78:85:7d:f6:a8:bd:a2:df:19:70:80:
+        8c:5d:06:5c:4c:b4:3d:de:04:90:2e:4c:a1:b4:64:b3:87:93:
+        24:97:38:2c:e0:b7:2d:c6:ec:1a:5b:e9:c4:80:c8:d3:cc:6e:
+        21:c2:11:68:dd:26:99:fe:45:e4:0b:4e:e4:af:32:cc:56:7d:
+        a1:d7:0e:19:be:eb:c8:dd:0f:e6:ba:88:1f:9b:6e:d5:e7:b8:
+        5d:8f:3c:1f:61:15:79:d0:81:93:54:4c:65:7a:77:06:a5:48:
+        6e:74:43:4c:0a:a7:62:52:56:3b:c9:4b:b3:28:af:1d:7e:29:
+        d1:a8:56:2f:98:30:9b:0a:5a:2b:57:06:3c:41:73:ed:a9:af:
+        2e:85:15:7f:c0:39:8c:f9:3c:a8:d5:42:84:b3:aa:2b:8b:9c:
+        64:56:ad:25
 -----BEGIN CERTIFICATE-----
-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
-T4MMEPnhHKo=
+MIIEajCCA1KgAwIBAgIUImcv2UXgWF4GpuARHsvQLl7uM7owDQYJKoZIhvcNAQEL
+BQAwgY8xCzAJBgNVBAYTAkNOMRIwEAYDVQQIDAlHdWFuZ0RvbmcxETAPBgNVBAcM
+CFNoZW5aaGVuMSIwIAYDVQQKDBlQTVMgVGVjaG5vbG9naWVzIENvLiwgTHRkMSEw
+HwYDVQQLDBhPU1MgJiBTZXJ2aWNlIFRvb2xzIERlcHQxEjAQBgNVBAMMCU9TUzMu
+MCBDQTAeFw0yNjEwMjcwNDUzMjRaFw0zNjEwMjQwNDUzMjRaMDMxCzAJBgNVBAYT
+AkNOMQwwCgYDVQQKDANQTVMxFjAUBgNVBAMMDVBsYXRmb3JtIENlcnQwggGiMA0G
+CSqGSIb3DQEBAQUAA4IBjwAwggGKAoIBgQCu3LV03i0qzOwDSr0iZw8DWyrM1OE3
+fopNiEuPGNQbOJ+OLVPgHDW/U557CmEmzl4eMcG98KV6z6KRvXkRlPh4z8/SxeRU
+SaLRk39eufz6nhqOferl51FcDkGPCkgCJ3gsmS6x9HYiESF4x8JxK8LLfjSYOFzc
+txuotlxj0GsbzqlzTnXKNPFxbX7TMCcY2Fj5hB4VQGI/wxIhYkHO4c0RlvEPwaWA
+tutlMgAvocgZEWicNzhRVJm+Kgg5hSFy8KkaOkk6FRURNrlBGO6640F+bj17+3F3
+iSy8f0WxpyNNMwIpPBmK7NGdqeiQmptUP9qG+RPJWph/LzrJ9DM+LIFBPp5Z6ac6
+AeopcBuSXoRExYp7DI/7zIqrvC5lV0DyH33dQd35lnqvNoJ1cU5TeHB1Jn+/wkf2
+1vghDajpax641etOvMCosl9qFODwHN/uEoM2T6P43/mx3DqAP9cIuHvbEBsxfcgJ
+2vDWk81gMDk/KJplTnSPweUgozhZsSJ6wAECAwEAAaOBmDCBlTAJBgNVHRMEAjAA
+MAsGA1UdDwQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwHAYD
+VR0RBBUwE4ILb3NzLlBNUy5jb22HBH8AAAEwHQYDVR0OBBYEFPTxU9gLAH+Oh4BT
+7+mMGMuYOFOMMB8GA1UdIwQYMBaAFFo+8GSVj8yD1CI8/YoHhmNF7N5NMA0GCSqG
+SIb3DQEBCwUAA4IBAQCmIrrqb3vnLRqstunHUiqFqZjP5fnwTIAP3N5fpWmout6o
+UBsx1IbRQAXFd/2Dxy7itfvaTVP+s05tRYZCwV7AMY0HOWaIDNG1vDIOq9N3l7Ck
+Awh5YuAj8PG5ZgPD7DdCeIV99qi9ot8ZcICMXQZcTLQ93gSQLkyhtGSzh5Mklzgs
+4LctxuwaW+nEgMjTzG4hwhFo3SaZ/kXkC07krzLMVn2h1w4ZvuvI3Q/muogfm27V
+57hdjzwfYRV50IGTVExlencGpUhudENMCqdiUlY7yUuzKK8dfinRqFYvmDCbClor
+VwY8QXPtqa8uhRV/wDmM+Tyo1UKEs6ori5xkVq0l
 -----END CERTIFICATE-----

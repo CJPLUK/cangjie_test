@@ -15,10 +15,10 @@ import std.unittest.testmacro.*
 
 // 不使用测试框架，防止产生额外的线程
 main() {
-    @When[os=="iOS"]
-    var size:Int64=2
-    @When[os!="iOS"]
-    var size:Int64=1
+    @When[os == "iOS" && env == ""]
+    var size: Int64 = 2
+    @When[os != "iOS" || env != ""]
+    var size: Int64 = 1
     let _thread_infos = ThreadSnapshot.dumpAllThreads()
     @Assert(_thread_infos.size, size)
     let _thread_info = _thread_infos[0]

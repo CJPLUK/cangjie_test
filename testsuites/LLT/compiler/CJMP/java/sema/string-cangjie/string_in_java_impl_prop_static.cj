@@ -10,7 +10,7 @@
 
 import java.lang.*
 
-@JavaImpl
+@Java
 class M {
     // Checks that properties can be of String type
     private static prop privprop: String {

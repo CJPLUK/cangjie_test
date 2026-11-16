@@ -7,8 +7,8 @@
  */
 
 // LEVEL: 0
-// (not MAC and not Windows) EXEC-PIPE: %compiler %cmp_opt -o %output %f
-// (not MAC and not Windows) RUN-EXEC-PIPE: %run %run_opt %output %run_args
+// (!target_mac & !target_win) EXEC-PIPE: %compiler %cmp_opt -o %output %f
+// (!target_mac & !target_win) RUN-EXEC-PIPE: %run %run_opt %output %run_args
 import std.posix.*
 
 main() {

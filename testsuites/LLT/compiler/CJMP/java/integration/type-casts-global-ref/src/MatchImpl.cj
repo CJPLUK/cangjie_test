@@ -8,7 +8,7 @@ package cjworld
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class MatchImpl {
     public func boo(): Unit {
         let a = A()

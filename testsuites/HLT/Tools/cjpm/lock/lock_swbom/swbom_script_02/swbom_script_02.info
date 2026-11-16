@@ -1,0 +1,23 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: ../%n
+// EXEC: cd %n/s2_core && git init && git add . && git -c user.name='name' -c user.email='' commit -am "foo"
+// EXEC: cd %n/s2_build_tool && git init && git add . && git -c user.name='name' -c user.email='' commit -am "foo"
+// (MAC)EXEC: cd %n && %git_dir_prefix%n && %git_dir_suffix %cjpm build %cjpm_opt
+// (not MAC)EXEC: cd %n && %git_dir_prefix%n%git_dir_suffix %cjpm build %cjpm_opt
+// EXEC: cd %n && %cat cjpm.lock 2>&1 | compare %f
+// ASSERT: regex version = 1
+// ASSERT: regex \[scripts\."s2_build_tool"\]
+// ASSERT: regex \[scripts\."s2_core"\]
+// ASSERT: regex version = "1.0.0"
+// ASSERT: regex source = "git\+
+// ASSERT: regex #[0-9a-f]{40}"
+// ASSERT: regex output-type = "static"
+// ASSERT: regex dependencies = \["s2_core"\]
+// ASSERT: scan-not \[requires\."s2_build_tool"\]
+// ASSERT: scan-not \[requires\."s2_core"\]

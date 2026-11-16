@@ -10,4 +10,4 @@
 // DEPENDENCE: ./src
 // EXEC-PIPE: %lint -f ./src -c %cangjieDir/tools -m %cangjieDir 2>&1 | compare %f
 // ASSERT: regex .*x\.cj:10:5:.*warning.*G\.VAR\.01: Prefer immutable variables when the value of the variable 'count' does not change\.
-// ASSERT: regex .*y\.cj:10:5:.*warning.*G\.VAR\.01: Prefer immutable variables when the value of the variable 'count' does not change\.
+// ASSERT: regex .*y\.cj:9:1:.*warning.*G\.VAR\.01: Prefer immutable variables when the value of the variable 'count2' does not change\.

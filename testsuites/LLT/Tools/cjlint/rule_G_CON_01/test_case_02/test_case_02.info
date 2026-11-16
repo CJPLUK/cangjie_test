@@ -1,0 +1,10 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+# This source file is part of the Cangjie project, licensed under Apache-2.0
+# with Runtime Library Exception.
+#
+# See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// DEPENDENCE: ../%n
+// EXEC: cd %n && %lint -f ./src  -c %lintConfigDir -m %lintModuleDir 2>&1 | compare %f
+// ASSERT: regex .*g_con_01_rule_test_02.cj:11:16:.*G.CON.01: 'private' should be used as modifier of synchronized object
+// ASSERT: regex .*g_con_01_rule_test_02.cj:12:16:.*G.CON.01: 'private' should be used as modifier of synchronized object

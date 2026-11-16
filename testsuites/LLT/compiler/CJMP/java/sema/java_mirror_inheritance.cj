@@ -8,14 +8,14 @@
 
 import java.lang.JObject
 
-@JavaMirror
-open class N {
+@Java
+open foreign class N {
     public open func foo(): Unit
     public open func bar(): Bool
 }
 
-@JavaMirror
-class M <: N {
+@Java
+foreign class M <: N {
     init()
 
     public override func bar(): Bool

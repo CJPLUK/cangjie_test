@@ -10,85 +10,85 @@
 // EXEC: ObjCInteropGen test.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-@ObjCMirror
-public open class A {
+@ObjC
+public open foreign class A {
     public open mut prop foo: Int32
 }
 
-@ObjCMirror
-public interface P1 {
+@ObjC
+public foreign interface P1 {
     mut prop foo: Int32
 }
 
-@ObjCMirror
-public interface P2 {
+@ObjC
+public foreign interface P2 {
     mut prop foo: Int32
 }
 
-@ObjCMirror
-public interface P3 {
+@ObjC
+public foreign interface P3 {
     prop foo: Int32
 }
 
-@ObjCMirror
-public open class M1 <: A & P1 & P2 /*& P3*/ {
+@ObjC
+public open foreign class M1 <: A & P1 & P2 /*& P3*/ {
 }
 
-@ObjCMirror
-public open class M2 <: P1 & P2 & P3 {
+@ObjC
+public open foreign class M2 <: P1 & P2 & P3 {
 }
 
-@ObjCMirror
-public open class M3 <: A /*& P3*/ {
+@ObjC
+public open foreign class M3 <: A /*& P3*/ {
 }
 
-@ObjCMirror
-public open class M4 <: A /*& P3*/ & P1 & P2 {
+@ObjC
+public open foreign class M4 <: A /*& P3*/ & P1 & P2 {
 }
 
-@ObjCMirror
-public open class B {
+@ObjC
+public open foreign class B {
     @ForeignName["bar:"] public open func bar(x: Int32): Unit
 }
 
-@ObjCMirror
-public interface P4 {
+@ObjC
+public foreign interface P4 {
     @ForeignName["bar:"] func bar(x: Int32): Unit
 }
 
-@ObjCMirror
-public interface P5 {
+@ObjC
+public foreign interface P5 {
     @ObjCOptional
     @ForeignName["bar:"] func bar(x: Int32): Unit
 }
 
-@ObjCMirror
-public open class M5 <: B & P4 /*& P5*/ & P1 {
+@ObjC
+public open foreign class M5 <: B & P4 /*& P5*/ & P1 {
 }
 
-@ObjCMirror
-public open class M6 <: P4 /*& P5*/ & P1 {
+@ObjC
+public open foreign class M6 <: P4 /*& P5*/ & P1 {
 }
 
-@ObjCMirror
-public open class M7 <: P1 & P5 /*& P4*/ {
+@ObjC
+public open foreign class M7 <: P1 & P5 /*& P4*/ {
 }
 
-@ObjCMirror
-public interface PP5 <: P5 {
+@ObjC
+public foreign interface PP5 <: P5 {
 }
 
-@ObjCMirror
-public interface P6 {
+@ObjC
+public foreign interface P6 {
     @ObjCOptional
     @ForeignName["bar:"] func bar(x: Int32): Unit
 }
 
-@ObjCMirror
-public interface PP6 <: P6 {
+@ObjC
+public foreign interface PP6 <: P6 {
 }
 
-@ObjCMirror
-public open class M8 <: P4 /*& PP5 & PP6*/ & P1 {
+@ObjC
+public open foreign class M8 <: P4 /*& PP5 & PP6*/ & P1 {
 }
 */

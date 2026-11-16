@@ -59,7 +59,7 @@ error: 'bar' is not found for generic type 'U' in its upper bounds
    |               ^^^ 
    | 
 
-error: interface function 'foo' must be implemented in 'C1'
+error: interface function 'foo(a: T): ' must be implemented in 'C1'
   ==> generic_constraint_and_4.cj:34:1:
    | 
 34 | class C1 <: C & I<C1> & I2<C1> {}

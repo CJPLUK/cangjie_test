@@ -4,7 +4,7 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// Verify selected enum table entries collect source case ids through their default edge.
+// Enum payload constants are not propagated yet, so selected-constructor payload failures are not diagnosed.
 // EXEC-PIPE-0: %compiler %cmp_opt -O2 %f -o %output 2>&1 | compare %f
 
 enum TableState {
@@ -29,16 +29,6 @@ warning: unreachable pattern
    | 
 19 |         case Left(_, true) | Right(0, true) => 1
    |                              ^^^^^^^^^^^^^^ 
-   | 
-   # note: this warning can be suppressed by setting the compiler option `-Woff unused`
-*/
-
-/* SCAN-IN
-warning: unreachable pattern
-  ==> enum_table_reachability_edges.cj:20:14:
-   | 
-20 |         case Left(_, false) => 2
-   |              ^^^^^^^^^^^^^^ 
    | 
    # note: this warning can be suppressed by setting the compiler option `-Woff unused`
 */

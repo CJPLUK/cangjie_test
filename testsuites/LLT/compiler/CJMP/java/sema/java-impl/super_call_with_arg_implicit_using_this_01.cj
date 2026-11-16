@@ -10,12 +10,12 @@
 
 import java.lang.JObject
 
-@JavaMirror
-open class M {
+@Java
+open foreign class M {
     init(a: Int64)
 }
 
-@JavaImpl
+@Java
 class A <: M {
     private let x: Int64 = 0
     init() {

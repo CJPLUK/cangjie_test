@@ -10,8 +10,8 @@ package cjworld
  
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     public init()
     public open func goo(): ObjCPointer<ObjCPointer<Int64>>
 }

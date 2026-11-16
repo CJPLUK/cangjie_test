@@ -39,7 +39,7 @@ class RunTestcase:
         # TODO：动态获取排序忽略的key
         self.ignore_sort_key = ["range", "data", 'to', 'fromRanges', 'end', 'start', 'selectionRange', 'children',
                                 'additionalTextEdits', 'edits', 'textDocument', 'parameters', 'location', "sortText",
-                                "containerName", "symbolId", "codeActions"]
+                                "containerName", "symbolId", "codeActions", "category", "code"]
         self.wait_request = ["textDocument/prepareTypeHierarchy", "textDocument/prepareCallHierarchy"]
         self.wait_response_key = {
             "textDocument/prepareTypeHierarchy": "symbolId",

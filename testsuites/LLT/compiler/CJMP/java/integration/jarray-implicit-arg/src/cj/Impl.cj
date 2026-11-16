@@ -8,7 +8,7 @@ package g
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class Impl {
     // Array component type: java.lang.String
     public func getJStringArr(): JArray<JString> {

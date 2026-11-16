@@ -9,8 +9,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public open class Base {
+@ObjC
+public open foreign class Base {
     public init()
     @ForeignName["primitive1WithArg0:"]
     public open func primitive1(i!: Int64): Int64
@@ -20,7 +20,7 @@ public open class Base {
     public open func primitive3(i!: Int64, f!: Float32, b!: Bool): Int64
 }
 
-@ObjCImpl
+@ObjC
 public class Derived <: Base {
     public init() {}
     public override func primitive1(i!: Int64): Int64 {

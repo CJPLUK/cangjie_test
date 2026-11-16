@@ -4,20 +4,12 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output 2>& 1 | compare %f
 
-@ObjCMirror
-class M {
+@ObjC
+foreign class M {
     func foo(): Unit {}
 }
 
-/* SCAN-IN
-error: @ObjCMirror declaration method 'foo' cannot have body
-  ==> objc_mirror_method_with_body.cj:11:5:
-   | 
-11 |     func foo(): Unit {}
-   |     ^^^^^^^^^^^^^^^^^^^ @ObjCMirror declaration method cannot have body
-   | 
-
-1 error generated, 1 error printed.
-*/
+// ASSERT: scan parse_objc_mirror_method_cannot_have_body
+// ASSERT: scan "Errors": 1

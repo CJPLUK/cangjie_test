@@ -17,8 +17,8 @@ import objc.foundation.NSObject
 import objc.foundation.NSString
 import objc.lang.*
 
-@ObjCMirror
-public open class test/*<T>*/ <: NSObject {
+@ObjC
+public open foreign class test/*<T>*/ <: NSObject {
     public open func f1(): ?ObjCId /*T*/
     public static func f2(): ?ObjCId /*T*/
     @ForeignName["f3:"] public open func f3(a: Int32): ?ObjCId /*T*/

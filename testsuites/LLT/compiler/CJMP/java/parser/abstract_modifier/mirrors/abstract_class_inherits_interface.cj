@@ -8,17 +8,17 @@
 
 import java.lang.*
 
-@JavaMirror
-interface I {
+@Java
+foreign interface I {
     func i(): Unit 
 }
 
-@JavaMirror
-abstract class A <: I {
+@Java
+abstract foreign class A <: I {
     public abstract func foo(): Unit
     public abstract func i(): Unit
 }
 
-@JavaMirror
-abstract class Child <: A {
+@Java
+abstract foreign class Child <: A {
 }

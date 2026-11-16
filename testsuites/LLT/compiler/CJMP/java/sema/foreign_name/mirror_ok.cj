@@ -8,48 +8,48 @@
 
 import java.lang.JObject
 
-@JavaMirror
-class M1 {
+@Java
+foreign class M1 {
     @ForeignName["fooJava"]
     public open func foo(): Unit
 }
 
-@JavaMirror
-interface I {
+@Java
+foreign interface I {
     @ForeignName["fooJava"]
     public open func foo(): Unit
 }
 
-@JavaMirror
-abstract class A {
+@Java
+abstract foreign class A {
     @ForeignName["fooJava"]
     public open func foo(): Unit
 }
 
-@JavaMirror
-interface I1 {
+@Java
+foreign interface I1 {
     @ForeignName["bar"]
     func foo(): Unit 
 }
 
-@JavaMirror
-interface I2 {
+@Java
+foreign interface I2 {
     @ForeignName["bar"]
     func foo(): Unit 
 }
 
-@JavaMirror
-open class M2 {
+@Java
+open foreign class M2 {
     @ForeignName["bar"]
     public open func foo(): Unit
 }
 
-@JavaMirror
-open class M3 <: M2 & I1 & I2 {
+@Java
+open foreign class M3 <: M2 & I1 & I2 {
 }
 
-@JavaMirror
-open class M4 <: M2 & I1 & I2 {
+@Java
+open foreign class M4 <: M2 & I1 & I2 {
     public open override func foo(): Unit
 }
 

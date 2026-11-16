@@ -10,8 +10,8 @@
 // EXEC: ObjCInteropGen test.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     @ForeignName["int1:"] public open func int1(x: ?M): ?M
     @ForeignName["int2:"] public open func int2(x: M): M
     @ForeignName["init1:"] public init(x: ?M)

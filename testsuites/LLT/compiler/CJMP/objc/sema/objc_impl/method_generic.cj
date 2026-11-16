@@ -4,12 +4,12 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
 
 import objc.lang.*
 
-@ObjCMirror
-public open class Base {
+@ObjC
+public open foreign class Base {
     public init()
     public open func arg0(): Bool
     @ForeignName["primitive1WithArg0:"]
@@ -20,20 +20,12 @@ public open class Base {
     public open func primitive3(i: Int64, f: Float32, b: Bool): Int64
 }
 
-@ObjCImpl
+@ObjC
 public class Derived <: Base {
     public init() {}
     public func foo<T>(): Unit {
     }
 }
 
-/* SCAN-IN
-error: @ObjCImpl declaration cannot be generic
-  ==> method_generic.cj:26:5:
-   | 
-26 |       public func foo<T>(): Unit {
-   |  _____^
-27 | |     }
-   | |_____^
-   | 
-*/
+// ASSERT: scan parse_objc_impl_cannot_be_generic
+// ASSERT: scan "Errors": 1

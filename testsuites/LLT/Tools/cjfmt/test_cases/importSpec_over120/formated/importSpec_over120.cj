@@ -4,6 +4,6 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-internal import model.taibai.model.flowcontrol.v1beta2.types.{FlowSchema, FlowSchemaList, FlowSchemaCondition, 
-    ConstantPool, PolicyRulesWithSubjects, FlowDistinguisherMethod, PriorityLevelConfigurationReference, FlowSchemaSpec, 
+internal import model.taibai.model.flowcontrol.v1beta2.types.{FlowSchema, FlowSchemaList, FlowSchemaCondition,
+    ConstantPool, PolicyRulesWithSubjects, FlowDistinguisherMethod, PriorityLevelConfigurationReference, FlowSchemaSpec,
     ResourcePolicyRule, NonResourcePolicyRule, Subject, UserSubject}

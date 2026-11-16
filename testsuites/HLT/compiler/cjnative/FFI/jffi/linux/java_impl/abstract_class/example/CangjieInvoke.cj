@@ -22,7 +22,7 @@ package UNNAMED
 
 import java.lang.JObject
 
-@JavaImpl
+@Java
 public class Impl <: JObject {
     public init() {
         let i = ImplAbstractMirror()

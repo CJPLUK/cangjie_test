@@ -8,7 +8,7 @@ package cj
 
 import java.lang.JObject
 
-@JavaImpl
+@Java
 public class Impl <: MyObject {
     public init() {
         println("cangjie: Impl()")

@@ -9,7 +9,7 @@ package cjworld
 import objc.lang.*
 
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public init() {
         print("cj: A()\n", flush: true)

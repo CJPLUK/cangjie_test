@@ -20,21 +20,68 @@ import std.runtime.*
 @Configure[warmup: Duration.second]
 public class Test_Forin_Range {
     var sum = 0
-    let _range = [1000, 1000_000, 1000_000_000]
+    var _count = 0
+    var size = 0
+    let _range = [1000, 1000000, 1000000000]
 
-    @Bench[count in _range]
-    func BenchmarkForinRangeWhere_UnClosed_N(count: Int64): Unit {
-        for (j in 0..count where j % 2 == 1) {
+    @BeforeEach
+    public func GenerateSize(): Unit {
+        size = _range[_count % _range.size]
+        _count += 1
+    }
+
+    @AfterEach
+    public func Reset(): Unit {
+        sum = 0
+    }
+
+    @Bench
+    func BenchmarkForinRangeWhere_UnClosed_N_1000(): Unit {
+        for (j in 0..size where j % 2 == 1) {
             sum += j
         }
         blackBox(sum)
     }
 
-    @Bench[count in _range]
-    func BenchmarkForinRangeWhere_Closed_N(count: Int64): Unit {
-        for (j in 0..=count where j % 2 == 1) {
+    @Bench
+    func BenchmarkForinRangeWhere_UnClosed_N_1000000(): Unit {
+        for (j in 0..size where j % 2 == 1) {
+            sum += j
+        }
+        blackBox(sum)
+    }
+
+    @Bench
+    func BenchmarkForinRangeWhere_UnClosed_N_1000000000(): Unit {
+        for (j in 0..size where j % 2 == 1) {
+            sum += j
+        }
+        blackBox(sum)
+    }
+
+    @Bench
+    func BenchmarkForinRangeWhere_Closed_N_1000(): Unit {
+        for (j in 0..=size where j % 2 == 1) {
+            sum += j
+        }
+        blackBox(sum)
+    }
+
+    @Bench
+    func BenchmarkForinRangeWhere_Closed_N_1000000(): Unit {
+        for (j in 0..=size where j % 2 == 1) {
+            sum += j
+        }
+        blackBox(sum)
+    }
+
+    @Bench
+    func BenchmarkForinRangeWhere_Closed_N_1000000000(): Unit {
+        for (j in 0..=size where j % 2 == 1) {
             sum += j
         }
         blackBox(sum)
     }
 }
+
+

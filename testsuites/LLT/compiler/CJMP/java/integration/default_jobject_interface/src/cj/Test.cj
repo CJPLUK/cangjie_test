@@ -8,7 +8,7 @@ package cj
 
 import java.lang.*
 
-@JavaMirror["com.java.lib.Test"]
-public open interface Test {
+@Java["com.java.lib.Test"]
+public open foreign interface Test {
     public open func test(): Unit
 }

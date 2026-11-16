@@ -29,7 +29,7 @@ error: unable to infer generic argument of this function
 note: following constraints for type variable 'Generics-T' cannot be solved:
       'Enum-Option<Class-A> <: Generics-T'
       'Generics-T <: Enum-Option<Interface-I>'
-  ==> (package std.core)option.cj:11:20:
+  ==> (package std.core)option.cj:20:20:
 note: constraint 'Enum-Option<Class-A> <: Generics-T' may come from:
   ==> infer_option_02.cj:15:28:
    | 

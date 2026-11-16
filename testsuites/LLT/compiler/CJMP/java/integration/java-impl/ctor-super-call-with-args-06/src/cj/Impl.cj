@@ -14,7 +14,7 @@ package cj
 import java.lang.*
 
 
-@JavaImpl
+@Java
 public class Impl <: MyObject {
 
     public static let base2: Int64 = 2

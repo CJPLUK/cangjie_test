@@ -8,7 +8,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 class A1 <: A {
     public init() {
         println("cj: A1()")

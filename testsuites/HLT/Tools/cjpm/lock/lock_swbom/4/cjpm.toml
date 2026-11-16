@@ -1,0 +1,31 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+# This source file is part of the Cangjie project, licensed under Apache-2.0
+# with Runtime Library Exception.
+#
+# See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+[package]
+  cjc-version = "1.0.0"
+  name = "demo"
+  version = "1.0.0"
+  output-type = "executable"
+
+[dependencies]
+  test_repo_1 = "(,)"
+
+[target.x86_64-linux-ohos]
+  compile-option = "-B=${OHOS_ROOT}/llvm/prebuilt/x86_64-linux-ohos/bin --sysroot=${OHOS_ROOT}/llvm/prebuilt/x86_64-linux-ohos/sysroot"
+[target.aarch64-linux-ohos]
+  compile-option = "-B${OHOS_ROOT}/sysroot/usr/lib/aarch64-linux-ohos -B${OHOS_ROOT}/llvm/bin -L${OHOS_ROOT}/llvm/lib/clang/15.0.4/lib/aarch64-linux-ohos -L${OHOS_ROOT}/llvm/lib/aarch64-linux-ohos -L${OHOS_ROOT}/sysroot/usr/lib/aarch64-linux-ohos"
+[target.aarch64-linux-android26]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.aarch64-linux-android31]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.aarch64-linux-android32]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.aarch64-linux-android35]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.arm-linux-android23]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.aarch64-linux-android23]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"

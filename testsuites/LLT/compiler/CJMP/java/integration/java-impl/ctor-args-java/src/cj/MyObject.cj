@@ -8,8 +8,8 @@ package cj
 
 import java.lang.*
 
-@JavaMirror["com.java.lib.MyObject"]
-public open class MyObject <: JObject {
+@Java["com.java.lib.MyObject"]
+public open foreign class MyObject <: JObject {
     public init()
     public func isValid(): Bool
 }

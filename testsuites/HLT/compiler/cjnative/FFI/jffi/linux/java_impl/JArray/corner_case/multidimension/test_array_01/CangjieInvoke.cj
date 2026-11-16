@@ -20,7 +20,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JavaClass {
     public init(arr: JArray<JArray<Int32>>) {
         super(arr)

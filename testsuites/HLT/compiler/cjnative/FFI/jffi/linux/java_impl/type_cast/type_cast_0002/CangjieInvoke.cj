@@ -21,7 +21,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     public init() {
         println("run cj")

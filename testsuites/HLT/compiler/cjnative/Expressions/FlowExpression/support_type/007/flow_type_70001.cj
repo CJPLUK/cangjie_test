@@ -15,4 +15,5 @@ main(): Int64 {
     Bool |> f 
     return 1
 }
-// ASSERT: scan parse_expected_expr_or_decl_in
+// ASSERT: scan parse_expected_character
+// ASSERT: scan parse_expected_expression

@@ -8,7 +8,7 @@ package i
 
 import java.lang.JObject
 
-@JavaMirror
-public interface I {
+@Java
+public foreign interface I {
     func foo(): Unit
 }

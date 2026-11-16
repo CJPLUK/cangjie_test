@@ -8,13 +8,13 @@
 
 import java.lang.JObject
 
-@JavaMirror
-open class M {
+@Java
+open foreign class M {
     public init()
     public func impl(obj: ?OtherImpl): Unit
 }
 
-@JavaImpl
+@Java
 class OtherImpl <: M {
    OtherImpl() {
     

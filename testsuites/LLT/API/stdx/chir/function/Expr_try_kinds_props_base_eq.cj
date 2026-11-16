@@ -7,7 +7,7 @@
  */
 // EXEC: %compiler %import-cangjie-stdx %cmp_opt -o %n.%suffix %f
 // RUN-EXEC: %set_stdx_path %run %run_opt %n.%suffix %run_args | compare %f
-// Try* all try-capable kinds, public getters, *Base Equatable, Lambda.paramDftValHostFunc
+// Try* all try-capable kinds, public getters, *Base Equatable, Lambda.paramDftValHostParam
 
 /* SCAN
 try kinds props: true
@@ -180,12 +180,12 @@ main() {
     child.initParameters()
     child.initBody()
     child.body.entryBlock.appendExpr(Exit.create())
-    child.paramDftValHostFunc = hostLam
-    let got = child.paramDftValHostFunc
+    child.paramDftValHostParam = hostLam.parameters[0]
+    let got = child.paramDftValHostParam
     let dump = child.toString()
     let emptyDump = hostLam.toString()
     bbLam.appendExpr(Exit.create())
-    println("lambda dft host: ${got.isSome() && dump.contains("paramDftValHostFunc") && emptyDump.size >= 0}")
+    println("lambda dft host: ${got == Some(hostLam.parameters[0]) && dump.contains("paramDftValHostParam") && emptyDump.size >= 0}")
 
     var rejected = false
     try {

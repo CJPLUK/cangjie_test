@@ -10,8 +10,8 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaMirror["com.JavaClass"]
-public open class JavaClass {
+@Java["com.JavaClass"]
+public open foreign class JavaClass {
     public mut prop aInt: JArray<Int32>
 
     public mut static prop arrayInt: JArray<Int32>
@@ -26,5 +26,3 @@ public open class JavaClass {
 
     public static func setArrayInt(aInt: JArray<Int32>): Unit
 }
-
-

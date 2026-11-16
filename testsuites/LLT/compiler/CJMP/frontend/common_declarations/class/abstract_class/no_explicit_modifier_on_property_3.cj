@@ -35,7 +35,7 @@ error: unexpected modifier 'abstract' on property declaration in class body
   |     on property declaration
   | 
 
-error: only common/specific or Native FFI mirror abstract classes can have explicitly abstract property
+error: only common/specific or '@Java' foreign abstract classes can have explicitly abstract property
  ==> c/c.cj:6:34:
   | 
 6 |     public abstract prop c: Int32

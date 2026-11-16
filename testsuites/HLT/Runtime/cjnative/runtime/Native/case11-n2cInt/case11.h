@@ -10,8 +10,9 @@
 #define CASE11_H
 
 #include <stdio.h>
+#include <stdint.h>
+#include <inttypes.h>
 
-int C2CJ_Func(int a1, long long a2, int a3, long long a4, int a5, long long a6, int a7, long long a8, int a9,
-              long long a10);
+int64_t C2CJ_Func(int32_t a1, int64_t a2, int32_t a3, int64_t a4, int32_t a5, int64_t a6, int32_t a7, int64_t a8, int32_t a9, int64_t a10);
 
 #endif

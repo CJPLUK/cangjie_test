@@ -12,8 +12,8 @@ import objc.lang.*
 
 type PrimitiveType = Int8
 
-@ObjCMirror
-public class M {
+@ObjC
+public foreign class M {
     init()
 
     @ForeignName["zeroParams"]

@@ -10,12 +10,12 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public class NSObject {
+@ObjC
+public foreign class NSObject {
     init()
 }
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     @ForeignName["init:"]
     public init(a: B) {

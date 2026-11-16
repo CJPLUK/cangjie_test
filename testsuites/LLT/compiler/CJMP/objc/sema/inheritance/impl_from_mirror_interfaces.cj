@@ -9,22 +9,22 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public interface I {
+@ObjC
+public foreign interface I {
     func f1(): Unit
 }
 
-@ObjCMirror
-public interface J <: I {
+@ObjC
+public foreign interface J <: I {
     func f2(): Unit
 }
 
-@ObjCMirror
-open class M {
+@ObjC
+open foreign class M {
     init()
 }
 
-@ObjCImpl
+@ObjC
 public class A <: M & J & ObjCId {
     public init() {}
     public func f1(): Unit {}

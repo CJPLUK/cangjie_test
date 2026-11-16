@@ -1,0 +1,5 @@
+result/
+*.out
+default.cjo
+default.cjo.flag
+__pycache__/

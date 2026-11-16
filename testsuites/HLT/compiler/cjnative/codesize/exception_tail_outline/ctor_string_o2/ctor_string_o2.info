@@ -1,0 +1,14 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ *
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+
+// LEVEL: 1
+// DESC: 异常尾部外提：带 String 的 ctor 冷尾外提，多个消息不串不丢，helper 符号存在（Windows 不生效故排除）
+// DEPENDENCE: main.cj ../check.py
+// (!target_win) EXEC: %compiler %cmp_opt -O2 main.cj -o %output
+// (!target_win) RUN-EXEC: %run %run_opt %output %run_args
+// (!target_win) EXEC: %python check.py --file %output --max-size 5000000 --nm-has exception_tail_helper

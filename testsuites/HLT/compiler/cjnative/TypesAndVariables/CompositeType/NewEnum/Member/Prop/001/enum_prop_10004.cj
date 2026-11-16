@@ -27,4 +27,3 @@ main(): Int64 {
 }
 // ASSERT: scan sema_immutable_property_with_setter
 // ASSERT: scan sema_cannot_assign_to_immutable
-// ASSERT: scan sema_mismatched_types

@@ -16,8 +16,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class test0 {
+@ObjC
+public open foreign class test0 {
     @ForeignName["testMethod1:"] public open func testMethod1(arg1: __0test_1): Unit
     @ForeignName["testMethod2:"] public open func testMethod2(arg1: __0test_2): Unit
 }
@@ -38,8 +38,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class test1 {
+@ObjC
+public open foreign class test1 {
     @ForeignName["testMethod1:"] public open func testMethod1(arg1: __1test_1): Unit
     @ForeignName["testMethod2:"] public open func testMethod2(arg1: __1test_2): Unit
 }
@@ -60,8 +60,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class test12319864000 {
+@ObjC
+public open foreign class test12319864000 {
     @ForeignName["testMethod1:"] public open func testMethod1(arg1: __19864000test123_1): Unit
     @ForeignName["testMethod2:"] public open func testMethod2(arg1: __19864000test123_2): Unit
 }
@@ -82,8 +82,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class 龍壬正 {
+@ObjC
+public open foreign class 龍壬正 {
     @ForeignName["testMethod1:"] public open func testMethod1(arg1: ____________1): Unit
     @ForeignName["testMethod2:"] public open func testMethod2(arg1: ____________2): Unit
 }
@@ -104,8 +104,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class 𠲖 {
+@ObjC
+public open foreign class 𠲖 {
     @ForeignName["testMethod1:"] public open func testMethod1(arg1: _______1): Unit
     @ForeignName["testMethod2:"] public open func testMethod2(arg1: _______2): Unit
 }
@@ -126,8 +126,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class 正 {
+@ObjC
+public open foreign class 正 {
     @ForeignName["testMethod1:"] public open func testMethod1(arg1: ______1): Unit
     @ForeignName["testMethod2:"] public open func testMethod2(arg1: ______2): Unit
 }
@@ -148,8 +148,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class 日 {
+@ObjC
+public open foreign class 日 {
     @ForeignName["testMethod1:"] public open func testMethod1(arg1: ______3): Unit
     @ForeignName["testMethod2:"] public open func testMethod2(arg1: ______4): Unit
 }
@@ -170,8 +170,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class 月 {
+@ObjC
+public open foreign class 月 {
     @ForeignName["testMethod1:"] public open func testMethod1(arg1: ______5): Unit
     @ForeignName["testMethod2:"] public open func testMethod2(arg1: ______6): Unit
 }

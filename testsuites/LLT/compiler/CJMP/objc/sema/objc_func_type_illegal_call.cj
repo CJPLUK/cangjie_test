@@ -6,7 +6,7 @@
 
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
 
-// ASSERT: scan-2 error: ObjCFunc property 'call' can only be called directly, no other operations are permitted
+// ASSERT: scan-2 error: 'ObjCFunc' property 'call' can only be called directly, no other operations are permitted
 
 import objc.lang.*
 

@@ -1,0 +1,15 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: ../%n
+// EXEC: cd %n && %cjpm build %cjpm_opt
+// EXEC: cd %n && %cat cjpm.lock 2>&1 | compare %f
+// ASSERT: regex version = 1
+// ASSERT: scan-not p1
+// ASSERT: scan-not source
+// ASSERT: scan-not checksum
+// ASSERT: scan-not dependencies

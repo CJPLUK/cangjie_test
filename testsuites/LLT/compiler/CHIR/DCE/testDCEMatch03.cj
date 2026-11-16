@@ -56,14 +56,6 @@ warning: unused variable:'scoreResult'
    # note: this warning can be suppressed by setting the compiler option `-Woff unused`
 
 warning: unreachable pattern
-  ==> testDCEMatch03.cj:13:10:
-   | 
-13 |     case ("aa", true) => "zero"
-   |          ^^^^^^^^^^^^ 
-   | 
-   # note: this warning can be suppressed by setting the compiler option `-Woff unused`
-
-warning: unreachable pattern
   ==> testDCEMatch03.cj:15:10:
    | 
 15 |     case (_, false) => "zero"
@@ -71,13 +63,7 @@ warning: unreachable pattern
    | 
    # note: this warning can be suppressed by setting the compiler option `-Woff unused`
 
-warning: unreachable pattern
-  ==> testDCEMatch03.cj:17:10:
-   | 
-17 |     case (_, true) => "zero"
-   |          ^^^^^^^^^ 
-   | 
-   # note: this warning can be suppressed by setting the compiler option `-Woff unused`
-
-7 warnings generated, 7 warnings printed.
+5 warnings generated, 5 warnings printed.
 */
+
+// String equality calls are not modeled by constant analysis yet; later cases remain potentially reachable.

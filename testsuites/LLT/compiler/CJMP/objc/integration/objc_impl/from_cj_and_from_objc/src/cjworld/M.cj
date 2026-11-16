@@ -8,8 +8,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     public var a: Int64
     public var b: Float64
     @ForeignName["initWithA:andB:"]

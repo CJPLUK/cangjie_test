@@ -26,7 +26,7 @@ class B<T> <: A<T> & I1 {} // error
 main() {}
 
 /* SCAN
-error: interface function 'foo' must be implemented in 'B'
+error: interface function 'foo(): Unit' must be implemented in 'B'
   ==> implement_by_super_extend01.cj:24:1:
    | 
 24 | class B<T> <: A<T> & I1 {} // error

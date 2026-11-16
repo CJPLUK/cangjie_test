@@ -6,7 +6,7 @@
 
 // LEVEL: 0
 // EXEC: %compiler %cmp_opt %enableDevirtualization -Woff all %f -o %n.%suffix 2>&1 | compare %f
-// ASSERT: scan interface function 'f1' must be implemented in 'A1'
+
 
 interface I1 {
     func f1(a: Int64): Unit {
@@ -43,3 +43,14 @@ main() {
     Test2(A1())
     Test(A1())
 }
+
+/* SCAN-IN
+error: interface function 'f1(a: Int64): Unit' must be implemented in 'A1'
+  ==> inherit_same_interface_sema_error.cj:27:1:
+   | 
+27 | open class A1 <: A & I2 & I3 {}
+   | ^ 
+   | 
+
+1 error generated, 1 error printed.
+*/

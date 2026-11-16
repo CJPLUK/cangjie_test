@@ -40,7 +40,7 @@ error: cannot assign to immutable value
   ==> record_6.cj:14:9:
    | 
 14 |         a = 2
-   |         ^^^^^ 
+   |         ^ 
    | 
 note: property 'a' is immutable
   ==> record_6.cj:11:17:
@@ -53,7 +53,7 @@ error: cannot assign to immutable value
   ==> record_6.cj:21:5:
    | 
 21 |     x.a = 4
-   |     ^^^^^^^ 
+   |     ^^^ 
    | 
 note: property 'a' is immutable
   ==> record_6.cj:11:17:

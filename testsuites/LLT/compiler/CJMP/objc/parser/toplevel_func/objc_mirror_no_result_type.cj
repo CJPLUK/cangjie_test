@@ -4,18 +4,12 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %frontendCompiler %dump-parse %cmp_opt %f -o %output %compile_shared_lib_opt 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %frontendCompiler %cmp_opt %diag_json %f -o %output %compile_shared_lib_opt 2>& 1 | compare %f
 
 import objc.lang.*
 
-@ObjCMirror
-func foo()
+@ObjC
+foreign func foo()
 
-/* SCAN-IN
-error: @ObjCMirror top-level function 'foo' must have result type explicitly specified
-  ==> objc_mirror_no_result_type.cj:12:1:
-   | 
-12 | func foo()
-   | ^ 
-   | 
-*/
+// ASSERT: scan parse_objc_mirror_func_must_have_explicit_type
+// ASSERT: scan "Errors": 1

@@ -8,15 +8,15 @@ package cj
 
 import java.lang.*
 
-@JavaMirror["com.java.lib.I1"]
-public interface I1 {
+@Java["com.java.lib.I1"]
+public foreign interface I1 {
     func goo(a: ?I1): Int32
     func foo(): ?I1
     static func bar(): Int32
 }
 
-@JavaMirror["com.java.lib.JavaClass"]
-public open class JavaClass <: I1 {
+@Java["com.java.lib.JavaClass"]
+public open foreign class JavaClass <: I1 {
     public init()
     public open func foo(): ?I1
     public open func goo(a: ?I1): Int32

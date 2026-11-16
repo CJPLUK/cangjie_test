@@ -4,13 +4,18 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// DEPENDENCE: sancov.h sancov.cpp
-// EXEC: %clang++ -c -fPIC %stdc++_opt sancov.cpp -o sancov.o
-// EXEC: %compiler --sanitizer-coverage-level=1  --sanitizer-coverage-stack-depth sancov.o %n.cj -o %output 2>&1 | compare %f
-// ASSERT: scan '--sanitizer-coverage-level' is illegal here
-// EXEC: %compiler --sanitizer-coverage-level=0 --sanitizer-coverage-inline-bool-flag sancov.o %n.cj -o %output 2>&1 | compare %f
-// ASSERT: scan '--sanitizer-coverage-level' is illegal here
+// DEPENDENCE: ../pick_defination.py
+// EXEC: %frontendCompiler %dumpCHIRDebug --sanitizer-coverage-level=1 --sanitizer-coverage-stack-depth -Woff all %f -o sancov-stack.out 2>&1 | compare %f --assert_flag=ASSERT_DIAGNOSTIC
+// EXEC: %python pick_defination.py sancov-stack_CHIR/[0-9]*_Sanitizer_Coverage.chirtxt WHOLE | compare %f
+// EXEC: %frontendCompiler %dumpCHIRDebug --sanitizer-coverage-level=0 --sanitizer-coverage-inline-bool-flag -Woff all %f -o sancov-bool.out 2>&1 | compare %f --assert_flag=ASSERT_DIAGNOSTIC
+// EXEC: %python pick_defination.py sancov-bool_CHIR/[0-9]*_Sanitizer_Coverage.chirtxt WHOLE | compare %f
 
 main() {
     0
 }
+
+// ASSERT_DIAGNOSTIC: scan-1 '--sanitizer-coverage-level' is illegal here
+
+// ASSERT: scan-not @__sanitizer_cov_trace_
+// ASSERT: scan-not @__cj_sancov_
+// ASSERT: scan-not sancov$_

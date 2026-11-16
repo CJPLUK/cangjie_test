@@ -10,8 +10,8 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaMirror["com.JavaClass"]
-public open class JavaClass {
+@Java["com.JavaClass"]
+public open foreign class JavaClass {
     public init() 
 
     public open func takeArr(arr: JArray<Int64>): Unit
@@ -24,5 +24,3 @@ public open class JavaClass {
 
     public open func getInt(): Int64
 }
-
-

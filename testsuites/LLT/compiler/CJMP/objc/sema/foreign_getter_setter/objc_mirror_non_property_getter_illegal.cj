@@ -10,8 +10,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-open class M {
+@ObjC
+public open foreign class M {
     public prop a: Int32
 
     @ForeignGetterName["assignAbc:"]

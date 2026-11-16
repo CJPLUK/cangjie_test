@@ -8,8 +8,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-class M {
+@ObjC
+foreign class M {
     init()
     @ForeignName["initWithA:"]
     init(a: Int64)

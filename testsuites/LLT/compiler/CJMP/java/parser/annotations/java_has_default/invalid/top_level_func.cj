@@ -9,17 +9,16 @@
 @JavaHasDefault
 func f() {}
 
-@JavaMirror
-class C {
+@Java
+foreign class C {
     public func foo(): Unit
 }
 
 /* SCAN-IN
-error: '@JavaHasDefault' can be used only on @JavaMirror interface methods.
+error: '@JavaHasDefault' can only be used on member functions in '@Java' foreign interface
  ==> top_level_func.cj:9:1:
   | 
 9 | @JavaHasDefault
   | ^^^^^^^^^^^^^^^ 
   |  
 */
-

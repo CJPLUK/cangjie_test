@@ -10,12 +10,12 @@
 // EXEC: ObjCInteropGen test.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-@ObjCMirror
-public open class NSArray/*<ObjectType>*/ {
+@ObjC
+public open foreign class NSArray/*<ObjectType>*/ {
 }
 
-@ObjCMirror
-public open class M/*<ObjectType>*/ <: NSArray {
+@ObjC
+public open foreign class M/*<ObjectType>*/ <: NSArray {
     public open func foo(): ObjCPointer<?ObjCId /*ObjectType*/>
     @ForeignName["f1:"] public open func f1(x: ?ObjCId /*ObjectType*/): Unit
     @ForeignName["f2:"] public open func f2(x: ?NSArray/*<ObjectType>*/): Unit

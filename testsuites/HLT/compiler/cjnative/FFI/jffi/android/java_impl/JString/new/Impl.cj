@@ -24,7 +24,7 @@ import std.runtime.*
 // 如果创建全局变量即会导致crash
 public let g0: Impl = Impl()
 
-// @JavaImpl实例被间接保存在全局
+// @Java实例被间接保存在全局
 public let g1: CangjieClass = CangjieClass()
 public let g2: CangjieStruct = CangjieStruct()
 public let g3: CangjieEnum = CangjieEnum.A(Impl())
@@ -44,7 +44,7 @@ public func acceptingTop(a: Any): Unit {
     }
 }
 
-// 仓颉class中使用@JavaImpl/@JavaMirror作为成员
+// 仓颉class中使用@Java/@JavaMirror作为成员
 public class CangjieClass {
     static init() {
         // 同上，全局静态初始化
@@ -75,7 +75,7 @@ public class CangjieClass {
     public let v4: Any = SimpleJavaClass()
 
     public func testJavaImpl(): Unit {
-        // @JavaImpl
+        // @Java
         // 实例成员变量
         this.v.simple()
         (this.v1 as Impl).getOrThrow().simple()
@@ -104,7 +104,7 @@ public class CangjieClass {
     }
 }
 
-// 仓颉struct中使用@JavaImpl作为成员
+// 仓颉struct中使用@Java作为成员
 public struct CangjieStruct {
     public let v: Impl = Impl()
     public let v1: JObject = Impl()
@@ -116,7 +116,7 @@ public struct CangjieStruct {
     }
 }
 
-// 仓颉enum中使用@JavaImpl作为成员
+// 仓颉enum中使用@Java作为成员
 public enum CangjieEnum {
     | A(Impl)
     | B(Impl, SimpleJavaClass)
@@ -133,7 +133,7 @@ public enum CangjieEnum {
     }
 }
 
-@JavaImpl
+@Java
 public class Impl <: Inherit {
     public let m: SimpleJavaClass = SimpleJavaClass()
     public init() {
@@ -193,7 +193,7 @@ public class Impl <: Inherit {
     }
     public func checkLambdaClosure(): Unit {
         Logger.println("=== checkLambdaClosure ===")
-        // 检查lambda捕获@JavaImpl
+        // 检查lambda捕获@Java
         let ci = Impl()
         let s = SimpleJavaClass()
         let l = {
@@ -315,7 +315,7 @@ public class Impl <: Inherit {
         this.checkCangjieStruct()
         this.checkCangjieEnum()
         this.checkLambdaClosure()
-        // 目前spawn仅支持编译通过，但运行时如果在spawn中对@JavaImpl实例进行操作将导致crash，故暂时注释，等到真正支持后再放开
+        // 目前spawn仅支持编译通过，但运行时如果在spawn中对@Java实例进行操作将导致crash，故暂时注释，等到真正支持后再放开
         // this.checkSpawn()
         this.checkUpCast()
     }

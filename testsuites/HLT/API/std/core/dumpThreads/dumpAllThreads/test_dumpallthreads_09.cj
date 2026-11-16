@@ -25,9 +25,9 @@ class C1 {
         return 1
     }
 }
-@When[os=="iOS"]
+@When[os == "iOS" && env == ""]
 var count:Int64=21
-@When[os!="iOS"]
+@When[os != "iOS" || env != ""]
 var count:Int64=20
 let all_count = 20
 var ready_count = 0

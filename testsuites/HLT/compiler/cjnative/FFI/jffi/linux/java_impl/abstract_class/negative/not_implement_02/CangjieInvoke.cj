@@ -17,7 +17,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JavaClass {
     public init() {
         print("in CangjieInvoke Init\n", flush: true)

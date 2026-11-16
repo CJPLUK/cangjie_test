@@ -10,21 +10,21 @@
 
 import java.lang.JObject
 
-@JavaMirror
-open class M {
+@Java
+open foreign class M {
     init(a: Bool)
     init()
     public func foo(): Int64
 }
 
-@JavaImpl
+@Java
 class A <: M {
     A() {
         super()
     }
 }
 
-@JavaImpl
+@Java
 class B <: M {
     B() {
         super()

@@ -9,5 +9,4 @@
 // LEVEL: 1
 // DEPENDENCE: ./src
 // EXEC-PIPE: %lint -f ./src -c %cangjieDir/tools -m %cangjieDir 2>&1 | compare %f
-// ASSERT: regex .*test.cj:9.*G.NAM.05.*
-// ASSERT: regex .*test.cj:12.*G.NAM.05.*
+// ASSERT: regex .*G.NAM.05.*

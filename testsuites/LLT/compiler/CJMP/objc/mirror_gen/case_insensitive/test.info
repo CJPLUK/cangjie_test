@@ -1,0 +1,15 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ *
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+
+// DEPENDENCE: test.toml test.h a b c expected-a expected-b expected-c
+// EXEC: ObjCInteropGen test.toml
+// EXEC: %cat TEST.cj | compare expected-a
+// (Linux) EXEC: %cat Test.cj | compare expected-b
+// (not Linux) EXEC: %cat Test_.cj | compare expected-b
+// (Linux) EXEC: %cat test.cj | compare expected-c
+// (not Linux) EXEC: %cat test__.cj | compare expected-c

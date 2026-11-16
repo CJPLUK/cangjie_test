@@ -14,9 +14,9 @@ import std.random.*
 import std.unittest.*
 import std.unittest.testmacro.*
 
-@When[os=="iOS"]
+@When[os == "iOS" && env == ""]
 var count:Int64=21
-@When[os!="iOS"]
+@When[os != "iOS" || env != ""]
 var count:Int64=20
 let all_count = 20
 var ready_count = 0

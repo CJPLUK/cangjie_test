@@ -9,13 +9,13 @@
 
 import objc.lang.*
 
-@ObjCMirror["M"]
-open class M {
+@ObjC["M"]
+open foreign class M {
    init()
    public let x: Int64
 }
 
-@ObjCImpl
+@ObjC
 class A <: M {
    init() {
       x = 5

@@ -8,8 +8,8 @@
 
 import java.lang.*
 
-@JavaMirror
-class M {
+@Java
+foreign class M {
     static func foo(): Unit
     static func fooRet(): M
     static func fooAccept(m: M, mm: M, mmm: M): Unit

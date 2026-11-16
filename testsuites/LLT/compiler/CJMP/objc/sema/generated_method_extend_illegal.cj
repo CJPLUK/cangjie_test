@@ -12,13 +12,13 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-open public class NSObject {
+@ObjC
+public open foreign class NSObject {
     public init()
 }
 
-@ObjCMirror
-public class NSString <: NSObject {
+@ObjC
+public foreign class NSString <: NSObject {
     public init()
 }
 
@@ -28,8 +28,8 @@ extend NSString {
     }
 }
 
-@ObjCMirror
-public class OtherString <: NSObject {
+@ObjC
+public foreign class OtherString <: NSObject {
     public init()
 }
 

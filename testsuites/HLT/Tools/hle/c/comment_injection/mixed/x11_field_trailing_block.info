@@ -1,0 +1,12 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: x11_field_trailing_block.h
+// EXEC: %hle_c --module-name="my_module" -i x11_field_trailing_block.h -o . --clang-args=""
+// EXEC-PIPE: %cat x11_field_trailing_block.cj | compare %f
+// ASSERT: scan //< X11: trailing doxygen block after field, payload /* opener
+// ASSERT: scan public let x11a: Int32

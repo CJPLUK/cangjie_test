@@ -9,8 +9,8 @@ package cj
 import java.lang.JObject
 import abstract.Abstract
 
-@JavaMirror["com.java.lib.Child"]
-open class Child <: Abstract {
+@Java["com.java.lib.Child"]
+open foreign class Child <: Abstract {
     public init()
     public func foo(): Abstract
 }

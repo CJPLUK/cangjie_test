@@ -13,7 +13,7 @@ package n
 import java.lang.JObject
 import i.I
 
-@JavaImpl
+@Java
 class N <: I {
     public func foo(): Unit {}
 }

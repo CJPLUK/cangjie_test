@@ -10,5 +10,5 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaMirror["java.io.Serializable"]
-public interface Serializable {}
+@Java["java.io.Serializable"]
+public foreign interface Serializable {}

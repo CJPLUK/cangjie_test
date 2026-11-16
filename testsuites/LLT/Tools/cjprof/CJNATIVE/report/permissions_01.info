@@ -1,0 +1,13 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2025-2026. All rights reserved.
+# This source file is part of the Cangjie project, licensed under Apache-2.0
+# with Runtime Library Exception.
+#
+# See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// DEPENDENCE: ../sample
+// EXEC: %copy sample/test.cj .
+// EXEC: %compiler test.cj -o test
+// EXEC: [ "$EUID" -eq 0 ] && setpriv --bounding-set -dac_override %cjprof record ./test || %cjprof record ./test
+// EXEC: %cjprof report | compare %f
+// ASSERT: scan main
+// ASSERT: scan-not No sampling data is available

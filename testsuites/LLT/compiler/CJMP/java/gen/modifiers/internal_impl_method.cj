@@ -10,13 +10,13 @@
 // ASSERT: scan-not void foo()
 // ASSERT: scan-not void foo(long $rid);
 
-// This test checks that method of @JavaImpl with internal modifier is not exported to java.
+// This test checks that method of @Java with internal modifier is not exported to java.
 
 package cjworld.theworld
 
 import java.lang.*
 
-@JavaImpl["A"]
+@Java["A"]
 public class A {
     public init() {}
     internal func foo(): Unit {}

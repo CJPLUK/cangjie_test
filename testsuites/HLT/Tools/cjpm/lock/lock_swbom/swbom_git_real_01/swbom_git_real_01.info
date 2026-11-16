@@ -1,0 +1,16 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: ../%n
+// EXEC: cd %n && %cjpm update
+// EXEC: cd %n && %cat cjpm.lock 2>&1 | compare %f
+// ASSERT: regex version = 1
+// ASSERT: regex \[requires\."stdx"\]
+// ASSERT: regex source = "git\+https://gitcode\.com/yaoruili/cangjie_stdx_9191\?branch=dev#[0-9a-f]{40}"
+// ASSERT: regex version = "1.0.5"
+// ASSERT: regex dependencies = \[\]
+// ASSERT: scan-not checksum

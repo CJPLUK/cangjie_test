@@ -14,7 +14,7 @@ abstract class AAA {
 }
 
 /* SCAN
-error: only common/specific or Native FFI mirror abstract classes can have explicitly abstract function
+error: only common/specific or '@Java' foreign abstract classes can have explicitly abstract function
  ==> c/c.cj:6:5:
   | 
 6 |     public abstract func foo() { 1 }

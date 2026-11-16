@@ -6,11 +6,11 @@
 
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
 
-// ASSERT: scan error: @ForeignSetterName could not appear on overridden declaration
+// ASSERT: scan error: '@ForeignSetterName' cannot be specified on overridden declaration
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 class A <: M {
     @ForeignSetterName["setA:"]
     override public mut prop a: Int32 {
@@ -19,8 +19,8 @@ class A <: M {
     }
 }
 
-@ObjCMirror
-open class M {
+@ObjC
+public open foreign class M {
     public init()
 
     @ForeignSetterName["assignA:"]

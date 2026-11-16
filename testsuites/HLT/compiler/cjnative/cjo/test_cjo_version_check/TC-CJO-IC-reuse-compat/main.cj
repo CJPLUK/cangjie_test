@@ -24,7 +24,7 @@
 // ASSERT: scan-not module_version_not_identical
 // (Linux)EXEC: cat .cached/*.log | compare log_reuse.txt
 // (Windows)EXEC: powershell Get-Content .cached/*.log | compare log_reuse.txt
-// EXEC-0: %run %run_opt %output %run_args
+// RUN-EXEC-0: %run %run_opt %output %run_args
 
 import pkg.*
 

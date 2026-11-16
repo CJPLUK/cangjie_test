@@ -21,36 +21,36 @@ public type PFunc = CPointer<Func>
 public type Enum = Int32
 public const a: Enum = 0
 
-@ObjCMirror
-public open class BaseClass {
+@ObjC
+public open foreign class BaseClass {
 }
 
-@ObjCMirror
-public open class C {
+@ObjC
+public open foreign class C {
 }
 
-@ObjCMirror
-public interface BaseProtocol {
+@ObjC
+public foreign interface BaseProtocol {
 }
 
-@ObjCMirror
-public interface P {
+@ObjC
+public foreign interface P {
 }
 
 @C
 public struct CStruct {
 }
 
-@ObjCMirror
-public open class M <: BaseClass & BaseProtocol {
+@ObjC
+public open foreign class M <: BaseClass & BaseProtocol {
     protected var x: Int32
     protected var i: Int1
-    protected var pf: ObjCPointer<ObjCPointer<ObjCFunc<() -> Unit> /*Func*/> /*PFunc*/>
+    protected var pf: CPointer<PFunc>
     protected var e: Enum
     protected var c: ?C
     protected var p: ?P
     protected var id_: ?ObjCId
-    protected var c_struct: ObjCPointer<CStruct>
+    protected var c_struct: CPointer<CStruct>
     public init()
 }
 */

@@ -16,8 +16,8 @@ public type F0 = ObjCFunc<(?M) -> ?M>
 
 public type F1 = ObjCFunc<(M) -> M>
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     protected var p: F
     protected var p0: F0
     protected var p1: F1

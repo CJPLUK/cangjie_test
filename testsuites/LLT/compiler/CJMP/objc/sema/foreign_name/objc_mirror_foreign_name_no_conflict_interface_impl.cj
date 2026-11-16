@@ -9,14 +9,14 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public interface test1 {
+@ObjC
+public foreign interface test1 {
     func f1(): Unit
     static func f2(): Unit
 }
 
-@ObjCMirror
-public open class test2 <: test1 {
+@ObjC
+public open foreign class test2 <: test1 {
     @ForeignName["f1:"] public open func f1(a: Int32): Unit
     @ForeignName["f2:"] public static func f2(a: Int32): Unit
 }

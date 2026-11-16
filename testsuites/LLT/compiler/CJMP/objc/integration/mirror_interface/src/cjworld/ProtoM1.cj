@@ -8,7 +8,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-interface ProtoM1 {
+@ObjC
+foreign interface ProtoM1 {
     func identity(): Unit
 }

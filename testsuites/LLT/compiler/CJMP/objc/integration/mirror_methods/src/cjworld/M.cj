@@ -10,8 +10,8 @@ import objc.lang.*
 
 type PrimitiveType = Float64
 
-@ObjCMirror
-open class M {
+@ObjC
+public open foreign class M {
     @ForeignName["init"]
     public init()
 

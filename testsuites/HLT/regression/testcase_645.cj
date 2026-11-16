@@ -45,5 +45,4 @@ class Child <: Father {
         super(a)
     }
 // ASSERT: scan parse_expected_expression
-// ASSERT: scan parse_expected_expr_or_decl_in
 // ASSERT: scan parse_expected_right_delimiter

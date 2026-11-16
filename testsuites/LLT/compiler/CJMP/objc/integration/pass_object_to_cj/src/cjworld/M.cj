@@ -7,8 +7,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M <: NSObject {
+@ObjC
+public open foreign class M <: NSObject {
     @ForeignName["initWithNumber:"]
     public init(number: NSNumber)
     public open func printNumber(): Unit

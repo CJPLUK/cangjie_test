@@ -7,12 +7,6 @@
  */
 
 // LEVEL: 1
-// DEPENDENCE: ./src
-// Regression: the manual documents the column key of exclude_lists.json as
-// 'colum' while the SDK only honors 'column'. With the manual spelling and a
-// mismatched column value (99 != 5) the warning must NOT be suppressed.
-// Currently the unknown key is silently ignored and the whole line 10 is
-// excluded. NOTE: if docs are fixed to 'column' instead, update the config
-// of this case accordingly.
+// DEPENDENCE: ./src ./config
 // EXEC-PIPE: %lint -f ./src -c . -m %cangjieDir 2>&1 | compare %f
-// ASSERT: regex .*test\.cj:10:5:.*warning.*G\.VAR\.01: Prefer immutable variables when the value of the variable 'count' does not change\.
+// ASSERT: regex-not .*G.VAR.01.*

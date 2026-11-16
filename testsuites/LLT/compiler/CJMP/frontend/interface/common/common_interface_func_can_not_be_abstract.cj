@@ -31,7 +31,7 @@ error: unexpected modifier 'abstract' on function declaration in interface body
   |     unexpected modifier
   | 
 
-error: only common/specific or Native FFI mirror abstract classes can have explicitly abstract function
+error: only common/specific or '@Java' foreign abstract classes can have explicitly abstract function
  ==> c/c.cj:5:5:
   | 
 5 |     abstract func f1(): Unit
@@ -50,7 +50,7 @@ error: unexpected modifier 'abstract' on function declaration in interface body
   |     unexpected modifier
   | 
 
-error: only common/specific or Native FFI mirror abstract classes can have explicitly abstract function
+error: only common/specific or '@Java' foreign abstract classes can have explicitly abstract function
  ==> c/c.cj:6:5:
   | 
 6 |     abstract func f2(): Unit {}
@@ -96,7 +96,7 @@ error: unexpected modifier 'abstract' on function declaration in interface body
   |     unexpected modifier
   | 
 
-error: only common/specific or Native FFI mirror abstract classes can have explicitly abstract function
+error: only common/specific or '@Java' foreign abstract classes can have explicitly abstract function
  ==> c/c.cj:9:5:
   | 
 9 |     abstract static func f5(): Unit
@@ -116,7 +116,7 @@ error: unexpected modifier 'abstract' on function declaration in interface body
    |     unexpected modifier
    | 
 
-error: only common/specific or Native FFI mirror abstract classes can have explicitly abstract function
+error: only common/specific or '@Java' foreign abstract classes can have explicitly abstract function
   ==> c/c.cj:10:5:
    | 
 10 |     abstract static func f6(): Unit {}

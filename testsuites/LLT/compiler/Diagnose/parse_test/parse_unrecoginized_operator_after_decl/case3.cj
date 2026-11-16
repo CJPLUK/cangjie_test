@@ -21,19 +21,5 @@ error: unrecognized operator '||' after declaration
    |        after declaration
    | 
 
-error: expected ';' or '<NL>', found keyword 'Int64'
-  ==> case3.cj:11:23:
-   | 
-11 |     @M func a() {} || Int64
-   |                       ^^^^^ expected ';' or '<NL>' here
-   | 
-
-error: expected expression or declaration, found '}'
-  ==> case3.cj:12:1:
-   | 
-12 | }
-   | ^ expected expression or declaration here
-   | 
-
-3 errors generated, 3 errors printed.
+1 error generated, 1 error printed.
 */

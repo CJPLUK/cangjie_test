@@ -4,7 +4,7 @@
 
 import java.lang.*
 
-@JavaImpl
+@Java
 interface I {
     public abstract func foo(): Unit
 }
@@ -26,4 +26,3 @@ error: unexpected modifier 'abstract' on function declaration in interface body
 // with Runtime Library Exception.
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
-

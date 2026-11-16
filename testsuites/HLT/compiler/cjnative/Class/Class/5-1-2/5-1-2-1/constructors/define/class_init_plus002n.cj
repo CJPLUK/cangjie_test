@@ -24,5 +24,6 @@ func run(): Int64 {
 main(): Int64 {
     return run()
 }
-// ASSERT: scan parse_expected_right_delimiter
 // ASSERT: scan parse_expected_name
+// ASSERT: scan parse_expected_expression
+// ASSERT: scan parse_expected_expr_or_decl_in

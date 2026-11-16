@@ -9,8 +9,8 @@ package cj
 import java.lang.JObject
 import i.Interface
 
-@JavaMirror["com.java.lib.Child"]
-open class Child <: Interface {
+@Java["com.java.lib.Child"]
+open foreign class Child <: Interface {
     public init()
     public func getThisInterface(): Interface
     public func foo(): Unit

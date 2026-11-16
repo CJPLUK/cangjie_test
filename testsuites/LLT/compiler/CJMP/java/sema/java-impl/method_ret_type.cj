@@ -10,7 +10,7 @@
 
 import java.lang.JObject
 
-@JavaImpl
+@Java
 class A <: JObject {
     A() {
         super()

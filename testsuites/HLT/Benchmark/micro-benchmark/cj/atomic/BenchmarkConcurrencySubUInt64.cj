@@ -62,7 +62,7 @@ public class Test_ConcurrencySubUInt64 {
         for (i in 0..reps) {
             let thread: Future<Unit> = spawn {
                 for (j in 0..10000) {
-                    blackBox(test.fetchAdd(-1))
+                    blackBox(test.fetchSub(1))
                 }
                 wg.done()
             }

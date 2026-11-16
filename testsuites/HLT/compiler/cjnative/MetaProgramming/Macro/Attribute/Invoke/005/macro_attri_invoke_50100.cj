@@ -18,4 +18,4 @@ main(){
     Int64[](@M[1,1](0))
     return 0
 }
-// ASSERT: scan parse_expected_expr_or_decl_in
+// ASSERT: scan parse_expected_expression

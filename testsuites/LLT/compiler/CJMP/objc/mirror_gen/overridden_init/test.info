@@ -10,8 +10,8 @@
 // EXEC: ObjCInteropGen test.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-@ObjCMirror
-public open class A {
+@ObjC
+public open foreign class A {
     public open func foo1(): ?A
     public open func foo2(): ?A
     @ForeignName["foo3:"] public open func foo3(x: Int32): ?A
@@ -30,8 +30,8 @@ public open class A {
     @ObjCInit @ForeignName["foo8:"] public static func foo8(x: Int32): A
 }
 
-@ObjCMirror
-public open class M <: A {
+@ObjC
+public open foreign class M <: A {
     public open func foo1(): ?A
     public open func foo2(): ?A
     public open func foo3(x: Int32): ?A

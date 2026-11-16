@@ -14,7 +14,7 @@ public class Value {
     public Value(public var value: Int64) {}
 }
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public let A_instanceVariable0: ObjCBlock<() -> Unit> = ObjCBlock<() -> Unit>({=> println("A.A_instanceVariable0")})
     public static let A_staticVariable0: ObjCBlock<() -> Unit> = ObjCBlock<() -> Unit>(
@@ -33,7 +33,7 @@ public class A <: M {
     }
     // 构造器入参类型为block类型
     @ForeignName["initWithP0:p1:p2:"]
-    public init(p0: ObjCBlock<(ObjCPointer<S>) -> ObjCPointer<S>>, p1!: ObjCBlock<() -> Unit>,
+    public init(p0: ObjCBlock<(CPointer<S>) -> CPointer<S>>, p1!: ObjCBlock<() -> Unit>,
         p2!: ObjCBlock<() -> Unit> = ObjCBlock<() -> Unit>({=> println("init.p2")})) {
         p0.call(this.v0)
         p1.call()

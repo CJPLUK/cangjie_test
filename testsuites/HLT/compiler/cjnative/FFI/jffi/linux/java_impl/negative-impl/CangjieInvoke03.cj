@@ -16,7 +16,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl["CangjieInvoke"]
+@Java["CangjieInvoke"]
 public class CangjieInvoke <: JObject {
     public init() {
         let class_01 = Init01()

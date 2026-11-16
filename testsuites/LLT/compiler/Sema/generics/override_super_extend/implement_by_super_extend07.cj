@@ -40,7 +40,7 @@ main() {
 }
 
 /* SCAN
-error: interface function 'foo' must be implemented in 'extend B'
+error: interface function 'foo(): Unit' must be implemented in 'extend B'
   ==> implement_by_super_extend07.cj:28:1:
    | 
 28 | extend<T2> B<T2> <: I1 {} // error

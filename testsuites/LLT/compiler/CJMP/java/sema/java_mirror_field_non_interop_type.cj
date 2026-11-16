@@ -12,8 +12,8 @@ import java.lang.*
 
 public class Foo {}
 
-@JavaMirror
-class M {
+@Java
+foreign class M {
     init()
     public var x: Foo
 }

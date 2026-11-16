@@ -9,16 +9,16 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public open class P {
+@ObjC
+public open foreign class P {
     @ForeignName["init:"]
     public init(b: Bool)
     @ForeignName["init:WithBool"]
     public static func initWithBool(b: Bool): P
 }
 
-@ObjCMirror
-public class M <: P {
+@ObjC
+public foreign class M <: P {
     public init()
 
     //@ForeignName["init:WithBool"]

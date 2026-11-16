@@ -9,8 +9,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-open class M {
+@ObjC
+public open foreign class M {
     @ForeignGetterName["getA"]
     @ForeignSetterName["assignA:"]
     public mut prop a: Int32

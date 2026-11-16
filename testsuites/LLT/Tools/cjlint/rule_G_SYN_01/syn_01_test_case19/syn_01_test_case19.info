@@ -1,0 +1,10 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+# This source file is part of the Cangjie project, licensed under Apache-2.0
+# with Runtime Library Exception.
+#
+# See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// DEPENDENCE: ../%n ../config
+// EXEC: cd %n && %lint -f ./src  -c ../. -m %lintModuleDir 2>&1 | compare %f
+// ASSERT: regex-1 .*test.cj:8:1:.*G.SYN.01: The syntax 'import package' is disabled in this project.
+// ASSERT: regex-1 .*test.cj:8:1:.*G.SYN.01: The syntax 'conditional compilation' is disabled in this project.

@@ -8,19 +8,22 @@
 
 // LEVEL: 1
 // EXEC: %compiler %cmp_opt %f -o %output
-// (not iOS) RUN-EXEC-PIPE-1: %run %run_opt %output %run_args 2>&1 | compare %f
-// (iOS) RUN-EXEC: %run %run_opt %output %run_args 2>&1 | compare %f
-// (iOS) ASSERT: scan Failed to InitCJLibrary
-// (not iOS) ASSERT: regex init
+// RUN-EXEC-PIPE-1: %run %run_opt %output %run_args 2>&1 | compare %f
+// ASSERT: scan-not exception caught
+// ASSERT: scan MyException
+// (!O2) ASSERT: scan at default::C::lambda.0()
+// ASSERT: scan at default::C::b
 
-class A <: Exception {}
-
-class B <: Exception {}
+class MyException <: Exception {
+    public func toString(): String {
+        "MyException"
+    }
+}
 
 struct C {
     public static var a: (Int64) -> Int64 = {
         x: Int64 => if (x == 1) {
-            throw A();
+            throw MyException();
             1
         } else {
             1
@@ -34,8 +37,7 @@ main() {
         C();
         ()
     } catch (a: Exception) {
-        a.printStackTrace()
-        print("success")
+        print("exception caught")
     }
     return 0
 }

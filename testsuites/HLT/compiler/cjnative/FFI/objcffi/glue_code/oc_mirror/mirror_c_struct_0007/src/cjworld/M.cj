@@ -16,8 +16,8 @@ public struct S {
     public var y: Int32 = 0
 }
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     public var sPtr: ObjCPointer<S>
     public init()
 }

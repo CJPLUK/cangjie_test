@@ -9,4 +9,4 @@
 // LEVEL: 1
 // DEPENDENCE: ./src
 // EXEC-PIPE: %lint -f ./src -c %cangjieDir/tools -m %cangjieDir 2>&1 | compare %f
-// ASSERT: regex-not .*test\.cj.*G\.CON\.01.*
+// ASSERT: regex-1 .*test\.cj.*G\.CON\.01.*

@@ -12,24 +12,24 @@ package cj
 
 import java.lang.*
 
-@JavaMirror["com.java.lib.Cla\\$s"]
-public class Class {
+@Java["com.java.lib.Cla\\$s"]
+public foreign class Class {
     public init()
 }
 
-@JavaMirror["com.java.lib.Cla\\$s$Inner"]
-public class Class_Inner {
+@Java["com.java.lib.Cla\\$s$Inner"]
+public foreign class Class_Inner {
     public init()
 
     public func getInner(): Class_Inner_InnerClass
 }
 
-@JavaMirror["com.java.lib.Cla\\$s$Inner$InnerClas\\$"]
-public class Class_Inner_InnerClass {
+@Java["com.java.lib.Cla\\$s$Inner$InnerClas\\$"]
+public foreign class Class_Inner_InnerClass {
     public init()
 }
 
-@JavaImpl
+@Java
 public class Main <: JObject {
     @ForeignName["main"]
     public static func entry(args: JArray<JString>): Unit {

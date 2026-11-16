@@ -10,11 +10,11 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M2 {
-    public prop a: ObjCFunc<() -> Unit> {get(){M1().fptr}}
+    public prop a: CFunc<() -> Unit> {get(){M1().fptr}}
     public init() {}
     public open func f() {
-        a.call()
+        unsafe { a() }
     }
 }

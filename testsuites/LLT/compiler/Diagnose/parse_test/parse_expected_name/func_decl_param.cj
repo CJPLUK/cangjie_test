@@ -19,5 +19,14 @@ error: expected a argument name after '(' in parameter list, found '@'
    |         after '(' in parameter list
    | 
 
-1 error generated, 1 error printed.
+error: expected a type name after ':' in function declaration, found '{'
+  ==> func_decl_param.cj:10:15:
+   | 
+10 | func foo(@):  {}
+   |            ~  ^ expected a type name here
+   |            |
+   |            after ':' in function declaration
+   | 
+
+2 errors generated, 2 errors printed.
 */

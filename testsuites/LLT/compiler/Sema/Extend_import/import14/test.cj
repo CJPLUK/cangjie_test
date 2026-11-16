@@ -33,10 +33,10 @@ warning: unused import 'pkg.b.ValueType as BValueType'
    | 
    # note: this warning can be suppressed by setting the compiler option `-Woff unused`
 
-error: interface property 'code' must be implemented in 'extend Int64'
+error: interface property 'code: String' must be implemented in 'extend Int64'
   ==> (package pkg.a)pkga.cj:21:1:
 
-error: interface property 'code' must be implemented in 'extend Int64'
+error: interface property 'code: String' must be implemented in 'extend Int64'
   ==> (package pkg.b)pkgb.cj:21:1:
 
 2 errors generated, 2 errors printed.

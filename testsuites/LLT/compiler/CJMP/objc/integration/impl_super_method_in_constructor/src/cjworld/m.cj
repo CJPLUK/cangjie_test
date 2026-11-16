@@ -8,15 +8,15 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class Base {
+@ObjC
+public open foreign class Base {
     public init()
     public open func bar(): Bool
     @ForeignName["foo:"]
     public open func foo(i: Int64): Int64
 }
 
-@ObjCImpl
+@ObjC
 public class A <: Base {
     public init() {
         super()

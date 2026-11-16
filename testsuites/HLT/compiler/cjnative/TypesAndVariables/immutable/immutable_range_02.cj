@@ -31,7 +31,7 @@ class Aoo {
     }
 }
 
-extend Aoo <: Countable<Aoo> & Comparable<Aoo> & Equatable<Aoo> {
+extend Aoo <: Countable<Aoo> & Comparable<Aoo> {
     public func compare(rhs: Aoo): Ordering {
         match {
             case this.a < rhs.a => Ordering.LT
@@ -68,7 +68,7 @@ extend Aoo <: Countable<Aoo> & Comparable<Aoo> & Equatable<Aoo> {
     }
 }
 
-extend Coo <: Countable<Coo> & Comparable<Coo> & Equatable<Coo> {
+extend Coo <: Countable<Coo> & Comparable<Coo> {
     public func compare(rhs: Coo): Ordering {
         match {
             case this.a < rhs.a => Ordering.LT

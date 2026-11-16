@@ -53,7 +53,6 @@ public class MutableStaticPropClass {
 public class AnnotatedStaticPropClass {
     public init() {
     }
-
     @Deprecated
     public static prop version: String {
         get() {

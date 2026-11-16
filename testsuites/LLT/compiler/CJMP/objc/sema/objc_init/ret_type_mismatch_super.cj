@@ -10,13 +10,13 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public open class P {
+@ObjC
+public open foreign class P {
     public init()
 }
 
-@ObjCMirror
-class M <: P {
+@ObjC
+foreign class M <: P {
     public init()
 
     @ObjCInit

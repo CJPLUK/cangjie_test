@@ -24,7 +24,7 @@ func idMyObject(x: MyObject): MyObject { x }
 func idImpl(x: Impl): Impl { x }
 func idJString(x: JString): JString { x }
 
-@JavaImpl
+@Java
 public class Impl <: MyObject {
     public init(value: Int64) {
         // Primitive argument

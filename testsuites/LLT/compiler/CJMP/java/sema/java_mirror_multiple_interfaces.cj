@@ -8,14 +8,14 @@
 
 import java.lang.JObject
 
-@JavaMirror
-public interface I1 {
+@Java
+public foreign interface I1 {
 }
 
-@JavaMirror
-public interface I2 {
+@Java
+public foreign interface I2 {
 }
 
-@JavaMirror
-class JForeignClass <: I1 & I2 {
+@Java
+foreign class JForeignClass <: I1 & I2 {
 }

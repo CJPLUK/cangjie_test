@@ -1,0 +1,15 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ *
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+
+// LEVEL: 2
+// DESC: 注解 outline：非 LTO staticlib 边界（init 拆到各自模块，允许无 helper/无收益），编译+链接+运行反射语义正确
+// DEPENDENCE: main.cj pkg/Anno.cj ../check.py
+// (!target_mac & !target_ios & !target_ios_simulator) EXEC: %compiler %cmp_opt --output-type=staticlib Anno.cj -o libannopkg.a
+// (!target_mac & !target_ios & !target_ios_simulator) EXEC: %compiler %cmp_opt --import-path . main.cj libannopkg.a -o %output
+// (!target_mac & !target_ios & !target_ios_simulator) RUN-EXEC: %run %run_opt %output %run_args
+// (!target_mac & !target_ios & !target_ios_simulator) EXEC: %python check.py --file %output --max-size 5000000

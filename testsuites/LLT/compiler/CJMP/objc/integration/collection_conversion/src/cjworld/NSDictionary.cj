@@ -7,8 +7,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class NSDictionary/*<KeyT, ValT>*/ <: NSObject {
+@ObjC
+public open foreign class NSDictionary/*<KeyT, ValT>*/ <: NSObject {
     public open func count(): NSUInteger
     @ForeignName["enumerateKeysAndObjectsUsingBlock:"] 
     public open func enumerateKeysAndObjectsUsingBlock(aBlock: GSKeysAndObjectsEnumeratorBlock): Unit

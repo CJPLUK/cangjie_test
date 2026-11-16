@@ -25,9 +25,9 @@ public func foo() {
 }
 
 // check threadstate changes
-@When[os=="iOS"]
+@When[os == "iOS" && env == ""]
 var size:Int64=3
-@When[os!="iOS"]
+@When[os != "iOS" || env != ""]
 var size:Int64=2
 main():Unit {
     let _thread = spawn { 

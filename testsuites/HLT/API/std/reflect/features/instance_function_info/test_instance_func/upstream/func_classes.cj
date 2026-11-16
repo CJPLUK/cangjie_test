@@ -90,3 +90,31 @@ OperatorShape()
 }
 
 }
+public struct StructFuncShape  {
+public var value: Int64 = 0i64
+
+public init() {
+}
+public func getValue(): Int64  {
+this.value
+}
+
+public func echo(v: Int64): Unit  {
+}
+
+public func greet(name: String): String  {
+"Hello " + name
+}
+
+}
+public struct StructGenericFuncShape  {
+public init() {
+}
+public func echo(v: Int64): Unit  {
+}
+
+public func identity<T>(x: T): T  {
+x
+}
+
+}

@@ -1,0 +1,37 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+# This source file is part of the Cangjie project, licensed under Apache-2.0
+# with Runtime Library Exception.
+#
+# See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+[package]
+  cjc-version = "1.2.0"
+  name = "pkg_lib_4"
+  organization = ""
+  description = "description with emoji 😀 and 🎯 symbols"
+  version = "1.9.7"
+  target-dir = "artifacts"
+  script-dir = "custom_target"
+  output-type = "static"
+  compile-option = "-Woff=all"
+  override-compile-option = ""
+  link-option = ""
+
+[package.package-configuration."pkg_lib_4"]
+  combine-all-deps = false
+
+[profile.build]
+  lto = "full"
+  incremental = false
+  enable-heuristic-parallelism = true
+
+[profile.customized-option]
+  cfg0 = "-V"
+
+[dependencies]
+  pkg_macro_0 = { path = "../pkg_macro_0" }
+  pkg_lib_3 = { path = "../pkg_lib_3" }
+  pkg_lib_2 = { path = "../pkg_lib_2" }
+  app_1 = { path = "../app_1" }
+  pkg_tf_0 = { path = "../pkg_tf_0" }
+

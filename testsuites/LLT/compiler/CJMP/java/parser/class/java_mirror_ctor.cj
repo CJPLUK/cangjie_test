@@ -7,10 +7,9 @@
 // (CJNATIVE and not Windows) EXEC-PIPE-0: %frontendCompiler %dump-parse %cmp_opt %f -o %output %compile_shared_lib_opt
 
 
-@JavaMirror
-class M {
+@Java
+foreign class M {
     init()
     init(a: Int64)
     init(a: Int64, b: Bool)
 }
-

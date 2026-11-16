@@ -65,7 +65,7 @@ error: undeclared identifier 'b'
    |            ^ 
    | 
 
-error: interface function 'foo' must be implemented in 'C1'
+error: interface function 'foo(a: T): ' must be implemented in 'C1'
   ==> expose4.cj:33:1:
    | 
 33 | class C1 <: C & I<C1> & I2<C1> {}

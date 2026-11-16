@@ -11,4 +11,4 @@
 // (iOSNative) EXEC: %mirror_gen test.toml
 // (iOSNative) EXEC: %compiler %compile_dylib_opt %cmp_ocffi_opt %link_oc --link-options="-install_name @rpath/libobjc.foundation.dylib" src/objc/foundation/*.cj
 // (iOSNative) ERRCHECK: %compiler %compile_dylib_opt %cmp_ocffi_opt %link_oc -L . -lobjc.foundation --link-options="-install_name @rpath/libcjworld.dylib" src/cjworld/*.cj
-// ASSERT: scan @ForeignName could not appear on overridden declaration
+// ASSERT: scan '@ForeignName' cannot be specified on overridden declaration

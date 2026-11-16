@@ -4,25 +4,18 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
 
 import objc.lang.*
 
 class Foo {}
 
-@ObjCMirror
-class M {
+@ObjC
+foreign class M {
    @ForeignName["initWithA:"]
    init(a: Foo)
 }
 
-/* SCAN-IN
-error: param type of Objective-C mirror constructor must be Objective-C compatible
-  ==> objc_mirror_ctor_type_mismatch.cj:16:9:
-   | 
-16 |    init(a: Foo)
-   |         ^^^^^^ 
-   | 
-
-1 error generated, 1 error printed.
-*/
+// ASSERT: scan sema_objc_interop_ctor_param_must_be_objc_compatible
+// ASSERT: scan 'Class-Foo' is not Objective-C compatible type
+// ASSERT: scan "Errors": 1

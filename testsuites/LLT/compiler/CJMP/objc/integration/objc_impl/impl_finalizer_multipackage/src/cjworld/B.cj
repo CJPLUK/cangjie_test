@@ -10,7 +10,7 @@ import objc.lang.*
 import cjbase.*
 import std.runtime.*
 
-@ObjCImpl
+@ObjC
 public class B <: A {
     public init() {
         super()

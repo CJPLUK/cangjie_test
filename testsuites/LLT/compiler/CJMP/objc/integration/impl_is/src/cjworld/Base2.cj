@@ -8,7 +8,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class Base2 <: BaseProto {
+@ObjC
+public open foreign class Base2 <: BaseProto {
     public init()
 }

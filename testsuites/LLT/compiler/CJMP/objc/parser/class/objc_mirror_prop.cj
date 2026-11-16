@@ -8,8 +8,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-class M {
+@ObjC
+foreign class M {
     public prop x: Int64
     public mut prop xm: Int64
     public static prop xs: Int64

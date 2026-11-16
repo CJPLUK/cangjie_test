@@ -11,13 +11,13 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-open class Bar {
+@ObjC
+public open foreign class Bar {
     init()
 }
 
-@ObjCMirror
-class Foo {
+@ObjC
+foreign class Foo {
     public prop a: Bar
 
     public static prop aStatic: Bar

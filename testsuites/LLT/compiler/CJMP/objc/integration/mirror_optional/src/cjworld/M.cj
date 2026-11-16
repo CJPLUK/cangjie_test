@@ -8,8 +8,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public interface I {
+@ObjC
+public foreign interface I {
     @ObjCOptional
     func memberFuncNotImplemented(n: Int32): Unit
     @ObjCOptional
@@ -20,8 +20,8 @@ public interface I {
     static func staticFuncImplemented(): Unit
 }
 
-@ObjCMirror
-open class M <: I {
+@ObjC
+public open foreign class M <: I {
     public init()
     public open func memberFuncImplemented(n: Int32): Unit
     public static func staticFuncNotImplemented(): Unit

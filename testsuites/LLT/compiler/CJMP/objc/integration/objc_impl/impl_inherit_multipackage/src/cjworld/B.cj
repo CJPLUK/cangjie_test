@@ -12,7 +12,7 @@ import cjbase.*
 /// `B$reg` has its super class restored to the imported `A$reg`, the one case where the parent companion is
 /// looked up through the import manager instead of the in-package map. Everything the base moved into its own
 /// companion is named here without a qualifier, which is what reaches it through the imported proxies.
-@ObjCImpl
+@ObjC
 public class B <: A {
     /// Reads the imported base's static state from a field initializer, which runs inside `B$reg`.
     public var stamp: Int64 = trace
@@ -26,7 +26,7 @@ public class B <: A {
         trace = trace * 10 + 2
     }
 
-    /// Overrides an imported `@ObjCImpl` method and reaches the overridden one through the restored parent.
+    /// Overrides an imported `@ObjC` method and reaches the overridden one through the restored parent.
     public func tag(): Int64 {
         super.tag() * 10 + 2
     }

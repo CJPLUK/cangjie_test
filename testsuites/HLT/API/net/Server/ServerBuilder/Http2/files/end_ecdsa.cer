@@ -1,13 +1,56 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            29:97:7a:74:d2:c4:a8:8c:f6:d0:01:dd:2c:34:34:59:15:44:c8:76
+        Signature Algorithm: ecdsa-with-SHA256
+        Issuer: C=CN, ST=GD, L=SZ, O=COM, OU=NSP, CN=CA, emailAddress=youremail@qq.com
+        Validity
+            Not Before: Oct 27 04:56:23 2026 GMT
+            Not After : Oct 24 04:56:23 2036 GMT
+        Subject: C=CN, O=PMS, CN=Platform Cert
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+                Public-Key: (256 bit)
+                pub:
+                    04:49:90:fd:cb:32:2c:63:19:30:3f:37:76:30:7a:
+                    85:66:81:ac:b3:3b:dd:68:4e:00:d3:2b:71:72:05:
+                    64:a4:b6:93:fa:04:fc:60:55:8c:8e:f7:05:b8:20:
+                    0b:49:f5:6b:53:74:b2:35:dc:4c:99:02:dc:00:a1:
+                    17:5c:70:19:8a
+                ASN1 OID: prime256v1
+                NIST CURVE: P-256
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Key Usage: 
+                Digital Signature, Key Encipherment
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication, TLS Web Client Authentication
+            X509v3 Subject Alternative Name: 
+                DNS:oss.PMS.com, IP Address:127.0.0.1
+            X509v3 Subject Key Identifier: 
+                F1:59:11:BF:D3:35:6B:71:97:53:41:0A:E7:06:56:D7:30:F5:34:50
+            X509v3 Authority Key Identifier: 
+                3F:E1:F0:56:90:22:1C:D2:4C:60:81:A7:AE:E3:C4:8E:98:06:B9:0F
+    Signature Algorithm: ecdsa-with-SHA256
+    Signature Value:
+        30:44:02:20:74:24:55:fb:87:f4:d3:36:df:ce:68:c0:0b:66:
+        c2:9e:6d:36:76:38:61:9a:d1:2c:d8:f6:e8:bb:09:3e:16:62:
+        02:20:1a:1c:85:48:dd:1e:e0:67:04:2e:70:59:1d:2c:85:05:
+        dc:0d:c6:6d:ee:e4:ee:e1:9e:69:74:e4:16:0e:f1:ee
 -----BEGIN CERTIFICATE-----
-MIICATCCAaigAwIBAgIUHDXVZkj2Htu3Hz53zkqmje5FmUMwCgYIKoZIzj0EAwIw
+MIICPjCCAeWgAwIBAgIUKZd6dNLEqIz20AHdLDQ0WRVEyHYwCgYIKoZIzj0EAwIw
 cTELMAkGA1UEBhMCQ04xCzAJBgNVBAgMAkdEMQswCQYDVQQHDAJTWjEMMAoGA1UE
 CgwDQ09NMQwwCgYDVQQLDANOU1AxCzAJBgNVBAMMAkNBMR8wHQYJKoZIhvcNAQkB
-FhB5b3VyZW1haWxAcXEuY29tMB4XDTIzMDIyNDA4NTcyOFoXDTMzMDIyMTA4NTcy
-OFowdTELMAkGA1UEBhMCQ04xCzAJBgNVBAgMAkdEMQswCQYDVQQHDAJTWjEMMAoG
-A1UECgwDQ09NMQwwCgYDVQQLDANOU1AxDzANBgNVBAMMBkNMSUVOVDEfMB0GCSqG
-SIb3DQEJARYQeW91cmVtYWlsQHFxLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEH
-A0IABEmQ/csyLGMZMD83djB6hWaBrLM73WhOANMrcXIFZKS2k/oE/GBVjI73Bbgg
-C0n1a1N0sjXcTJkC3AChF1xwGYqjGjAYMBYGA1UdEQQPMA2CC29zcy5QTVMuY29t
-MAoGCCqGSM49BAMCA0cAMEQCIAioP1f6rNBweW0kkS14mP62DFm7GBwNVnQ/IpLq
-38MTAiAHZ39G1sk6h/QTnYhVw0gjtmzyClihXPl46OzMsiJEQA==
+FhB5b3VyZW1haWxAcXEuY29tMB4XDTI2MTAyNzA0NTYyM1oXDTM2MTAyNDA0NTYy
+M1owMzELMAkGA1UEBhMCQ04xDDAKBgNVBAoMA1BNUzEWMBQGA1UEAwwNUGxhdGZv
+cm0gQ2VydDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABEmQ/csyLGMZMD83djB6
+hWaBrLM73WhOANMrcXIFZKS2k/oE/GBVjI73BbggC0n1a1N0sjXcTJkC3AChF1xw
+GYqjgZgwgZUwCQYDVR0TBAIwADALBgNVHQ8EBAMCBaAwHQYDVR0lBBYwFAYIKwYB
+BQUHAwEGCCsGAQUFBwMCMBwGA1UdEQQVMBOCC29zcy5QTVMuY29thwR/AAABMB0G
+A1UdDgQWBBTxWRG/0zVrcZdTQQrnBlbXMPU0UDAfBgNVHSMEGDAWgBQ/4fBWkCIc
+0kxggaeu48SOmAa5DzAKBggqhkjOPQQDAgNHADBEAiB0JFX7h/TTNt/OaMALZsKe
+bTZ2OGGa0SzY9ui7CT4WYgIgGhyFSN0e4GcELnBZHSyFBdwNxm3u5O7hnml05BYO
+8e4=
 -----END CERTIFICATE-----

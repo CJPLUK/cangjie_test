@@ -47,7 +47,6 @@ public class MultiStaticClass {
 public class AnnotatedStaticClass {
     public init() {
     }
-
     @Deprecated
     public static func deprecatedStatic(): Unit {
     }

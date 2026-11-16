@@ -8,13 +8,13 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M {   
+@ObjC
+public open foreign class M {   
     public init()
     public var fptr: ObjCFunc<() -> ObjCPointer<Int64>>
 }
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public init() {}
     public open func f1(): ObjCFunc<() -> ObjCPointer<Int64>> {

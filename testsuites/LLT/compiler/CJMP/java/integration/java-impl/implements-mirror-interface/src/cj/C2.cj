@@ -8,7 +8,7 @@ package cj
 
 import java.lang.JObject
 
-@JavaImpl["com.java.lib.C2"]
+@Java["com.java.lib.C2"]
 public class C2 <: I2 & I3 {
     public init() {
         println("in CangjieInvoke Init")

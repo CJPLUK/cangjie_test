@@ -20,7 +20,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     public init() {
         let javaclass = JavaClass(JArray<Int32>(0))

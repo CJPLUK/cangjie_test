@@ -8,11 +8,11 @@
 
 // LEVEL:2
 // DEPENDENCE: pkg cfg.json cfg-main.json c_ffi.c
-// (not Windows) EXEC: %clang %clang_opt c_ffi.c -o libc_ffi.%test_suffix
-// (not Windows) EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg.json
-// (not Windows) EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg-main.json
-// (not Windows) EXEC: %compiler %cmp_opt %pkg_compile pkg/pkg.cj -o libpkg.%test_suffix
-// (not Windows) ERRCHECK: %compiler %cmp_opt %f %pkg_link -o %output
+// EXEC: %clang %clang_opt c_ffi.c -o libc_ffi.%test_suffix
+// EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg.json
+// EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg-main.json
+// EXEC: %compiler %cmp_opt %pkg_compile pkg/pkg.cj -o libpkg.%test_suffix
+// ERRCHECK: %compiler %cmp_opt %f %pkg_link -o %output
 
 import pkg
 
@@ -23,4 +23,4 @@ unsafe main(): Int64 {
     }
     return 0
 }
-// (not Windows) ASSERT: scan sema_undeclared_identifier
+// ASSERT: scan sema_undeclared_identifier

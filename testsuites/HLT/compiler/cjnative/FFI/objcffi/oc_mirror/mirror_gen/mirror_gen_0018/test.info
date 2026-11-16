@@ -16,12 +16,12 @@ package cjworld
 import objc.foundation.NSObject
 import objc.lang.*
 
-@ObjCMirror
-public open class R <: NSObject {
+@ObjC
+public open foreign class R <: NSObject {
 }
 
-@ObjCMirror
-public open class test <: NSObject {
+@ObjC
+public open foreign class test <: NSObject {
     public static prop p1: ?R
 }
 */

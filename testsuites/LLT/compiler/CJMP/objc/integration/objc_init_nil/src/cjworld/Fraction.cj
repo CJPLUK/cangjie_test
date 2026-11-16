@@ -8,8 +8,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror["FractionForeignName"]
-open class Fraction {
+@ObjC["FractionForeignName"]
+open foreign class Fraction {
 	var num: Int64
 	var denom: Int64
 	@ForeignName["initWithNum:andDenom:"]

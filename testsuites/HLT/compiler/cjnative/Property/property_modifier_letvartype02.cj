@@ -53,5 +53,7 @@ main(): Int64 {
     C()
     return 0
 }
+// ASSERT: scan sema_inherit_member_type_inconsistent
+// ASSERT: scan sema_missing_overridden_func
 // ASSERT: scan sema_property_have_same_declaration_in_inherit_immut
-// ASSERT: scan sema_property_override_implement_type_diff
+// ASSERT: scan sema_prop_redefinition

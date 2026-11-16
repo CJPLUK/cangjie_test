@@ -14,7 +14,7 @@ public struct Point2D {
     }
 }
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public var cjField: Point2D
 
@@ -46,4 +46,3 @@ public class A <: M {
 // with Runtime Library Exception.
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
-

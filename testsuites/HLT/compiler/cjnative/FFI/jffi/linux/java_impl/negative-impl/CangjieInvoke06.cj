@@ -22,7 +22,7 @@ public interface I1 {
     public func foo(): Unit
 }
 
-@JavaImpl["CangjieInvoke"]
+@Java["CangjieInvoke"]
 public class CangjieInvoke <: JObject & I1 {
     public static let a1: ?Init01 = None
 

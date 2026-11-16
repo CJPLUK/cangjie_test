@@ -20,4 +20,4 @@ Req#
 {"jsonrpc": "2.0", "method": "exit", "params": {}}
 
 Rev#
-{"id":31,"jsonrpc":"2.0","result":[{"deprecated":false,"detail":"public interface Any","documentation":"","filterText":"Any","insertText":"Any","insertTextFormat":1,"kind":8,"label":"Any","sortText":""}]}
+{"id":31,"jsonrpc":"2.0","result":[{"deprecated":false,"detail":"public interface Any","documentation":"","filterText":"Any","insertText":"Any","insertTextFormat":1,"kind":8,"label":"Any","sortText":""},{"deprecated":false,"detail":"public class LocalRegionOutOfMemoryError <: Error","documentation":"","filterText":"LocalRegionOutOfMemoryError","insertText":"LocalRegionOutOfMemoryError","insertTextFormat":1,"kind":7,"label":"LocalRegionOutOfMemoryError","sortText":"646667"}]}

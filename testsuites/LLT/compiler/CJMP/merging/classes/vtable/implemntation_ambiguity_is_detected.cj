@@ -28,7 +28,7 @@ public specific interface I3 {
 } 
 
 /* SCAN
-error: interface function 'foo6' must be implemented in 'A'
+error: interface function 'foo6(): Unit' must be implemented in 'A'
   ==> (package cmp)c.cj:19:1:
 
 1 error generated, 1 error printed.

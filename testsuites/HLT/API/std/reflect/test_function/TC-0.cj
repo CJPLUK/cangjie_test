@@ -24,12 +24,13 @@
  * - @Priority: P0
  */
 
+// LEVEL: 0
 // Description:
-// DEPENDENCE: utils upstream
-// EXEC: %compiler %cmp_opt %compile_lib_opt -p utils
-// EXEC: %compiler %cmp_opt %compile_lib_opt -p upstream
-// EXEC: %compiler %cmp_opt %f -L . -lutils -lupstream -o %output %cmp_utest_opt
-// RUN-EXEC: %run %run_opt %output %run_utest_opt %run_args
+// DEPENDENCE: ../utils upstream
+// (!target_ohos) EXEC: %compiler %cmp_opt %compile_lib_opt -p utils
+// (!target_ohos) EXEC: %compiler %cmp_opt %compile_lib_opt -p upstream
+// (!target_ohos) EXEC: %compiler %cmp_opt %f -L . -lutils -lupstream -o %output %cmp_utest_opt
+// (!target_ohos) RUN-EXEC: %run %run_opt %output %run_utest_opt %run_args
 
 import std.unittest.*
 import std.unittest.common.*
@@ -45,23 +46,23 @@ class TestFunction {
         @Expect(FunctionTypeInfo.of({ =>()
         }).parameters.size, 0i64)
         @Expect(FunctionTypeInfo.of({ =>()
-    }).returnType.name, "Unit")
+        }).returnType.name, "Unit")
         @Expect[annotations](FunctionTypeInfo.of({ =>()
-}).annotations, [])
+        }).annotations, [])
         @Expect(FunctionTypeInfo.of({ =>()
-}).modifiers.toArray().size >= 0i64)
+        }).modifiers.toArray().size >= 0i64)
         @Expect(FunctionTypeInfo.of({ =>()
-}).superInterfaces.toArray().size >= 0i64)
+        }).superInterfaces.toArray().size >= 0i64)
         @Expect(FunctionTypeInfo.of({ =>()
-}).hashCode() == FunctionTypeInfo.of({ =>()
-}).hashCode())
+        }).hashCode() == FunctionTypeInfo.of({ =>()
+        }).hashCode())
         @Expect(FunctionTypeInfo.of({ =>()
-}).toString() != "")
+        }).toString() != "")
         @Expect[anyValue](FunctionTypeInfo.of({ =>()
-}).apply({ =>()
-}, []), FunctionTypeInfo.of({ =>()
-}).apply({ =>()
-}, []))
+        }).apply({ =>()
+        }, []), FunctionTypeInfo.of({ =>()
+        }).apply({ =>()
+        }, []))
         @ExpectThrows[IllegalTypeException](FunctionTypeInfo.of(0i64))
     }
 }

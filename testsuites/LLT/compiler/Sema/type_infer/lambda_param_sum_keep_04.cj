@@ -28,6 +28,9 @@ main() {
     return 0
 }
 
+// With the current map overloads, inference selects TreeMap<String, Int64>.
+// Passing a HashMap then reports a type mismatch at the call site.
+
 /* SCAN
 error: mismatched types
   ==> lambda_param_sum_keep_04.cj:22:7:

@@ -9,7 +9,7 @@ package cjworld
 import objc.lang.*
 
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     private var someValue: Int64 = 0
 

@@ -18,13 +18,13 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     @ForeignName["initWithM:"]
     init(m: M)
 }
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     @ForeignName["initWithM:"]
     private init(m: M) {

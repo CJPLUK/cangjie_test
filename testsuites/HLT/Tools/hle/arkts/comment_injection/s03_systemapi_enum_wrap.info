@@ -1,0 +1,14 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: s03_systemapi_enum_wrap.d.ts
+// EXEC: %hle_arkts -i s03_systemapi_enum_wrap.d.ts -o . --module-name="my_module"
+// EXEC-PIPE: %cat cj/s03_systemapi_enum_wrap/src/s03_systemapi_enum_wrap.cj | compare %f
+// ASSERT: scan // this is systemapi
+// ASSERT: scan * S3: systemapi enum description
+// ASSERT: scan /\* enum S3SystemapiEnum {
+// ASSERT: scan public enum S3SystemapiEnum <: ToString & Equatable < S3SystemapiEnum > {

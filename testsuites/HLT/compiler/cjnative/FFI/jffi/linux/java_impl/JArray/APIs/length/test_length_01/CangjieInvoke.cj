@@ -23,7 +23,7 @@ package UNNAMED
 import java.lang.*
 
 // cj can not create [][]
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     public init() {
         let javaclass = JavaClass()

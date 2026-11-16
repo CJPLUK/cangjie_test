@@ -7,8 +7,8 @@
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>& 1 | compare %f
 
 @JavaHasDefault
-@JavaMirror
-class C {
+@Java
+foreign class C {
 }
 
 /* SCAN-IN
@@ -17,8 +17,8 @@ error: unexpected annotation '@JavaHasDefault' on class
    | 
 9  | @JavaHasDefault
    | ^^^^^^^^^^^^^^^ unexpected annotation here
-10 | @JavaMirror
-11 | class C {
-   | ~~~~~ on class
+10 | @Java
+11 | foreign class C {
+   |         ~~~~~ on class
    | 
 */

@@ -8,8 +8,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-open class NSLock {
+@ObjC
+public open foreign class NSLock {
     public func tryLock(): Bool
     public func unlock(): Unit
 }

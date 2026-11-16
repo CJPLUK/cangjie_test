@@ -16,12 +16,12 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     init()
 }
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     protected mut prop p: A {
         get() {

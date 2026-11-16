@@ -10,8 +10,8 @@ package cjworld
  
 import objc.lang.*
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     public var a1: Int64
     public var a2: ObjCPointer<Int64>
     public init()

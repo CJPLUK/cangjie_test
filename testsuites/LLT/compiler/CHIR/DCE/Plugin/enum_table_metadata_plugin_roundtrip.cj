@@ -7,7 +7,8 @@
 // Verify a plugin round trip preserves enum table traversal metadata.
 // (Linux) EXEC-PIPE-0: export LD_LIBRARY_PATH=$CANGJIE_HOME/tools/lib:$LD_LIBRARY_PATH && %compiler %import-cangjie-stdx %cmp_opt %diag_json -O2 %f -o %output %collect_aspects_plugin 2>&1 | compare %f
 
-// ASSERT: scan-4 "DiagKind": "chir_unreachable_pattern"
+// Payload constants are not propagated yet; only the three Right alternatives are diagnosed.
+// ASSERT: scan-3 "DiagKind": "chir_unreachable_pattern"
 
 enum TableState {
     | Left(Int64, Bool)

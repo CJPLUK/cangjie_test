@@ -38,5 +38,6 @@ interface II<T> {
 main() {
     return A<Int64>.pa - 1
 }
-// ASSERT: scan sema_property_override_implement_type_diff
-// ASSERT: scan sema_weak_visibility
+// ASSERT: scan sema_interface_is_not_extendable
+// ASSERT: scan sema_prop_redefinition
+// ASSERT: scan sema_static_variable_use_generic_parameter

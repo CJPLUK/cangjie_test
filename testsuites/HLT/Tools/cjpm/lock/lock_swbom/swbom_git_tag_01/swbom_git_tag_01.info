@@ -1,0 +1,18 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: ../%n
+// EXEC: cd %n/gt_pro1 && git init && git add . && git -c user.name='name' -c user.email='' commit -am "foo" && git tag v1.0.0
+// (MAC)EXEC: cd %n && %git_dir_prefix%n && %git_dir_suffix %cjpm build %cjpm_opt
+// (not MAC)EXEC: cd %n && %git_dir_prefix%n%git_dir_suffix %cjpm build %cjpm_opt
+// EXEC: cd %n && %cat cjpm.lock 2>&1 | compare %f
+// ASSERT: regex version = 1
+// ASSERT: regex \[requires\."gt_pro1"\]
+// ASSERT: regex source = "git\+gt_pro1\?tag=v1\.0\.0#[0-9a-f]{40}"
+// ASSERT: regex version = "1.0.0"
+// ASSERT: regex dependencies = \[\]
+// ASSERT: scan-not checksum

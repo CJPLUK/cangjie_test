@@ -8,8 +8,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-open class M <: I {
+@ObjC
+public open foreign class M <: I {
     public init()
     // Implemented @protocol methods are ommitted in mirror as they aren't present in @interface
 }

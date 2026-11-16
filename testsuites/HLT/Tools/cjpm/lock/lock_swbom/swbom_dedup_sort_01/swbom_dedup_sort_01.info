@@ -1,0 +1,25 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 1
+// DEPENDENCE: ../%n
+// EXEC: cd %n/d_zeta && git init && git add . && git -c user.name='name' -c user.email='' commit -am "foo"
+// EXEC: cd %n/d_alpha && git init && git add . && git -c user.name='name' -c user.email='' commit -am "foo"
+// EXEC: cd %n/d_core && git init && git add . && git -c user.name='name' -c user.email='' commit -am "foo"
+// EXEC: cd %n/d_demo && git init && git add . && git -c user.name='name' -c user.email='' commit -am "foo"
+// EXEC: cd %n/d_adapter && git init && git add . && git -c user.name='name' -c user.email='' commit -am "foo"
+// (MAC)EXEC: cd %n && %git_dir_prefix%n && %git_dir_suffix %cjpm build %cjpm_opt
+// (not MAC)EXEC: cd %n && %git_dir_prefix%n%git_dir_suffix %cjpm build %cjpm_opt
+// EXEC: cd %n && %cat cjpm.lock 2>&1 | compare %f
+// ASSERT: regex version = 1
+// ASSERT: regex \[requires\."d_adapter"\]
+// ASSERT: regex version = "1.0.0"
+// ASSERT: regex source = "git\+
+// ASSERT: regex #[0-9a-f]{40}"
+// ASSERT: scan-not checksum
+// ASSERT: regex dependencies = \["d_alpha", "d_core", "d_zeta"\]
+// ASSERT: scan-not d_demo
+// ASSERT: scan-not \[requires\."d_alpha"\]

@@ -8,7 +8,7 @@
 
 import java.lang.JObject
 
-@JavaMirror
-class N <: JObject {
+@Java
+foreign class N <: JObject {
     init()
 }

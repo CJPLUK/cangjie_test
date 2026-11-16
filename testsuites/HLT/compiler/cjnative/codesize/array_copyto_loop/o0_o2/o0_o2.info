@@ -1,0 +1,17 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ *
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+
+// LEVEL: 1
+// DESC: Array.copyTo 非常量长度 O0 与 O2 编译运行结果一致
+// DEPENDENCE: main.cj ../check.py
+// EXEC: %compiler %cmp_opt main.cj -o %output
+// RUN-EXEC: %run %run_opt %output %run_args
+// EXEC: %compiler %cmp_opt -O2 main.cj -o o0_o2_O2.out
+// RUN-EXEC-0: %run %run_opt o0_o2_O2.out %run_args
+// EXEC: %python check.py --file %output --max-size 5000000
+// EXEC: %python check.py --file o0_o2_O2.out --max-size 5000000

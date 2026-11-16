@@ -8,11 +8,11 @@
 
 // LEVEL:2
 // DEPENDENCE: pkg cfg.json cfg-main.json c_ffi.c
-// (not Windows) EXEC: %clang %clang_opt %n.c -o lib%n.%test_suffix
-// (not Windows) EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg.json
-// (not Windows) EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg-main.json
-// (not Windows) EXEC: %compiler %cmp_opt %pkg_compile pkg/pkg.cj -o pkg/
-// (not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f %pkg_link -o %output 2>&1 | compare %f
+// EXEC: %clang %clang_opt %n.c -o lib%n.%test_suffix
+// EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg.json
+// EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg-main.json
+// EXEC: %compiler %cmp_opt %pkg_compile pkg/pkg.cj -o pkg/
+// EXEC-PIPE-1: %compiler %cmp_opt %f %pkg_link -o %output 2>&1 | compare %f
 
 import pkg.*
 
@@ -34,4 +34,4 @@ unsafe main(): Int64 {
     print("CPointer Type Bool\n")
     return 0
 }
-// (not Windows) ASSERT: scan sema_undeclared_identifier
+// ASSERT: scan sema_undeclared_identifier

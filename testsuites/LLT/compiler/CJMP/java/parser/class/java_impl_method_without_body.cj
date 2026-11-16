@@ -18,7 +18,7 @@ error: function 'f' can not be abstract
 
 */
 
-@JavaImpl
+@Java
 public class C {
     init() {}
     func f(): Unit

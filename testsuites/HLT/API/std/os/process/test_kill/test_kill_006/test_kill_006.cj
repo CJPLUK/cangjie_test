@@ -8,11 +8,11 @@
 
 // LEVEL: 2
 // DEPENDENCE: ../util/run.sh ../util/test.c ../util/cstr2int.c
-// (not MAC and not Windows) EXEC: %clang %clang_opt cstr2int.c -o %cffi_output
-// (not MAC and not Windows) EXEC: %compiler %cmp_opt %ffic_opt -o %output
-// (not MAC and not Windows) RUN-EXEC-PIPE: %target_shell run.sh "%run %run_opt %output %run_args" | compare %f
-// (not MAC and not Windows) ASSERT: scan pass1
-// (not MAC and not Windows) ASSERT: scan pass2
+// (!target_mac & !target_win) EXEC: %clang %clang_opt cstr2int.c -o %cffi_output
+// (!target_mac & !target_win) EXEC: %compiler %cmp_opt %ffic_opt -o %output
+// (!target_mac & !target_win) RUN-EXEC-PIPE: %target_shell run.sh "%run %run_opt %output %run_args" | compare %f
+// (!target_mac & !target_win) ASSERT: scan pass1
+// (!target_mac & !target_win) ASSERT: scan pass2
 
 import std.posix.*
 

@@ -8,14 +8,14 @@
 
 import java.lang.*
 
-@JavaMirror["A"]
-public open class A {
+@Java["A"]
+public open foreign class A {
     public open func foo(): Unit
     @ForeignName["foo"] public open func foo(x: Int32): Unit
 }
 
-@JavaMirror["M"]
-public open class M <: A {
+@Java["M"]
+public open foreign class M <: A {
     public open func foo(): Unit
     public open func foo(x: Int32): Unit
 }

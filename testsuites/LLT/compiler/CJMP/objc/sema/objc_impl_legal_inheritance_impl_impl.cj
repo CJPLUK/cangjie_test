@@ -10,17 +10,17 @@
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class K <: N {
     init() {}
 }
 
-@ObjCImpl
+@ObjC
 public open class N <: M {
     init() {}
 }
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     init()
 }

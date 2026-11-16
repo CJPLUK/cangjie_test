@@ -3,136 +3,22 @@
 # with Runtime Library Exception.
 #
 # See https://cangjie-lang.cn/pages/LICENSE for license information.
-
-# testcase is not correct.
-Tools/cjlsp/testcases/autotestcase/deprecated/textDocument_completion_018.info
-
-Tools/cjpm/stdx/r/01/01.info
+# https://gitcode.com/Cangjie/cangjie_test/issues/523
 Tools/cjprof
+
+# https://gitcode.com/Cangjie/cangjie_test/issues/524
 Tools/cjpm/stdx/r/04/04.info
+Tools/cjpm/stdx/r/01/01.info
 Tools/cjpm/stdx/r/03/03.info
 
-# old jffi can only be run with cjvm.
-compiler/cjnative/FFI/jffi
-
-# issue 198: syntax rewriter not support
-API/syntax/visit/ASTRewriter/test_rewriter_02.cj
-API/syntax/parseFunc/parseDir/path/parsedir_path_012n.cj
-
-# MacOS does not support reflect yet, these test cases for compatibility require reflect so disabled for now.
-compiler/cjnative/stable_abi/package_name
-compiler/cjnative/stable_abi/add_instance_member_variable
-compiler/cjnative/stable_abi/add_virtual_function
-
-# https://gitcode.com/Cangjie/cangjie_test/issues/211
-compiler/cjnative/Packages/cjmp/cjmp_03018/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_03019/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_03020/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_03021/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_03022/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_03023/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_03024/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_04029/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_04038/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_04073/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_04076/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_04077/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_04082/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_04083/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_11037/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_11039/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_13007/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_16007/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_16009/test.cj
-
 # https://gitcode.com/Cangjie/cangjie_test/issues/315
-compiler/cjnative/Chir/CompileOption/plugin/testpath/test_plugin_path_05n.cj
 compiler/cjnative/Chir/CompileOption/plugin/runplugin/plugin5/runplugin.cj
 
-# cjmp
-
-# "Objective-C calls Cangjie" interop (cjmapping) is disabled
-compiler/cjnative/FFI/objcffi/glue_code/cj_impl
-
-# https://gitcode.com/Cangjie/cangjie_compiler/issues/566
-compiler/cjnative/FFI/objcffi/glue_code/cj_impl/impl_class_0102/test.info
-compiler/cjnative/FFI/objcffi/glue_code/cj_impl/impl_class_0103/test.info
-compiler/cjnative/FFI/objcffi/glue_code/cj_impl/impl_class_0104/test.info
-
-API/net/TLS_new/KeylessTlsServerConfig/test_KeylessTlsServerConfig.cj
-
-# testcase is not correct.
-Tools/cjlsp/testcases/autotestcase/deprecated/textDocument_completion_018.info
-Tools/cjprof
-# issue 198: syntax rewriter not support
-API/syntax/visit/ASTRewriter/test_rewriter_02.cj
-
-
-# fail in ci env
-API/std/socket/UdpSocket/test_udp_transportation_init.cj
-# limit described in the doc
-compiler/cjnative/FFI/objcffi/glue_code/oc_mirror/mirror_pointer_0014/
-compiler/cjnative/FFI/objcffi/glue_code/oc_impl/impl_prop_0003/
-# mirrorgen error Option<M> -> M
-compiler/cjnative/FFI/objcffi/glue_code/oc_mirror/mirror_func_pointer_0007
-compiler/cjnative/FFI/objcffi/glue_code/oc_mirror/mirror_func_pointer_0008
-compiler/cjnative/FFI/objcffi/glue_code/oc_mirror/mirror_func_pointer_0014
-compiler/cjnative/FFI/objcffi/glue_code/oc_mirror/mirror_func_pointer_0015
-compiler/cjnative/FFI/objcffi/glue_code/oc_impl/impl_func_pointer_0007
-compiler/cjnative/FFI/objcffi/glue_code/oc_impl/impl_func_pointer_0008
-compiler/cjnative/FFI/objcffi/glue_code/oc_impl/impl_func_pointer_0014
-compiler/cjnative/FFI/objcffi/glue_code/oc_impl/impl_func_pointer_0015
-
-
-
-# cj generic
-compiler/cjnative/FFI/objcffi/glue_code/cj_impl/impl_generic_0019
-
-# "Objective-C calls Cangjie" interop (cjmapping) is disabled
-compiler/cjnative/FFI/objcffi/glue_code/cj_impl
-
-API/std/io/file/File_create_03.cj
-API/std/io/StringReader/StringReader_readln_13_01.cj
-
-# MacOS does not support reflect yet, these test cases for compatibility require reflect so disabled for now.
-compiler/cjnative/stable_abi/package_name
-compiler/cjnative/stable_abi/add_instance_member_variable
-compiler/cjnative/stable_abi/add_virtual_function
-
-# https://gitcode.com/Cangjie/cangjie_compiler/issues/442
-compiler/cjnative/Packages/org_name/import_decl/backtick_in_org_name_0.cj
-compiler/cjnative/Packages/org_name/import_decl/backtick_in_org_name_1.cj
-
-# https://gitcode.com/Cangjie/cangjie_compiler/issues/443
-compiler/cjnative/Packages/org_name/import_decl/invalid_colon_0.cj
-compiler/cjnative/Packages/org_name/package_decl/invalid_colon_0.cj
-compiler/cjnative/Packages/org_name/package_decl/invalid_colon_1.cj
-compiler/cjnative/Packages/org_name/package_decl/no_package_name_0.cj
-compiler/cjnative/Packages/org_name/package_decl/no_package_name_1.cj
-compiler/cjnative/Packages/org_name/package_decl/no_package_name_2.cj
-
-# https://gitcode.com/Cangjie/cangjie_test/issues/315
-compiler/cjnative/Chir/CompileOption/plugin/testpath/test_plugin_path_05n.cj
-compiler/cjnative/Chir/CompileOption/plugin/runplugin/plugin5/runplugin.cj
-
-# cjmp
-# https://gitcode.com/Cangjie/cangjie_compiler/issues/566
-compiler/cjnative/FFI/objcffi/glue_code/cj_impl/impl_class_0102/test.info
-compiler/cjnative/FFI/objcffi/glue_code/cj_impl/impl_class_0103/test.info
-compiler/cjnative/FFI/objcffi/glue_code/cj_impl/impl_class_0104/test.info
-
-# cjmp
-# these three are not ready for iOS, exclude them here as there is no dedicated iOS exclude list
-compiler/cjnative/FFI/objcffi/glue_code/cj_impl/impl_class_0114/test.info
-compiler/cjnative/FFI/objcffi/glue_code/cj_impl/impl_class_0115/test.info
-compiler/cjnative/FFI/objcffi/glue_code/cj_impl/impl_enum_0031/test.info
-
-API/syntax/parseFunc/parseDir/path/parsedir_path_012n.cj
-
-API/net/TLS_new/KeylessTlsServerConfig/test_KeylessTlsServerConfig.cj
-
-# Android ARM32 does not support reflection.
+# https://gitcode.com/Cangjie/cangjie_test/issues/522
 API/std/reflect
+compiler/cjnative/stable_abi/package_name
+compiler/cjnative/stable_abi/add_instance_member_variable
+compiler/cjnative/stable_abi/add_virtual_function
 
 # Limitation of run_cross_compilation.py
 API/std/fs/os_chmod_n_01.cj
@@ -148,3 +34,5 @@ API/std/fs/links/test_hardlink_create_01.cj
 API/std/fs/links/test_hardlink_create_02.cj
 API/std/fs/globalfunc/test_removeIfExists_02.cj
 
+# https://gitcode.com/Cangjie/cangjie_test/issues/526
+Runtime/cjnative/runtime/GC/cjEnableGC

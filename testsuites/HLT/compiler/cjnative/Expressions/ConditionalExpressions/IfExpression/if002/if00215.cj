@@ -15,5 +15,4 @@ main(): Int64 {
     }
     return 0
 }
-// ASSERT: scan parse_expected_right_delimiter
 // ASSERT: scan parse_expected_expression

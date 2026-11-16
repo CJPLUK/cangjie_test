@@ -6,4 +6,4 @@
 
 // DEPENDENCE: ../%n
 // EXEC: cd %n && %lint -f ./src  -c %lintConfigDir -m %lintModuleDir 2>&1 | compare %f
-// ASSERT: regex .*common/common.cj:10:24:.*G.FUN.03: Avoid overloaded functions 'foo' appearing in different scopes.
+// ASSERT: regex-2 .*common.cj:.*error.*: G.FUN.02: Parameter

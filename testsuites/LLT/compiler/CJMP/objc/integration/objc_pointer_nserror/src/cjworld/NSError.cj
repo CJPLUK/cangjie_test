@@ -9,8 +9,8 @@ import objc.lang.*
 
 public type NSErrorDomain = NSString
 
-@ObjCMirror
-public open class NSError <: NSObject {
+@ObjC
+public open foreign class NSError <: NSObject {
     public open func code(): NSInteger
     public open func domain(): NSErrorDomain
 }

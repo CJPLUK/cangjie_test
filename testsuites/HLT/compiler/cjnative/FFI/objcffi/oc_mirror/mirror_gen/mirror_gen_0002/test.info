@@ -16,8 +16,8 @@ package cjworld
 import objc.foundation.NSObject
 import objc.lang.*
 
-@ObjCMirror
-public open class test <: NSObject {
+@ObjC
+public open foreign class test <: NSObject {
     public open func f1(): Unit
     public static func f2(): Unit
 }

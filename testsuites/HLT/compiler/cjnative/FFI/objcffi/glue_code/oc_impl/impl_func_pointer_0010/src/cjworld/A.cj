@@ -10,13 +10,13 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public init() {}
-    public open func f1(): ObjCFunc<(ObjCPointer<Int64>) -> Unit> {
+    public open func f1(): CFunc<(CPointer<Int64>) -> Unit> {
         this.fptr
     }
     public open func f2() {
-        f1().call(this.a2)
+        unsafe { f1()(this.a2) }
     }
 }

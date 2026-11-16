@@ -8,7 +8,7 @@ package cj
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CjExe <: Exe {
 
     public init(s: String, opt: ?String) {

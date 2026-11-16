@@ -22,8 +22,9 @@
 *- @Priority: P0
 */
 
+// LEVEL: 0
 // Description:
-// DEPENDENCE: utils upstream
+// DEPENDENCE: ../../../utils upstream
 // EXEC: %compiler %cmp_opt %compile_lib_opt -p utils
 // EXEC: %compiler %cmp_opt %compile_lib_opt -p upstream
 // EXEC: %compiler %cmp_opt %f -L . -lupstream -lutils -o %output %cmp_utest_opt

@@ -1,0 +1,31 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// ERRCHECK: %compiler %local %f -Woff all %diag_json 2>&1
+
+class F {
+    var a = 1
+    init() {}
+    init(this @local!) { exclave { } }
+    init(this @local?) { exclave { } }
+}
+
+func f() {
+    let y: F@local! = F()
+    @local? func h1() {
+        println(y.a)
+    }
+    let x: F@local? = F()
+    @local! func h2() {
+        println(x.a)
+    }
+}
+
+main() {}
+
+// ASSERT: scan-1 "DiagKind": "sema_bad_capture_local",
+// ASSERT: scan-1 "DiagKind": "sema_invalid_local_func_type",
+// ASSERT: scan "Errors": 2,

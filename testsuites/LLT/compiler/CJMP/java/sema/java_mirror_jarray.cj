@@ -8,8 +8,8 @@
 
 import java.lang.*
 
-@JavaMirror
-class M {
+@Java
+foreign class M {
     public func foo(a: JArray<JObject>): Unit
     public func foo(a: JArray<?JObject>): Unit
     public func fooOpt(a: ?JArray<JObject>): Unit

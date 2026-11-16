@@ -1,0 +1,14 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ *
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+
+// LEVEL: 2
+// DESC: 异常尾部外提：深递归栈溢出错误类型正确、无二次崩溃（栈溢出 throw 为 rt$Create*_msg 工厂形状，可能被外提，不断言符号）
+// DEPENDENCE: main.cj ../check.py
+// (not MAC) EXEC: %compiler %cmp_opt -O2 main.cj -o %output
+// (not MAC) RUN-EXEC: %export cjStackSize=64kb && %export CJ_SOF_SIZE=-1 && %run %run_opt %output %run_args
+// (not MAC) EXEC: %python check.py --file %output --max-size 5000000

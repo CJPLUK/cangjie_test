@@ -4,3 +4,35 @@
 #
 # See https://cangjie-lang.cn/pages/LICENSE for license information.
 
+# https://gitcode.com/Cangjie/cangjie_test/issues/523
+Tools/cjprof
+
+# https://gitcode.com/Cangjie/cangjie_test/issues/524
+Tools/cjpm/stdx/r/04/04.info
+Tools/cjpm/stdx/r/01/01.info
+Tools/cjpm/stdx/r/03/03.info
+
+# https://gitcode.com/Cangjie/cangjie_test/issues/522
+API/std/reflect
+compiler/cjnative/stable_abi/package_name
+compiler/cjnative/stable_abi/add_instance_member_variable
+compiler/cjnative/stable_abi/add_virtual_function
+
+# https://gitcode.com/Cangjie/cangjie_test/issues/315
+compiler/cjnative/Chir/CompileOption/plugin/runplugin/plugin5/runplugin.cj
+
+# limit described in the doc
+compiler/cjnative/FFI/objcffi/glue_code/oc_mirror/mirror_pointer_0014/
+compiler/cjnative/FFI/objcffi/glue_code/oc_impl/impl_prop_0003/
+# mirrorgen error Option<M> -> M
+compiler/cjnative/FFI/objcffi/glue_code/oc_mirror/mirror_func_pointer_0007
+compiler/cjnative/FFI/objcffi/glue_code/oc_mirror/mirror_func_pointer_0008
+compiler/cjnative/FFI/objcffi/glue_code/oc_mirror/mirror_func_pointer_0014
+compiler/cjnative/FFI/objcffi/glue_code/oc_mirror/mirror_func_pointer_0015
+compiler/cjnative/FFI/objcffi/glue_code/oc_impl/impl_func_pointer_0007
+compiler/cjnative/FFI/objcffi/glue_code/oc_impl/impl_func_pointer_0008
+compiler/cjnative/FFI/objcffi/glue_code/oc_impl/impl_func_pointer_0014
+compiler/cjnative/FFI/objcffi/glue_code/oc_impl/impl_func_pointer_0015
+
+# https://gitcode.com/Cangjie/cangjie_test/issues/526
+Runtime/cjnative/runtime/GC/cjEnableGC

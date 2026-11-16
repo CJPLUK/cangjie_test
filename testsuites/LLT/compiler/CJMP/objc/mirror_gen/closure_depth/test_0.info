@@ -10,16 +10,16 @@
 // EXEC: ObjCInteropGen test_0.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-@ObjCMirror
-public open class BaseClass {
+@ObjC
+public open foreign class BaseClass {
 }
 
-@ObjCMirror
-public interface BaseProtocol {
+@ObjC
+public foreign interface BaseProtocol {
 }
 
-@ObjCMirror
-public open class M <: BaseClass & BaseProtocol {
+@ObjC
+public open foreign class M <: BaseClass & BaseProtocol {
     protected var x: Int32
     protected var id_: ?ObjCId
     public init()

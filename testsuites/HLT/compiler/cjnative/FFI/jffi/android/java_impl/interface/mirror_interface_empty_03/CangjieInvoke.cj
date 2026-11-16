@@ -19,7 +19,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     public init() {
         Logger.println("in CangjieInvoke Init")

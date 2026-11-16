@@ -18,7 +18,7 @@ package UNNAMED
 import java.lang.*
 
 // error
-@JavaImpl
+@Java
 public class CangjieInvoke <: Init04 {
     public init() {
         let class_01 = Init04()

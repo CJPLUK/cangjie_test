@@ -12,7 +12,7 @@ import std.runtime.*
 
 private var list = ArrayList<M>()
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public func test(): Int64 {
         println("cj: A.test()")

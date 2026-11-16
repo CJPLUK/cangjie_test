@@ -39,31 +39,11 @@ main(): Int64 {
 }
 
 /* SCAN
-error: instance member property 'b' cannot be accessed in the constructor of open class 'A'
-  ==> let_in_init13-1.cj:33:9:
-   | 
-33 |         b = 1
-   |         ^ 
-   | 
-
-error: cannot assign to immutable value
-  ==> let_in_init13-1.cj:33:9:
-   | 
-33 |         b = 1
-   |         ^^^^^ 
-   | 
-note: property 'b' is immutable
-  ==> let_in_init13-1.cj:27:17:
-   | 
-27 |     public prop b: Int64 {
-   |                 ^ 
-   | 
-
 error: cannot assign to immutable value
   ==> let_in_init13-1.cj:12:9:
    | 
 12 |         b = 0
-   |         ^^^^^ 
+   |         ^ 
    | 
 note: property 'b' is immutable
   ==> let_in_init13-1.cj:27:17:
@@ -76,7 +56,7 @@ error: cannot assign to immutable value
   ==> let_in_init13-1.cj:16:9:
    | 
 16 |         b = 0
-   |         ^^^^^ 
+   |         ^ 
    | 
 note: property 'b' is immutable
   ==> let_in_init13-1.cj:27:17:
@@ -85,5 +65,18 @@ note: property 'b' is immutable
    |                 ^ 
    | 
 
-4 errors generated, 4 errors printed.
+error: cannot assign to immutable value
+  ==> let_in_init13-1.cj:33:9:
+   | 
+33 |         b = 1
+   |         ^ 
+   | 
+note: property 'b' is immutable
+  ==> let_in_init13-1.cj:27:17:
+   | 
+27 |     public prop b: Int64 {
+   |                 ^ 
+   | 
+
+3 errors generated, 3 errors printed.
 */

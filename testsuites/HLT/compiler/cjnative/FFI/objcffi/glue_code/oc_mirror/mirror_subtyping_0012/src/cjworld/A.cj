@@ -8,7 +8,5 @@
  
 package cjworld
 
-@ObjCImpl
+@ObjC
 public open class A {}
-
-

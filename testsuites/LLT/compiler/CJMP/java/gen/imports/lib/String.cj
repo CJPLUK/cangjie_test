@@ -8,7 +8,7 @@ package java.cj.mirrors
 
 import java.lang.*
 
-@JavaImpl["java.cj.mirrors.String"]
+@Java["java.cj.mirrors.String"]
 public class JString <: Obj {
     public init() {
         super()

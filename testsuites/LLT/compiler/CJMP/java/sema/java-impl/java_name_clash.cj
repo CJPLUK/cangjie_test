@@ -10,10 +10,10 @@
 
 import java.lang.JObject
 
-@JavaImpl["A"]
+@Java["A"]
 class A <: JObject {
 }
 
-@JavaImpl["A"]
+@Java["A"]
 class B <: JObject {
 }

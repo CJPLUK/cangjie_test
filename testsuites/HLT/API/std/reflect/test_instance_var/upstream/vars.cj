@@ -37,7 +37,6 @@ public class MutableVarClass {
 public class AnnotatedVarClass {
     public init() {
     }
-
     @Deprecated
     public let info: String = "info"
 }

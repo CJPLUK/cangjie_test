@@ -9,14 +9,14 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public open class Box {
+@ObjC
+public open foreign class Box {
     public init()
     public open mut prop value: Int64
 }
 
-@ObjCMirror
-public open class Base {
+@ObjC
+public open foreign class Base {
     public init()
     @ForeignName["mirror1WithArg0:"]
     public open func mirror1(arg0: Box): Int64
@@ -28,7 +28,7 @@ public open class Base {
     public open func returnMirror(box: Box): Box
 }
 
-@ObjCImpl
+@ObjC
 public class Derived <: Base {
     public init() {}
     public override func mirror1(arg0: Box): Int64 {

@@ -10,7 +10,7 @@
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class Line <: Shape {
     public var start: ObjCPointer<Point2D>
     public var end: ObjCPointer<Point2D>
@@ -33,7 +33,7 @@ public struct Point2D {
     }
 }
 
-@ObjCMirror
-public open class Shape {
+@ObjC
+public open foreign class Shape {
     init()
 }

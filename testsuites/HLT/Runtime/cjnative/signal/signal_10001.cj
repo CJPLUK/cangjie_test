@@ -10,7 +10,10 @@
 // (!host_win) EXEC: %compiler %f %cmp_opt -o %output
 // (!host_win) RUN-EXEC-PIPE-134: %run %run_opt %output %run_args 2>&1 | compare %f
 // (!host_win & target_android) ASSERT: scan Aborted
-// (!host_win & !target_android) ASSERT: scan SIGABRT
+// (!host_win & target_ohos) ASSERT: scan Signal 6 (core dumped)
+// (!host_win & (target_ios | target_ios_simulator)) ASSERT: scan Abort trap
+// (!host_win & target_mac) ASSERT: scan Abort trap
+// (!host_win & target_linux) ASSERT: scan Aborted
 
 foreign func abort(): Unit
 

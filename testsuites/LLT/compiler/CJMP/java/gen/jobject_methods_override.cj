@@ -65,7 +65,7 @@ package cjworld.theworld
 
 import java.lang.*
 
-@JavaImpl["A"]
+@Java["A"]
 public class A {
     public override func hashCode32(): Int32 {
         return 42

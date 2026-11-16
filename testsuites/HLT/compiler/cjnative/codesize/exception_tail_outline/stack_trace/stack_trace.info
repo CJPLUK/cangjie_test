@@ -1,0 +1,15 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ *
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+
+// LEVEL: 2
+// DESC: 异常尾部外提：栈回溯保留异常消息（level3 函数可能在 O2 被内联，不精确断言帧名），异常消息正确；helper 符号存在（Windows 不生效故排除）
+// DEPENDENCE: main.cj ../check.py
+// (native_compilation & !target_win) EXEC: %compiler %cmp_opt -O2 main.cj -o %output
+// (native_compilation & !target_win) RUN-EXEC: %run %run_opt %output %run_args > trace.log 2>&1
+// (native_compilation & !target_win) EXEC: %python check.py --file trace.log --has stack_trace_test
+// (native_compilation & !target_win) EXEC: %python check.py --file %output --max-size 5000000 --nm-has exception_tail_helper

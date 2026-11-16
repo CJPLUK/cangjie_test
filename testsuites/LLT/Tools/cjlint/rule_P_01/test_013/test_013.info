@@ -1,0 +1,10 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
+# This source file is part of the Cangjie project, licensed under Apache-2.0
+# with Runtime Library Exception.
+#
+# See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// DEPENDENCE: ../%n
+// EXEC: cd %n && %lint -f ./src  -c %lintConfigDir -m %lintModuleDir 2>&1 | compare %f
+// ASSERT: regex-1 test.cj:13:16:.*G.CON.01: 'private' should be used as modifier of synchronized object
+// ASSERT: regex-1 test.cj:27:9:.*P.01: The nested synchronized objects has a different sequence than the nested synchronized objects on the line 16 of the file 'test.cj', which may cause a deadlock.

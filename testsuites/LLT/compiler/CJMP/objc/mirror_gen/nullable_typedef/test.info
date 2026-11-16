@@ -20,8 +20,8 @@ public type M_0 = ?M_
 
 public type M_1 = M_
 
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
     @ObjCInit @ForeignName["init:"] public static func `init`(x: M_): M
     @ObjCInit @ForeignName["init1:"] public static func init1(x: M_): M
     @ObjCInit @ForeignName["init2:"] public static func init2(x: M0): M

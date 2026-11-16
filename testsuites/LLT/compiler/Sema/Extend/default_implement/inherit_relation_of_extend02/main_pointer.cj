@@ -30,14 +30,14 @@ main() {
 }
 
 /* SCAN
-error: interface function 'containsValue' must be implemented in 'extend CPointer<Generics-V>'
+error: interface function 'containsValue(value: V, fn: (V, V) -> Bool): Bool' must be implemented in 'extend CPointer<Generics-V>'
   ==> main_pointer.cj:24:1:
    | 
 24 | extend<V> CPointer<V> <: I1<V> {}
    | ^ 
    | 
 
-error: interface function 'containsValue' must be implemented in 'extend CPointer<Generics-V>'
+error: interface function 'containsValue(value: V, fn: (V, V) -> Bool): Bool' must be implemented in 'extend CPointer<Generics-V>'
   ==> main_pointer.cj:26:1:
    | 
 26 | extend<V> CPointer<V> <: I2<V> {}

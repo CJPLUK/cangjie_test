@@ -19,8 +19,8 @@ error: function 'f' can not be abstract
 
 import java.lang.JObject
 
-@JavaMirror
-abstract class A {
+@Java
+abstract foreign class A {
     public init()
     public abstract static func f(): Int32
 }

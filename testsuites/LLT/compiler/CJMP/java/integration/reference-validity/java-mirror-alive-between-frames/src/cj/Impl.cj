@@ -10,13 +10,13 @@ import java.lang.JObject
 
 private var mirror = Option<MyObject>.None
 
-@JavaMirror["com.java.lib.MyObject"]
-public class MyObject {
+@Java["com.java.lib.MyObject"]
+public foreign class MyObject {
     public init()
     public func check(): Unit
 }
 
-@JavaImpl
+@Java
 public class Impl {
     public static func store(i: MyObject) {
         mirror = i

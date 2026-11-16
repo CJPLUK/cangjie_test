@@ -13,8 +13,8 @@ import objc.lang.*
 
 type PrimitiveType = Int32
 
-@ObjCMirror
-class Foo {
+@ObjC
+foreign class Foo {
     public prop a: Int64
     public prop b: Float64
     public prop c: Int8

@@ -8,13 +8,13 @@
 
 import java.lang.JObject
 
-@JavaMirror
-class OtherMirror {
+@Java
+foreign class OtherMirror {
    public init()
 }
 
-@JavaMirror
-class M {
+@Java
+foreign class M {
     public func foo(obj: ?JObject): Unit
     public func self(obj: ?M): Unit
     public func other(obj: ?OtherMirror): Unit

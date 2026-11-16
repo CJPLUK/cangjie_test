@@ -1,14 +1,49 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            09:b8:26:57:6b:9f:62:69:b3:62:b4:d1:ac:3d:1a:86:44:56:27:f1
+        Signature Algorithm: ecdsa-with-SHA256
+        Issuer: C=CN, ST=GD, L=SZ, O=COM, OU=NSP, CN=CA, emailAddress=youremail@qq.com
+        Validity
+            Not Before: Oct 27 04:56:23 2026 GMT
+            Not After : Oct 24 04:56:23 2036 GMT
+        Subject: C=CN, ST=GD, L=SZ, O=COM, OU=NSP, CN=CA, emailAddress=youremail@qq.com
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+                Public-Key: (256 bit)
+                pub:
+                    04:2b:4e:54:e2:43:ec:cb:7e:3d:e1:c7:dd:d0:be:
+                    12:3a:35:d3:58:14:51:ec:73:01:cc:37:09:a7:54:
+                    d4:54:f2:23:80:a1:21:41:e6:12:04:28:dc:cb:a7:
+                    a6:cc:fc:9c:7d:76:e8:75:de:c4:57:75:f8:30:4d:
+                    5e:e0:f3:fa:07
+                ASN1 OID: prime256v1
+                NIST CURVE: P-256
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                3F:E1:F0:56:90:22:1C:D2:4C:60:81:A7:AE:E3:C4:8E:98:06:B9:0F
+            X509v3 Authority Key Identifier: 
+                3F:E1:F0:56:90:22:1C:D2:4C:60:81:A7:AE:E3:C4:8E:98:06:B9:0F
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+    Signature Algorithm: ecdsa-with-SHA256
+    Signature Value:
+        30:45:02:21:00:cd:b0:34:c9:8b:98:bf:c4:f0:a1:96:4a:6d:
+        6f:66:19:48:2d:cf:78:12:bf:82:c8:c6:c2:30:44:3b:05:dc:
+        53:02:20:21:85:f4:90:38:72:bc:af:20:bf:72:3a:26:42:2a:
+        c3:77:51:ee:32:df:a2:a9:4f:44:de:15:5c:a1:54:29:ce
 -----BEGIN CERTIFICATE-----
-MIICNzCCAd2gAwIBAgIUabcEHZg5WhGzHWtMIEgQsnjLUY4wCgYIKoZIzj0EAwIw
+MIICNzCCAd2gAwIBAgIUCbgmV2ufYmmzYrTRrD0ahkRWJ/EwCgYIKoZIzj0EAwIw
 cTELMAkGA1UEBhMCQ04xCzAJBgNVBAgMAkdEMQswCQYDVQQHDAJTWjEMMAoGA1UE
 CgwDQ09NMQwwCgYDVQQLDANOU1AxCzAJBgNVBAMMAkNBMR8wHQYJKoZIhvcNAQkB
-FhB5b3VyZW1haWxAcXEuY29tMB4XDTIzMDIyNDA4NTcwMVoXDTMzMDIyMTA4NTcw
-MVowcTELMAkGA1UEBhMCQ04xCzAJBgNVBAgMAkdEMQswCQYDVQQHDAJTWjEMMAoG
+FhB5b3VyZW1haWxAcXEuY29tMB4XDTI2MTAyNzA0NTYyM1oXDTM2MTAyNDA0NTYy
+M1owcTELMAkGA1UEBhMCQ04xCzAJBgNVBAgMAkdEMQswCQYDVQQHDAJTWjEMMAoG
 A1UECgwDQ09NMQwwCgYDVQQLDANOU1AxCzAJBgNVBAMMAkNBMR8wHQYJKoZIhvcN
 AQkBFhB5b3VyZW1haWxAcXEuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE
-usJH2auIkLirV2xv3h6J1hALqEWYrEAthfn3QAysy3hG70wzwnFAh/b4vu6+IYHJ
-MwC0yKKywliroW17mBIzRqNTMFEwHQYDVR0OBBYEFCMNa0YR2aTTeCKenh/lduuV
-/EtiMB8GA1UdIwQYMBaAFCMNa0YR2aTTeCKenh/lduuV/EtiMA8GA1UdEwEB/wQF
-MAMBAf8wCgYIKoZIzj0EAwIDSAAwRQIgcbHwpCaGa4F8U9tUIQDamNR00d8w6ack
-9K/fdXN/AzMCIQDNHUoqFjmFf2l2uRlzvL699Q9Wot2ovFTwrqIdbVr6Rg==
+K05U4kPsy3494cfd0L4SOjXTWBRR7HMBzDcJp1TUVPIjgKEhQeYSBCjcy6emzPyc
+fXbodd7EV3X4ME1e4PP6B6NTMFEwHQYDVR0OBBYEFD/h8FaQIhzSTGCBp67jxI6Y
+BrkPMB8GA1UdIwQYMBaAFD/h8FaQIhzSTGCBp67jxI6YBrkPMA8GA1UdEwEB/wQF
+MAMBAf8wCgYIKoZIzj0EAwIDSAAwRQIhAM2wNMmLmL/E8KGWSm1vZhlILc94Er+C
+yMbCMEQ7BdxTAiAhhfSQOHK8ryC/cjomQirDd1HuMt+iqU9E3hVcoVQpzg==
 -----END CERTIFICATE-----

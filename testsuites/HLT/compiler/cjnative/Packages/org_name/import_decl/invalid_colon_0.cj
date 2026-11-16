@@ -10,9 +10,8 @@
 // DESCRIPTION: 3 colons.
 // DEPENDENCE: upstream_package.cj
 // EXEC: %compiler %cmp_opt %compile_lib_opt upstream_package.cj
-// EXEC: %compiler %cmp_opt %f -L. -lmy_pkg@my_org -o %output
-// RUN-EXEC-PIPE: %run %run_opt %output %run_args | compare %f
-// ASSERT: scan expected a '*' or identifier after '::' in qualified name, found ':'
+// EXEC-PIPE-1: %compiler %cmp_opt %f -L. -lmy_pkg@my_org -o %output 2>&1 | compare %f
+// ASSERT: scan expected an identifier after '::' in qualified name, found ':'
 
 import my_org:::my_pkg
 

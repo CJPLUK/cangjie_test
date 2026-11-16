@@ -7,8 +7,8 @@
  */
 
 // LEVEL: 1
-// (not Windows) EXEC: %compiler %cmp_opt %f -o %output
-// (not Windows) RUN-EXEC: %run %run_opt %output %run_args
+// EXEC: %compiler %cmp_opt %f -o %output
+// RUN-EXEC: %run %run_opt %output %run_args
 
 main(): Int64 {
     var i: Int32 = 5

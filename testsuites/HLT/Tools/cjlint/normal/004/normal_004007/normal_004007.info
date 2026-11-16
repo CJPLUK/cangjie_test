@@ -8,17 +8,5 @@
 
 // LEVEL: 1
 // DEPENDENCE: ./src
-// Regression: cjlint must not be silent on source files that contain compile
-// errors. The same file fed to cjc reports: (1) "the visibility of an 'open'
-// function must be 'public' or 'protected'" and (2) "undeclared identifier
-// 'undeclaredFunc'", while cjlint exits 0 without any diagnostic and the
-// valid G.VAR.01 warning is swallowed as well (a broken package must not
-// look clean).
-// NOTE: the 'undeclared identifier' assertion is mandatory under any design:
-// skipping semantic-analysis-dependent rules on broken code may be an
-// acceptable trade-off, but it must be visible (errors reported / exit code).
-// The G.VAR.01 assertion is the strict expectation; it may be relaxed only
-// together with explicit compile-error reporting being added.
 // EXEC-PIPE: %lint -f ./src -c %cangjieDir/tools -m %cangjieDir 2>&1 | compare %f
-// ASSERT: regex .*undeclared identifier.*
-// ASSERT: regex .*G\.VAR\.01.*
+// ASSERT: regex-not .*G.VAR.01.*

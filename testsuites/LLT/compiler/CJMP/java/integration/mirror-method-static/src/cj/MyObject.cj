@@ -8,7 +8,7 @@ package cj
 
 import java.lang.JObject
 
-@JavaMirror["com.java.lib.MyObject"]
-open class MyObject <: JObject {
+@Java["com.java.lib.MyObject"]
+open foreign class MyObject <: JObject {
     public static func foo(): Unit
 }

@@ -8,7 +8,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public open class A <: Base {
     let i: Int32
     public A(a: Int32) { i = a }
@@ -19,7 +19,7 @@ public open class A <: Base {
     }
 }
 
-@ObjCImpl
+@ObjC
 public class D <: A {
     public D() { super(-1) }
 }

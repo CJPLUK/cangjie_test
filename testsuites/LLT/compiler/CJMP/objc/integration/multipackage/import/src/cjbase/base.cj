@@ -8,8 +8,8 @@ package cjbase
 
 import objc.lang.*
 
-@ObjCMirror
-public open class Base {
+@ObjC
+public open foreign class Base {
     public init()
     public open func foo(): Int64
     @ForeignName["getSelf"]

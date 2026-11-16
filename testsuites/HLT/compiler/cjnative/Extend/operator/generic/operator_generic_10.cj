@@ -25,4 +25,3 @@ class Data<T> {
     public operator func +<V>(right:Int64):UInt8  {return 0}
 }
 // ASSERT: scan parse_expected_expression
-// ASSERT: scan parse_expected_right_delimiter

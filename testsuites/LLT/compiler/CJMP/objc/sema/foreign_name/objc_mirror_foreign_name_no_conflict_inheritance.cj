@@ -9,14 +9,14 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public open class A {
+@ObjC
+public open foreign class A {
     public open func foo(): Unit
     @ForeignName["foo:"] public open func foo(x: Int32): Unit
 }
 
-@ObjCMirror
-public open class M <: A {
+@ObjC
+public open foreign class M <: A {
     public open func foo(): Unit
     public open func foo(x: Int32): Unit
 }

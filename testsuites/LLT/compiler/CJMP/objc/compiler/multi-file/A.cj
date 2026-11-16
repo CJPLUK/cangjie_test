@@ -13,7 +13,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 class A <: M {
     init() {
         super()

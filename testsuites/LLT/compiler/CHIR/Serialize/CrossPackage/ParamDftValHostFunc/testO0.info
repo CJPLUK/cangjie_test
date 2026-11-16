@@ -6,7 +6,8 @@
 // (CJNATIVE) EXEC: %chirDis b.chir
 
 // (CJNATIVE) EXEC: %cat *_Emit_Debug.chirtxt | compare %f
-// (CJNATIVE) ASSERT: scan paramDftValHostFunc:
+// (CJNATIVE) ASSERT: scan paramDftValHostParam:
+// (CJNATIVE) ASSERT: scan paramDftValFunc:
 // (CJNATIVE) EXEC: diff *_Emit_Debug.chirtxt b.chirtxt
 
 

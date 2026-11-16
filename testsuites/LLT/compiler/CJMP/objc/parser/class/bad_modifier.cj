@@ -4,30 +4,16 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %diag_json %f -o %output 2>& 1 | compare %f
 
-@ObjCMirror
-sealed abstract class M {
+@ObjC
+sealed abstract foreign class M {
 }
 
-@ObjCImpl
+@ObjC
 sealed abstract class Impl {
 }
 
-/* SCAN-IN
-error: @ObjCMirror declaration cannot be sealed
-  ==> bad_modifier.cj:10:17:
-   | 
-10 | sealed abstract class M {
-   |                 ^ 
-   | 
-
-error: @ObjCImpl declaration cannot be abstract
-  ==> bad_modifier.cj:14:17:
-   | 
-14 | sealed abstract class Impl {
-   |                 ^ 
-   | 
-
-2 errors generated, 2 errors printed.
-*/
+// ASSERT: scan parse_objc_mirror_cannot_be_sealed
+// ASSERT: scan parse_objc_impl_cannot_be_abstract
+// ASSERT: scan "Errors": 2

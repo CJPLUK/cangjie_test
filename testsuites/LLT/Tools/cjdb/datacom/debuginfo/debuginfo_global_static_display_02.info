@@ -15,5 +15,6 @@ b,b 22,debuginfo_global_static_display_02.cj:22
 r,r,-> 22
 globalScopeViewer,target variable -s,.*STATIC: \(Int64\) default::cls::aaa = 10
 globalScopeViewer,target variable -s,.*STATIC: \(std.core.Array<Int64>\) default::cls::ccc = {\s+\[0\] = 1\s+\[1\] = 2\s+\[2\] = 3\s+}
-globalScopeViewer,target variable -s,.*STATIC: \(default.A\) default::cls::ddd = {\s+mem = 50.*STATIC: \(std.core.String\) default::cls::bbb = "HHHH"
+globalScopeViewer,target variable -s,.*STATIC: \(default.A\) default::cls::ddd = {\s+mem = 50
+globalScopeViewer,target variable -s,.*STATIC: \(std.core.String\) default::cls::bbb = "HHHH"
 q,q,

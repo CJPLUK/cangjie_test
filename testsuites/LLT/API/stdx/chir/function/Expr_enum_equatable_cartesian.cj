@@ -11,6 +11,7 @@
 
 /* SCAN
 enum eq cartesian: true
+linkage enum: true
 */
 
 import stdx.chir.*
@@ -94,4 +95,17 @@ main() {
     println(
         "enum eq cartesian: ${ovEq == ov.size && ovNeq > 0 && ovNeq == ovNe && unEq == un.size && unNeq > 0 && unNeq == unNe && binEq == bin.size && binNeq > 0 && binNeq == binNe}"
     )
+
+    let linkages = [LinkType.External, LinkType.ExternalWeak, LinkType.Internal, LinkType.LinkonceOdr, LinkType.WeakOdr]
+    let names = ["external", "external_weak", "internal", "linkonce_odr", "weak_odr"]
+    var linkageEq = true
+    for (i in 0..linkages.size) {
+        linkageEq = linkageEq && linkages[i].toString() == names[i]
+        for (j in 0..linkages.size) {
+            linkageEq = linkageEq && ((linkages[i] == linkages[j]) == (i == j))
+            linkageEq = linkageEq && ((linkages[i] != linkages[j]) == (i != j))
+        }
+    }
+    println("linkage enum: ${linkageEq}")
+
 }

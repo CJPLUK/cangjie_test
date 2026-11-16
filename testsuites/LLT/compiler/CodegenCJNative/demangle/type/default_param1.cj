@@ -6,7 +6,7 @@
 
 // EXEC: %compiler %cmp_opt %n.cj -o %n.%suffix
 // EXEC-PIPE-1: %run %run_opt %n.%suffix 2>&1 | compare %f
-// ASSERT: scan default::foo::defaultParam0.0::lambda
+// ASSERT: scan default::foo::defaultParam0.0::lambda.0()
 // ASSERT: scan foo(() -> Unit)
 func foo(defaultParam0!: () -> Unit = {=> throw IndexOutOfBoundsException()}): Unit {
     defaultParam0()

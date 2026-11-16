@@ -9,7 +9,7 @@ package cjworld
 import objc.lang.*
 import std.runtime.*
 
-@ObjCImpl
+@ObjC
 public class B <: M {
     public init() {}
 

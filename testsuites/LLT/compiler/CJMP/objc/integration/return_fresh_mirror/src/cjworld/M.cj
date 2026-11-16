@@ -7,8 +7,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M <: NSObject {
+@ObjC
+public open foreign class M <: NSObject {
     @ForeignName["initWithDescription:"]
     public init(description: NSString)
     public func description(): NSString

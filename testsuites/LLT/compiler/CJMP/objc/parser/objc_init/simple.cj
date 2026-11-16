@@ -9,8 +9,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public class M {
+@ObjC
+public foreign class M {
     @ObjCInit
     public static func customInit(): M
 }

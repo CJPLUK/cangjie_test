@@ -8,8 +8,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public interface M {
+@ObjC
+public foreign interface M {
     @ObjCOptional
     func foo(): Unit
 }

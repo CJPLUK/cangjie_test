@@ -11,7 +11,7 @@ package cjworld
 import objc.foundation.NSObject
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public init() {}
     public func f() {

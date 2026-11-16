@@ -4,7 +4,7 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// Verify an exhaustive enum table does not follow its placeholder default into another constructor group.
+// Verify exhaustive enum tables preserve constructor boundaries and completion.
 // EXEC-PIPE-0: %compiler %cmp_opt -O2 %f -o %output 2>&1 | compare %f
 
 enum State {
@@ -35,6 +35,28 @@ func selectLeft(flag: Bool): Int64 {
 main() {
     println(selectRight(true))
     println(selectLeft(false))
+    endTrivial(Plain.A)
+    endPayload(State.Right(0, true))
+}
+
+enum Plain { A | B }
+
+func endTrivial(state: Plain): Unit {
+    match (state) {
+        case A => return
+        case B => return
+    }
+    println("dead after trivial table")
+}
+
+func endPayload(state: State): Unit {
+    match (state) {
+        case Left(_, true) => return
+        case Left(_, false) => return
+        case Right(_, true) => return
+        case Right(_, false) => return
+    }
+    println("dead after payload table")
 }
 
 /* SCAN-IN
@@ -75,4 +97,40 @@ warning: unreachable pattern
    |              ^^^^^^^^^^^^^^^ 
    | 
    # note: this warning can be suppressed by setting the compiler option `-Woff unused`
+*/
+
+/* SCAN-IN
+warning: unreachable expression
+  ==> enum_table_exhaustive_constructor_boundary.cj:49:5:
+   | 
+45 |       match (state) {
+   |  _____~
+46 | |         case A => return
+   | | ...
+48 | |     }
+   | |_____~ any code following this expression is unreachable
+49 |       println("dead after trivial table")
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unreachable expression
+   | 
+   # note: this warning can be suppressed by setting the compiler option `-Woff unused`
+*/
+
+/* SCAN-IN
+warning: unreachable expression
+  ==> enum_table_exhaustive_constructor_boundary.cj:59:5:
+   | 
+53 |       match (state) {
+   |  _____~
+54 | |         case Left(_, true) => return
+   | | ...
+58 | |     }
+   | |_____~ any code following this expression is unreachable
+59 |       println("dead after payload table")
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unreachable expression
+   | 
+   # note: this warning can be suppressed by setting the compiler option `-Woff unused`
+*/
+
+/* SCAN-IN
+6 warnings generated, 6 warnings printed.
 */

@@ -11,7 +11,7 @@
 import java.lang.JObject
 import std.random.*
 
-@JavaImpl
+@Java
 public class MyObject {
 }
 

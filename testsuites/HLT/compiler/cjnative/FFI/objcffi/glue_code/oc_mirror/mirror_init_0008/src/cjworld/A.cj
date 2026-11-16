@@ -10,7 +10,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M2 {
     public init() {
         super(M1())
@@ -21,5 +21,3 @@ public class A <: M2 {
         println("in cangjie test")
     }
 }
-
-

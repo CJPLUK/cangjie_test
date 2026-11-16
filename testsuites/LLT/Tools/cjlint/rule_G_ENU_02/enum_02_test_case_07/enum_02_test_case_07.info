@@ -6,4 +6,4 @@
 
 // DEPENDENCE: ../%n
 // EXEC: cd %n && %lint -f ./src  -c %lintConfigDir -m %lintModuleDir 2>&1 | compare %f
-// ASSERT: regex-not .*error.*
+// ASSERT: regex-1 .*main.cj:13:21:.*error.*: G.FUN.02: Parameter 'a' is unused parameter

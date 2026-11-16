@@ -10,7 +10,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class ChildClass <: ParentClass {
     public init(param0: JArray<Float64>, param1: Float64, param2: Int32, param3: JArray<UInt16>, param4: JArray<UInt16>,
         param5: JArray<Int64>, param6: JArray<UInt16>, param7: JArray<Int8>, param8: JArray<Float32>,

@@ -8,7 +8,7 @@
 
 import objc.lang.*
 
-@ObjCMirror
-open class M {
+@ObjC
+public open foreign class M {
     public open prop x: Int64
 }

@@ -1,0 +1,14 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ *
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+
+// LEVEL: 1
+// DESC: Array.copyTo 元素类型 1/8/16/24 字节 struct 拷贝，运行数据完整
+// DEPENDENCE: main.cj ../check.py
+// EXEC: %compiler %cmp_opt main.cj -o %output
+// RUN-EXEC: %run %run_opt %output %run_args
+// EXEC: %python check.py --file %output --max-size 5000000

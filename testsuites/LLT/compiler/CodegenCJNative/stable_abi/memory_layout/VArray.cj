@@ -8,7 +8,7 @@
 // (CJNATIVE) EXEC: %llvmDissembler %n.bc -o %n.ll
 // (CJNATIVE) EXEC: %cat %n.ll 2>&1 | compare %f
 // (CJNATIVE) ASSERT: regex %VArray\.5i = type { \[5 x i32\] }
-// (not Windows and CJNATIVE) ASSERT: regex @"VArray<Int32,5>\.ti" = linkonce_odr global %TypeInfo {.*}, !RelatedType !(?P<id>[0-9]+)
+// (not Windows and CJNATIVE) ASSERT: regex @"VArray<Int32,5>\.ti" = linkonce_odr hidden global %TypeInfo {.*}, !RelatedType !(?P<id>[0-9]+)
 // (Windows and CJNATIVE) ASSERT: regex @"VArray<Int32,5>\.ti" = internal global %TypeInfo {.*}, !RelatedType !(?P<id>[0-9]+)
 // (CJNATIVE) ASSERT: regex !(?P=id) = !{!"VArray\.5i"}
 

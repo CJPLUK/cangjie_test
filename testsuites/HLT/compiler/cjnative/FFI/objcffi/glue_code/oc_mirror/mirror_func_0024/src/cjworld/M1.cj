@@ -10,9 +10,7 @@ package cjworld
  
 import objc.lang.*
 
-@ObjCMirror
-public open class M1 {
+@ObjC
+public open foreign class M1 {
     public init()
 }
-
-

@@ -54,7 +54,7 @@ note: found candidate
    |          ^ 
    | 
 
-error: interface function 'foo' must be implemented in 'C1'
+error: interface function 'foo(): Int64' must be implemented in 'C1'
   ==> interface_implement_4.cj:21:1:
    | 
 21 | open class C1 <: I1 & I2 {}

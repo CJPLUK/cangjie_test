@@ -1,0 +1,15 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 0
+// DEPENDENCE: ../%n
+// ERRCHECK: cd %n && %cjpm build 2>&1
+// ASSERT: scan cannot configure both
+// ASSERT: scan-not Internal Compiler Error
+// ASSERT: scan-not has occurred
+// ASSERT: scan-not Assertion failed
+// ASSERT: scan-not segmentation
+// ASSERT: scan-not SIGSEGV

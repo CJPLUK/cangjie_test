@@ -13,7 +13,7 @@ func testFunc(i: Int32): Unit {
     println("testFunc() passed to ObjC called, i = ${i}")
 }
 
-@ObjCImpl
+@ObjC
 public class Test <: Base {
     public Test() {}
 

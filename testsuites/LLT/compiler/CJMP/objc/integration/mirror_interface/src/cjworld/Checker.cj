@@ -8,7 +8,7 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-interface Checker {
+@ObjC
+foreign interface Checker {
   func check(): Unit
 }

@@ -10,17 +10,17 @@
 // EXEC: ObjCInteropGen test.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-@ObjCMirror
-public interface A {
+@ObjC
+public foreign interface A {
 }
 
-@ObjCMirror
-public open class M <: A {
+@ObjC
+public open foreign class M <: A {
     public open func foo(): Unit
 }
 
-@ObjCMirror
-public open class P <: A {
+@ObjC
+public open foreign class P <: A {
     public open func bar(): Unit
 }
 */

@@ -30,9 +30,9 @@ import stdx.aspect_cj.*
 
 @ReplaceFuncBody[packageName: "AOP_demo1", className: "WovenClass", methodName: "wovenFunction", isStatic: false,
     recursive: false]
-public func annotatedFunction(self: WovenClass, original: (WovenClass) -> Unit): Unit {
+public func annotatedFunction(self: WovenClass, original: () -> Unit): Unit {
     println("annotatedFunction")
-    original(self)
+    original()
 }
 
 public class WovenClass {

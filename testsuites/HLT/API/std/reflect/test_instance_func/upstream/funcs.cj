@@ -49,7 +49,6 @@ public class MultiFuncClass {
 public class AnnotatedFuncClass {
     public init() {
     }
-
     @Deprecated
     public func deprecatedMethod(): Unit {
     }

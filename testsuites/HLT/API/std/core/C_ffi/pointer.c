@@ -7,14 +7,16 @@
  */
 
 #include <stdlib.h>
-long* pointer(void)
+#include <stdint.h>
+
+int64_t* pointer(void)
 {
-    long* a = (long*)malloc(sizeof(long));
+    int64_t* a = (int64_t*)malloc(sizeof(int64_t));
     return a;
 }
 
-long* pointer_2(void)
+int64_t* pointer_2(void)
 {
-    long* a = (long*)malloc(sizeof(long) * 2);
+    int64_t* a = (int64_t*)malloc(sizeof(int64_t) * 2);
     return a;
 }

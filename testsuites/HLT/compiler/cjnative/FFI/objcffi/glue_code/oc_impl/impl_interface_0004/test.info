@@ -2,15 +2,15 @@
  * Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
  * This source file is part of the Cangjie project, licensed under Apache-2.0
  * with Runtime Library Exception.
- * 
+ *
  * See https://cangjie-lang.cn/pages/LICENSE for license information.
  */
- 
-// LEVEL: 3 
+
+// LEVEL: 3
 // DEPENDENCE: src test.toml
 // (iOSNative) EXEC: %mirror_gen test.toml
 // (iOSNative) EXEC: %compiler %compile_dylib_opt %cmp_ocffi_opt %link_oc --link-options="-install_name @rpath/libobjc.foundation.dylib" src/objc/foundation/*.cj
 // (iOSNative) ERRCHECK: %compiler %compile_dylib_opt %cmp_ocffi_opt %link_oc -L . -lobjc.foundation --link-options="-install_name @rpath/libcjworld.dylib" src/cjworld/*.cj
-// ASSERT: scan-1 error: interface inheriting @ObjCMirror interface must be annotated with @ObjCMirror
-// ASSERT: scan-1 error: @ObjCImpl declaration must inherit @ObjCMirror
+// ASSERT: scan-1 only '@ObjC' foreign interface can inherit super '@ObjC' foreign interface
+// ASSERT: scan-1 exported '@ObjC' declaration must inherit either foreign or exported '@ObjC' type
 // ASSERT: scan 2 errors generated, 2 errors printed

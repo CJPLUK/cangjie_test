@@ -1,0 +1,15 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 0
+// DEPENDENCE: d09_function_multiline_doc.h
+// EXEC: %hle_c --module-name="my_module" -i d09_function_multiline_doc.h -o . --clang-args=""
+// EXEC-PIPE: %cat d09_function_multiline_doc.cj | compare %f
+// ASSERT: scan // D9: function preceding multi-line doxygen block
+// ASSERT: scan // payload /* opener and *\/ pseudo closer
+// ASSERT: scan // @param a first param
+// ASSERT: scan // @return sum
+// ASSERT: scan foreign func d9_func(a: Int32, b: Int32): Int32

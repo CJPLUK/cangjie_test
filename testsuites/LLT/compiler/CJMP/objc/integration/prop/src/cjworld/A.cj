@@ -10,7 +10,7 @@ import objc.lang.*
 
 var global: Float64 = 15.0
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public mut prop a: Int64 {
         get() {

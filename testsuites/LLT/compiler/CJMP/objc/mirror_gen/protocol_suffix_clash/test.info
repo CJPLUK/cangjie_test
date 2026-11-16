@@ -10,15 +10,15 @@
 // EXEC: ObjCInteropGen test.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-@ObjCMirror["M"]
-public interface MProtocolProtocol {
+@ObjC["M"]
+public foreign interface MProtocolProtocol {
 }
 
-@ObjCMirror
-public open class MProtocol {
+@ObjC
+public open foreign class MProtocol {
 }
 
-@ObjCMirror
-public open class M <: MProtocol & MProtocolProtocol {
+@ObjC
+public open foreign class M <: MProtocol & MProtocolProtocol {
 }
 */

@@ -4,18 +4,13 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// (CJNATIVE and not Windows) EXEC-PIPE-1: %frontendCompiler %dump-parse %cmp_opt %f -o %output %compile_shared_lib_opt 2>& 1 | compare %f
+// (CJNATIVE and not Windows) EXEC-PIPE-1: %frontendCompiler %cmp_opt %diag_json %f -o %output %compile_shared_lib_opt 2>& 1 | compare %f
 
 import objc.lang.*
 
-@ObjCMirror
-func foo(i: Int64): String
+@ObjC
+foreign func foo(i: Int64): String
 
-/* SCAN-IN
-error: return type of Objective-C mirror top-level function 'foo' must be Objective-C compatible
-  ==> objc_mirror_incompat_restype.cj:12:21:
-   | 
-12 | func foo(i: Int64): String
-   |                     ^^^^^^ 
-   | 
-*/
+// ASSERT: scan sema_objc_interop_toplevel_ret_must_be_objc_compatible
+// ASSERT: scan 'String' is not Objective-C compatible type
+// ASSERT: scan "Errors": 1

@@ -12,8 +12,8 @@
 // EXEC: %compiler %cmp_opt use_80001.cj define.%middle -o %output
 // RUN-EXEC-PIPE-1: %run %run_opt %output %run_args 2>&1 | compare %f
 // ASSERT: scan An exception has occurred:
-// ASSERT: scan at define::A::init()
-// (!(target_ios | target_ios_simulator)) ASSERT: scan throwable_80001.cj:23
+// (!O2) ASSERT: scan at define::A::init()
+// ASSERT: scan at define::a
 
 package define
 

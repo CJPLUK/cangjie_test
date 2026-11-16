@@ -16,8 +16,8 @@ package cjworld
 import objc.foundation.NSObjectProtocol
 import objc.lang.*
 
-@ObjCMirror
-public interface test <: NSObjectProtocol {
+@ObjC
+public foreign interface test <: NSObjectProtocol {
     func f1(): Unit
     static func f2(): Unit
     @ObjCOptional

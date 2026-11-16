@@ -10,12 +10,12 @@
 
 
 // DEPENDENCE: pkg ../tools
-// EXEC: %compiler %pkg_opt pkg %compile_lib_opt -o pkg.%middle
+// EXEC: %compiler %cmp_opt %pkg_opt pkg %compile_lib_opt -o pkg.%middle
 // EXEC: %python tools/cjo_mutate.py --patch-cjo pkg.cjo --set-cjo-version 0.0.0
 // EXEC-PIPE-0: %compiler %cmp_opt pkg.%middle %f -o %output 2>&1 | compare %f
 // ASSERT: scan-not is incompatible: compiled with cjc
 // ASSERT: scan-not validation of
-// EXEC-0: %run %run_opt %output %run_args
+// RUN-EXEC-0: %run %run_opt %output %run_args
 
 import pkg.*
 

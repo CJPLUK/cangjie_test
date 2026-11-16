@@ -9,13 +9,13 @@
 
 import objc.lang.*
 
-@ObjCMirror
-public open class P {
+@ObjC
+public open foreign class P {
     public init()
 }
 
-@ObjCMirror
-public class M <: P {
+@ObjC
+public foreign class M <: P {
     public init()
 
     @ObjCInit

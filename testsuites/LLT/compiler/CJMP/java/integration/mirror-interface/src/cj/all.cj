@@ -8,32 +8,32 @@ package com.java.lib
 
 import java.lang.*;
 
-@JavaMirror
-interface I {
+@Java
+foreign interface I {
     func foo(): I
     func foo(arg: I): Int
 }
 
-@JavaMirror
-open class T {
+@Java
+open foreign class T {
     init()
 }
 
-@JavaMirror
-class Arg {
+@Java
+foreign class Arg {
     init()
     public func g(a: I): Int64
 }
 
-@JavaMirror
-class IImpl <: I {
+@Java
+foreign class IImpl <: I {
     init()
     public func foo(): I
     public func foo(arg: I): Int
 }
 
 
-@JavaImpl
+@Java
 class Impl <: T {
     public init() {
         print("CJ: started\n", flush: true)

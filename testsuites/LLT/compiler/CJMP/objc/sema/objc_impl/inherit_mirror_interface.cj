@@ -10,7 +10,7 @@
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class N <: I {
     init() {}
 
@@ -19,7 +19,7 @@ public class N <: I {
     }
 }
 
-@ObjCMirror
-public interface I {
+@ObjC
+public foreign interface I {
     func foo(): Unit
 }

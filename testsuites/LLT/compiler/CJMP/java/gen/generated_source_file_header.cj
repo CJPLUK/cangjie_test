@@ -18,6 +18,6 @@
 package cj
 import java.lang.*
 
-@JavaImpl
+@Java
 public class DummyImpl <: JObject {
 }

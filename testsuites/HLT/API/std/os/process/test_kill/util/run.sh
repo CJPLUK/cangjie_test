@@ -7,7 +7,14 @@
 
 run="$1"
 
-pkill -9 -f "test.out" 2>/dev/null || true
+# 清理本目录上一次运行可能遗留的 test.out：按 test.txt 记录的 pid 精确清理，
+# 并校验进程名，避免全局 pkill 误杀其他并行用例的 test.out/clang/pkill 进程
+if [ -f test.txt ]; then
+  oldpid=`cat test.txt 2>/dev/null`
+  if [ -n "$oldpid" ] && [ "`ps -p "$oldpid" -o comm= 2>/dev/null`" = "test.out" ]; then
+    kill -9 "$oldpid" 2>/dev/null || true
+  fi
+fi
 sleep 0.1
 
 clang test.c -o test.out
@@ -28,4 +35,8 @@ if [ -n "$pid" ]; then
   fi
 fi
 
-pkill -9 -f "test.out" 2>/dev/null || true
+# 清理本用例自己的 test.out（同样按 pid 精确清理，不做全局 pkill）
+mypid=`cat test.txt 2>/dev/null`
+if [ -n "$mypid" ] && [ "`ps -p "$mypid" -o comm= 2>/dev/null`" = "test.out" ]; then
+  kill -9 "$mypid" 2>/dev/null || true
+fi

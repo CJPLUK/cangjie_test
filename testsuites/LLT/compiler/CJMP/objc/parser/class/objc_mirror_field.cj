@@ -10,8 +10,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-open class M {
+@ObjC
+open foreign class M {
     init()
     // primitive
     public let x: Int64
@@ -24,5 +24,5 @@ open class M {
     public var am: A
 }
 
-@ObjCImpl
+@ObjC
 class A <: M {}

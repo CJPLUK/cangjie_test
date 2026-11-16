@@ -9,4 +9,4 @@
 // LEVEL: 3 
 // DEPENDENCE: src
 // (iOSNative) ERRCHECK: %compiler %compile_dylib_opt %cmp_ocffi_opt %link_oc --link-options="-install_name @rpath/libcjworld.dylib" src/cjworld/*.cj -o libcjworld.dylib
-// ASSERT: scan constructor with more than one parameter must have @ForeignName annotation
+// ASSERT: scan initializer in '@ObjC' foreign declaration must be annotated with '@ForeignName'

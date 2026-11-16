@@ -8,7 +8,8 @@
 
 // LEVEL: 1
 // EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>&1 | compare %f
-// ASSERT: scan The stacksize of default::main() exceeds cangjie max stacksize(2GB)
+// (!(target_android & target_aarch32 & O2)) ASSERT: scan The stacksize of default::main() exceeds cangjie max stacksize(2GB)
+// (target_android & target_aarch32 & O2) ASSERT: scan The stacksize of 0_for_keeping_some_types exceeds cangjie max stacksize(2GB)
 
 main(): Int64 {
     var varr: VArray<Int64, $6442450959> = VArray<Int64, $6442450959> {i => i + 1}

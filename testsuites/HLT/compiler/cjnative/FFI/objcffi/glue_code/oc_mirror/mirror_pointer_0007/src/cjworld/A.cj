@@ -10,16 +10,16 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public init() {}
     public open func foo() {
         var m = M()
         var p = m.goo()
         if (!p.isNull()) {
-            println("in cangjie foo, ${p.read()}")
-            p.write(())
-            println("in cangjie foo, ${p.read()}")
+            println("in cangjie foo, ${unsafe { p.read() }}")
+            unsafe { p.write(()) }
+            println("in cangjie foo, ${unsafe { p.read() }}")
         }
     }
 }

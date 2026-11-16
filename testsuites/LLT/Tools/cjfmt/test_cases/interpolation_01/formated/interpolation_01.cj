@@ -83,70 +83,70 @@ ${"Check SEMI+SEMI with spaces at end";}""")
     // Check NL as an expression separator.
     Assert.equals("1", """
 ${
-        a++
-        a
-    }""")
+    a++
+    a
+}""")
 
     // Check SEMI as an expression separator.
     Assert.equals("2", """
 ${
-        let a = 2;
-        a
-    }""")
+    let a = 2;
+    a
+}""")
 
     // Check NL+NL as an expression separator.
     Assert.equals("3", """
 ${
-        a << 3
-        3
-    }""")
+    a << 3
+    3
+}""")
 
     // Check NL+SEMI as an expression separator.
     Assert.equals("4", """
 ${
-        a *= 4
-        a
-    }""")
+    a *= 4
+    a
+}""")
 
     // Check SEMI+NL as an expression separator.
     Assert.equals("5", """
 ${
-        func f() {
-            1
-        };
-        a + f()
-    }""")
+    func f() {
+        1
+    };
+    a + f()
+}""")
 
     // Check SEMI+SEMI as an expression separator.
     Assert.equals("2", """
 ${
-        """
+    """
 ${a}""";
-        2
-    }""")
+    2
+}""")
 
     // Complex case.
     Assert.equals("3\n7\n", """
 ${
-        let a = """
+    let a = """
     ${let a = ""}""";
-        func one() {
-            1
-        };
-        func two() {
-            2
-        };
-        one() + two();
-        func three() {
-            one() + two()
-        }
-        three()
+    func one() {
+        1
+    };
+    func two() {
+        2
+    };
+    one() + two();
+    func three() {
+        one() + two()
     }
+    three()
+}
 ${
-        a++;
-        a++;
-        a++;
-        a
-    }
+    a++;
+    a++;
+    a++;
+    a
+}
 """)
 }

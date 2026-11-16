@@ -7,20 +7,18 @@
  */
 
 // LEVEL: 0
-// EXEC: %compiler %cmp_opt -o %output %f
-// RUN-EXEC: %run %run_opt %output %run_args
+// EXEC: %compiler %cmp_opt -o %output %f %cmp_utest_opt
+// RUN-EXEC: %run %run_opt %output %run_utest_opt %run_args
 
 import std.io.*
 import std.fs.*
 
-main() {
-    var fileName = ""
-    try {
-        var file1 = File.create(fileName)
-    } catch (e: IllegalArgumentException) {
-        if (e.toString() != "IllegalArgumentException: The file path is empty.") {
-            return 1
-        }
+@Test
+class TestFileCreation {
+    @TestCase
+    func testCase00(): Unit {
+        let fileName = ""
+        let e = @AssertThrows[IllegalArgumentException](File.create(fileName))
+        @Assert(e.toString(), "IllegalArgumentException: Invalid argument 'path': cannot be empty.")
     }
-    return 0
 }

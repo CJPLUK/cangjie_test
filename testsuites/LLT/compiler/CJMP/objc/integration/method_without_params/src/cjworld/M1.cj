@@ -8,8 +8,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public class M1 {
+@ObjC
+public foreign class M1 {
     public init()
     public func fooBar(): Bool
 }

@@ -7,38 +7,38 @@
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
 
 /* SCAN-IN
-error: Objective-C mirror field type must be Objective-C compatible
-  ==> objc_struct_illegal.cj:44:23:
+error: type of member variable in exported '@ObjC' must be Objective-C compatible
+  ==> objc_struct_illegal.cj:43:23:
    |
-44 |     public var start: Point2D
-   |                       ^^^^^^^
-   |
-
-error: Objective-C mirror field type must be Objective-C compatible
-  ==> objc_struct_illegal.cj:45:21:
-   |
-45 |     public var end: Point2D
-   |                     ^^^^^^^
+43 |     public var start: Point2D
+   |                       ^^^^^^^ 'Struct-Point2D' is not Objective-C compatible type
    |
 
-error: param type of Objective-C mirror constructor must be Objective-C compatible
-  ==> objc_struct_illegal.cj:47:17:
+error: type of member variable in exported '@ObjC' must be Objective-C compatible
+  ==> objc_struct_illegal.cj:44:21:
    |
-47 |     public init(start: Point2D, end: Point2D) {
-   |                 ^^^^^^^^^^^^^^
+44 |     public var end: Point2D
+   |                     ^^^^^^^ 'Struct-Point2D' is not Objective-C compatible type
    |
 
-error: param type of Objective-C mirror constructor must be Objective-C compatible
-  ==> objc_struct_illegal.cj:47:33:
+error: parameter type of initializer in exported '@ObjC' declaration must be Objective-C compatible
+  ==> objc_struct_illegal.cj:46:17:
    |
-47 |     public init(start: Point2D, end: Point2D) {
-   |                                 ^^^^^^^^^^^^
+46 |     public init(start: Point2D, end: Point2D) {
+   |                 ^^^^^^^^^^^^^^ 'Struct-Point2D' is not Objective-C compatible type
+   |
+
+error: parameter type of initializer in exported '@ObjC' declaration must be Objective-C compatible
+  ==> objc_struct_illegal.cj:46:33:
+   |
+46 |     public init(start: Point2D, end: Point2D) {
+   |                                 ^^^^^^^^^^^^ 'Struct-Point2D' is not Objective-C compatible type
    |
 */
 
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class Line <: Shape {
     public var start: Point2D
     public var end: Point2D
@@ -59,7 +59,7 @@ public struct Point2D {
     }
 }
 
-@ObjCMirror
-public open class Shape {
+@ObjC
+public open foreign class Shape {
     init()
 }

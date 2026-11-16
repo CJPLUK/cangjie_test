@@ -28,7 +28,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: MI {
     public init() {
         println("static: ${MI.staticMethod()}") // prints "static: 1"

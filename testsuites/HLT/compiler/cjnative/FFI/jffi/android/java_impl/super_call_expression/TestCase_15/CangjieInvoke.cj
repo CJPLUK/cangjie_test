@@ -50,7 +50,7 @@ func globalFunction10(p: JArray<UInt16>): JArray<Int16> {
     JArray<Int16>(114514i32)
 }
 
-@JavaImpl
+@Java
 public class ChildClass <: ParentClass {
     public init(param0: JArray<UInt16>, param1: Float32, param2: UInt16, param3: JArray<Int64>, param4: Float64,
         param5: Int32, param6: JArray<UInt16>, param7: JArray<Float64>, param8: JArray<UInt16>, param9: Int16) {

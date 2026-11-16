@@ -29,7 +29,6 @@ public struct HelperStruct {
 public class AnnotatedMembersClass {
     public init() {
     }
-
     @Deprecated
     public func annotatedFunc(): Unit {
     }

@@ -16,14 +16,14 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl["CangjieInvoke"]
+@Java["CangjieInvoke"]
 public class CangjieInvoke <: JObject {
     public init() {
         let class_01 = Init01()
     }
 }
 
-@JavaImpl["CangjieInvoke"]
+@Java["CangjieInvoke"]
 public class CangjieInvoke1 <: JObject {
     public func foo(): CangjieInvoke {
         return CangjieInvoke()

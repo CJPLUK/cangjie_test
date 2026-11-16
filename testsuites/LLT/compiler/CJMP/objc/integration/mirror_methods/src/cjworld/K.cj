@@ -8,8 +8,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-open class K {
+@ObjC
+public open foreign class K {
     public var number: Int64
 
     @ForeignName["init"]

@@ -4,7 +4,7 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// EXEC: %compiler %cmp_opt %f -o %output 2>&1 | compare %f
+// (CJNATIVE)EXEC-PIPE-1: %frontendCompiler %cmp_opt %f 2>&1 | compare %f
 
 
 main(): Int64 {
@@ -15,33 +15,18 @@ main(): Int64 {
     return 0
 }
 
-/* SCAN
-error: ambiguous use of 'clone'
-  ==> array_invalid_api.cj:12:13:
-   | 
-12 |     var z = a.clone
-   |             ^^^^^^^ 
-   | 
-note: found function member of 'Struct-Array<Generics-T>'
-   ==> (package std.core)array.cj:275:17:
-note: found function member of 'Struct-Array<Generics-T>'
-   ==> (package std.core)array.cj:289:17:
-
-error: cannot convert an integer literal to type 'Struct-Range<Int64>'
-  ==> array_invalid_api.cj:14:21:
-   | 
-14 |     var x = a.clone(2)
-   |                     ^ 
-   | 
-
-error: cannot assign to immutable value
-  ==> array_invalid_api.cj:13:5:
-   | 
-13 |     a.size = 1
-   |     ^^^^^^^^^^ 
-   | 
-note: property 'size' is immutable
-  ==> (package std.core)array_common.cj:60:17:
-
-3 errors generated, 3 errors printed.
-*/
+// The notes point into stdlib sources, whose line numbers move whenever the declarations above
+// them gain or lose a line. Match the note shape instead of a fixed line number so this case
+// keeps checking the diagnostics rather than the layout of array.cj; the positions inside this
+// file stay exact.
+// (CJNATIVE)ASSERT: regex-1 error: ambiguous use of 'clone'
+// (CJNATIVE)ASSERT: regex-1 ==> .*array_invalid_api\.cj:12:13:
+// (CJNATIVE)ASSERT: regex-2 note: found function member of 'Struct-Array<Generics-T>'
+// (CJNATIVE)ASSERT: regex-2 ==> \(package std\.core\)array\.cj:\d+:17:
+// (CJNATIVE)ASSERT: regex-1 error: cannot assign to immutable value
+// (CJNATIVE)ASSERT: regex-1 ==> .*array_invalid_api\.cj:13:5:
+// (CJNATIVE)ASSERT: regex-1 note: property 'size' is immutable
+// (CJNATIVE)ASSERT: regex-1 ==> \(package std\.core\)array_common\.cj:\d+:17:
+// (CJNATIVE)ASSERT: regex-1 error: cannot convert an integer literal to type 'Struct-Range<Int64>'
+// (CJNATIVE)ASSERT: regex-1 ==> .*array_invalid_api\.cj:14:21:
+// (CJNATIVE)ASSERT: regex-1 3 errors generated, 3 errors printed\.

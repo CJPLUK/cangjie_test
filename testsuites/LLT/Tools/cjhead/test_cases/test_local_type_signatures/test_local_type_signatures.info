@@ -1,0 +1,13 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// DEPENDENCE: ../%n ../check_local_api.py
+// EXEC: mkdir -p %n/out %n/package-out
+// EXEC: cjhead --enable-local-mode -i %n/cangjie -o %n/out > %n/cjhead-1.log 2>&1
+// EXEC: python3 check_local_api.py %n/cjd/a_types.cj.d %n/out/a_types.cj.d %n/cjhead-1.log
+// EXEC: python3 check_local_api.py %n/cjd/b_uses.cj.d %n/out/b_uses.cj.d %n/cjhead-1.log
+// EXEC: cjhead --enable-local-mode -i %n/cangjie -o %n/package-out -p > %n/cjhead-2.log 2>&1
+// EXEC: python3 check_local_api.py %n/package.cj.d %n/package-out/test.local_types.cj.d %n/cjhead-2.log

@@ -8,9 +8,9 @@
 
 // LEVEL:2
 // DEPENDENCE: %n.c cfg.json
-// (not Windows) EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg.json
-// (not Windows) EXEC: %clang %clang_opt %n.c -o %cffi_output
-// (not Windows) EXEC-PIPE-1: %compiler %cmp_opt %ffic_opt -o %output 2>&1 | compare %f
+// EXEC: %sed %sed_opt "s!cangjieCFFI_path!%cstring_cjo!g" cfg.json
+// EXEC: %clang %clang_opt %n.c -o %cffi_output
+// EXEC-PIPE-1: %compiler %cmp_opt %ffic_opt -o %output 2>&1 | compare %f
 
 
 
@@ -23,4 +23,4 @@ unsafe main():Int64 {
     print("CPointer Type Bool\n")
     return 0
 }
-// (not Windows) ASSERT: scan parse_illegal_modifier_in_scope
+// ASSERT: scan parse_illegal_modifier_in_scope

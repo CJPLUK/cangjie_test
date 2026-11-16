@@ -1,0 +1,24 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// (CJNATIVE and not Windows) DEPENDENCE: ../%n
+// (CJNATIVE and not Windows) RUN-EXEC-0: %cd %n && cjc %compile_shared_lib_opt -p src/cj %import_java_interop --output-javagen-dir=src/java/cj
+// (CJNATIVE and not Windows) RUN-EXEC-0: %cd %n && %javac %cp_cj_loader_java_interop src/java/com/JavaClass.java src/java/com/example/myapplication/Main.java src/java/cj/TestClass.java src/java/cj/CangjieInvoke.java -h ./ -d ./
+// (CJNATIVE and not Windows) RUN-EXEC-PIPE: %cd %n && %java %cp_cj_loader_java_interop -Djava.library.path./ com.example.myapplication.Main 2>& 1 | compare %f
+
+/* SCAN-IN
+run java Main
+in CangjieInvoke Init
+in TestClass Init
+in TestClass goo
+testclass.goo(): 88
+in CangjieInvoke newoo
+testclass.newoo(): 12345
+in TestClass bar
+TestClass.bar(): 54321
+in JavaClass bar
+JavaClass.bar(): 1
+*/

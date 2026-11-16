@@ -6,8 +6,7 @@
 
 // (CJNATIVE and not Windows) EXEC-0: %frontendCompiler %dump-parse %cmp_opt %f -o %output %compile_shared_lib_opt
 
-@JavaMirror["java.anypackage.M"]
-interface M {
+@Java["java.anypackage.M"]
+foreign interface M {
     func f(): Unit
 }
-

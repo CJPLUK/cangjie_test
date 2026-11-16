@@ -1,7 +1,7 @@
 # Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
 # This source file is part of the Cangjie project, licensed under Apache-2.0
 # with Runtime Library Exception.
-# 
+#
 # See https://cangjie-lang.cn/pages/LICENSE for license information.
 
 [dependencies]
@@ -19,39 +19,49 @@
   package-configuration = {}
 
 [target]
-  [target.x86_64-unknown-linux-gnu]
-    [target.x86_64-unknown-linux-gnu.bin-dependencies]
-      path-option = []
-      package-option = {pro1 = "pp/pro1/pro1.cjo"}
-
-  [target.aarch64-unknown-linux-gnu]
-    [target.aarch64-unknown-linux-gnu.bin-dependencies]
-      path-option = []
-      package-option = {pro1 = "pp/pro1/pro1.cjo"}
-
-  [target.cjvm]
-    [target.cjvm.bin-dependencies]
-      path-option = []
-      package-option = {pro1 = "pp/pro1/pro1.cjo"}
-
-  [target.x86_64-w64-mingw32]
-    [target.x86_64-w64-mingw32.bin-dependencies]
-      path-option = []
-      package-option = {pro1 = "pp/pro1/pro1.cjo"}
-
-  [target.x86_64-apple-darwin]
-    [target.x86_64-apple-darwin.bin-dependencies]
-      path-option = []
-      package-option = {pro1 = "pp/pro1/pro1.cjo"}
-
-  [target.aarch64-apple-darwin]
-    [target.aarch64-apple-darwin.bin-dependencies]
-      path-option = []
-      package-option = {pro1 = "pp/pro1/pro1.cjo"}
-
-  [target.aarch64-linux-ohos]
-    [target.aarch64-linux-ohos.bin-dependencies]
-      path-option = []
-      package-option = {pro1 = "pp/pro1/pro1.cjo"}
-
-
+[target.x86_64-unknown-linux-gnu]
+[target.x86_64-unknown-linux-gnu.bin-dependencies]
+  path-option = []
+  package-option = {pro1 = "pp/pro1/pro1.cjo"}
+[target.aarch64-unknown-linux-gnu]
+[target.aarch64-unknown-linux-gnu.bin-dependencies]
+  path-option = []
+  package-option = {pro1 = "pp/pro1/pro1.cjo"}
+[target.cjvm]
+[target.cjvm.bin-dependencies]
+  path-option = []
+  package-option = {pro1 = "pp/pro1/pro1.cjo"}
+[target.x86_64-w64-mingw32]
+[target.x86_64-w64-mingw32.bin-dependencies]
+  path-option = []
+  package-option = {pro1 = "pp/pro1/pro1.cjo"}
+[target.x86_64-apple-darwin]
+[target.x86_64-apple-darwin.bin-dependencies]
+  path-option = []
+  package-option = {pro1 = "pp/pro1/pro1.cjo"}
+[target.aarch64-apple-darwin]
+[target.aarch64-apple-darwin.bin-dependencies]
+  path-option = []
+  package-option = {pro1 = "pp/pro1/pro1.cjo"}
+[target.aarch64-linux-ohos]
+[target.aarch64-linux-ohos.bin-dependencies]
+  path-option = []
+  package-option = {pro1 = "pp/pro1/pro1.cjo"}
+[target.x86_64-linux-ohos]
+  compile-option = "-B=${OHOS_ROOT}/llvm/prebuilt/x86_64-linux-ohos/bin --sysroot=${OHOS_ROOT}/llvm/prebuilt/x86_64-linux-ohos/sysroot"
+[target.aarch64-linux-android26]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.aarch64-linux-android31]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.aarch64-linux-android32]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.aarch64-linux-android35]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.arm-linux-android23]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.aarch64-linux-android23]
+  compile-option = "-B=${NDK_ROOT}/bin --sysroot=${NDK_ROOT}/sysroot"
+[target.arm64-apple-ios-simulator]
+  compile-option = "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ --sysroot=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk"
+[target.x86_64-apple-ios-simulator]
+  compile-option = "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ --sysroot=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk"

@@ -10,7 +10,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class JavaImplClass {
     public var value: Int64 = 114514i64
 

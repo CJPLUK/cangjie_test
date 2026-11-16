@@ -45,6 +45,7 @@ extend A <: I {
         }
     }
 }
+main() {}
 
 /* SCAN
 error: property 'p1' should have 'mut' modifier
@@ -143,43 +144,35 @@ note: the visibility of the base 'p4' is 'public'
    |          ^^ the base 'p4' is in 'interface'
    | 
 
-error: The type of the override/implement property must be the same
-  ==> property_mut_immut_mismatch.cj:42:5:
-   | 
-42 |     static prop p5: Int64 {
-   |     ^ 
-   | 
-
-error: property 'p5' should have 'mut' modifier
-  ==> property_mut_immut_mismatch.cj:42:5:
-   | 
-42 |       static prop p5: Int64 {
-   |  _____^
-43 | |         get() {
-   | | ...
-46 | |     }
-   | |_____^
-   | 
-
-error: a deriving member must be at least as visible as its base member
+error: overloaded instance property must be of the same data type
   ==> property_mut_immut_mismatch.cj:42:17:
    | 
 42 |     static prop p5: Int64 {
-   |                 ^^ the visibility of the deriving 'p5' is 'internal'
+   |                 ^^ 
    | 
-note: the visibility of the base 'p5' is 'public'
+note: 'p5' is previously declared here
   ==> property_mut_immut_mismatch.cj:14:21:
    | 
 14 |     mut static prop p5: Int32
-   |                     ^^ the base 'p5' is in 'interface'
+   |                     ^^ 
    | 
 
-error: 'main' is missing
- ==> property_mut_immut_mismatch.cj:1:1:
-  | 
-1 | // Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
-  | ^ 
-  | 
+error: implementation of function or property is needed in 'extend A'
+  ==> property_mut_immut_mismatch.cj:19:1:
+   | 
+19 |   extend A <: I {
+   |  _^
+20 | |     static prop p1: Int64 {
+   | | ...
+47 | | }
+   | |_^
+   | 
+note: unimplemented interface property 'p5'
+  ==> property_mut_immut_mismatch.cj:14:5:
+   | 
+14 |     mut static prop p5: Int32
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^ 
+   | 
 
-12 errors generated, 12 errors printed.
+10 errors generated, 10 errors printed.
 */

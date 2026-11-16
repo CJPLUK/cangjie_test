@@ -9,10 +9,10 @@
 
 import objc.lang.*
 
-@ObjCMirror
-class NSObject {
+@ObjC
+foreign class NSObject {
     init()
 }
 
-@ObjCMirror
-func foo(a: NSObject, b: Float64): NSObject
+@ObjC
+foreign func foo(a: NSObject, b: Float64): NSObject

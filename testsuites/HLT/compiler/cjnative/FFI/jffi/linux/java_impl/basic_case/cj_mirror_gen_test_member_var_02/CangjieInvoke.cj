@@ -18,7 +18,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: JObject {
     public init() {
         let class_01 = MemberVar(true, 1, 1, 1, 1, 1, 3.14, 3.14)

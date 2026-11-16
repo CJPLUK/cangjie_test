@@ -26,7 +26,7 @@ error: cannot assign to immutable value
   ==> class6.cj:14:9:
    | 
 14 |         a = 2  
-   |         ^^^^^ 
+   |         ^ 
    | 
 note: property 'a' is immutable
  ==> class6.cj:7:18:
@@ -39,7 +39,7 @@ error: cannot assign to immutable value
   ==> class6.cj:20:9:
    | 
 20 |         x.a = 4 
-   |         ^^^^^^^ 
+   |         ^^^ 
    | 
 note: property 'a' is immutable
  ==> class6.cj:7:18:

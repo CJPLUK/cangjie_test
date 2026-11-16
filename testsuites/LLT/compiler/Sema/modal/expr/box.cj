@@ -1,0 +1,28 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// EXEC: %compiler %local %f -o %output
+// EXEC: %run %run_opt %output %run_args
+interface P {
+    func foo(this @local!): String
+}
+struct F <: P {
+    F(var a: String) {}
+    exclave init(this @local!, p: String @local!) {
+        a = p
+    }
+    public func foo(this @local!): String {
+        "${a.size}"
+    }
+}
+exclave func gam<T>(v: T @local!) where T <: P {
+    v.foo()
+}
+main() {
+    let a: P@local! = F("haha") @local!
+    gam(a)
+    0
+}

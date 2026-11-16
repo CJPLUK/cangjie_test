@@ -8,30 +8,30 @@ package cj
 
 import java.lang.JObject
 
-@JavaMirror["com.java.lib.JBase"]
-public open class JBase {
+@Java["com.java.lib.JBase"]
+public open foreign class JBase {
     public init()
 }
 
-@JavaMirror["com.java.lib.JDer"]
-public open class JDer <: JBase {
+@Java["com.java.lib.JDer"]
+public open foreign class JDer <: JBase {
     public init()
 }
 
-@JavaMirror["com.java.lib.JDerValue"]
-public open class JDerValue <: JBase {
+@Java["com.java.lib.JDerValue"]
+public open foreign class JDerValue <: JBase {
     public init(value: Int32)
     public func getValue(): Int32
 }
 
-@JavaImpl
+@Java
 public class CjDerValue <: JBase {
     public CjDerValue(private var value: Int32) {}
 
     public func getValue(): Int32 { value }
 }
 
-@JavaImpl
+@Java
 public class CjDer <: JDer {
     public let x: Int32
 
@@ -44,7 +44,7 @@ public class CjDer <: JDer {
     }
 }
 
-@JavaImpl
+@Java
 public class CjBaseDer <: JBase {
     public let x: Int32
 
@@ -79,8 +79,8 @@ func asAnyJDer(o: Any): String { tf((o as JDer).isSome()) }
 func asAnyCjDer(o: Any): String { tf((o as CjDer).isSome()) }
 func asAnyCjBaseDer(o: Any): String { tf((o as CjBaseDer).isSome()) }
 
-@JavaMirror["com.java.lib.Exe"]
-public open class Exe {
+@Java["com.java.lib.Exe"]
+public open foreign class Exe {
     public init()
 
     public static func getJBase(t: Int32): JBase
@@ -90,7 +90,7 @@ public open class Exe {
     public static func getCjDerValue(x: Int32): JBase
 }
 
-@JavaImpl
+@Java
 public class CjExe <: Exe {
     public init(doTest: Bool) {
         if (!doTest) { return }
@@ -216,4 +216,3 @@ public class CjExe <: Exe {
         println("new CjDer() | ${isJBase(getJDer(2))}     | ${isJDer(getJDer(2))}    | ${isCjDer(getJDer(2))}     | ${isCjBaseDer(getJDer(2))}") 
     }
 }
-

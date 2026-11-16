@@ -22,7 +22,7 @@ package UNNAMED
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class CangjieInvoke <: I2 {
     public init() {
         // super() // super is default

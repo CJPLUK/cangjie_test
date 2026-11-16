@@ -1,0 +1,13 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ *
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+
+// LEVEL: 0
+// DESC: Array.copyTo 常量 dataSize=SIZE_OF_SINGLE_COPY+8（2147483648）进循环，分段 SIZE+8 字节；完整编译成 exe 通过（不运行，防 2GB 分配 OOM）
+// DEPENDENCE: main.cj ../check.py
+// EXEC: %compiler %cmp_opt main.cj -o %output
+// EXEC: %python check.py --file %output --max-size 5000000

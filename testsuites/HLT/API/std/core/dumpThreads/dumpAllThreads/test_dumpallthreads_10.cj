@@ -21,9 +21,9 @@ var running_count = 0
 var pending_count = 0
 let terminated_count = AtomicInt64(0)
 let random = Random()
-@When[os=="iOS"]
+@When[os == "iOS" && env == ""]
 var count:Int64=21
-@When[os!="iOS"]
+@When[os != "iOS" || env != ""]
 var count:Int64=20
 
 class C1 {

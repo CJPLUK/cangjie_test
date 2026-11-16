@@ -1,7 +1,7 @@
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>& 1 | compare %f
 
-@JavaMirror
-class C {
+@Java
+foreign class C {
     @ForeignName[]
     public func foo(): Unit
 }
@@ -19,4 +19,3 @@ error: @ForeignName requires exactly one 'String' literal argument
 // with Runtime Library Exception.
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
-

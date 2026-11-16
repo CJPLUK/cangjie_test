@@ -6,12 +6,12 @@
 
 // (CJNATIVE and not Windows) EXEC-PIPE-1: %compiler %cmp_opt %f -o %output %compile_shared_lib_opt %import_objc_interop 2>& 1 | compare %f
 
-// ASSERT: scan error: @ObjCMirror declaration cannot have static initializer
+// ASSERT: scan error: static initializer is not allowed within '@ObjC' foreign declaration
 
 import objc.lang.*
 
-@ObjCMirror
-public class N {
+@ObjC
+public foreign class N {
     static init()
 
     @ForeignName["twoParams:second:"]

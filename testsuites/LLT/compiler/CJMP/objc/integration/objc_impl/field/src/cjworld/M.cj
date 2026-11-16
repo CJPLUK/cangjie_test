@@ -8,22 +8,22 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class M <: ProtoM {
+@ObjC
+public open foreign class M <: ProtoM {
     init()
 }
 
-@ObjCMirror
-public class M1 <: ProtoM {
+@ObjC
+public foreign class M1 <: ProtoM {
     init()
 }
 
-@ObjCMirror
-public interface ProtoM {
+@ObjC
+public foreign interface ProtoM {
     func identity(): Unit
 }
 
-@ObjCMirror
-public interface Checker {
+@ObjC
+public foreign interface Checker {
     func check(): Unit
 }

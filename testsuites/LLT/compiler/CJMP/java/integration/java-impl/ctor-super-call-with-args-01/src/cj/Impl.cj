@@ -25,7 +25,7 @@ func gf(x: Int64): Int64 {
     x + 1
 }
 
-@JavaImpl
+@Java
 public class Impl <: MyObject {
     public init() {
         super(1)

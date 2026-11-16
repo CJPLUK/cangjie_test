@@ -8,7 +8,7 @@ package cj
 
 import java.lang.*
 
-@JavaImpl
+@Java
 public class Main <: JavaClass {
    public init() {
      println("in M Init")
@@ -27,5 +27,3 @@ public class Main <: JavaClass {
         print("cj: Main() end\n", flush: true)
     }
 }
-
-

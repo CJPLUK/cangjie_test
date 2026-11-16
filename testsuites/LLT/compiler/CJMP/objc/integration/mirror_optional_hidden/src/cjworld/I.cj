@@ -8,8 +8,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public interface I {
+@ObjC
+public foreign interface I {
     @ObjCOptional
     func memberFuncNotImplemented(n: Int32): Unit
     @ObjCOptional

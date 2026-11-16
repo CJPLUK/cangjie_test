@@ -10,8 +10,8 @@ import objc.lang.*
 
 type PrimitiveType = Float64
 
-@ObjCMirror
-interface K {
+@ObjC
+foreign interface K {
     @ObjCOptional
     func unimplemented(): Unit
     @ObjCOptional
@@ -22,8 +22,8 @@ interface K {
     func implementedWithArg(i: Int64): Unit
 }
 
-@ObjCMirror
-open class M <: K {
+@ObjC
+public open foreign class M <: K {
     @ForeignName["init"]
     public init()
 

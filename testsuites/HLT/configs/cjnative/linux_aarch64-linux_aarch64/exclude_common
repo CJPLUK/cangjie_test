@@ -4,36 +4,8 @@
 #
 # See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-# testcase is not correct.
-Tools/cjlsp/testcases/autotestcase/deprecated/textDocument_completion_018.info
-
-# testcase should be fixed.
+# https://gitcode.com/Cangjie/cangjie_test/issues/520
 Tools/cjdb/datacom/C_FFI/viewVariables_Cstring_002.info
 
-# issue 198: syntax rewriter not support
-API/syntax/visit/ASTRewriter/test_rewriter_02.cj
-
-API/std/io/file/File_create_03.cj
-API/std/io/StringReader/StringReader_readln_13_01.cj
-
-
-# cjmp 
-# https://gitcode.com/Cangjie/cangjie_test/issues/265
-compiler/cjnative/Packages/cjmp/cjmp_01005/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_01006/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_01007/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_04046/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_04052/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_11044/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_11045/test.cj
-compiler/cjnative/Packages/cjmp/cjmp_14006/test.cj
-
-# https://gitcode.com/Cangjie/cangjie_test/issues/315
-compiler/cjnative/Chir/CompileOption/plugin/testpath/test_plugin_path_05n.cj
-
-API/syntax/parseFunc/parseDir/path/parsedir_path_012n.cj
-
-API/net/TLS_new/KeylessTlsServerConfig/test_KeylessTlsServerConfig.cj
-
-# cjbind temporarily does not support Linux aarch64 https://gitcode.com/Cangjie/cangjie_tools/issues/721
+# https://gitcode.com/Cangjie/cangjie_tools/issues/721
 Tools/hle/c

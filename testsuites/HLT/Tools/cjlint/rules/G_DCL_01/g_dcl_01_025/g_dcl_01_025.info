@@ -9,4 +9,5 @@
 // LEVEL: 1
 // DEPENDENCE: ./src
 // EXEC-PIPE: %lint -f ./src -c %cangjieDir/tools -m %cangjieDir 2>&1 | compare %f
-// ASSERT: regex .*test.cj:14.*G.DCL.01.*
+// ASSERT: regex .*test.cj:11.*G.DCL.01.*
+// ASSERT: regex .*test.cj:16.*G.DCL.01.*

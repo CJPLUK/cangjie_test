@@ -12,7 +12,9 @@
 //
 // TEST INTENT: results are yielded in completion order, not launch order
 // DOC REF: ThreadGroup - "Results are yielded as threads complete"
-// EXPECT: collected order is 2,3,1 with 60/10/30ms delays, exit 0
+// EXPECT: collected order is 2,3,1 with 600/100/300ms delays, exit 0
+// NOTE: delays are spaced 200ms+ apart so ordinary scheduler jitter
+// (GC pauses, CPU contention on CI machines) cannot reorder them
 
 import std.collection.ArrayList
 import std.concurrent.*
@@ -21,15 +23,15 @@ main(): Int64 {
     let results = threadScope<Int64, ArrayList<Int64>> {
         group =>
             group.launch {
-                sleep(Duration.millisecond * 60)
+                sleep(Duration.millisecond * 600)
                 1
             }
             group.launch {
-                sleep(Duration.millisecond * 10)
+                sleep(Duration.millisecond * 100)
                 2
             }
             group.launch {
-                sleep(Duration.millisecond * 30)
+                sleep(Duration.millisecond * 300)
                 3
             }
 

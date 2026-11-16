@@ -11,7 +11,7 @@
 // EXEC: ObjCInteropGen -Dgeneratedtoml=generated.toml -Dworkspace=sub1/sub2 -Doptimization_level=2 -Doutput=. test.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-@ObjCMirror
-public open class M {
+@ObjC
+public open foreign class M {
 }
 */

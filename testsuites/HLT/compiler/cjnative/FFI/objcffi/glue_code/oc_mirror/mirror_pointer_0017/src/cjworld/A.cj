@@ -12,7 +12,7 @@ import objc.lang.*
 
 public class C {}
 
-@ObjCImpl
+@ObjC
 public class A <: M {
     public init() {}
     public open func foo(a: ObjCPointer<C>) {}

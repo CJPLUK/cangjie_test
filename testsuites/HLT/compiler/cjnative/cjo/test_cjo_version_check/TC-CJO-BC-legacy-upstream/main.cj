@@ -13,8 +13,8 @@
 
 
 // DEPENDENCE: pkg_l1 pkg_l2 ../tools diag_ok.txt
-// EXEC: %compiler %pkg_opt pkg_l1 %compile_lib_opt -o l1.%middle
-// EXEC: %compiler %pkg_opt pkg_l2 %compile_lib_opt -o l2.%middle
+// EXEC: %compiler %cmp_opt %pkg_opt pkg_l1 %compile_lib_opt -o l1.%middle
+// EXEC: %compiler %cmp_opt %pkg_opt pkg_l2 %compile_lib_opt -o l2.%middle
 // EXEC: %cp l1.cjo l1_mut.cjo
 // EXEC: %cp l2.cjo l2_mut.cjo
 // EXEC: %python tools/cjo_mutate.py --patch-cjo l1_mut.cjo --set-cjo-version 0.0.0
@@ -24,7 +24,7 @@
 // EXEC-PIPE-0: %compiler %cmp_opt l1.%middle l2.%middle %f -o %output 2>&1 | compare diag_ok.txt
 // ASSERT: scan-not is incompatible: compiled with cjc
 // ASSERT: scan-not validation of
-// EXEC-0: %run %run_opt %output %run_args
+// RUN-EXEC-0: %run %run_opt %output %run_args
 
 import l1.*
 import l2.*

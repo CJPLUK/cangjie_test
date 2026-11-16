@@ -29,7 +29,7 @@ main() {
 }
 
 /* SCAN
-error: interface function 'foo' must be implemented in 'D'
+error: interface function 'foo(a: C1<C2<Int32>>): Int32' must be implemented in 'D'
   ==> class_no_override_modifier_invalid_5.cj:25:1:
    | 
 25 | class D <: A & B {}

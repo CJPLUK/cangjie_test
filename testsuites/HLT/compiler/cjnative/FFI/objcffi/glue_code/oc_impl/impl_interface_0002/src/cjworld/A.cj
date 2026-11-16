@@ -11,7 +11,7 @@ package cjworld
 import objc.foundation.NSObject
 import objc.lang.*
 
-@ObjCImpl
+@ObjC
 public class A <: NSObject & I {
     private var a = 0
     public init() {}

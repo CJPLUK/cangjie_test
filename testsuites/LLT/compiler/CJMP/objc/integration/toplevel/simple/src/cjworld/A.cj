@@ -10,13 +10,13 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class NSObject {
+@ObjC
+public open foreign class NSObject {
     init()
 }
 
-@ObjCMirror
-public class NSString <: NSObject {
+@ObjC
+public foreign class NSString <: NSObject {
     init()
 }
 

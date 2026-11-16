@@ -8,8 +8,8 @@
 
 import objc.lang.*
 
-@ObjCMirror
-class Foo {
+@ObjC
+foreign class Foo {
     init()
 }
 

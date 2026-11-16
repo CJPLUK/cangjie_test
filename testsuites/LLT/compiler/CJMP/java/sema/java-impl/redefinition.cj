@@ -10,12 +10,12 @@ package cj
 
 import java.lang.JObject
 
-@JavaImpl
+@Java
 class A {
     public init() {}
 }
 
-@JavaImpl["cj.A"]
+@Java["cj.A"]
 class B {
 }
 

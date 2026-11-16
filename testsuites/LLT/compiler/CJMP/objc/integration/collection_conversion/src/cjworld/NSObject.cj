@@ -7,8 +7,8 @@ package cjworld
 
 import objc.lang.*
 
-@ObjCMirror
-public open class NSObject {
+@ObjC
+public open foreign class NSObject {
     public init()
     @ForeignName["setValue:forKey:"] 
     public open func setValueForKey(anObject: ?ObjCId, aKey: ?NSString): Unit

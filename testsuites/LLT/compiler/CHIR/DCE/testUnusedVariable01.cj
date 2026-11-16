@@ -158,14 +158,6 @@ warning: unused variable:'i'
    # note: this warning can be suppressed by setting the compiler option `-Woff unused`
 
 warning: unreachable pattern
-  ==> testUnusedVariable01.cj:49:14:
-   | 
-49 |         case _ => println(0)
-   |              ^ 
-   | 
-   # note: this warning can be suppressed by setting the compiler option `-Woff unused`
-
-warning: unreachable pattern
   ==> testUnusedVariable01.cj:59:14:
    | 
 59 |         case _ => println(0)
@@ -181,5 +173,7 @@ warning: unreachable pattern
    | 
    # note: this warning can be suppressed by setting the compiler option `-Woff unused`
 
-11 warnings generated, 11 warnings printed.
+10 warnings generated, 10 warnings printed.
 */
+
+// Enum payload constants are not propagated yet, so foo6 does not diagnose its fallback after the guard.

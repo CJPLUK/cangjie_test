@@ -10,7 +10,7 @@
 
 import java.lang.*
 
-@JavaImpl
+@Java
 class M {
     // Checks that fields can be String
     var s: String = "s"

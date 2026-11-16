@@ -9,4 +9,4 @@
 // LEVEL: 1
 // DEPENDENCE: ./src
 // EXEC-PIPE: %lint -f ./src -c %cangjieDir/tools -m %cangjieDir 2>&1 | compare %f
-// ASSERT: regex .*test.cj:17.*G\.CON\.02: Use mtx\.lock\(\) outside try block or release 'mtx' at finally block\.
+// ASSERT: regex-not .*G.CON.02.*

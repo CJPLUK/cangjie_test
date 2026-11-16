@@ -15,9 +15,9 @@ foreign func foo(): CFunc<(Int32) -> Unit>
 @ObjCMirror
 public func bar(): ObjCBlock<(Int32) -> Unit>
 
-@ObjCMirror
-public open class M {
-    public open func foo(): ObjCFunc<(Int32) -> Unit>
+@ObjC
+public open foreign class M {
+    public open func foo(): CFunc<(Int32) -> Unit>
     public open func bar(): ObjCBlock<(Int32) -> Unit>
 }
 */

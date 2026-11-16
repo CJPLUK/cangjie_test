@@ -1,0 +1,14 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// LEVEL: 0
+// DEPENDENCE: s08_default_injection_guard.d.ts
+// EXEC: %hle_arkts -i s08_default_injection_guard.d.ts -o . --module-name="my_module"
+// EXEC-PIPE: %cat cj/s08_default_injection_guard/src/s08_default_injection_guard.cj | compare %f
+// ASSERT: scan public var unsafeProp: Option<String> = None
+// ASSERT: scan-not unquoted_evil_payload
+// ASSERT: scan public var safeNumericProp: Float64 = 3.14
+// ASSERT: scan public var safeBoolProp: Bool = true

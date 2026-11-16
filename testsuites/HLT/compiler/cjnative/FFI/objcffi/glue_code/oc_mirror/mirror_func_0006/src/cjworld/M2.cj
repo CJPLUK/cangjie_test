@@ -10,10 +10,8 @@ package cjworld
  
 import objc.lang.*
 
-@ObjCMirror
-public open class M2 {
+@ObjC
+public open foreign class M2 {
     public init()
     public open func goo(): M1
 }
-
-

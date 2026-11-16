@@ -4,141 +4,67 @@
 #
 # See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-# testcase is not correct.
+# https://gitcode.com/Cangjie/cangjie_test/issues/521
 Tools/cjlsp/testcases/autotestcase/deprecated/textDocument_completion_018.info
 
-# pffi should run with Python-ffi version
-API/std/ffi/Python
-# invoke_api can only be used in cjvm.
-compiler/cjnative/FFI/cffi/invoke_api
-
-# stable abi: not support jffi
-compiler/cjnative/stable_abi/05_class/02_modify/01_define_content/01_visible_outside_module/02_compiler_directive/Java/class_Java_add.cj
-compiler/cjnative/stable_abi/05_class/02_modify/01_define_content/01_visible_outside_module/02_compiler_directive/Java/class_Java_delete.cj
-compiler/cjnative/stable_abi/06_interface/02_modify/01_define_content/02_compiler_directive/java/06_interface_Java_add.cj
-compiler/cjnative/stable_abi/06_interface/02_modify/01_define_content/02_compiler_directive/java/06_interface_Java_delete.cj
-compiler/cjnative/stable_abi/interface/modify/funcmemeber_property/modify/compiler_directive/interface_add_java.cj
-
-# issue 198: syntax rewriter not support
-API/syntax/visit/ASTRewriter/test_rewriter_02.cj
-API/syntax/parseFunc/parseDir/path/parsedir_path_012n.cj
-
-# fail in ci env
-API/std/socket/UdpSocket/test_udp_transportation_init.cj
-API/std/io/file/File_create_03.cj
-API/std/io/StringReader/StringReader_readln_13_01.cj
-
-# update exception message
-API/std/reflect/cjnative/Generic
-
-# https://gitcode.com/Cangjie/cangjie_compiler/issues/442
-compiler/cjnative/Packages/org_name/import_decl/backtick_in_org_name_0.cj
-compiler/cjnative/Packages/org_name/import_decl/backtick_in_org_name_1.cj
-
-# https://gitcode.com/Cangjie/cangjie_compiler/issues/443
-compiler/cjnative/Packages/org_name/import_decl/invalid_colon_0.cj
-compiler/cjnative/Packages/org_name/package_decl/invalid_colon_0.cj
-compiler/cjnative/Packages/org_name/package_decl/invalid_colon_1.cj
-compiler/cjnative/Packages/org_name/package_decl/no_package_name_0.cj
-compiler/cjnative/Packages/org_name/package_decl/no_package_name_1.cj
-compiler/cjnative/Packages/org_name/package_decl/no_package_name_2.cj
-
-# https://gitcode.com/Cangjie/cangjie_test/issues/315
-compiler/cjnative/Chir/CompileOption/plugin/testpath/test_plugin_path_05n.cj
-Runtime/cjnative/runtime/OutOfMemoryError/oom_dump.cj
-
-# cjmp
-# only this exclude file from cangjie_test repo is used for linux_x86_64
-# While Cangjie toolchain for linux_x86_64 does not contain interop library
-# ObjectiveC interop tests should be excluded
-compiler/cjnative/FFI/objcffi/glue_code/cj_impl
-
-# cjmp
-# https://gitcode.com/Cangjie/cangjie_compiler/issues/566
-compiler/cjnative/FFI/objcffi/glue_code/cj_impl/impl_class_0102/test.info
-compiler/cjnative/FFI/objcffi/glue_code/cj_impl/impl_class_0103/test.info
-compiler/cjnative/FFI/objcffi/glue_code/cj_impl/impl_class_0104/test.info
-
+# https://gitcode.com/Cangjie/cangjie_test/issues/517
 API/net/TLS_new/KeylessTlsServerConfig/test_KeylessTlsServerConfig.cj
 
+# https://gitcode.com/Cangjie/cangjie_test/issues/515
 Runtime/cjnative/runtime/PointerAuth
-compiler/cjnative/FFI/jffi/android/native
 
-# To be fixed soon.
-Tools/hle/arkts/class/class_impl_interface.info
 
-Benchmark
 
-# flaky test.
+# https://gitcode.com/Cangjie/cangjie_test/issues/516
 Runtime/cjnative/runtime/Finalizer/complex_1.cj
 
-# Known Bug
-compiler/cjnative/Chir/dispatch/property_matrix/22_default_plus_abstract_unique_select/main.cj
-compiler/cjnative/stable_abi/07_extend/02_modify/01_define_content/05_instance_function/01_extend_nonclass/02_modify/return_type/41_extend_modify_func_returntype/41_extend_modify_func_returntype_0202.cj
+# modal type
+# https://gitcode.com/Cangjie/cangjie_compiler/issues/1134
+compiler/cjnative/TypesAndVariables/immutable/immutable_range_02.cj
 
-# https://gitcode.com/Cangjie/cangjie_test/issues/488
-Tools/cjlint/normal\004\normal_004001\normal_004001.info
-Tools/cjlint/normal\004\normal_004002\normal_004002.info
-Tools/cjlint/normal\004\normal_004003\normal_004003.info
-Tools/cjlint/normal\004\normal_004004\normal_004004.info
-Tools/cjlint/normal\004\normal_004005\normal_004005.info
-Tools/cjlint/normal\004\normal_004006\normal_004006.info
-Tools/cjlint/normal\004\normal_004007\normal_004007.info
-Tools/cjlint/normal\004\normal_004008\normal_004008.info
-Tools/cjlint/rules\G_CLS_01\g_cls_01_009\g_cls_01_009.info
-Tools/cjlint/rules\G_CON_01\g_con_01_003\g_con_01_003.info
-Tools/cjlint/rules\G_CON_01\g_con_01_006\g_con_01_006.info
-Tools/cjlint/rules\G_CON_02\g_con_02_1037\g_con_02_1037.info
-Tools/cjlint/rules\G_DCL_01\g_dcl_01_025\g_dcl_01_025.info
-Tools/cjlint/rules\G_FUN_02\g_fun_02_006\g_fun_02_006.info
-Tools/cjlint/rules\G_FUN_02\g_fun_02_007\g_fun_02_007.info
-Tools/cjlint/rules\G_FUN_02\g_fun_02_008\g_fun_02_008.info
-Tools/cjlint/rules\G_FUN_02\g_fun_02_023\g_fun_02_023.info
-Tools/cjlint/rules\G_NAM_05\G_NAM_05_016\G_NAM_05_016.info
-Tools/cjlint/rules\G_SYN_01\g_syn_01_029\g_syn_01_029.info
-Tools/cjlint/rules\G_VAR_03\g_var_03_008\g_var_03_008.info
-Tools/cjlint/rules\P_01\p_01_10033\p_01_10033.info
-
-# https://gitcode.com/Cangjie/cangjie_test/issues/489
-Tools/cjfmt/binary_operator/binary_operator_03_wrap_over_length/binary_operator_03_wrap_over_length.info
-Tools/cjfmt/blank_line/blank_line_02_top_level_decls/blank_line_02_top_level_decls.info
-Tools/cjfmt/blank_line/blank_line_08_top_multiline_comment_blank/blank_line_08_top_multiline_comment_blank.info
-Tools/cjfmt/cli/options/cjfmt_cli_416.info
-Tools/cjfmt/cli/options/cjfmt_cli_601.info
-Tools/cjfmt/line_length/line_length_02_boundary_121/line_length_02_boundary_121.info
-Tools/cjfmt/macro/macro_08_blank_line_vars/macro_08_blank_line_vars.info
-Tools/cjfmt/multiline_comment/multiline_comment_03_toplevel_alignment/multiline_comment_03_toplevel_alignment.info
-
-# 已知的不可达告警BUG
-compiler/cjnative/Chir/DeadCodeWarnning/enhancement/C16_guard_false.cj
+# https://gitcode.com/Cangjie/cangjie_test/issues/518
 compiler/cjnative/Chir/DeadCodeWarnning/enhancement/C16_guard_short_circuit.cj
 compiler/cjnative/Chir/DeadCodeWarnning/enhancement/C6_merged_reasons.cj
 compiler/cjnative/Chir/DeadCodeWarnning/enhancement/E1_twr_nothing.cj
-compiler/cjnative/Chir/DeadCodeWarnning/enhancement/FP10_enum_ctor_guard_value.cj
-compiler/cjnative/Chir/DeadCodeWarnning/enhancement/FP11_opt_guard_opaque_call.cj
 compiler/cjnative/Chir/DeadCodeWarnning/enhancement/FP12_elvis_none_lhs.cj
 compiler/cjnative/Chir/DeadCodeWarnning/enhancement/FP13_elvis_none_both_sides_execute.cj
 compiler/cjnative/Chir/DeadCodeWarnning/enhancement/FP14_elvis_stale_reassign.cj
-compiler/cjnative/Chir/DeadCodeWarnning/enhancement/FP1_const_guard_false_live_successor.cj
-compiler/cjnative/Chir/DeadCodeWarnning/enhancement/FP2_const_guard_false_multi_live_catcher.cj
-compiler/cjnative/Chir/DeadCodeWarnning/enhancement/FP3_bool_selector_guard_false.cj
-compiler/cjnative/Chir/DeadCodeWarnning/enhancement/FP4_tuple_selector_guard_false.cj
-compiler/cjnative/Chir/DeadCodeWarnning/enhancement/FP5_const_arith_guard.cj
-compiler/cjnative/Chir/DeadCodeWarnning/enhancement/FP6_const_neg_guard.cj
-compiler/cjnative/Chir/DeadCodeWarnning/enhancement/FP7_var_propagated_selector.cj
-compiler/cjnative/Chir/DeadCodeWarnning/enhancement/FP8_enum_nopayload_guard_false.cj
-compiler/cjnative/Chir/DeadCodeWarnning/enhancement/FP9_opt_ctor_guard_value.cj
 compiler/cjnative/Chir/DeadCodeWarnning/enhancement/R2_all_alts_excluded.cj
 compiler/cjnative/Chir/DeadCodeWarnning/enhancement/S5_nested_transfer.cj
 compiler/cjnative/Chir/DeadCodeWarnning/enhancement/S6_receiver_callee.cj
 compiler/cjnative/Chir/DeadCodeWarnning/enhancement/X4_body_no_recursion.cj
 
-# AOP issues https://gitcode.com/Cangjie/cangjie_stdx/issues/396
-API/stdx/aspect_cj/test_aop_oracle/TC-AOP-ORACLE-6.cj
-API/stdx/aspect_cj/test_aop_param/TC-AOP-PARAM-2.cj
-API/stdx/aspect_cj/test_aop_param/TC-AOP-PARAM-5.cj
-API/stdx/aspect_cj/test_aop_weave/TC-AOP-WEAVE-15.cj
-API/stdx/aspect_cj/test_aop_weave/TC-AOP-WEAVE-25.cj
-API/stdx/aspect_cj/test_aop_weave/TC-AOP-WEAVE-27.cj
-API/stdx/aspect_cj/test_aop_weave/TC-AOP-WEAVE-29.cj
-API/stdx/aspect_cj/test_aop_weave/TC-AOP-WEAVE-5.cj
+# https://gitcode.com/Cangjie/cangjie_test/issues/527
+compiler/cjnative/stable_abi/07_extend/02_modify/01_define_content/05_instance_function/01_extend_nonclass/02_modify/return_type/41_extend_modify_func_returntype/41_extend_modify_func_returntype_0202.cj
+
+# https://gitcode.com/Cangjie/cangjie_test/issues/529
+API/std/os/file/test_lseek/test_lseek.cj
+
+# Benchmark cases with missing data/dependencies
+Benchmark/micro-benchmark/cj/http2/
+Benchmark/micro-benchmark/cj/https/
+Benchmark/CJ-Arkworkload/babylon/cj/main.cj
+Benchmark/Object-oriented/game_of_life/cj/gameoflife.cj
+Benchmark/CJ-Arkworkload/mix-case/cj/weekly/crypto-aes.cj
+Benchmark/CJ-Arkworkload/mix-case/cj/weekly/json-parse-inspector.cj
+Benchmark/CJ-Arkworkload/mix-case/cj/weekly/json-stringify-inspector.cj
+Benchmark/CJ-Arkworkload/mix-case/cj/weekly/stanford-crypto-pbkdf2.cj
+Benchmark/micro-benchmark/cj/json/BenchmarkStr2JsonValue.cj
+
+# BenchmarkVisitorTraverse mutates the shared AST each iteration and cannot finish
+Benchmark/micro-benchmark/cj/libast_api/BenchmarkVisitorTraverse.cj
+
+# Puzzle fails under -O2 due to a compiler bug, A ticket has been filed
+Benchmark/linaro-benchmark/benchmarks-cj/stanford/Puzzle/Puzzle.cj
+
+# case25 performance gate failed, A ticket has been filed
+Benchmark/requirements-benchmark/case25_http_complex_json_stream/case25_http_complex_json_stream.info
+
+# https://gitcode.com/Cangjie/cangjie_runtime/issues/1063
+API/net/WebSocket/http1.1_websocket/test_websocket_behavior.cj
+API/net/New_HTTP/Cookie/test_cookie_jar_integration.cj
+API/net/New_HTTP/Cookie/test_cookie_parse_behavior.cj
+API/net/New_HTTP/Cookie/test_cookie_store_behavior.cj
+API/net/New_HTTP/Redirect/test_redirect_behavior.cj
+API/net/New_HTTP/ResponseTolerance/test_response_tolerance.cj
+API/net/New_HTTP/ReuseH2/test_headers_reuse_h2.cj

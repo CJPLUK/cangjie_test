@@ -7,6 +7,6 @@
 // REGION: 7:8
 
 func a() {
-    let x = (a - b + c / d) + (a - b + c / d) + (a - b + c / d) + (a - b + c / d) + (a - b + c / d) + (a - b + c / d) + (a -
-        b + c / d)
+    let x = (a - b + c / d) + (a - b + c / d) + (a - b + c / d) + (a - b + c / d) + (a - b + c / d) + (a - b + c / d) +
+        (a - b + c / d)
 }

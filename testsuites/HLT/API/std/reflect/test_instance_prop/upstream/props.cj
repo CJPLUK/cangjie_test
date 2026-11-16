@@ -59,7 +59,6 @@ public class MutablePropClass {
 public class AnnotatedPropClass {
     public init() {
     }
-
     @Deprecated
     public prop info: String {
         get() {
