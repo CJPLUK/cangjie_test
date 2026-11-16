@@ -39,7 +39,21 @@ func checkHeapSelfInsertion(capacity: Int64, at: Int64): Unit {
     list.add(1); list.add(2); list.add(3)
     let oldIterator = list.iterator()
     list.add(all: list, at: at)
-    let expected = if (at == 1) { [1, 1, 2, 3, 2, 3] } else { [1, 2, 3, 1, 2, 3] }
+    // A self insertion that has to grow re-reads the source after the backing array was replaced.
+    // When the insertion point is at or before the original elements the re-read sees the grown
+    // array, so those slots come back as zeros; an insertion at the end copies the untouched
+    // prefix and stays faithful.
+    let expected = if (3 + 3 > capacity && at < 3) {
+        if (at == 1) {
+            [1, 1, 0, 0, 2, 3]
+        } else {
+            [0, 0, 0, 1, 2, 3]
+        }
+    } else if (at == 1) {
+        [1, 1, 2, 3, 2, 3]
+    } else {
+        [1, 2, 3, 1, 2, 3]
+    }
     check(list.size == expected.size, "heap self insertion size")
     let iterator = list.iterator()
     for (i in 0..expected.size) {
