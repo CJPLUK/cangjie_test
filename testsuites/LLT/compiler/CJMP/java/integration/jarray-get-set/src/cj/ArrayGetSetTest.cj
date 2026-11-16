@@ -8,14 +8,14 @@ package javasample
 
 import java.lang.*
 
-@JavaMirror["javasample.Item"]
-public open class Item <: JObject {
+@Java ["javasample.Item"]
+public foreign open class Item {
     public init()
     public init(value: Int32)
     public open func getValue(): Int32
 }
 
-@JavaImpl["javasample.SpecialItem"]
+@Java ["javasample.SpecialItem"]
 public class SpecialItem <: Item {
     private let specialValue: Int32
 
@@ -28,8 +28,8 @@ public class SpecialItem <: Item {
     }
 }
 
-@JavaImpl["javasample.TestImpl"]
-public class TestImpl <: JObject {
+@Java ["javasample.TestImpl"]
+public class TestImpl {
     public init() {}
 
     private func assertCondition(condition: Bool, message: String): Unit {
