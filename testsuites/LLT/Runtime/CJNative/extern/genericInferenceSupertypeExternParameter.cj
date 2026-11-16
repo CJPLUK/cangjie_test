@@ -9,7 +9,9 @@
 
 // A parameter type mixing Extern<T> and type variables accepts a literal whose type is a subtype of it, such as an
 // array literal for a Collection or an Iterable, or a tuple literal for an option type. The parts matching Extern<T>
-// are converted and the other parts determine the type arguments, as with explicit type arguments.
+// are converted and the other parts determine the type arguments, as with explicit type arguments. As with Option
+// boxing, an array literal reaches Collection and Iterable through invariant type arguments, so the conversion of its
+// elements needs explicit type arguments.
 
 var conversions = 0
 var conversions2 = 0
@@ -95,10 +97,11 @@ func check(name: String, ok: Bool, expectedConversions: Int64, expectedConversio
 
 main() {
     let e2 = Extern<RT2>(0)
-    check("collection overload", choose(0, [(1, 2)]) == 1, 1, 0)
+    // As with Option boxing, only the candidate that does not convert the elements is selected without type arguments.
+    check("collection overload", choose(0, [(1, 2)]) == 2, 0, 0)
     check("collection overload explicit", choose<Int64>(0, [(1, 2)]) == 1, 1, 0)
-    check("iterable", firstOf([(1, "a"), (2, "b")]) == "a", 2, 0)
-    check("nested collection", nested([[("a", 1)], [("b", 2)]]) == "a", 2, 0)
+    check("iterable", firstOf<String>([(1, "a"), (2, "b")]) == "a", 2, 0)
+    check("nested collection", nested<String>([[("a", 1)], [("b", 2)]]) == "a", 2, 0)
     check("option overload", optional(0, (1, 2)) == 1, 1, 0)
     check("option overload explicit", optional<Int64>(0, (1, 2)) == 1, 1, 0)
     check("runtime from other argument", sizeWith(e2, [1, "a", true]) == 3, 0, 3)

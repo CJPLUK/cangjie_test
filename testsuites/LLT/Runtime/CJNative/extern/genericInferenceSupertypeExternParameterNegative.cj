@@ -5,9 +5,9 @@
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
 // RUN-EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>&1 | compare %f
-// ASSERT: scan-2 unable to infer generic argument of this function
-// ASSERT: scan of type 'Struct-Array<Tuple<Int64, Struct-String>>', should match parameter type 'Interface-Collection<Tuple<Struct-Extern<Class-RT>, Generics-T>>'
-// ASSERT: scan expected 'Interface-Collection<Tuple<Struct-Extern<Class-RT>, Int64>>', found 'Struct-Array<Tuple<Int64, Int64>>'
+// ASSERT: scan-3 unable to infer generic argument of this function
+// ASSERT: scan of type 'Struct-Array<Tuple<Int64, Struct-String>>', impossible to match parameter type 'Interface-Collection<Tuple<Struct-Extern<Class-RT>, Generics-T>>'
+// ASSERT: scan of type 'Struct-Array<Tuple<Int64, Int64>>', impossible to match parameter type 'Interface-Collection<Tuple<Struct-Extern<Class-RT>, Generics-T>>'
 // ASSERT: scan of type 'Tuple<Int64, Struct-String>', should match parameter type 'Enum-Option<Tuple<Struct-Extern<Class-RT>, Generics-T>>'
 // ASSERT: scan-not Assertion
 
@@ -31,7 +31,7 @@ func optional<T>(value: T, pair: ?(Extern<RT>, T)): Unit {}
 
 main() {
     let array = [(1, 2)]
-    pairsWith(0, [(1, "s")])    // T cannot be both Int64 and String.
+    pairsWith(0, [(1, "s")])    // Elements of an array literal are not converted where T is inferred.
     pairsWith(0, array)         // An existing array is not converted.
     optional(0, (1, "s"))       // T cannot be both Int64 and String.
     0

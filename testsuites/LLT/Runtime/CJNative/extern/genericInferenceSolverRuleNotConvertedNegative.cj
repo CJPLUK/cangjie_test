@@ -5,13 +5,17 @@
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
 // RUN-EXEC-PIPE-1: %compiler %cmp_opt --error-count-limit all %f -o %output 2>&1 | compare %f
-// ASSERT: scan-10 error: mismatched types
+// ASSERT: scan-7 error: mismatched types
 // ASSERT: scan-1 parameters and arguments mismatch
-// ASSERT: scan-not unable to infer generic argument
+// ASSERT: scan-3 unable to infer generic argument of this function
+// ASSERT: scan-1 of type 'Struct-Array<Tuple<Struct-String, Int64>>', impossible to match parameter type 'Struct-Array<Tuple<Generics-T, Struct-Extern<Class-RT>>>'
+// ASSERT: scan-1 of type '(Int64) -> Struct-String @ideal', impossible to match parameter type '(Struct-Extern<Class-RT>) -> Generics-T'
+// ASSERT: scan-1 of type 'Class-Derived<Tuple<Int64, Struct-String>>', impossible to match parameter type 'Class-Base<Tuple<Struct-Extern<Class-RT>, Generics-T>>'
 // ASSERT: scan-not Assertion
 
 // Only values of literals and lambdas are converted to the parts Extern<T> of a parameter type. Existing values of
-// other types are not converted, while the type arguments are still inferred.
+// other types are not converted. Where the type arguments are inferred and the conversion would be inside the type
+// argument of a generic type or a parameter of a function type, as with Option boxing, they are not inferred.
 
 class RT <: ForeignRuntime<RT> {
     public static func memberAccess(e: Extern<RT>, name: String): Extern<RT> { throw Exception() }

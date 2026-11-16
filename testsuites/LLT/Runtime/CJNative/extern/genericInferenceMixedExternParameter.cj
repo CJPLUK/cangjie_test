@@ -9,7 +9,8 @@
 
 // A parameter type mixing Extern<T> and type variables accepts a literal or a lambda whose matching parts are converted.
 // Its other parts still determine the type arguments, so the call and its overload resolution are the same as with
-// explicit type arguments.
+// explicit type arguments. As with Option boxing, a conversion inside the type argument of a generic type, such as the
+// elements of an array literal, needs explicit type arguments.
 
 var conversions = 0
 var conversions2 = 0
@@ -96,8 +97,8 @@ main() {
     check("overload explicit", choose<Int64>(0, (1, 2)) == 1, 1, 0)
     check("tuple", second((1, "a")) == "a", 1, 0)
     check("tuple without conversion", second((e, true)), 0, 0)
-    check("array of tuples", firstOfPairs([(1.5, 2), (2.5, 3)]) == 1.5, 2, 0)
-    check("nested arrays", nested([[("a", 1)], [("b", 2)]]) == "a", 2, 0)
+    check("array of tuples", firstOfPairs<Float64>([(1.5, 2), (2.5, 3)]) == 1.5, 2, 0)
+    check("nested arrays", nested<String>([[("a", 1)], [("b", 2)]]) == "a", 2, 0)
     check("lambda result", callResult({ => (1, 'c') }) == 'c', 1, 0)
     check("runtime from other argument", sizeWith(e2, [1, "a", true]) == 3, 0, 3)
     check("runtime from literal", sizeOf([e, e]) == 2, 0, 0)

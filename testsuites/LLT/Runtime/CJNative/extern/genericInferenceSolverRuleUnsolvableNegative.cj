@@ -5,14 +5,16 @@
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
 // RUN-EXEC-PIPE-1: %compiler %cmp_opt --error-count-limit all %f -o %output 2>&1 | compare %f
-// ASSERT: scan-21 unable to infer generic argument of this function
+// ASSERT: scan-25 unable to infer generic argument of this function
 // ASSERT: scan-not Assertion
 
 // Type arguments are not inferred from conversions to Extern<T>:
 // - the parts Extern<T> of a parameter type accept any argument, but the other parts must agree with the type
 //   arguments;
 // - the runtime R of Extern<R> is only determined by values of type Extern<T>;
-// - the bounds of a type variable, its arguments and the return type are matched without conversions.
+// - the bounds of a type variable, its arguments and the return type are matched without conversions;
+// - as with Option boxing, a conversion inside the type argument of a generic type, such as the elements of an array
+//   literal, is not accepted by the inference and needs explicit type arguments.
 
 class RT <: ForeignRuntime<RT> {
     public static func memberAccess(e: Extern<RT>, name: String): Extern<RT> { throw Exception() }
@@ -37,10 +39,14 @@ class RT2 <: ForeignRuntime<RT2> {
 func sizeOf<T>(x: T, p: Collection<(Extern<RT>, T)>): Int64 { p.size }
 func optional<T>(x: T, p: ?(Extern<RT>, T)): Int64 { 1 }
 func pairWith<T>(x: T, p: (Extern<RT>, T)): Int64 { 1 }
+func firstOfPairs<T>(p: Array<(T, Extern<RT>)>): T { p[0][0] }
+func firstOf<T>(p: Iterable<(Extern<RT>, T)>): Int64 { 1 }
+func pairsWith<T>(x: T, p: Array<(Extern<RT>, T)>): Int64 { 1 }
 
 func runtimeOf<R>(p: Extern<R>): Int64 where R <: ForeignRuntime<R> { 1 }
 func sameRuntime<R>(a: Extern<R>, b: Extern<R>): Int64 where R <: ForeignRuntime<R> { 1 }
 func runtimeArray<R>(p: Array<Extern<R>>): Int64 where R <: ForeignRuntime<R> { p.size }
+func runtimeAndArray<R>(e: Extern<R>, p: Array<Extern<R>>): Int64 where R <: ForeignRuntime<R> { p.size }
 func runtimeTuple<R>(p: (Extern<R>, Int64)): Int64 where R <: ForeignRuntime<R> { 1 }
 func runtimeResult<R>(p: () -> Extern<R>): Int64 where R <: ForeignRuntime<R> { 1 }
 func runtimeResults<R>(p: () -> Array<Extern<R>>): Int64 where R <: ForeignRuntime<R> { 1 }
@@ -65,6 +71,10 @@ main() {
     sizeOf(0, [(1, "s")])                   // T cannot be both Int64 and String.
     optional(0, (1, "s"))                   // T cannot be both Int64 and String.
     pairWith(e, (1, 2))                     // T cannot be both Extern<RT> and Int64.
+    firstOfPairs([("a", 1)])                // Elements of an array literal are not converted where T is inferred.
+    firstOf([(1, "s")])                     // Nor for an Iterable.
+    pairsWith(0, [(1, 0)])                  // Nor when another argument determines T.
+    runtimeAndArray(e, [1, 2])              // Nor when another argument determines R.
 
     runtimeOf(1)                            // No value determines the runtime.
     sameRuntime(e, e2)                      // The runtime cannot be both RT and RT2.

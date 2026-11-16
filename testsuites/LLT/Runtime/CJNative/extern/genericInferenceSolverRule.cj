@@ -10,6 +10,8 @@
 // Type arguments of generic calls are inferred as if each part of type Extern<T> of a parameter accepted any argument,
 // which is converted. Covers each parameter shape, the inference of the runtime R of Extern<R>, type variable bounds,
 // return types, overload resolution and the different forms of calls.
+// As with Option boxing, a conversion inside the type argument of a generic type, such as the elements of an array
+// literal for Array<(T, Extern<RT>)>, needs explicit type arguments when the parameter type has type variables.
 
 var conversions = 0
 
@@ -222,14 +224,14 @@ main() {
     check("option of Extern", optionOf(e, 3) == 3, 0)
 
     check("mixed tuple", second((1, "s")) == "s", 1)
-    check("mixed array", firstOfPairs([("a", 1)]) == "a", 1)
+    check("mixed array", firstOfPairs<String>([("a", 1)]) == "a", 1)
     check("mixed existing Extern array", firstOfPairs([("a", e)]) == "a", 0)
-    check("mixed nested arrays", firstOfRows([[("a", 1)], [("b", 2)]]) == "a", 2)
+    check("mixed nested arrays", firstOfRows<String>([[("a", 1)], [("b", 2)]]) == "a", 2)
     check("mixed lambda result", callResult({ => (1, "s") }) == "s", 1)
     check("mixed lambda parameter", callWithExtern({ y => "s" }) == "s", 0)
     check("lambda returning Extern", callToExtern({ y: Int64 => y }, 2) == 1, 1)
-    check("collection", sizeOf([(1, "s")]) == 1, 1)
-    check("iterable", firstOf([(1, "s")]) == Some("s"), 1)
+    check("collection", sizeOf<String>([(1, "s")]) == 1, 1)
+    check("iterable", firstOf<String>([(1, "s")]) == Some("s"), 1)
     check("option boxing", optionalPair((1, "s")) == 1, 1)
     check("two runtimes", twoRuntimes((1, "s", 2)) == "s", 2)
     check("other runtime in tuple", second((e2, "s")) == "s", 1)
@@ -240,7 +242,7 @@ main() {
     check("conversion before runtime", runtimeOf(1, e) == 1, 1)
     check("runtime from array literal", runtimeArray([e, e]) == 2, 0)
     check("runtime from existing array", runtimeArray([e]) == 1, 0)
-    check("runtime and literal elements", runtimeAndArray(e, [1, 2]) == 2, 2)
+    check("runtime and literal elements", runtimeAndArray<RT>(e, [1, 2]) == 2, 2)
     check("runtime from option", runtimeOption(e) == 1, 0)
     check("runtime from lambda result", runtimeResult({ => e }) == 1, 0)
     check("lambda result and runtime", resultAndRuntime({ => 1 }, e) == 1, 1)

@@ -5,10 +5,10 @@
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
 // RUN-EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>&1 | compare %f
-// ASSERT: scan-2 unable to infer generic argument of this function
+// ASSERT: scan-3 unable to infer generic argument of this function
 // ASSERT: scan of type 'Tuple<Int64, Struct-String>', should match parameter type 'Tuple<Struct-Extern<Class-RT>, Generics-T>'
 // ASSERT: scan expected 'Tuple<Struct-Extern<Class-RT>, Int64>', found 'Tuple<Int64, Int64>'
-// ASSERT: scan expected 'Struct-Array<Tuple<Int64, Struct-Extern<Class-RT>>>', found 'Struct-Array<Tuple<Int64, Int64>>'
+// ASSERT: scan of type 'Struct-Array<Tuple<Int64, Int64>>', impossible to match parameter type 'Struct-Array<Tuple<Generics-T, Struct-Extern<Class-RT>>>'
 // ASSERT: scan expected '() -> Tuple<Struct-Extern<Class-RT>, Int64>', found '() -> Tuple<Int64, Int64>'
 // ASSERT: scan-not Assertion
 
