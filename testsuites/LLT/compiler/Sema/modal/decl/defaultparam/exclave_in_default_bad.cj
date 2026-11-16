@@ -14,5 +14,6 @@ main() {
     0
 }
 
+// ASSERT: scan "DiagKind": "sema_empty_arrayLit_type_undefined",
 // ASSERT: scan "DiagKind": "sema_exclave_outside_function",
-// ASSERT: scan "Errors": 1,
+// ASSERT: scan "Errors": 2,

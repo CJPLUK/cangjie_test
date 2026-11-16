@@ -48,7 +48,7 @@ func transformMax(): Int64 {
 
 func t115FlatMap(source: Array<Int64> @local!): Int64 {
     exclave {
-        let flat: Array<Int64> @local! = source.flatMap<Int64>({ x: Int64 @local! => [x, x * 10] })
+        let flat: Array<Int64> @local! = source.flatMap<Int64>({ x: Int64 @local! => exclave { [x, x * 10] } })
         if (flat.size != 4) { return 1 }
         if (flat[0] != 1 || flat[1] != 10 || flat[2] != 2 || flat[3] != 20) { return 2 }
         0
@@ -59,10 +59,12 @@ func t115FilterMap(source: Array<Int64> @local!): Int64 {
     exclave {
         let mapped: Array<Int64> @local! = source.filterMap<Int64>({
             x: Int64 @local! =>
-            if (x % 2 == 1) {
-                Some(x * 10)
-            } else {
-                None
+            exclave {
+                if (x % 2 == 1) {
+                    Some(x * 10)
+                } else {
+                    None
+                }
             }
         })
         if (mapped.size != 2) { return 1 }

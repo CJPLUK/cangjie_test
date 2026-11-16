@@ -21,5 +21,5 @@ class Bad {
 
 main() {}
 
-// ASSERT: scan-1 "DiagKind": "sema_expected_data_type",
+// ASSERT: scan-1 "DiagKind": "sema_mismatched_types",
 // ASSERT: scan "Errors": 1,
