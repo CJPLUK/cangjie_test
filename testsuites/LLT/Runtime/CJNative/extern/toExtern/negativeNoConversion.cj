@@ -4,14 +4,15 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// RUN-EXEC-PIPE-1: %compiler %cmp_opt %f -o %output 2>&1 | compare %f
-// ASSERT: scan cannot convert an integer literal to type 'Enum-Option<Struct-Extern<Class-DummyRT>>'
+// RUN-EXEC-PIPE-1: %compiler %cmp_opt --error-count-limit all %f -o %output 2>&1 | compare %f
+// ASSERT: scan-4 cannot convert an integer literal to type 'Enum-Option<Struct-Extern<Class-DummyRT>>'
+// ASSERT: scan-1 expected 'Enum-Option<Struct-Extern<Class-DummyRT>>', found 'Int64'
 // ASSERT: scan unable to infer generic argument of this function
 // ASSERT: scan expected 'Struct-Array<Struct-Extern<Class-DummyRT>>', found 'Struct-Array<Int64>'
 // ASSERT: scan expected '() -> Struct-Extern<Class-DummyRT>', found '() -> Int64'
 // ASSERT: scan expected 'Struct-Extern<Class-DummyRT>', found 'Int64'
 // ASSERT: scan inconsistent element type for array literal
-// ASSERT: scan 6 errors generated
+// ASSERT: scan 10 errors generated
 
 public class DummyRT <: ForeignRuntime<DummyRT> {
     public static func memberAccess(e: Extern<DummyRT>, field: String): Extern<DummyRT> {
@@ -47,9 +48,23 @@ func g(): Int64 {
     1
 }
 
+func optionParam(p: ?Extern<DummyRT>) {}
+
+func optionReturn(): ?Extern<DummyRT> {
+    return 1
+}
+
+func optionBody(): ?Extern<DummyRT> {
+    1
+}
+
 main() {
-    // A type that only contains Extern<T> doesn't allow the conversion.
+    // A type that only contains Extern<T> doesn't allow the conversion, ?Extern<T> included: an initializer, an
+    // argument and a returned value of ?Extern<T> are not converted and boxed.
     let opt: ?Extern<DummyRT> = 1
+    let i = 1
+    let optVar: ?Extern<DummyRT> = i
+    optionParam(1)
     let ints: Array<Int64> = [3]
     let arr: Array<Extern<DummyRT>> = ints
     let fn: () -> Extern<DummyRT> = g
