@@ -1,0 +1,35 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ * 
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+ 
+// DEPENDENCE: ../test.toml test.h
+// EXEC: ObjCInteropGen test.toml
+// EXEC: %cat test.cj | compare %f
+/* SCAN-IN
+@ObjC
+public foreign interface P_ {
+}
+
+@ObjC
+public foreign interface P0 {
+}
+
+@ObjC
+public foreign interface P1 {
+}
+
+@ObjC
+public open foreign class M {
+    public open func f__(): P_
+    public open func f_0(): ?P_
+    public open func f_1(): P_
+    public open func f0_(): ?P0
+    public open func f00(): ?P0
+    public open func f1_(): P1
+    public open func f11(): P1
+}
+*/
