@@ -38,7 +38,7 @@ class parseSignatureTest {
             classInfo.getConstructor(parseParameterTypes("Int64, String, Int64, default.Bar"))
         } catch (e: InfoNotFoundException) {
             println(e.message)
-            @Expect(e.message.contains("Can not find the specified constructor"))
+            @Expect(e.message.contains("Cannot find the specified constructor"))
         }
 
         try {
