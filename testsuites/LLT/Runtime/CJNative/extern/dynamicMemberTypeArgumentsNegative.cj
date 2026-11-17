@@ -5,14 +5,15 @@
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
 // RUN-EXEC-PIPE-1: %compiler %cmp_opt --error-count-limit all %f -o %output 2>&1 | compare %f
-// ASSERT: scan-6 type arguments are not allowed on a dynamic member access of 'Extern'
+// ASSERT: scan-8 type arguments are not allowed on a dynamic member access of 'Extern'
 // ASSERT: scan-2 type argument's number does not match type parameter's number
-// ASSERT: scan-1 8 errors generated
+// ASSERT: scan-not expected 'integer type'
+// ASSERT: scan-1 10 errors generated
 // ASSERT: scan-not Assertion
 
 // The foreign runtime only receives the name of a dynamic member, so a dynamic member access cannot have type
-// arguments, whether it is read, called, used as a base, updated or compound-assigned. A variable of type Extern
-// cannot have type arguments either, like any other variable.
+// arguments, whether it is read, called, used as a base, updated, compound-assigned, incremented or decremented. A
+// variable of type Extern cannot have type arguments either, like any other variable.
 
 class RT <: ForeignRuntime<RT> {
     public static func memberAccess(e: Extern<RT>, name: String): Extern<RT> { throw Exception() }
@@ -31,6 +32,8 @@ main() {
     let base = e.f<Int64, String>.g
     e.f<Int64> = 1
     e.f<Int64> += 1
+    e.f<Int64>++
+    e.f<Int64>--
     e.f.g<Int64>[0] = 1
     let variable = e<Int64>
     let variableCalled = e<Int64>(1)
