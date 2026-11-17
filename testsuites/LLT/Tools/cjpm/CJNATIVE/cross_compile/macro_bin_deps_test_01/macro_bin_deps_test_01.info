@@ -1,0 +1,12 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// DEPENDENCE: ../%n
+// Test: cross-compiled test binary must not link host-platform bin-dependencies
+// EXEC: mkdir -p %n/deps/host/liba && cd %n/lib && %cjpm build -V
+// EXEC: cp %n/lib/target/release/liba/liba.cjo %n/lib/target/release/liba/libliba.so %n/deps/host/liba/
+// EXEC: cd %n && %cjpm test --no-run --target=x86_64-pc-windows-gnu 2>&1 | compare %f
+// ASSERT: scan cjpm test success

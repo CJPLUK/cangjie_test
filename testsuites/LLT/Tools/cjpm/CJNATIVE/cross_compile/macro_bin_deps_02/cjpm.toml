@@ -1,0 +1,22 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2025. All rights reserved.
+# This source file is part of the Cangjie project, licensed under Apache-2.0
+# with Runtime Library Exception.
+#
+# See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+[package]
+  cjc-version = "1.0.5"
+  name = "macrob"
+  description = "nothing here"
+  version = "1.0.0"
+  target-dir = ""
+  output-type = "dynamic"
+  compile-option = ""
+  link-option = ""
+  package-configuration = {}
+
+[target.x86_64-unknown-linux-gnu.bin-dependencies]
+  package-option = {"liba" = "deps/host/liba/liba.cjo"}
+
+[target.x86_64-pc-windows-gnu.bin-dependencies]
+  package-option = {"liba" = "deps/cross/liba/liba.cjo"}
