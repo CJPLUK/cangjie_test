@@ -47,5 +47,4 @@ func run(): Int64 {
 main(): Int64 {
     return run()
 }
-// ASSERT: scan sema_unable_to_infer_generic_func
 // ASSERT: scan sema_generic_type_without_type_argument
