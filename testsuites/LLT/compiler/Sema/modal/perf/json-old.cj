@@ -123,9 +123,9 @@ func collectInfo(v: JsonValue, out: ArrayList<Info>): Unit {
                     }
                 case None => ()
             }
-            o.getFields().forEach({ _, child =>
+            for ((_, child) in o.getFields()) {
                 collectInfo(child, out)
-            })
+            }
         case a: JsonArray =>
             let n = a.size()
             for (i in 0..n) {

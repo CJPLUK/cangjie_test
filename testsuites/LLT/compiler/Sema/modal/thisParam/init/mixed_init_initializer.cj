@@ -15,47 +15,47 @@ class F {
 }
 
 class C {
-    let f: F@~local = F()
+    let f: F = F()
     init(this @local!) { exclave {}}
     init() {}
 }
 
 class C2 {
-    let f: F@~local = F()
+    let f: F = F()
     init(this @local?) { exclave {}}
     init(this @local!) { exclave {}}
 }
 
 class C3 {
-    let f: F@~local = F()
+    let f: F = F()
     init(this @local!) { exclave {}}
     init() {}
 }
 class C4 {
-    let f: F@~local = F()
+    let f: F = F()
     init(this @~local) {}
     init(this @local!) { exclave {}}
 }
 
 struct S1 {
-    let f: F@~local = F()
+    let f: F = F()
     init(this @local!) { exclave {}}
     init() {}
 }
 
 struct S2 {
-    let f: F@~local = F()
+    let f: F = F()
     init(this @local?) { exclave {}}
     init(this @~local) {}
 }
 
 struct S3 {
-    let f: F@~local = F()
+    let f: F = F()
     init(this @local!) { exclave {}}
     init() {}
 }
 struct S4 {
-    let f: F@~local = F()
+    let f: F = F()
     init(this @~local) {}
     init(this @local!) { exclave {}}
 }

@@ -23,3 +23,4 @@ main() {}
 
 // ASSERT: scan-1 "DiagKind": "sema_no_match_prop_accessor_for_call",
 // ASSERT: scan "Errors": 1,
+// ASSERT: scan-not "found candidate"

@@ -128,8 +128,7 @@ exclave func collectInfo(v: JsonValue @local!, out: ArrayList<Info>): Unit {
                     }
                 case None => ()
             }
-            let fs: HashMap<String, JsonValue> @local! = o.getFields()
-            for ((_, child) in fs) {
+            for ((_, child) in o.getFields()) {
                 collectInfo(child, out)
             }
         case a: JsonArray =>
