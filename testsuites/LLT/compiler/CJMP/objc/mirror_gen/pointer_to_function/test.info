@@ -1,0 +1,102 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ * 
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+ 
+// DEPENDENCE: test.toml test.h
+// EXEC: ObjCInteropGen test.toml
+// EXEC: %cat test.cj | compare %f
+/* SCAN-IN
+public type CFunc = CFunc<() -> Unit>
+
+public type PCFunc = CFunc<() -> Unit>
+
+public type PPCFunc = CPointer<CFunc<() -> Unit>>
+
+public type OCFunc = ObjCFunc<() -> ?ObjCId>
+
+public type POCFunc = ObjCFunc<() -> ?ObjCId>
+
+public type PPOCFunc = ObjCPointer<ObjCFunc<() -> ?ObjCId>>
+
+public type Block = ObjCBlock<() -> Unit>
+
+public type PBlock = ObjCPointer<ObjCBlock<() -> Unit>>
+
+foreign func cfunc(): Unit
+
+foreign func cfunc1(cfunc1: CFunc, cfunc2: CFunc, cfunc3: PCFunc, pcfunc: PPCFunc): Unit
+
+foreign func cfunc2(cfunc_1: CFunc<() -> Unit>, cfunc_2: CFunc<() -> Unit>, pcfunc_: CPointer<CFunc<() -> Unit>>): Unit
+
+@ObjCMirror
+public func ocfunc(): ?ObjCId
+
+@ObjCMirror
+public func ocfunc1(ocfunc1: OCFunc, ocfunc2: OCFunc, ocfunc3: POCFunc, pocfunc: PPOCFunc): Unit
+
+@ObjCMirror
+public func ocfunc2(block1: ObjCBlock<() -> Unit>, block2: Block, pblock: PBlock): Unit
+
+@ObjCMirror
+public func ocfunc3(ocfunc_1: ObjCFunc<() -> ?ObjCId>): Unit
+
+@ObjCMirror
+public func ocfunc4(ocfunc_2: ObjCFunc<() -> ?ObjCId>): Unit
+
+@ObjCMirror
+public func ocfunc5(pocfunc_: ObjCPointer<ObjCFunc<() -> ?ObjCId>>): Unit
+
+@ObjCMirror
+public func ocfunc6(block_: ObjCBlock<() -> Unit>, pblock_: ObjCPointer<ObjCBlock<() -> Unit>>): Unit
+
+@C
+public struct CStruct {
+    public var func1: CFunc = CFunc<() -> Unit>(CPointer<Unit>())
+    public var func2: PCFunc = CFunc<() -> Unit>(CPointer<Unit>())
+    public var pfunc: PPCFunc = CPointer<CFunc<() -> Unit>>()
+    public var func_: CFunc<() -> Unit> = CFunc<() -> Unit>(CPointer<Unit>())
+    public var pfunc_: CPointer<CFunc<() -> Unit>> = CPointer<CFunc<() -> Unit>>()
+}
+
+/* @ObjC */
+public struct OCStruct {
+    public var cfunc1: CFunc = CFunc<() -> Unit>(CPointer<Unit>())
+    public var cfunc2: PCFunc = CFunc<() -> Unit>(CPointer<Unit>())
+    public var pcfunc: PPCFunc = CPointer<CFunc<() -> Unit>>()
+    public var cfunc_: CFunc<() -> Unit> = CFunc<() -> Unit>(CPointer<Unit>())
+    public var pcfunc_: CPointer<CFunc<() -> Unit>> = CPointer<CFunc<() -> Unit>>()
+    public var ocfunc1: OCFunc = ObjCFunc<() -> ?ObjCId>(CPointer<CFunc<() -> Unit>>())
+    public var ocfunc2: POCFunc = ObjCFunc<() -> ?ObjCId>(CPointer<CFunc<() -> Unit>>())
+    public var pocfunc: PPOCFunc = ObjCPointer<ObjCFunc<() -> ?ObjCId>>(CPointer<Unit>())
+    public var ocfunc_: ObjCFunc<() -> ?ObjCId> = ObjCFunc<() -> ?ObjCId>(CPointer<CFunc<() -> Unit>>())
+    public var pocfunc_: ObjCPointer<ObjCFunc<() -> ?ObjCId>> = ObjCPointer<ObjCFunc<() -> ?ObjCId>>(CPointer<Unit>())
+    public var block1: ObjCBlock<() -> Unit> = ObjCBlock<() -> Unit>(unsafe { zeroValue<() -> Unit>() })
+    public var block2: Block = ObjCBlock<() -> Unit>(unsafe { zeroValue<() -> Unit>() })
+    public var pblock: PBlock = ObjCPointer<ObjCBlock<() -> Unit>>(CPointer<Unit>())
+    public var block_: ObjCBlock<() -> ?ObjCId> = ObjCBlock<() -> ?ObjCId>(unsafe { zeroValue<() -> ?ObjCId>() })
+    public var pblock_: ObjCPointer<ObjCBlock<() -> ?ObjCId>> = ObjCPointer<ObjCBlock<() -> ?ObjCId>>(CPointer<Unit>())
+}
+
+@ObjC
+public open foreign class M {
+    protected var cfunc1: CFunc
+    protected var cfunc2: PCFunc
+    protected var pcfunc: PPCFunc
+    protected var cfunc_: CFunc<() -> Unit>
+    protected var pcfunc_: CPointer<CFunc<() -> Unit>>
+    protected var ocfunc1: OCFunc
+    protected var ocfunc2: POCFunc
+    protected var pocfunc: PPOCFunc
+    protected var ocfunc_: ObjCFunc<() -> ?ObjCId>
+    protected var pocfunc_: ObjCPointer<ObjCFunc<() -> ?ObjCId>>
+    protected var block1: ObjCBlock<() -> Unit>
+    protected var block2: Block
+    protected var pblock: PBlock
+    protected var block_: ObjCBlock<() -> ?ObjCId>
+    protected var pblock_: ObjCPointer<ObjCBlock<() -> ?ObjCId>>
+}
+*/
