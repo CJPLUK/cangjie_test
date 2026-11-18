@@ -17,23 +17,15 @@ import std.fs.*
 @Test
 class DecompressInputStreamTest {
     @TestCase
-    func inputStreamEmptyOutputBufferEmpty(): Unit {
+    func inputStreamEmptySourceReturnsZero(): Unit {
+        // Empty input never starts the read: read returns 0 (EOF semantics) instead of throwing
         var source: ByteBuffer = ByteBuffer()
         var tempBuf: Array<UInt8> = Array<UInt8>(1024, repeat: 0)
 
         var decompressInputStream: DecompressInputStream = DecompressInputStream(source)
-        var dest: ByteBuffer = ByteBuffer()
-        while (true) {
-            var readNum = decompressInputStream.read(tempBuf)
-            if (readNum > 0) {
-                dest.write(tempBuf.slice(0, readNum).toArray())
-            } else {
-                break
-            }
-        }
+        let n = decompressInputStream.read(tempBuf)
+        @Expect(n, 0)
         decompressInputStream.close()
-
-        @Expect(dest.remainLength, 0)
     }
 
     @TestCase

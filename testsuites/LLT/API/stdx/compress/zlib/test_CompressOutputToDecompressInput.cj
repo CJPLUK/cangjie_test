@@ -325,7 +325,7 @@ class CompressOutputToDecompressInputTest {
                 dest2.write(tempBuf.slice(0, readNum).toArray())
             }
         } catch (e: ZlibException) {
-            @Assert(e.message, "ZLIB_BUFFER_ERROR: Buffer-related exception.")
+            @Assert(e.message, "Unexpected end of compressed data: no progress (Z_BUF_ERROR), decompression is not finished.")
             return
         } finally {
             decompressInputStream.close()
