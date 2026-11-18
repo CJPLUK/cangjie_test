@@ -157,6 +157,7 @@ Options:
   -h, --help                  Show usage
   --compile-macro             Options to compile the macro define package
   --coverage                  Enable coverage
+  --cj-pct                    Enable PCT model-check mode: remap std.sync imports to stdx.unittest.sync, reroute sleep to virtual time (Experimental)
   --experimental              Enable experimental options
   -j, --jobs <value>          Number of tasks to run at once
   --apc, --aggressive-parallel-compile
