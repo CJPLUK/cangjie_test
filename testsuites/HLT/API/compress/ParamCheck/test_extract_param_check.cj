@@ -16,6 +16,7 @@ import std.fs.*
 import std.io.*
 import stdx.compress.*
 import stdx.compress.tar.*
+import stdx.compress.zlib.*
 
 let illegalFiles = [
     ("空字符串非法", "", { => IllegalArgumentException("The input path is empty.")}),
@@ -130,7 +131,8 @@ class test_TarGzip_extract_param {
                     let _path = if (apiName.contains("TarGzip")) { path } else { path.removeSuffix(".gz") }
                     callAPI(byteBuffer, _path, true)
                    // @Expect("should raise exception", "when API is ${apiName}, test ${brief}")
-                } catch (e: IllegalArgumentException | FSException | TarException) {
+                } catch (e: IllegalArgumentException | FSException | TarException | ZlibException) {
+                    // An empty stream is not a valid compressed stream: ZlibException from TarGzip.extract decompression is expected
                 }
             }
         }
