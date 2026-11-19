@@ -10,7 +10,7 @@
 // EXEC: ObjCInteropGen test.toml
 // EXEC: %cat test.cj | compare %f
 /* SCAN-IN
-public type CFunc = CFunc<() -> Unit>
+public type CFun = CFunc<() -> Unit>
 
 public type PCFunc = CFunc<() -> Unit>
 
@@ -28,7 +28,7 @@ public type PBlock = ObjCPointer<ObjCBlock<() -> Unit>>
 
 foreign func cfunc(): Unit
 
-foreign func cfunc1(cfunc1: CFunc, cfunc2: CFunc, cfunc3: PCFunc, pcfunc: PPCFunc): Unit
+foreign func cfunc1(cfunc1: CFun, cfunc2: CFun, cfunc3: PCFunc, pcfunc: PPCFunc): Unit
 
 foreign func cfunc2(cfunc_1: CFunc<() -> Unit>, cfunc_2: CFunc<() -> Unit>, pcfunc_: CPointer<CFunc<() -> Unit>>): Unit
 
@@ -55,7 +55,7 @@ public func ocfunc6(block_: ObjCBlock<() -> Unit>, pblock_: ObjCPointer<ObjCBloc
 
 @C
 public struct CStruct {
-    public var func1: CFunc = CFunc<() -> Unit>(CPointer<Unit>())
+    public var func1: CFun = CFunc<() -> Unit>(CPointer<Unit>())
     public var func2: PCFunc = CFunc<() -> Unit>(CPointer<Unit>())
     public var pfunc: PPCFunc = CPointer<CFunc<() -> Unit>>()
     public var func_: CFunc<() -> Unit> = CFunc<() -> Unit>(CPointer<Unit>())
@@ -64,7 +64,7 @@ public struct CStruct {
 
 /* @ObjC */
 public struct OCStruct {
-    public var cfunc1: CFunc = CFunc<() -> Unit>(CPointer<Unit>())
+    public var cfunc1: CFun = CFunc<() -> Unit>(CPointer<Unit>())
     public var cfunc2: PCFunc = CFunc<() -> Unit>(CPointer<Unit>())
     public var pcfunc: PPCFunc = CPointer<CFunc<() -> Unit>>()
     public var cfunc_: CFunc<() -> Unit> = CFunc<() -> Unit>(CPointer<Unit>())
@@ -83,7 +83,7 @@ public struct OCStruct {
 
 @ObjC
 public open foreign class M {
-    protected var cfunc1: CFunc
+    protected var cfunc1: CFun
     protected var cfunc2: PCFunc
     protected var pcfunc: PPCFunc
     protected var cfunc_: CFunc<() -> Unit>

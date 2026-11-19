@@ -7,7 +7,7 @@
  */
 
 // @C functions
-typedef void CFunc(void);
+typedef void CFun(void);
 typedef void (*PCFunc)(void);
 typedef void (**PPCFunc)(void);
 
@@ -21,14 +21,14 @@ typedef void (^Block)(void);
 typedef void (^const* PBlock)(void);
 
 // @C global function
-CFunc cfunc;
-void cfunc1(CFunc cfunc1, CFunc* cfunc2, PCFunc cfunc3, PPCFunc pcfunc);
+CFun cfunc;
+void cfunc1(CFun cfunc1, CFun* cfunc2, PCFunc cfunc3, PPCFunc pcfunc);
 void cfunc2(void cfunc_1(void), void (*cfunc_2)(void), void (**pcfunc_)(void));
 
 // @ObjC global function
 OCFunc ocfunc;
 void ocfunc1(OCFunc ocfunc1, OCFunc* ocfunc2, POCFunc ocfunc3, PPOCFunc pocfunc);
-void ocfunc2(CFunc^ block1, Block block2, PBlock pblock);
+void ocfunc2(CFun^ block1, Block block2, PBlock pblock);
 void ocfunc3(id ocfunc_1(void));
 void ocfunc4(id (*ocfunc_2)(void));
 void ocfunc5(id (**pocfunc_)(void));
@@ -36,7 +36,7 @@ void ocfunc6(void (^block_)(void), void (^*pblock_)(void));
 
 // @C structure
 struct CStruct {
-    CFunc* func1;
+    CFun* func1;
     PCFunc func2;
     PPCFunc pfunc;
 
@@ -47,7 +47,7 @@ struct CStruct {
 // @ObjC structure
 struct OCStruct {
     // @C functions
-    CFunc* cfunc1;
+    CFun* cfunc1;
     PCFunc cfunc2;
     PPCFunc pcfunc;
     void (*cfunc_)(void);
@@ -61,7 +61,7 @@ struct OCStruct {
     id (**pocfunc_)(void);
 
     // Blocks
-    CFunc^ block1;
+    CFun^ block1;
     Block block2;
     PBlock pblock;
     id (^block_)(void);
@@ -70,7 +70,7 @@ struct OCStruct {
 
 @interface M {
     // @C functions
-    CFunc* cfunc1;
+    CFun* cfunc1;
     PCFunc cfunc2;
     PPCFunc pcfunc;
     void (*cfunc_)(void);
@@ -84,7 +84,7 @@ struct OCStruct {
     id (**pocfunc_)(void);
 
     // Blocks
-    CFunc^ block1;
+    CFun^ block1;
     Block block2;
     PBlock pblock;
     id (^block_)(void);
