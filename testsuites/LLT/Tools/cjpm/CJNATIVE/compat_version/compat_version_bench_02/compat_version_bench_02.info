@@ -1,0 +1,11 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// `cjpm bench` rejects a '--compat-version' value that is not two-segment.
+// DEPENDENCE: ../%n
+// ERRCHECK: cd %n && %cjpm bench --compat-version abc
+// ASSERT: scan Error: invalid value 'abc' for '--compat-version', the example is '1.3'
+// ASSERT: scan cjpm bench failed

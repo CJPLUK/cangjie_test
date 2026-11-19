@@ -1,0 +1,11 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// Specifying different versions is rejected by cjpm.
+// DEPENDENCE: ../%n
+// ERRCHECK: cd %n && %cjpm build --compat-version 1.3 --compat-version 1.4
+// ASSERT: scan Error: the '--compat-version' option is specified with different values '1.3' and '1.4'
+// ASSERT: scan cjpm build failed

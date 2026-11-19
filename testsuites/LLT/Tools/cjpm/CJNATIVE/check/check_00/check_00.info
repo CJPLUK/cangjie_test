@@ -7,6 +7,7 @@
 // DEPENDENCE: ../%n
 // EXEC: cd %n && %cjpm check -h 2>&1 | compare %f
 // ASSERT: scan cjpm check [option]
-// ASSERT: scan -m, --member <value>    specify a member module of the workspace
-// ASSERT: scan -h, --help              help for check
-// ASSERT: scan --no-tests              exclude the test-dependencies
+// ASSERT: scan -m, --member <value>      specify a member module of the workspace
+// ASSERT: scan -h, --help                help for check
+// ASSERT: scan --no-tests                exclude the test-dependencies
+// ASSERT: scan --compat-version <value>  check dependencies according to the specified compatibility version

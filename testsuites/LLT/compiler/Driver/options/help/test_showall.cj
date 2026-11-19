@@ -14,6 +14,8 @@ Options:
     <value>=json                
     <value>=noColor             
     <value>=default             
+  --compat-version <value>    Compile with compatibility behavior for the specified SDK version. Candidate versions: 
+    <value>=1.3                 
   --scan-dependency           Get the package(s) which the current package depends on
   --no-sub-pkg                The package doesn't have sub-packages
   --cfg <value>               User defined condition to compile
