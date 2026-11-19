@@ -1,0 +1,26 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+ * This source file is part of the Cangjie project, licensed under Apache-2.0
+ * with Runtime Library Exception.
+ * 
+ * See https://cangjie-lang.cn/pages/LICENSE for license information.
+ */
+
+// DEPENDENCE: ../test.toml test.h
+// EXEC: ObjCInteropGen test.toml
+// EXEC: %cat test.cj | compare %f
+/* SCAN-IN
+@ObjC
+public open foreign class C {
+    @ForeignName["foo::"] public open func foo(x: Int32, y: Int32): Unit
+    @ForeignName["bar::"] public open func bar(x: ObjCId, y: ObjCId): Unit
+    @ForeignName["baz::"] public open func baz(x: ?C, y: ?C): Unit
+}
+
+@ObjC
+public open foreign class M <: C {
+    @ForeignName["foo::"] public open func foo(x: Float64, y: Float64): Unit
+    @ForeignName["bar::"] public open func bar(x: ?ObjCId, y: ?ObjCId): Unit
+    @ForeignName["baz::"] public open func baz(x: ?M, y: ?M): Unit
+}
+*/
