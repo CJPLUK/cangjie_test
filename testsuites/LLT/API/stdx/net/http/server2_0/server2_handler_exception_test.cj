@@ -33,6 +33,7 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import stdx.net.tls.*
 import stdx.crypto.x509.X509Certificate
+import std.collection.ArrayList
 import {asan.*, tlsconfig.*}
 
 @Test
@@ -49,8 +50,9 @@ class TestHandlerThrowException {
             .build()
         try {
             let response = client.send(request)
-            readBody(response)
+            let body = readBody(response)
             @Assert(response.status, 500)
+            @Expect(body, "Internal Server Error")
         } catch (e: Exception) {
             println("${e}")
         }
@@ -95,9 +97,19 @@ class TestHandlerThrowException {
         sleep(Duration.millisecond * 100)
     }
 
-    func readBody(response: HttpResponse) {
+    func readBody(response: HttpResponse): String {
+        let buffer = ArrayList<UInt8>()
         let buf = Array<UInt8>(500, repeat: 0)
-        while (response.body.read(buf) > 0) {}
+        while (true) {
+            let n = response.body.read(buf)
+            if (n == 0) {
+                break
+            }
+            for (i in 0..n) {
+                buffer.add(buf[i])
+            }
+        }
+        return String.fromUtf8(buffer.toArray())
     }
 
     func handlerThrowExceptionHd(_: HttpContext): Unit {
