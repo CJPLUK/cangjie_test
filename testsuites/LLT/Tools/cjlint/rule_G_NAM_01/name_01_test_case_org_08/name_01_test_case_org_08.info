@@ -6,4 +6,4 @@
 
 // DEPENDENCE: ../%n
 // EXEC: cd %n && %lint -f ./src  -c %lintConfigDir -m %lintModuleDir 2>&1 | compare %f
-// ASSERT: regex-1 test.cj:7.*G.NAM.01.*The name of the 'AA::Apkga.pkgb' package must correspond to the directory where the source code resides.
+// ASSERT: regex-1 test.cj:7.*G.NAM.01.*The name of the 'AA::Apkga.missing.pkgb' package must correspond to the directory where the source code resides.
