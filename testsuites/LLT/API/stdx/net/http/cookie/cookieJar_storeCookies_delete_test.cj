@@ -126,9 +126,60 @@ class TestCookieJarStoreCookiesDelete {
         @Expect(CookieJar.toCookieString(deleted), "")
         println("ok")
     }
+    // a non-secure parent-domain cookie must not shadow a subdomain Secure cookie
+    // (the domain match must work in either direction, RFC 6265bis storage model step 14)
+    @TestCase
+    func cookieJarStoreCookiesLeaveSecureCookieAloneParentDomain(): Unit {
+        let secureRequest = HttpRequestBuilder()
+            .url(URL.parse("https://www.example.com/hello/a"))
+            .method("GET")
+            .version(HTTP1_1)
+            .build()
+        let secureResponseBuilder = HttpResponseBuilder().request(secureRequest)
+        secureResponseBuilder.header("Set-Cookie", "sid=secure; Path=/; Secure")
+        let cookieJar = CookieJar.createDefaultCookieJar(ArrayList<String>(["com"]), true)
+        cookieJar.storeCookies(URL.parse("https://www.example.com/hello/a"),
+            CookieJar.parseSetCookieHeader(secureResponseBuilder.build()))
+
+        // http://example.com tries to set the same name at the parent domain
+        let insecureRequest = HttpRequestBuilder()
+            .url(URL.parse("http://example.com/hello/a"))
+            .method("GET")
+            .version(HTTP1_1)
+            .build()
+        let insecureResponseBuilder = HttpResponseBuilder().request(insecureRequest)
+        insecureResponseBuilder.header("Set-Cookie", "sid=evil; Domain=example.com; Path=/")
+        cookieJar.storeCookies(URL.parse("http://example.com/hello/a"),
+            CookieJar.parseSetCookieHeader(insecureResponseBuilder.build()))
+
+        // www.example.com must still see only the Secure value
+        let visible = cookieJar.getCookies(URL.parse("https://www.example.com/hello/a"))
+        @Expect(CookieJar.toCookieString(visible), "sid=secure")
+        println("ok")
+    }
+    // an absurd Max-Age must not overflow DateTime arithmetic
+    @TestCase
+    func cookieJarStoreCookiesHugeMaxAge(): Unit {
+        let httpRequest = HttpRequestBuilder()
+            .url(URL.parse("http://example.com/hello/a"))
+            .method("GET")
+            .version(HTTP1_1)
+            .build()
+        let httpResponseBuilder = HttpResponseBuilder().request(httpRequest)
+        httpResponseBuilder.header("Set-Cookie", "sid=huge; Max-Age=9223372036854775807; Path=/")
+        let cookies = CookieJar.parseSetCookieHeader(httpResponseBuilder.build())
+        @Expect(cookies.size, 1)
+        let cookieJar = CookieJar.createDefaultCookieJar(ArrayList<String>(["com"]), true)
+        cookieJar.storeCookies(URL.parse("http://example.com/hello/a"), cookies)
+        let stored = cookieJar.getCookies(URL.parse("http://example.com/hello/a"))
+        @Expect(CookieJar.toCookieString(stored), "sid=huge")
+        println("ok")
+    }
 }
 
 /* SCAN-IN
+ok
+ok
 ok
 ok
 ok
