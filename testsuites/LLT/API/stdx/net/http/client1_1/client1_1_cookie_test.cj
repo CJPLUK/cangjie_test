@@ -67,7 +67,11 @@ class TestClient1_1Cookie {
         let buf = Array<UInt8>(500, repeat: 0)
         let server = serverSocket.accept()
         server.read(buf)
-        let cookie1 = Cookie("1", "1", maxAge: 4, domain: "127.0.0.1", path: "/a/b/")
+        // the server runs on the IP-address host 127.0.0.1, so cookie "1" must
+        // be host-only: cookies carrying a Domain attribute are rejected from
+        // an IP-address host (RFC 6265bis Section 5.7 step 3.10 and
+        // Section 5.1.3, aligned with Cangjie/cangjie_stdx#435)
+        let cookie1 = Cookie("1", "1", maxAge: 4, path: "/a/b/")
         let setCookie1 = cookie1.toSetCookieString()
         let cookie2 = Cookie("2", "2", maxAge: 2, path: "/a/")
         let setCookie2 = cookie2.toSetCookieString()
