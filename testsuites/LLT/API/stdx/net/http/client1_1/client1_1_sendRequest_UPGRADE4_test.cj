@@ -40,11 +40,12 @@ class TestConnNodeSendRequestUPGRADE4 {
         let port = (serverSocket.localAddress as IPSocketAddress)?.port ?? 0
         let u = URL.parse("http://127.0.0.1:${port}/a")
         let r = HttpRequestBuilder().url(u).header("upgrade", "foo").build()
-        try {
-            client.upgrade(r)
+        // RFC 9110 10.11: Location is optional; the 308 response without it is
+        // returned to the caller as-is instead of throwing
+        let (resp308, conn308) = client.upgrade(r)
+        @Expect(resp308.toString().contains("HTTP/1.1 308"))
+        if (let Some(_) <- conn308) {
             @Expect(1, 2)
-        } catch (e: HttpException) {
-            @Expect(e.message, "Response missing Location header, status code: '308'.")
         }
 
         let (resp, conn) = client.upgrade(r)

@@ -46,12 +46,13 @@ class TestClientReadLocation {
             @Expect(e.message, "Response's Location header can only contain a single URI-reference.")
         }
 
-        try {
-            client.get(u)
-            @Expect(1, 2)
-        } catch (e: HttpException) {
-            @Expect(e.message, "Response missing Location header, status code: '308'.")
-        }
+        // RFC 9110 10.11: Location is optional; an empty Location value has no
+        // target to follow, the 308 response is returned to the caller as-is
+        let resp308 = client.get(u)
+        @Expect(resp308.status, 308)
+        let buf308 = Array<UInt8>(8, repeat: 0)
+        let len308 = resp308.body.read(buf308)
+        @Expect(String.fromUtf8(buf308[..len308]), "redirect")
 
         client.close()
         fut.get()

@@ -34,13 +34,15 @@ class TestClientRedirect {
     var server = ServerBuilder().addr("127.0.0.1").port(0).build()
 
     @TestCase
-    func testException(): Unit {
+    func testRedirectWithoutLocation(): Unit {
         startServer()
-        try {
-            client.get("http://127.0.0.1:${server.port}/hd")
-        } catch (e: HttpException) {
-            @Expect(e.message.contains("Response missing Location header, status code: '302'"))
-        }
+        // RFC 9110 10.11: Location is optional; a 3xx response without it
+        // must be returned to the caller as-is instead of throwing
+        let resp = client.get("http://127.0.0.1:${server.port}/hd")
+        @Assert(resp.status, 302)
+        let buf = Array<UInt8>(8, repeat: 0)
+        let len = resp.body.read(buf)
+        @Assert(String.fromUtf8(buf[..len]), "redirect")
     }
 
     @TestCase
@@ -66,6 +68,17 @@ class TestClientRedirect {
         let buf = Array<UInt8>(10, repeat: 0)
         let len = resp.body.read(buf)
         @Assert(String.fromUtf8(buf[..len]), "hello")
+    }
+
+    @TestCase
+    func testMiddleHopWithoutLocation(): Unit {
+        // /hd6 -> 301 with Location -> /hd7 -> 302 without Location:
+        // the last response (with its body) must be returned to the caller
+        let resp = client.get("http://127.0.0.1:${server.port}/hd6")
+        @Assert(resp.status, 302)
+        let buf = Array<UInt8>(11, repeat: 0)
+        let len = resp.body.read(buf)
+        @Assert(String.fromUtf8(buf[..len]), "no-location")
     }
 
     @TestCase
@@ -129,6 +142,19 @@ class TestClientRedirect {
                         .header("location", "http://127.0.0.1:${server.port}/red")
                         .body("redirect")
                 })
+
+        server
+            .distributor
+            .register("/hd6",
+                {
+                    ctx => ctx
+                        .responseBuilder
+                        .status(301)
+                        .header("location", "http://127.0.0.1:${server.port}/hd7")
+                })
+        server.distributor.register("/hd7", {
+            ctx => ctx.responseBuilder.status(302).body("no-location")
+        })
 
         spawn {
             server.serve()
