@@ -50,6 +50,7 @@ CJNATIVE/build/multi_module/multi_module_from_10008
 
 # macOS暂不支持combined
 CJNATIVE/build/combined
+CJNATIVE/organization/combined_01
 
 # git 用例暂时屏蔽，仅保留基础用例，避免并行问题
 CJNATIVE/install/git
