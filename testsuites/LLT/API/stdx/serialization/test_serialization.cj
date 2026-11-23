@@ -288,7 +288,7 @@ class SerializableTest {
         } catch (e: DataModelException) {
             exception = e
         }
-        anomalyAssert("testInvalidDeserializeUInt8", exception, "Expected DataModelFloat.")
+        anomalyAssert("testInvalidDeserializeUInt8", exception, "Expected DataModelFloat or DataModelInt.")
     }
 
     /*
@@ -316,7 +316,7 @@ class SerializableTest {
         } catch (e: DataModelException) {
             exception = e
         }
-        anomalyAssert("testInvalidDeserializeFloat32", exception, "Expected DataModelFloat.")
+        anomalyAssert("testInvalidDeserializeFloat32", exception, "Expected DataModelFloat or DataModelInt.")
     }
 
     /*
@@ -344,7 +344,7 @@ class SerializableTest {
         } catch (e: DataModelException) {
             exception = e
         }
-        anomalyAssert("testInvalidDeserializeFloat16", exception, "Expected DataModelFloat.")
+        anomalyAssert("testInvalidDeserializeFloat16", exception, "Expected DataModelFloat or DataModelInt.")
     }
 
     /*
@@ -550,7 +550,7 @@ class SerializableTest {
         } catch (e: DataModelException) {
             exception = e
         }
-        anomalyAssert("testInvalidSerializeHashMap", exception, "Expected String.")
+        anomalyAssert("testInvalidSerializeHashMap", exception, "requires the key type to be String")
     }
     /*
      * Test description: Test extend HashMap <: Serializable ::serialization
@@ -573,7 +573,7 @@ class SerializableTest {
             exception02 = e
         }
 
-        anomalyAssert("testInvalidDeserializeHashMap_02", exception02, "Expected String.")
+        anomalyAssert("testInvalidDeserializeHashMap_02", exception02, "requires the key type to be String")
     }
 
     /*
