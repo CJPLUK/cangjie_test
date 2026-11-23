@@ -324,3 +324,9 @@ class TestWebSocketReadValidation {
         println("websocket_read_validation_state_reset_ok")
     }
 }
+
+/* SCAN-IN
+websocket_read_validation_frag_then_new_ok
+websocket_read_validation_violations_ok
+websocket_read_validation_state_reset_ok
+ */

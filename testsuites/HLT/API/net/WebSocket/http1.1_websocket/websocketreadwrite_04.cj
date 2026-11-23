@@ -208,7 +208,13 @@ class Testwebsocketreadwrite_04 {
             var frame2 = websocketServer.read()
             @Expect(frame2.fin, true)
             @Expect(frame2.frameType, CloseWebFrame)
-            @Expect(frame2.payload[0..], Array<UInt8>(124, repeat: 10))
+            let expectedBody = Array<UInt8>(124, repeat: 0)
+            expectedBody[0] = 0x03
+            expectedBody[1] = 0xF2
+            for (i in 2..124) {
+                expectedBody[i] = 97
+            }
+            @Expect(frame2.payload[0..], expectedBody)
             sleep(Duration.millisecond * 100)
             var frame3 = websocketServer.read()
             @Expect(frame3.fin, true)
@@ -238,7 +244,16 @@ class Testwebsocketreadwrite_04 {
         @Expect(value1, "zpstest")
         websocket.write(PingWebFrame, Array<UInt8>(123, repeat: 10))
         sleep(Duration.millisecond * 100)
-        websocket.write(CloseWebFrame, Array<UInt8>(124, repeat: 10))
+        // the Close frame body is 124 bytes: a 2-byte status code + a 122-byte
+        // reason; the status code must be a valid one on the wire
+        // (RFC 6455 7.4), use 1010 with a 122-byte reason of 'a'
+        let closeBody = Array<UInt8>(124, repeat: 0)
+        closeBody[0] = 0x03
+        closeBody[1] = 0xF2
+        for (i in 2..124) {
+            closeBody[i] = 97
+        }
+        websocket.write(CloseWebFrame, closeBody)
         sleep(Duration.millisecond * 100)
         websocket.write(PongWebFrame, Array<UInt8>(125, repeat: 10))
 
