@@ -107,6 +107,54 @@ class TestRequestTrailersIssue1053 {
     }
 
     /*
+     * Test description: declared and undeclared (non-forbidden) trailers are
+     * both delivered; the "Trailer" declaration is an optional hint and is
+     * not enforced as a whitelist (issue 1053 follow-up).
+     */
+    @TestCase
+    func requestTrailersDeclaredMixedDelivered(): Unit {
+        let server = ServerBuilder().listener(TcpServerSocket(bindAt: 0)).logger(NoopLogger()).build()
+        server.distributor.register("/", { ctx =>
+            let buf = Array<UInt8>(8192, repeat: 0)
+            while (true) {
+                let n = ctx.request.body.read(buf)
+                if (n <= 0) {
+                    break
+                }
+            }
+            let a = ctx.request.trailers.getFirst("X-Checksum") ?? "absent"
+            let b = ctx.request.trailers.getFirst("X-Extra") ?? "absent"
+            ctx.responseBuilder.header("Connection", "close").body("a=<${a}> b=<${b}>")
+        })
+        spawn { server.serve() }
+        while (server.port == 0) {
+            sleep(Duration.millisecond)
+        }
+
+        let client = ClientBuilder().logger(NoopLogger()).build()
+        let trailers = HttpHeaders()
+        trailers.add("X-Checksum", "abc123")
+        trailers.add("X-Extra", "extra")
+        let req = HttpRequestBuilder().url("http://127.0.0.1:${server.port}/")
+            .body("payload").header("Trailer", "X-Checksum").addTrailers(trailers).build()
+        let resp = client.send(req)
+        let buf = Array<UInt8>(1024, repeat: 0)
+        var total = 0
+        while (true) {
+            let n = resp.body.read(buf[total..])
+            if (n <= 0) {
+                break
+            }
+            total += n
+        }
+        @Expect(String.fromUtf8(buf[..total]), "a=<abc123> b=<extra>")
+        println("declared_mixed_delivered_ok")
+        client.close()
+        server.close()
+        serverSocket.close()
+    }
+
+    /*
      * Test description: forbidden trailer field names are rejected.
      */
     @TestCase
@@ -130,6 +178,7 @@ class TestRequestTrailersIssue1053 {
 
 /* SCAN-IN
 request_trailers_delivered_ok
+declared_mixed_delivered_ok
 explicit_cl_throws_ok
 forbidden_field_throws_ok
  */
