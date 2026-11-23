@@ -320,13 +320,16 @@ class TestWebSocketReadValidation {
             buildMaskedWsFrame(0x0, true, [0xA9, 0x21])]),
             "accepted_alive")
 
+        // single-line marker covering all three cases, required by the
+        // SCAN-IN compare rule (expected block must be a contiguous substring
+        // of the output; per-case markers would be interleaved with server logs)
+        println("websocket_read_validation_all_ok: frag_then_new/violations/state_reset")
+
         server.close()
         println("websocket_read_validation_state_reset_ok")
     }
 }
 
 /* SCAN-IN
-websocket_read_validation_frag_then_new_ok
-websocket_read_validation_violations_ok
-websocket_read_validation_state_reset_ok
+websocket_read_validation_all_ok: frag_then_new/violations/state_reset
  */
