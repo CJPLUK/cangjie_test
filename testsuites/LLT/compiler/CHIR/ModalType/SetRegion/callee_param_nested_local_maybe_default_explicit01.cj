@@ -9,14 +9,14 @@
 // EXEC: %compiler %local %n.cj %dumpCHIRDebug -Woff unused -o %output
 // RUN-EXEC: %run %run_opt %output
 // EXEC: %python pick_defination.py callee_param_nested_local_maybe_default_explicit01_CHIR/[0-9]*_Canonicalization.chirtxt "Func @_CN7default5outerHCNY_1CEQlE" | compare %f
-// ASSERT: scan-2 StartRegion()
-// ASSERT: scan-2 EndRegion()
+// ASSERT: scan-1 StartRegion()
+// ASSERT: scan-1 EndRegion()
 
 // Nested func param is `C@local?` with a default. The call passes `c` explicitly,
 // so the default desugar is not applied at the call site. `outer` still needs
 // StartRegion because the callee formal is non-copyable `C@local?` with a
-// default-value function; the other StartRegion/EndRegion pair is inside the
-// default-value lambda that allocates `C()`.
+// default-value function. The implicit exclave default-value lambda allocates
+// `C()` in its caller's region and must not open a region of its own.
 class C {
     init() {
         x = 3
