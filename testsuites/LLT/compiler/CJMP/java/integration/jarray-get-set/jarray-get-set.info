@@ -1,0 +1,24 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// (CJNATIVE and not Windows) DEPENDENCE: ../%n
+// (CJNATIVE and not Windows) RUN-EXEC-0: %cd %n && cjc %compile_shared_lib_opt -p src/cj %import_java_interop --output-javagen-dir=src/java/javasample
+// (CJNATIVE and not Windows) RUN-EXEC-0: %cd %n && %javac %cp_cj_loader_java_interop src/java/javasample/Item.java src/java/javasample/Main.java src/java/javasample/SpecialItem.java src/java/javasample/TestImpl.java -h ./ -d ./
+// (CJNATIVE and not Windows) RUN-EXEC-PIPE: %cd %n && %java %cp_cj_loader_java_interop -Djava.library.path=./ javasample.Main 2>&1 | compare %f
+
+/* SCAN-IN
+primitive arrays: PASS
+string array: PASS
+JavaMirror Item[] get/set and Java readback: PASS
+JavaImpl subclass in Item[]: PASS
+JObject/Object[] get/set and identity: PASS
+primitive get out of bounds: PASS
+primitive set out of bounds: PASS
+object get out of bounds: PASS
+object set out of bounds: PASS
+object set ArrayStoreException propagation: PASS
+ALL JArray get/set regression tests: PASS
+*/
