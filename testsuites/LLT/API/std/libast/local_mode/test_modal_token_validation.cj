@@ -22,8 +22,23 @@ func reject(change: () -> Unit, unchanged: () -> Bool): Unit {
     check(unchanged(), "Rejected assignment must retain the previous token")
 }
 
+func typeModal(t: TypeNode): ModalInfo {
+    match (t) {
+        case p: PrimitiveType => p.modal
+        case r: RefType => r.modal
+        case q: QualifiedType => q.modal
+        case pt: ParenType => pt.modal
+        case tt: TupleType => tt.modal
+        case st: ThisType => st.modal
+        case ft: PrefixType => ft.modal
+        case fnt: FuncType => fnt.modal
+        case vt: VArrayType => vt.modal
+        case _ => throw Exception("unreachable TypeNode subtype")
+    }
+}
+
 main(): Int64 {
-    let modal = parseType(cangjieLex("Value @local!")).modal
+    let modal = typeModal(parseType(cangjieLex("Value @local!")))
     let at = Token(TokenKind.AT).addPosition(1, 2, 3)
     modal.at = at
     check(modal.at == at, "Valid @ token and position")
