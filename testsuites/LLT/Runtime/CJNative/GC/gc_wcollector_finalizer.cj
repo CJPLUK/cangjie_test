@@ -57,6 +57,9 @@ main(): Int64 {
         weakValues.add(createUnreachableList(1000 + Int64(index * 10)))
     }
 
+    for (_ in 0..2048) {
+        blackBox(Array<UInt8>(1024, repeat: 0))
+    }
     let worker1 = spawn { => churn(100000) }
     let worker2 = spawn { => churn(200000) }
     var cleared: Int64 = 0
