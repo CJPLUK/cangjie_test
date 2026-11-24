@@ -199,4 +199,4 @@ public class Test_request_check {
 
 // ASSERT: scan Some(valuea)
 // ASSERT: scan Some(valueb)
-// ASSERT: scan None
+// ASSERT: scan Some(valuec)
