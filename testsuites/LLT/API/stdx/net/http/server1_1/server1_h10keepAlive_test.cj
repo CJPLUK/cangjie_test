@@ -99,17 +99,14 @@ class TestServer11Http10KeepAlive {
     }
 
     func constructRequest(timeout: ?String): String {
-        var request = """
-GET /hello HTTP/1.0
-Host: 127.0.0.1:${port}
-Content-Length: 16
-Connection: keep-alive
-"""
+        // request lines must be CRLF-terminated (RFC 9112 2.2): bare-LF
+        // line terminators are rejected by the server with 400
+        var request = "GET /hello HTTP/1.0\r\nHost: 127.0.0.1:${port}\r\nContent-Length: 16\r\nConnection: keep-alive\r\n"
         if (let Some(v) <- timeout) {
-            request += "keep-alive: timeout=${v}, max=1000\n"
+            request += "keep-alive: timeout=${v}, max=1000\r\n"
         }
 
-        request += "\n\ntest head method"
+        request += "\r\ntest head method"
         request
     }
 
