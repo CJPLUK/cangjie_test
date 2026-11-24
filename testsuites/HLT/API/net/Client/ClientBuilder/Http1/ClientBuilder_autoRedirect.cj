@@ -138,7 +138,6 @@ public class Test_autoRedirect {
 
     @TestCase
     func Redirect_and_not_header_exception(): Unit {
-        var flag = false
         let serve = ServerBuilder().addr("127.0.0.1").port(0).build()
         serve.distributor.register("/d1", {ctx => ctx.responseBuilder.body("redirect success")})
         serve.distributor.register("/dd", {ctx => ctx.responseBuilder.body("not redirect").status(300)})
@@ -149,15 +148,16 @@ public class Test_autoRedirect {
             sleep(Duration.millisecond)
         }
 
+        // RFC 9110 10.11: Location is optional; the 300 response without it is
+        // returned to the caller as-is instead of throwing
         let client_Redirec_true = ClientBuilder().autoRedirect(true).build()
-
-        try {
-            let res_true = client_Redirec_true.get("http://127.0.0.1:${serve.port}/dd")
-        } catch (e: HttpException) {
-            flag = true
-            @Expect(e.message, "Response missing Location header, status code: '300'.")
-        }
-        @Expect(flag, true)
+        let res_true = client_Redirec_true.get("http://127.0.0.1:${serve.port}/dd")
+        @Expect(res_true.status, 300)
+        let buf_true = Array<UInt8>(12, repeat: 0)
+        let len = res_true.body.read(buf_true)
+        @Expect(String.fromUtf8(buf_true[..len]), "not redirect")
+        client_Redirec_true.close()
+        serve.close()
     }
 
     @TestCase

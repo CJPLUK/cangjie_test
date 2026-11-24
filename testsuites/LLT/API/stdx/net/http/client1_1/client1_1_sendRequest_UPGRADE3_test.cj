@@ -49,11 +49,12 @@ class TestConnNodeSendRequestUPGRADE3 {
         }
         let (resp2, _) = client.upgrade(r)
         @Expect(resp2.toString().contains("HTTP/1.1 204 No Content\r\n"))
-        try {
-            client.upgrade(r)
+        // RFC 9110 10.11: Location is optional; the 308 response without it is
+        // returned to the caller as-is instead of throwing
+        let (resp308, conn308) = client.upgrade(r)
+        @Expect(resp308.toString().contains("HTTP/1.1 308"))
+        if (let Some(_) <- conn308) {
             @Expect(1, 2)
-        } catch (e: HttpException) {
-            @Expect(e.message, "Response missing Location header, status code: '308'.")
         }
 
         let (resp3, _) = client.upgrade(r)
