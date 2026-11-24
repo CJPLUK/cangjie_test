@@ -11,12 +11,11 @@
 import stdx.contract.macros.*
 
 // CT-LOOP-023: a `continue` inside a loop nested in a do-while body targets the
-// inner loop and must not run the outer invariant checks (the do-while `continue`
-// rewrite is applied to the enclosing loop's body only; nested loop bodies are
-// tracked brace-wise, including the `while` trailer of a nested do-while). Two
-// outer iterations with three inner iterations each (one inner `continue` per
-// outer pass) yield exactly two outer checks; misattributing the inner
-// `continue` would add one extra outer check per outer pass.
+// inner loop and must not run the outer invariant checks; the do-while check
+// point belongs to the enclosing loop only. Two outer iterations with three
+// inner iterations each (one inner `continue` per outer pass) yield exactly two
+// outer checks; misattributing the inner `continue` would add one extra outer
+// check per outer pass.
 var loopDWNestState: Int64 = 0
 var loopDWNestOuterChecks: Int64 = 0
 
