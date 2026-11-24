@@ -178,7 +178,7 @@ class TestRequestTrailersIssue1053 {
 
 /* SCAN-IN
 request_trailers_delivered_ok
-declared_mixed_delivered_ok
 explicit_cl_throws_ok
+declared_mixed_delivered_ok
 forbidden_field_throws_ok
  */
