@@ -66,18 +66,14 @@ class TestCookieInitException {
         } catch (e: IllegalArgumentException) {
             @Expect(e.message, "Invalid cookie expires: year is 2, but minimum is 1601.")
         }
-        try {
-            let _ = Cookie("2", "2", maxAge: -2)
-            @Expect(1, 2)
-        } catch (e: IllegalArgumentException) {
-            @Expect(e.message, "Invalid cookie maxAge: -2, but must be positive.")
-        }
-        try {
-            let _ = Cookie("2", "2", maxAge: 0)
-            @Expect(1, 2)
-        } catch (e: IllegalArgumentException) {
-            @Expect(e.message, "Invalid cookie maxAge: 0, but must be positive.")
-        }
+        // RFC 6265 5.2.2: maxAge 0 and negative values are valid inputs and expire
+        // the cookie immediately, so the constructor must accept them
+        let c0 = Cookie("2", "2", maxAge: 0)
+        @Expect(c0.maxAge, Some(0))
+        @Expect(c0.toSetCookieString(), "2=2; Max-Age=0")
+        let cN = Cookie("2", "2", maxAge: -2)
+        @Expect(cN.maxAge, Some(-2))
+        @Expect(cN.toSetCookieString(), "2=2; Max-Age=-2")
         let c = Cookie("2", "2", maxAge: 1)
         @Expect(c.toSetCookieString(), "2=2; Max-Age=1")
         println("ok")
