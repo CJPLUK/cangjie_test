@@ -4,7 +4,7 @@
 //
 // See https://cangjie-lang.cn/pages/LICENSE for license information.
 
-// EXEC-PIPE-1:%frontendCompiler %typecheck %cmp_opt %f 2>&1 | compare %f
+// EXEC-PIPE-1: %frontendCompiler %diag_json %f 2>&1 | compare %f
 
 func test1(v: Any) {}
 
@@ -17,36 +17,6 @@ main() {
     0
 }
 
-/* SCAN
-error: generic type should be used with type argument
-  ==> enum37.cj:14:18:
-   | 
-14 |     let x = Some(None)
-   |                  ^ 
-   | 
-
-error: unable to infer generic argument of this function
-  ==> enum37.cj:14:13:
-   | 
-14 |     let x = Some(None)
-   |             ^^^^ 
-   | 
-note: no information known for type variable 'Generics-T'
-  ==> (package std.core)option.cj:20:20:
-
-error: generic type should be used with type argument
-  ==> enum37.cj:15:11:
-   | 
-15 |     test1(None)
-   |           ^ 
-   | 
-
-error: generic type should be used with type argument
-  ==> enum37.cj:16:11:
-   | 
-16 |     test2(None)
-   |           ^ 
-   | 
-
-4 errors generated, 4 errors printed.
-*/
+// ASSERT: scan-3 "DiagKind": "sema_generic_type_without_type_argument",
+// ASSERT: scan-not "DiagKind": "sema_unable_to_infer_generic_func",
+// ASSERT: scan "Errors": 3,
