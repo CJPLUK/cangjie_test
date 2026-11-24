@@ -16,5 +16,4 @@ func test(test`test`test:Int64): Int64 {
 main(): Int64 {
     return test(0)
 }
-// ASSERT: scan parse_expected_right_delimiter
 // ASSERT: scan parse_expected_character
