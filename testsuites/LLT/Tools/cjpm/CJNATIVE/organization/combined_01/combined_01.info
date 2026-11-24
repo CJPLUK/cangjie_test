@@ -1,0 +1,12 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// DEPENDENCE: ../%n
+// EXEC: cd %n && %cjpm build -V 2>&1 | compare %f
+// ASSERT: regex Compiling package `huawei::test\.child`:.*-o=libtest\.child@huawei\.a
+// ASSERT: regex Compiling package `huawei::test`:.*--link-options=--whole-archive.*-ltest\.child@huawei.*--link-options=--no-whole-archive
+// ASSERT: regex Compiling package `huawei::test`:.*--output-type=dylib.*-o=libtest@huawei\.(so|dll)
+// ASSERT: scan cjpm build success
