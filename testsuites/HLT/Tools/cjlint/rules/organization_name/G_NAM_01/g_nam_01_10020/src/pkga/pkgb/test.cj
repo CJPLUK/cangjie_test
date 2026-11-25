@@ -6,7 +6,7 @@
  * See https://cangjie-lang.cn/pages/LICENSE for license information.
  */
 
-package aa::Apkga.pkgb
+package aa::Apkga.missing.pkgb
 
 class X{}
 

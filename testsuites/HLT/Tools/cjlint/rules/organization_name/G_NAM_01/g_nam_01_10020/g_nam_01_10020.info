@@ -9,4 +9,4 @@
 // LEVEL: 1
 // DEPENDENCE: ./src
 // EXEC-PIPE: %lint -f ./src  -c %cangjieDir/tools -m %cangjieDir 2>&1 | compare %f
-// ASSERT: regex .cj:9.*warning.*The name of the 'aa::Apkga.pkgb' package must correspond to the directory where the source code resides.
+// ASSERT: regex .cj:9.*warning.*The name of the 'aa::Apkga.missing.pkgb' package must correspond to the directory where the source code resides.
