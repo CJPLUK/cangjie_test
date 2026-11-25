@@ -10,11 +10,10 @@
 
 import stdx.contract.macros.*
 
-// CT-LOOP-022: a `continue` in a do-while body is rewritten to run the loop
-// invariant checks first (design 3.2.6.2: the check point sits between the body
-// and the condition). Five iterations with one `continue` still yield exactly
-// five checks; without the rewrite the `continue` iteration would skip its
-// check and only four would be observed.
+// CT-LOOP-022: a `continue` in a do-while body still reaches the loop invariant
+// check point (design 3.2.6.2: the check point sits between the body and the
+// condition). Five iterations with one `continue` still yield exactly five
+// checks; a `continue` that skipped the check point would yield only four.
 var loopDWContinueState: Int64 = 0
 var loopDWContinueChecks: Int64 = 0
 
