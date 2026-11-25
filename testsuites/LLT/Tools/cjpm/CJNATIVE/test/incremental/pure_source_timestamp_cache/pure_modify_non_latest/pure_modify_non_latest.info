@@ -1,0 +1,15 @@
+// Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
+// This source file is part of the Cangjie project, licensed under Apache-2.0
+// with Runtime Library Exception.
+//
+// See https://cangjie-lang.cn/pages/LICENSE for license information.
+
+// DEPENDENCE: ../%n
+// Replacing a test file whose mtime stays older than the newest one (e.g. a source restored from an archive) must rebuild
+// even when the maximum modification time is unchanged. It is replaced instead of edited in place to keep that mtime.
+// Timestamps (touch -t [[CC]YY]MMDDhhmm[.SS]): older_test.cj = 2023-11-14 00:00:00, replacement_test.cj = 2023-11-14 00:00:01, latest_test.cj = 2023-11-14 00:00:10.
+// EXEC: cd %n && touch -t 202311140000.00 src/tests/older_test.cj && touch -t 202311140010.00 src/tests/latest_test.cj && %cjpm test --no-run -i
+// EXEC: cd %n && %rm src/tests/older_test.cj && %move replacement_test.cj src/tests/older_test.cj && touch -t 202311140001.00 src/tests/older_test.cj
+// EXEC: cd %n && %cjpm test --no-run -i -V 2>&1 | compare %f
+// ASSERT: scan-1 Compiling test package `cacheprobe.tests`:
+// ASSERT: scan cjpm test success
