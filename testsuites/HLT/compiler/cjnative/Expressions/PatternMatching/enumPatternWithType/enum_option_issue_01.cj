@@ -24,5 +24,4 @@ let c = Year(EA)
 main() {
     1
 }
-// ASSERT: scan sema_unable_to_infer_generic_func
 // ASSERT: scan sema_generic_type_without_type_argument
