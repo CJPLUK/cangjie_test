@@ -43,7 +43,10 @@ class TestCookieJarGetCookies3 {
     @TestCase
     func cookieJarGetCookiesDomain2(): Unit {
 
-        // IP address only domain match the same IP address
+        // cookies carrying a Domain attribute are rejected from an IP-address
+        // host: a suffix match requires a host name, and the identical match
+        // must not extend the scope of an IP host
+        // RFC 6265bis Section 5.7 step 3.10 and Section 5.1.3
         let cookie1 = Cookie("1", "1", domain: "0.0.1")
         let cookie2 = Cookie("2", "2", domain: "127.0.0.1")
         let cookie3 = Cookie("3", "3")
@@ -52,7 +55,7 @@ class TestCookieJarGetCookies3 {
         let resultCookies = ArrayList<Cookie>([cookie1, cookie2, cookie3])
         cookieJar.storeCookies(URL.parse("http://127.0.0.1/hello/a/b"), resultCookies)
         let cookies = cookieJar.getCookies(URL.parse("http://127.0.0.1/hello/a/b"))
-        @Expect(CookieJar.toCookieString(cookies), "2=2; 3=3")
+        @Expect(CookieJar.toCookieString(cookies), "3=3")
     }
 
     @TestCase

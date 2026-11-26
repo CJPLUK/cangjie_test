@@ -67,6 +67,9 @@ class TestCookieDomain {
         serverSocket.bind()
         var server = serverSocket.accept()
         sleep(Duration.millisecond * 100)
+        // cookies carrying a Domain attribute are rejected from an IP-address
+        // host (RFC 6265bis Section 5.7 step 3.10 and Section 5.1.3),
+        // so cookie "1" is rejected and no cookie is sent afterwards
         server.write("HTTP/1.1 204 ok\r\nconnection: close\r\nSet-Cookie: 1=1; domain=.127.0.0.1\r\n\r\n".toArray())
         server.close()
 
@@ -75,21 +78,21 @@ class TestCookieDomain {
         let buf = Array<UInt8>(500, repeat: 0)
         let i = server.read(buf)
         println(String.fromUtf8(buf[..i]))
-        @Expect(String.fromUtf8(buf[..i]).contains("cookie: 1=1\r\n"))
+        @Expect(String.fromUtf8(buf[..i]).contains("cookie:"), false)
         server.write("HTTP/1.1 204 ok\r\nSet-Cookie: 2=2; domain=127.0.0.1\r\n\r\n".toArray())
         let i2 = server.read(buf)
         println(String.fromUtf8(buf[..i2]))
-        @Expect(String.fromUtf8(buf[..i2]).contains("cookie: 1=1; 2=2\r\n"))
+        @Expect(String.fromUtf8(buf[..i2]).contains("cookie:"), false)
         // invalid domain value, the domain attribute is ignored
         server.write("HTTP/1.1 204 ok\r\nSet-Cookie: 3=3; domain=..abced\r\n\r\n".toArray())
         let i3 = server.read(buf)
         println(String.fromUtf8(buf[..i3]))
-        @Expect(String.fromUtf8(buf[..i3]).contains("cookie: 1=1; 2=2; 3=3\r\n"))
+        @Expect(String.fromUtf8(buf[..i3]).contains("cookie: 3=3\r\n"))
         // not domain match
         server.write("HTTP/1.1 204 ok\r\nSet-Cookie: 4=4; domain=.abcded\r\n\r\n".toArray())
         let i4 = server.read(buf)
         println(String.fromUtf8(buf[..i4]))
-        @Expect(String.fromUtf8(buf[..i4]).contains("cookie: 1=1; 2=2; 3=3\r\n"))
+        @Expect(String.fromUtf8(buf[..i4]).contains("cookie: 3=3\r\n"))
         server.write("HTTP/1.1 204 ok\r\nConnection: close\r\n\r\n".toArray())
 
         server.close()
