@@ -22,7 +22,11 @@ common class A1 {
 
 // SEPARATE-FILE: p/p.cj
 // EXEC-PIPE-1: %compiler %diag_json --experimental p/p.cj --common-part-chir=c/cmp.chir --common-part-cjo=./c/cmp.cjo --output-type=dylib --output-dir ./p 2>&1 | compare %f
-// ASSERT: scan-4 sema_not_matched
+// ASSERT: scan-2 sema_not_matched
+// ASSERT: scan-1 sema_generic_member_type_argument_different
+// ASSERT: scan-1 'specific' class 'A1' type parameter count is 1, but its 'common' declaration requires 0
+// ASSERT: scan-1 'common' declaration is here
+// ASSERT: scan-not Internal Compiler Error
 package cmp
 
 specific func foo<T>(): Unit{}

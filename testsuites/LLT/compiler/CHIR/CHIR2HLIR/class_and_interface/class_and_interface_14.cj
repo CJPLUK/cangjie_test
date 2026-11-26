@@ -25,3 +25,5 @@ main() {
 }
 // ASSERT: scan sema_upper_bound_must_be_class_or_interface
 // ASSERT: scan sema_generic_member_type_argument_different
+// ASSERT: scan function 'func644' type parameter count is 1, but its inherited declaration requires 2
+// ASSERT: scan inherited declaration is here
