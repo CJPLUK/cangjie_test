@@ -429,8 +429,8 @@ def run_cmd(stage, cmd, work_dir, timeout):
     log_output("execute stage: %s", stage)
     log_output("execute command: %s", cmd)
     log_output("execute exit code: %s", return_code)
-    log_output("execute stdout: \n%s", indent(com_out, "\t", lambda line: True))
-    log_output("execute stderr: \n%s", indent(com_err, "\t", lambda line: True))
+    logging.debug("execute stdout: \n%s", indent(com_out, "\t", lambda line: True))
+    logging.debug("execute stderr: \n%s", indent(com_err, "\t", lambda line: True))
     global EXIT_CODE
     if stage != "remove_file_on_remote":
         EXIT_CODE = int(return_code)
