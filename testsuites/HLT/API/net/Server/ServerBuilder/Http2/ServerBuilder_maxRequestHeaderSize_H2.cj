@@ -123,7 +123,7 @@ public class Test_maxRequestHeaderSize_h2 {
         try {
             let response2 = client.send(request2)
         } catch (e: Exception) {
-            @Expect(e.message.contains("Stream closed"))
+            @Expect(e.message.contains("Request header list size '283' exceeds maximum '282'"))
         }
 
         @Expect(server.maxHeaderListSize, 282)

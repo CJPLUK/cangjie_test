@@ -110,7 +110,8 @@ public class Test_ServerBuilder_maxHeaderListSize_h2 {
         try {
             client.send(request)
         } catch (e: HttpException) {
-            @Expect(e.message, "Stream closed.")
+            println("exception message: ${e.message}")
+            @Expect(e.message.contains("Request header list size '287' exceeds maximum '278'"))
         }
     }
 
@@ -138,4 +139,4 @@ public class Test_ServerBuilder_maxHeaderListSize_h2 {
     }
 }
 
-// ASSERT: scan HpackException: Total header list size '287' exceeds maximum '278'.
+// ASSERT: scan Request header list size '287' exceeds maximum '278' set by peer's SETTINGS_MAX_HEADER_LIST_SIZE.
